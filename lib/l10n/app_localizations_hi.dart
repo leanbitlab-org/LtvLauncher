@@ -494,4 +494,25 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get requestPermission => 'अनुमति का अनुरोध करें';
+
+  @override
+  String get dismiss => 'हटाएं';
+
+  @override
+  String get openApp => 'खोलें';
+
+  @override
+  String get notificationOptions => 'सूचना विकल्प';
+
+  @override
+  String get noBlockedAppsDesc => 'सभी ऐप्स को वर्तमान में सूचनाएं दिखाने की अनुमति है';
+
+  @override
+  String get notificationsAllowed => 'सूचनाएं चालू हैं';
+
+  @override
+  String get notificationsBlocked => 'सूचनाएं अवरुद्ध हैं';
+
+  @override
+  String get dpadDismissHint => 'बायां: हटाएं • ठीक है: विकल्प';
 }

@@ -218,5 +218,12 @@
     "notifications": "الإشعارات",
     "continueWatchingDescription": "عرض الأفلام والبرامج التلفزيونية التي تمت مشاهدتها مؤخرًا على الشاشة الرئيسية",
     "continueWatchingPermissionDesc": "يلزم الحصول على إذن خاص لقراءة سجل المشاهدة من تطبيقات التلفزيون:",
-    "requestPermission": "طلب الإذن"
+    "requestPermission": "طلب الإذن",
+    "dismiss": "تجاهل",
+    "openApp": "فتح",
+    "notificationOptions": "خيارات الإشعار",
+    "noBlockedAppsDesc": "يُسمح لجميع التطبيقات حاليًا بإظهار الإشعارات",
+    "notificationsAllowed": "الإشعارات مسموحة",
+    "notificationsBlocked": "الإشعارات محظورة",
+    "dpadDismissHint": "يسار: تجاهل • موافق: خيارات"
 }

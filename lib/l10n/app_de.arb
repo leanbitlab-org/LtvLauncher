@@ -218,5 +218,12 @@
     "notifications": "Benachrichtigungen",
     "continueWatchingDescription": "Zuletzt angesehene Filme und Serien von unterstützten Apps auf dem Startbildschirm anzeigen",
     "continueWatchingPermissionDesc": "Zum Lesen des Wiedergabeverlaufs von TV-Apps ist eine spezielle Berechtigung erforderlich:",
-    "requestPermission": "Berechtigung anfordern"
+    "requestPermission": "Berechtigung anfordern",
+    "dismiss": "Verwerfen",
+    "openApp": "Öffnen",
+    "notificationOptions": "Benachrichtigungsoptionen",
+    "noBlockedAppsDesc": "Alle Apps dürfen derzeit Benachrichtigungen anzeigen",
+    "notificationsAllowed": "Benachrichtigungen erlaubt",
+    "notificationsBlocked": "Benachrichtigungen blockiert",
+    "dpadDismissHint": "Links: Verwerfen • OK: Optionen"
 }

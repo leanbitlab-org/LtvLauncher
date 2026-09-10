@@ -218,5 +218,12 @@
     "notifications": "Notifiche",
     "continueWatchingDescription": "Mostra film e programmi TV visti di recente sulla schermata iniziale",
     "continueWatchingPermissionDesc": "È richiesta un'autorizzazione speciale per leggere la cronologia di visualizzazione:",
-    "requestPermission": "Richiedi autorizzazione"
+    "requestPermission": "Richiedi autorizzazione",
+    "dismiss": "Ignora",
+    "openApp": "Apri",
+    "notificationOptions": "Opzioni notifica",
+    "noBlockedAppsDesc": "Tutte le applicazioni possono attualmente mostrare notifiche",
+    "notificationsAllowed": "Notifiche consentite",
+    "notificationsBlocked": "Notifiche bloccate",
+    "dpadDismissHint": "Sinistra: Ignora • OK: Opzioni"
 }

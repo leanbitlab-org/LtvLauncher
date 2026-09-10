@@ -218,5 +218,12 @@
     "notifications": "Notifications",
     "continueWatchingDescription": "Show recently watched movies and TV shows from supported apps on your home screen",
     "continueWatchingPermissionDesc": "Special permission is required to read watch history from TV apps. You can grant it using the button below or via ADB:",
-    "requestPermission": "Request Permission"
+    "requestPermission": "Request Permission",
+    "dismiss": "Dismiss",
+    "openApp": "Open",
+    "notificationOptions": "Notification Options",
+    "noBlockedAppsDesc": "All applications are currently allowed to show notifications",
+    "notificationsAllowed": "Notifications Allowed",
+    "notificationsBlocked": "Notifications Blocked",
+    "dpadDismissHint": "Left: Dismiss • OK: Options"
 }

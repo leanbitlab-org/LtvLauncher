@@ -1060,6 +1060,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Request Permission'**
   String get requestPermission;
+
+  /// No description provided for @dismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get dismiss;
+
+  /// No description provided for @openApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get openApp;
+
+  /// No description provided for @notificationOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Options'**
+  String get notificationOptions;
+
+  /// No description provided for @noBlockedAppsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'All applications are currently allowed to show notifications'**
+  String get noBlockedAppsDesc;
+
+  /// No description provided for @notificationsAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications Allowed'**
+  String get notificationsAllowed;
+
+  /// No description provided for @notificationsBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications Blocked'**
+  String get notificationsBlocked;
+
+  /// No description provided for @dpadDismissHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Left: Dismiss • OK: Options'**
+  String get dpadDismissHint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

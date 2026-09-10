@@ -218,5 +218,12 @@
     "notifications": "Уведомления",
     "continueWatchingDescription": "Показывать недавно просмотренные фильмы и передачи на главном экране",
     "continueWatchingPermissionDesc": "Для чтения истории просмотров из ТВ-приложений требуется специальное разрешение:",
-    "requestPermission": "Запросить разрешение"
+    "requestPermission": "Запросить разрешение",
+    "dismiss": "Закрыть",
+    "openApp": "Открыть",
+    "notificationOptions": "Параметры уведомления",
+    "noBlockedAppsDesc": "Всем приложениям в данный момент разрешено показывать уведомления",
+    "notificationsAllowed": "Уведомления разрешены",
+    "notificationsBlocked": "Уведомления заблокированы",
+    "dpadDismissHint": "Влево: Закрыть • OK: Параметры"
 }

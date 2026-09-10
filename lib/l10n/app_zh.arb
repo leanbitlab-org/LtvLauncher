@@ -218,5 +218,12 @@
     "notifications": "通知",
     "continueWatchingDescription": "在主屏幕上显示支持的应用最近观看的电影和电视剧",
     "continueWatchingPermissionDesc": "需要特殊权限才能读取电视应用的观看历史记录：",
-    "requestPermission": "请求权限"
+    "requestPermission": "请求权限",
+    "dismiss": "关闭",
+    "openApp": "打开",
+    "notificationOptions": "通知选项",
+    "noBlockedAppsDesc": "当前所有应用均允许显示通知",
+    "notificationsAllowed": "允许通知",
+    "notificationsBlocked": "已屏蔽通知",
+    "dpadDismissHint": "左键: 关闭 • 确定: 选项"
 }

@@ -218,5 +218,12 @@
     "notifications": "알림",
     "continueWatchingDescription": "홈 화면에 최근 시청한 영화 및 TV 프로그램 표시",
     "continueWatchingPermissionDesc": "TV 앱의 시청 기록을 읽으려면 특별한 권한이 필요합니다:",
-    "requestPermission": "권한 요청"
+    "requestPermission": "권한 요청",
+    "dismiss": "닫기",
+    "openApp": "열기",
+    "notificationOptions": "알림 옵션",
+    "noBlockedAppsDesc": "현재 모든 애플리케이션의 알림 표시가 허용되어 있습니다",
+    "notificationsAllowed": "알림 허용됨",
+    "notificationsBlocked": "알림 차단됨",
+    "dpadDismissHint": "왼쪽: 닫기 • 확인: 옵션"
 }

@@ -218,5 +218,12 @@
     "notifications": "Notificações",
     "continueWatchingDescription": "Mostrar filmes e programas assistidos recentemente na tela inicial",
     "continueWatchingPermissionDesc": "É necessária uma permissão especial para ler o histórico de reprodução:",
-    "requestPermission": "Solicitar permissão"
+    "requestPermission": "Solicitar permissão",
+    "dismiss": "Descartar",
+    "openApp": "Abrir",
+    "notificationOptions": "Opções de notificação",
+    "noBlockedAppsDesc": "Todos os aplicativos estão atualmente autorizados a exibir notificações",
+    "notificationsAllowed": "Notificações permitidas",
+    "notificationsBlocked": "Notificações bloqueadas",
+    "dpadDismissHint": "Esquerda: Descartar • OK: Opções"
 }

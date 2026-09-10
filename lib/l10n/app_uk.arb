@@ -218,5 +218,12 @@
     "notifications": "Сповіщення",
     "continueWatchingDescription": "Показувати нещодавно переглянуті фільми та серіали на головному екрані",
     "continueWatchingPermissionDesc": "Для читання історії перегляду з ТВ-додатків потрібен спеціальний дозвіл:",
-    "requestPermission": "Запитати дозвіл"
+    "requestPermission": "Запитати дозвіл",
+    "dismiss": "Закрити",
+    "openApp": "Відкрити",
+    "notificationOptions": "Параметри сповіщення",
+    "noBlockedAppsDesc": "Усім програмам наразі дозволено показувати сповіщення",
+    "notificationsAllowed": "Сповіщення дозволено",
+    "notificationsBlocked": "Сповіщення заблоковано",
+    "dpadDismissHint": "Вліво: Закрити • OK: Параметри"
 }

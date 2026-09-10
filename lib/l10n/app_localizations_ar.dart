@@ -494,4 +494,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get requestPermission => 'طلب الإذن';
+
+  @override
+  String get dismiss => 'تجاهل';
+
+  @override
+  String get openApp => 'فتح';
+
+  @override
+  String get notificationOptions => 'خيارات الإشعار';
+
+  @override
+  String get noBlockedAppsDesc => 'يُسمح لجميع التطبيقات حاليًا بإظهار الإشعارات';
+
+  @override
+  String get notificationsAllowed => 'الإشعارات مسموحة';
+
+  @override
+  String get notificationsBlocked => 'الإشعارات محظورة';
+
+  @override
+  String get dpadDismissHint => 'يسار: تجاهل • موافق: خيارات';
 }

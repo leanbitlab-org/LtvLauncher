@@ -494,4 +494,25 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get requestPermission => '권한 요청';
+
+  @override
+  String get dismiss => '닫기';
+
+  @override
+  String get openApp => '열기';
+
+  @override
+  String get notificationOptions => '알림 옵션';
+
+  @override
+  String get noBlockedAppsDesc => '현재 모든 애플리케이션의 알림 표시가 허용되어 있습니다';
+
+  @override
+  String get notificationsAllowed => '알림 허용됨';
+
+  @override
+  String get notificationsBlocked => '알림 차단됨';
+
+  @override
+  String get dpadDismissHint => '왼쪽: 닫기 • 확인: 옵션';
 }

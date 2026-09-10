@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flauncher/l10n/app_localizations.dart';
+import 'package:flauncher/models/app.dart';
 import 'package:flauncher/providers/apps_service.dart';
 import 'package:flauncher/providers/notifications_service.dart';
 import 'package:flauncher/widgets/settings/focusable_settings_tile.dart';
@@ -66,15 +67,33 @@ class NotificationsPanel extends StatelessWidget {
                                 },
                               ),
                               if (hasClearable)
-                                TextButton.icon(
+                                OutlinedButton.icon(
                                   onPressed: () async {
                                     await notificationsService.dismissAll();
                                   },
                                   icon: const Icon(Icons.clear_all, size: 18),
                                   label: const Text("Clear All"),
-                                  style: TextButton.styleFrom(
-                                    foregroundColor: theme.colorScheme.primary,
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  style: ButtonStyle(
+                                    foregroundColor: WidgetStateProperty.resolveWith(
+                                      (states) => states.contains(WidgetState.focused)
+                                          ? Colors.white
+                                          : theme.colorScheme.primary,
+                                    ),
+                                    backgroundColor: WidgetStateProperty.resolveWith(
+                                      (states) => states.contains(WidgetState.focused)
+                                          ? theme.colorScheme.primary.withOpacity(0.3)
+                                          : Colors.transparent,
+                                    ),
+                                    side: WidgetStateProperty.resolveWith(
+                                      (states) => BorderSide(
+                                        color: states.contains(WidgetState.focused)
+                                            ? theme.colorScheme.primary
+                                            : Colors.white24,
+                                      ),
+                                    ),
+                                    padding: WidgetStateProperty.all(
+                                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    ),
                                   ),
                                 ),
                             ],
@@ -122,11 +141,25 @@ class NotificationsPanel extends StatelessWidget {
                                     clipBehavior: Clip.antiAlias,
                                     child: Focus(
                                       onKeyEvent: (node, event) {
-                                        if (event is KeyDownEvent &&
-                                            event.logicalKey == LogicalKeyboardKey.arrowLeft &&
-                                            notification.isClearable) {
-                                          notificationsService.dismiss(notification.key);
-                                          return KeyEventResult.handled;
+                                        if (event is KeyDownEvent) {
+                                          if (event.logicalKey == LogicalKeyboardKey.arrowLeft &&
+                                              notification.isClearable) {
+                                            notificationsService.dismiss(notification.key);
+                                            return KeyEventResult.handled;
+                                          }
+                                          if (event.logicalKey == LogicalKeyboardKey.contextMenu ||
+                                              event.logicalKey == LogicalKeyboardKey.arrowRight) {
+                                            _showNotificationOptions(
+                                              context,
+                                              notification,
+                                              appName,
+                                              app,
+                                              notificationsService,
+                                              appsService,
+                                              localizations,
+                                            );
+                                            return KeyEventResult.handled;
+                                          }
                                         }
                                         return KeyEventResult.ignored;
                                       },
@@ -199,6 +232,11 @@ class NotificationsPanel extends StatelessWidget {
                                                   overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              localizations.dpadDismissHint,
+                                              style: const TextStyle(fontSize: 10, color: Colors.white38),
+                                            ),
                                           ],
                                         ),
                                         trailing: Row(
@@ -207,7 +245,7 @@ class NotificationsPanel extends StatelessWidget {
                                             if (notification.isClearable)
                                               IconButton(
                                                 icon: const Icon(Icons.close, size: 18),
-                                                tooltip: "Dismiss",
+                                                tooltip: localizations.dismiss,
                                                 padding: EdgeInsets.zero,
                                                 constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                                                 onPressed: () => notificationsService.dismiss(notification.key),
@@ -222,10 +260,15 @@ class NotificationsPanel extends StatelessWidget {
                                           ],
                                         ),
                                         onPressed: () {
-                                          if (app != null) {
-                                            Navigator.of(context).pop();
-                                            appsService.launchApp(app);
-                                          }
+                                          _showNotificationOptions(
+                                            context,
+                                            notification,
+                                            appName,
+                                            app,
+                                            notificationsService,
+                                            appsService,
+                                            localizations,
+                                          );
                                         },
                                       ),
                                     ),
@@ -240,6 +283,92 @@ class NotificationsPanel extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showNotificationOptions(
+    BuildContext context,
+    NotificationItem notification,
+    String appName,
+    App? app,
+    NotificationsService notificationsService,
+    AppsService appsService,
+    AppLocalizations localizations,
+  ) {
+    showDialog(
+      context: context,
+      builder: (dialogCtx) => AlertDialog(
+        title: Row(
+          children: [
+            FutureBuilder<dynamic>(
+              future: appsService.getAppIcon(notification.packageName),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
+                      child: Image.memory(
+                        snapshot.data,
+                        width: 28,
+                        height: 28,
+                      ),
+                    ),
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+            Expanded(child: Text(appName, overflow: TextOverflow.ellipsis)),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (notification.title.isNotEmpty)
+              Text(notification.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            if (notification.text.isNotEmpty) ...[
+              const SizedBox(height: 4),
+              Text(notification.text),
+            ],
+            const SizedBox(height: 12),
+            const Divider(),
+            if (app != null)
+              FocusableSettingsTile(
+                autofocus: true,
+                leading: const Icon(Icons.launch, color: Colors.blueAccent),
+                title: Text("${localizations.openApp} $appName"),
+                onPressed: () {
+                  Navigator.of(dialogCtx).pop();
+                  Navigator.of(context).pop();
+                  appsService.launchApp(app);
+                },
+              ),
+            if (notification.isClearable)
+              FocusableSettingsTile(
+                autofocus: app == null,
+                leading: const Icon(Icons.close),
+                title: Text(localizations.dismiss),
+                onPressed: () {
+                  Navigator.of(dialogCtx).pop();
+                  notificationsService.dismiss(notification.key);
+                },
+              ),
+            FocusableSettingsTile(
+              leading: const Icon(Icons.block, color: Colors.redAccent),
+              title: Text(
+                "${localizations.blockAppNotifications} ($appName)",
+                style: const TextStyle(color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.of(dialogCtx).pop();
+                notificationsService.blockPackage(notification.packageName);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

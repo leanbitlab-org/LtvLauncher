@@ -494,4 +494,25 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get requestPermission => '请求权限';
+
+  @override
+  String get dismiss => '关闭';
+
+  @override
+  String get openApp => '打开';
+
+  @override
+  String get notificationOptions => '通知选项';
+
+  @override
+  String get noBlockedAppsDesc => '当前所有应用均允许显示通知';
+
+  @override
+  String get notificationsAllowed => '允许通知';
+
+  @override
+  String get notificationsBlocked => '已屏蔽通知';
+
+  @override
+  String get dpadDismissHint => '左键: 关闭 • 确定: 选项';
 }

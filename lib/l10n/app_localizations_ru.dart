@@ -494,4 +494,25 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get requestPermission => 'Запросить разрешение';
+
+  @override
+  String get dismiss => 'Закрыть';
+
+  @override
+  String get openApp => 'Открыть';
+
+  @override
+  String get notificationOptions => 'Параметры уведомления';
+
+  @override
+  String get noBlockedAppsDesc => 'Всем приложениям в данный момент разрешено показывать уведомления';
+
+  @override
+  String get notificationsAllowed => 'Уведомления разрешены';
+
+  @override
+  String get notificationsBlocked => 'Уведомления заблокированы';
+
+  @override
+  String get dpadDismissHint => 'Влево: Закрыть • OK: Параметры';
 }

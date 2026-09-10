@@ -494,4 +494,25 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get requestPermission => 'Berechtigung anfordern';
+
+  @override
+  String get dismiss => 'Verwerfen';
+
+  @override
+  String get openApp => 'Öffnen';
+
+  @override
+  String get notificationOptions => 'Benachrichtigungsoptionen';
+
+  @override
+  String get noBlockedAppsDesc => 'Alle Apps dürfen derzeit Benachrichtigungen anzeigen';
+
+  @override
+  String get notificationsAllowed => 'Benachrichtigungen erlaubt';
+
+  @override
+  String get notificationsBlocked => 'Benachrichtigungen blockiert';
+
+  @override
+  String get dpadDismissHint => 'Links: Verwerfen • OK: Optionen';
 }

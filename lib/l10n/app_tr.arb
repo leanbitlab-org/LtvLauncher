@@ -218,5 +218,12 @@
     "notifications": "Bildirimler",
     "continueWatchingDescription": "Son izlenen filmleri ve dizileri ana ekranda göster",
     "continueWatchingPermissionDesc": "TV uygulamalarından izleme geçmişini okumak için özel izin gereklidir:",
-    "requestPermission": "İzin İste"
+    "requestPermission": "İzin İste",
+    "dismiss": "Kapat",
+    "openApp": "Aç",
+    "notificationOptions": "Bildirim Seçenekleri",
+    "noBlockedAppsDesc": "Şu anda tüm uygulamaların bildirim göstermesine izin veriliyor",
+    "notificationsAllowed": "Bildirimlere İzin Verildi",
+    "notificationsBlocked": "Bildirimler Engellendi",
+    "dpadDismissHint": "Sol: Kapat • Tamam: Seçenekler"
 }

@@ -494,4 +494,25 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get requestPermission => 'Запитати дозвіл';
+
+  @override
+  String get dismiss => 'Закрити';
+
+  @override
+  String get openApp => 'Відкрити';
+
+  @override
+  String get notificationOptions => 'Параметри сповіщення';
+
+  @override
+  String get noBlockedAppsDesc => 'Усім програмам наразі дозволено показувати сповіщення';
+
+  @override
+  String get notificationsAllowed => 'Сповіщення дозволено';
+
+  @override
+  String get notificationsBlocked => 'Сповіщення заблоковано';
+
+  @override
+  String get dpadDismissHint => 'Вліво: Закрити • OK: Параметри';
 }

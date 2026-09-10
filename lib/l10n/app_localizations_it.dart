@@ -494,4 +494,25 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get requestPermission => 'Richiedi autorizzazione';
+
+  @override
+  String get dismiss => 'Ignora';
+
+  @override
+  String get openApp => 'Apri';
+
+  @override
+  String get notificationOptions => 'Opzioni notifica';
+
+  @override
+  String get noBlockedAppsDesc => 'Tutte le applicazioni possono attualmente mostrare notifiche';
+
+  @override
+  String get notificationsAllowed => 'Notifiche consentite';
+
+  @override
+  String get notificationsBlocked => 'Notifiche bloccate';
+
+  @override
+  String get dpadDismissHint => 'Sinistra: Ignora • OK: Opzioni';
 }

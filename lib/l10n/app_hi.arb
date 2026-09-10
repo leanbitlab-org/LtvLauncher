@@ -218,5 +218,12 @@
     "notifications": "सूचनाएं",
     "continueWatchingDescription": "होम स्क्रीन पर हाल ही में देखी गई फिल्में और टीवी शो दिखाएं",
     "continueWatchingPermissionDesc": "टीवी ऐप्स से देखने का इतिहास पढ़ने के लिए विशेष अनुमति की आवश्यकता है:",
-    "requestPermission": "अनुमति का अनुरोध करें"
+    "requestPermission": "अनुमति का अनुरोध करें",
+    "dismiss": "हटाएं",
+    "openApp": "खोलें",
+    "notificationOptions": "सूचना विकल्प",
+    "noBlockedAppsDesc": "सभी ऐप्स को वर्तमान में सूचनाएं दिखाने की अनुमति है",
+    "notificationsAllowed": "सूचनाएं चालू हैं",
+    "notificationsBlocked": "सूचनाएं अवरुद्ध हैं",
+    "dpadDismissHint": "बायां: हटाएं • ठीक है: विकल्प"
 }

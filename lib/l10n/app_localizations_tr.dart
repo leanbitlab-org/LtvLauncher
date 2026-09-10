@@ -494,4 +494,25 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get requestPermission => 'İzin İste';
+
+  @override
+  String get dismiss => 'Kapat';
+
+  @override
+  String get openApp => 'Aç';
+
+  @override
+  String get notificationOptions => 'Bildirim Seçenekleri';
+
+  @override
+  String get noBlockedAppsDesc => 'Şu anda tüm uygulamaların bildirim göstermesine izin veriliyor';
+
+  @override
+  String get notificationsAllowed => 'Bildirimlere İzin Verildi';
+
+  @override
+  String get notificationsBlocked => 'Bildirimler Engellendi';
+
+  @override
+  String get dpadDismissHint => 'Sol: Kapat • Tamam: Seçenekler';
 }

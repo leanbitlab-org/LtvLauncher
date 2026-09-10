@@ -494,4 +494,25 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get requestPermission => '権限をリクエスト';
+
+  @override
+  String get dismiss => '非表示';
+
+  @override
+  String get openApp => '開く';
+
+  @override
+  String get notificationOptions => '通知のオプション';
+
+  @override
+  String get noBlockedAppsDesc => '現在、すべてのアプリで通知の表示が許可されています';
+
+  @override
+  String get notificationsAllowed => '通知を許可';
+
+  @override
+  String get notificationsBlocked => '通知をブロック';
+
+  @override
+  String get dpadDismissHint => '左: 非表示 • OK: オプション';
 }

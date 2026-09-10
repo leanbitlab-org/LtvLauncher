@@ -218,5 +218,12 @@
     "notifications": "通知",
     "continueWatchingDescription": "ホーム画面に最近再生した映画や番組を表示します",
     "continueWatchingPermissionDesc": "TVアプリの視聴履歴を読み取るには特別な権限が必要です:",
-    "requestPermission": "権限をリクエスト"
+    "requestPermission": "権限をリクエスト",
+    "dismiss": "非表示",
+    "openApp": "開く",
+    "notificationOptions": "通知のオプション",
+    "noBlockedAppsDesc": "現在、すべてのアプリで通知の表示が許可されています",
+    "notificationsAllowed": "通知を許可",
+    "notificationsBlocked": "通知をブロック",
+    "dpadDismissHint": "左: 非表示 • OK: オプション"
 }
