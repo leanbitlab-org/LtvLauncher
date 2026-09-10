@@ -544,8 +544,8 @@ class AppsService extends ChangeNotifier {
 
     await _database.insertAppsCategories(batch);
 
+    sortCategory(categoryFound); // also for new apps, which arrive without notify
     if (shouldNotifyListeners) {
-      sortCategory(categoryFound);
       notifyListeners();
     }
   }
