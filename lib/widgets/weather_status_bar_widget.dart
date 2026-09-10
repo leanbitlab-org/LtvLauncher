@@ -33,12 +33,12 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
             if (weather == null) return const SizedBox.shrink();
 
             final bool isWarning = showWarnings && weather.hasWarning;
-            final icon = weather.getConditionIcon(isWarning: isWarning);
+            final icon = weather.getConditionIcon();
             final tempText = weather.formatTemperature(useFahrenheit: useFahrenheit);
 
             String displayText;
             if (isWarning && weather.warningText != null) {
-              displayText = "${weather.warningText} • $tempText";
+              displayText = "$tempText • ${weather.warningText}";
             } else if (weather.currentCondition != null && weather.currentCondition!.isNotEmpty) {
               displayText = "$tempText • ${weather.currentCondition}";
             } else {
@@ -46,7 +46,6 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
             }
 
             final theme = Theme.of(context);
-            final warningColor = isWarning ? Colors.amberAccent : Colors.white;
 
             return Actions(
               actions: <Type, Action<Intent>>{
@@ -73,8 +72,8 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
                       border: Border.all(
                         color: _focused
                             ? theme.colorScheme.primary
-                            : (isWarning ? Colors.amber.withOpacity(0.5) : Colors.white.withOpacity(0.12)),
-                        width: 1.5,
+                            : Colors.white.withOpacity(0.12),
+                        width: 1,
                       ),
                       boxShadow: _focused
                           ? const [
@@ -92,7 +91,7 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
                         Icon(
                           icon,
                           size: 20,
-                          color: warningColor,
+                          color: Colors.white,
                           shadows: const [
                             Shadow(color: Colors.black54, offset: Offset(0, 2), blurRadius: 4)
                           ],
@@ -100,11 +99,11 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
                         const SizedBox(width: 8),
                         Text(
                           displayText,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
-                            fontWeight: isWarning ? FontWeight.bold : FontWeight.w400,
-                            color: warningColor,
-                            shadows: const [
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                            shadows: [
                               Shadow(color: Colors.black54, offset: Offset(0, 2), blurRadius: 4)
                             ],
                           ),
