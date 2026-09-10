@@ -96,17 +96,22 @@ def main():
     size_armv7 = get_file_size("build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk")
     size_arm64 = get_file_size("build/app/outputs/flutter-apk/app-arm64-v8a-release.apk")
 
-    release_notes = f"""### ❤️ Support the Project
-If you love using LTvLauncher (ad-free, lightweight, and open source), please consider supporting us! Your contributions help buy testing hardware, cover bills, and keep development active.
-👉 **[Sponsor LeanBitLab on GitHub](https://github.com/sponsors/LeanBitLab)**
+    release_notes = f"""### 💖 Support Our Work
 
-### Whats New
+As an open-source, community-funded project, we operate on a very limited budget. If LTvLauncher helps you daily, please consider supporting us on [GitHub Sponsors](https://github.com/sponsors/LeanBitLab) or [Open Collective](https://opencollective.com/leanbitlab-org). Sharing LTvLauncher with friends and family makes a huge difference!
+
+## 🚀 What's New
+
+### ✨ Highlights & Changes
 {changelog}
 
-#### 📦 Artifacts
-* **LTvLauncher-universal-release.apk**: Universal build containing all architectures.
-* **LTvLauncher-armeabi-v7a-release.apk**: Optimized build for ARMv7 architectures (older Android TVs & Fire TV sticks).
-* **LTvLauncher-arm64-v8a-release.apk**: Optimized build for ARM64 architectures (newer Android TVs & NVIDIA Shield).
+## 📦 Downloads (Choose Your Architecture)
+
+| File | Target Devices | Architecture | Size |
+|:---|:---|:---|:---|
+| **`LTvLauncher-universal-release.apk`** | All Android TV & Fire TV devices (Universal) | All | {size_universal} |
+| **`LTvLauncher-arm64-v8a-release.apk`** | Chromecast with Google TV, Nvidia Shield, modern TVs | 64-bit ARM (`arm64-v8a`) | {size_arm64} |
+| **`LTvLauncher-armeabi-v7a-release.apk`** | Fire TV Stick (Lite, 4K, 4K Max), older smart TVs | 32-bit ARM (`armeabi-v7a`) | {size_armv7} |
 """
 
     with open("release_notes.md", "w") as f:
