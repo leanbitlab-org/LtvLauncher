@@ -67,23 +67,20 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
                   focusColor: Colors.transparent,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 150),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
                     decoration: BoxDecoration(
-                      color: _focused
-                          ? theme.colorScheme.primary.withOpacity(0.2)
-                          : Colors.black.withOpacity(0.3),
+                      color: Colors.black.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(
                         color: _focused
                             ? theme.colorScheme.primary
-                            : (isWarning ? Colors.amber.withOpacity(0.4) : Colors.white.withOpacity(0.12)),
-                        // Constant width: a 1px->2px change resizes the chip and shifts its neighbours.
-                        width: 2,
+                            : (isWarning ? Colors.amber.withOpacity(0.5) : Colors.white.withOpacity(0.12)),
+                        width: 1.5,
                       ),
                       boxShadow: _focused
-                          ? [
+                          ? const [
                               BoxShadow(
-                                color: theme.colorScheme.primary.withOpacity(0.4),
+                                color: Colors.black54,
                                 blurRadius: 8,
                                 spreadRadius: 1,
                               )
@@ -95,7 +92,7 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
                       children: [
                         Icon(
                           icon,
-                          size: 18,
+                          size: 20,
                           color: warningColor,
                           shadows: const [
                             Shadow(color: Colors.black54, offset: Offset(0, 2), blurRadius: 4)
@@ -105,8 +102,8 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
                         Text(
                           displayText,
                           style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: isWarning ? FontWeight.bold : FontWeight.w500,
+                            fontSize: 18,
+                            fontWeight: isWarning ? FontWeight.bold : FontWeight.w400,
                             color: warningColor,
                             shadows: const [
                               Shadow(color: Colors.black54, offset: Offset(0, 2), blurRadius: 4)

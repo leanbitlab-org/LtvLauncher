@@ -25,8 +25,8 @@ class WeatherForecastItem {
 
   factory WeatherForecastItem.fromJson(Map<String, dynamic> json) {
     return WeatherForecastItem(
-      minTemp: json['minTemp'] as int?,
-      maxTemp: json['maxTemp'] as int?,
+      minTemp: WeatherData.parseTemperature(json['minTemp']),
+      maxTemp: WeatherData.parseTemperature(json['maxTemp']),
       conditionCode: json['conditionCode'] as int?,
       humidity: json['humidity'] as int?,
       precipProbability: json['precipProbability'] as int?,
@@ -80,6 +80,23 @@ class WeatherData {
   factory WeatherData.fromJsonString(String jsonString) {
     final Map<String, dynamic> json = jsonDecode(jsonString);
     return WeatherData.fromJson(json);
+  }
+
+  static int? parseTemperature(dynamic val) {
+    if (val == null) return null;
+    num? n;
+    if (val is num) {
+      n = val;
+    } else if (val is String) {
+      n = num.tryParse(val);
+    }
+    if (n == null) return null;
+    // Gadgetbridge / Breezy Weather WeatherSpec sends temperatures in Kelvin (e.g., 300K for ~27°C).
+    // If value > 100, treat as Kelvin and convert to Celsius.
+    if (n > 100) {
+      return (n - 273.15).round();
+    }
+    return n.round();
   }
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
@@ -143,13 +160,13 @@ class WeatherData {
     return WeatherData(
       timestamp: json['timestamp'] as int?,
       location: json['location'] as String?,
-      currentTemp: json['currentTemp'] as int?,
+      currentTemp: parseTemperature(json['currentTemp']),
       currentConditionCode: json['currentConditionCode'] as int?,
       currentCondition: json['currentCondition'] as String?,
       currentHumidity: json['currentHumidity'] as int?,
       windSpeed: (json['windSpeed'] is num) ? (json['windSpeed'] as num).toDouble() : null,
-      todayMaxTemp: json['todayMaxTemp'] as int?,
-      todayMinTemp: json['todayMinTemp'] as int?,
+      todayMaxTemp: parseTemperature(json['todayMaxTemp']),
+      todayMinTemp: parseTemperature(json['todayMinTemp']),
       forecasts: forecasts,
       hasWarning: hasWarning,
       warningType: warningType,

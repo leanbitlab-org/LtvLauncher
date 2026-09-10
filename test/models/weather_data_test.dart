@@ -37,6 +37,35 @@ void main() {
       expect(weather.getConditionIcon(), Icons.wb_sunny_outlined);
     });
 
+    test('converts Kelvin temperatures from Breezy Weather broadcast to Celsius', () {
+      const jsonStr = '''
+      {
+        "location": "Breezy Location",
+        "currentTemp": 300,
+        "todayMinTemp": 293,
+        "todayMaxTemp": 303,
+        "forecasts": [
+          {
+            "conditionCode": 800,
+            "minTemp": 294,
+            "maxTemp": 304
+          }
+        ]
+      }
+      ''';
+
+      final weather = WeatherData.fromJsonString(jsonStr);
+
+      // 300 K - 273.15 = 26.85 -> 27°C
+      expect(weather.currentTemp, 27);
+      expect(weather.todayMinTemp, 20); // 293 - 273.15 = 19.85 -> 20°C
+      expect(weather.todayMaxTemp, 30); // 303 - 273.15 = 29.85 -> 30°C
+      expect(weather.forecasts.first.minTemp, 21); // 294 - 273.15 = 20.85 -> 21°C
+      expect(weather.forecasts.first.maxTemp, 31); // 304 - 273.15 = 30.85 -> 31°C
+      expect(weather.formatTemperature(useFahrenheit: false), "27°C");
+      expect(weather.formatTemperature(useFahrenheit: true), "81°F");
+    });
+
     test('detects rain warning today in forecast', () {
       const jsonStr = '''
       {

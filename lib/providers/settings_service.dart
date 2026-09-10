@@ -201,12 +201,12 @@ class SettingsService extends ChangeNotifier {
     _screensaverClockStyle = _sharedPreferences.getString(_screensaverClockStyleKey) ?? "minimal";
     _timeBasedWallpaperEnabled = _sharedPreferences.getBool(_timeBasedWallpaperEnabledKey) ?? false;
     _showInputsWidgetInStatusBar = _sharedPreferences.getBool(_showInputsWidgetInStatusBarKey) ?? true;
-    _showContinueWatching = _sharedPreferences.getBool(_showContinueWatchingKey) ?? true;
+    _showContinueWatching = _sharedPreferences.getBool(_showContinueWatchingKey) ?? false;
     _startOnBoot = _sharedPreferences.getBool(_startOnBootKey) ?? false;
     _showNotificationsWidgetInStatusBar = _sharedPreferences.getBool(_showNotificationsWidgetInStatusBarKey) ?? true;
     _autoHideNotificationsWidget = _sharedPreferences.getBool(_autoHideNotificationsWidgetKey) ?? false;
     _appLanguage = _sharedPreferences.getString(_appLanguageKey) ?? "";
-    _showWeatherInStatusBar = _sharedPreferences.getBool(_showWeatherInStatusBarKey) ?? true;
+    _showWeatherInStatusBar = _sharedPreferences.getBool(_showWeatherInStatusBarKey) ?? false;
     _showWeatherWarnings = _sharedPreferences.getBool(_showWeatherWarningsKey) ?? true;
     _temperatureUnit = _sharedPreferences.getString(_temperatureUnitKey) ?? TEMPERATURE_UNIT_CELSIUS;
     notifyListeners();
