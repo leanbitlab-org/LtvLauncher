@@ -479,4 +479,19 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get breezyWeatherSetupHint => 'Встановіть Breezy Weather та увімкніть \'Локальний обмін даними\' / \'Gadgetbridge\' у налаштуваннях для перегляду погоди та попереджень про дощ.';
+
+  @override
+  String get displayAndScreensaver => 'Екран та заставка';
+
+  @override
+  String get notifications => 'Сповіщення';
+
+  @override
+  String get continueWatchingDescription => 'Показувати нещодавно переглянуті фільми та серіали на головному екрані';
+
+  @override
+  String get continueWatchingPermissionDesc => 'Для читання історії перегляду з ТВ-додатків потрібен спеціальний дозвіл:';
+
+  @override
+  String get requestPermission => 'Запитати дозвіл';
 }

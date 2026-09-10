@@ -21,6 +21,9 @@ import 'package:flauncher/providers/settings_service.dart';
 import 'package:flauncher/widgets/settings/applications_panel_page.dart';
 import 'package:flauncher/widgets/settings/interface_settings_page.dart';
 import 'package:flauncher/widgets/settings/general_settings_page.dart';
+import 'package:flauncher/widgets/settings/display_settings_page.dart';
+import 'package:flauncher/widgets/settings/notifications_settings_page.dart';
+import 'package:flauncher/widgets/settings/accessibility_page.dart';
 import 'package:flauncher/widgets/settings/flauncher_about_dialog.dart';
 import 'package:flauncher/widgets/settings/settings_panel_page.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +90,48 @@ void main() {
     expect(find.byKey(Key("GeneralSettingsPage")), findsOneWidget);
   });
 
+  testWidgets("'Display & screensaver' opens DisplaySettingsPage", (tester) async {
+    final settingsService = MockSettingsService();
+    final appsService = MockAppsService();
+    when(appsService.launcherSections).thenReturn([]);
+    when(appsService.applications).thenReturn([]);
+    when(settingsService.appHighlightAnimationEnabled).thenReturn(true);
+
+    await _pumpWidgetWithProviders(tester, settingsService, appsService);
+
+    await tester.tap(find.text("Display & Screensaver"));
+    await tester.pumpAndSettle();
+    expect(find.byKey(Key("DisplaySettingsPage")), findsOneWidget);
+  });
+
+  testWidgets("'Notifications' opens NotificationsSettingsPage", (tester) async {
+    final settingsService = MockSettingsService();
+    final appsService = MockAppsService();
+    when(appsService.launcherSections).thenReturn([]);
+    when(appsService.applications).thenReturn([]);
+    when(settingsService.appHighlightAnimationEnabled).thenReturn(true);
+
+    await _pumpWidgetWithProviders(tester, settingsService, appsService);
+
+    await tester.tap(find.text("Notifications"));
+    await tester.pumpAndSettle();
+    expect(find.byKey(Key("NotificationsSettingsPage")), findsOneWidget);
+  });
+
+  testWidgets("'Accessibility' opens AccessibilityPage", (tester) async {
+    final settingsService = MockSettingsService();
+    final appsService = MockAppsService();
+    when(appsService.launcherSections).thenReturn([]);
+    when(appsService.applications).thenReturn([]);
+    when(settingsService.appHighlightAnimationEnabled).thenReturn(true);
+
+    await _pumpWidgetWithProviders(tester, settingsService, appsService);
+
+    await tester.tap(find.text("Accessibility"));
+    await tester.pumpAndSettle();
+    expect(find.byKey(Key("AccessibilityPage")), findsOneWidget);
+  });
+
   testWidgets("'Android settings' calls AppsService", (tester) async {
     final settingsService = MockSettingsService();
     final appsService = MockAppsService();
@@ -138,7 +183,10 @@ Future<void> _pumpWidgetWithProviders(
         supportedLocales: AppLocalizations.supportedLocales,
         routes: {
           InterfaceSettingsPage.routeName: (_) => Container(key: Key("InterfaceSettingsPage")),
+          DisplaySettingsPage.routeName: (_) => Container(key: Key("DisplaySettingsPage")),
+          NotificationsSettingsPage.routeName: (_) => Container(key: Key("NotificationsSettingsPage")),
           GeneralSettingsPage.routeName: (_) => Container(key: Key("GeneralSettingsPage")),
+          AccessibilityPage.routeName: (_) => Container(key: Key("AccessibilityPage")),
           ApplicationsPanelPage.routeName: (_) => Container(key: Key("ApplicationsPanelPage")),
         },
         home: Material(child: SettingsPanelPage()),

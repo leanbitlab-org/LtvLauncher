@@ -1,5 +1,3 @@
-import 'package:flauncher/widgets/settings/themes_page.dart';
-import 'package:flauncher/widgets/settings/themes_page.dart';
 /*
  * FLauncher
  * Copyright (C) 2024 LeanBitLab
@@ -22,9 +20,11 @@ import 'package:flutter/material.dart';
 import 'package:flauncher/l10n/app_localizations.dart';
 import 'focusable_settings_tile.dart';
 import 'launcher_sections_panel_page.dart';
+import 'continue_watching_settings_page.dart';
+import 'themes_page.dart';
+import 'accent_color_page.dart';
 import 'wallpaper_panel_page.dart';
 import 'status_bar_panel_page.dart';
-import 'accent_color_page.dart';
 import 'misc_panel_page.dart';
 
 class InterfaceSettingsPage extends StatelessWidget {
@@ -51,6 +51,21 @@ class InterfaceSettingsPage extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pushNamed(LauncherSectionsPanelPage.routeName),
                 ),
                 FocusableSettingsTile(
+                  leading: const Icon(Icons.play_circle_outline),
+                  title: Text(localizations.continueWatching, style: Theme.of(context).textTheme.bodyMedium),
+                  onPressed: () => Navigator.of(context).pushNamed(ContinueWatchingSettingsPage.routeName),
+                ),
+                FocusableSettingsTile(
+                  leading: const Icon(Icons.crop_square),
+                  title: Text(localizations.themes, style: Theme.of(context).textTheme.bodyMedium),
+                  onPressed: () => Navigator.of(context).pushNamed(ThemesPage.routeName),
+                ),
+                FocusableSettingsTile(
+                  leading: const Icon(Icons.palette_outlined),
+                  title: Text(localizations.accentColor, style: Theme.of(context).textTheme.bodyMedium),
+                  onPressed: () => Navigator.of(context).pushNamed(AccentColorPage.routeName),
+                ),
+                FocusableSettingsTile(
                   leading: const Icon(Icons.wallpaper_outlined),
                   title: Text(localizations.wallpaper, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(WallpaperPanelPage.routeName),
@@ -61,17 +76,7 @@ class InterfaceSettingsPage extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pushNamed(StatusBarPanelPage.routeName),
                 ),
                 FocusableSettingsTile(
-                  leading: const Icon(Icons.palette_outlined),
-                  title: Text(localizations.accentColor, style: Theme.of(context).textTheme.bodyMedium),
-                  onPressed: () => Navigator.of(context).pushNamed(AccentColorPage.routeName),
-                ),
-                FocusableSettingsTile(
-                  leading: const Icon(Icons.crop_square),
-                  title: Text(localizations.themes, style: Theme.of(context).textTheme.bodyMedium),
-                  onPressed: () => Navigator.of(context).pushNamed(ThemesPage.routeName),
-                ),
-                FocusableSettingsTile(
-                  leading: const Icon(Icons.miscellaneous_services),
+                  leading: const Icon(Icons.animation),
                   title: Text(localizations.miscellaneous, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(MiscPanelPage.routeName),
                 ),

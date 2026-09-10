@@ -213,5 +213,10 @@
     "temperatureUnit": "Sıcaklık Birimi",
     "celsius": "Celsius (°C)",
     "fahrenheit": "Fahrenheit (°F)",
-    "breezyWeatherSetupHint": "Hava durumu ve yağmur uyarılarını görmek için Breezy Weather'ı yükleyin ve ayarlarından 'Yerel veri paylaşımı' / 'Gadgetbridge' özelliğini etkinleştirin."
+    "breezyWeatherSetupHint": "Hava durumu ve yağmur uyarılarını görmek için Breezy Weather'ı yükleyin ve ayarlarından 'Yerel veri paylaşımı' / 'Gadgetbridge' özelliğini etkinleştirin.",
+    "displayAndScreensaver": "Ekran ve Ekran Koruyucu",
+    "notifications": "Bildirimler",
+    "continueWatchingDescription": "Son izlenen filmleri ve dizileri ana ekranda göster",
+    "continueWatchingPermissionDesc": "TV uygulamalarından izleme geçmişini okumak için özel izin gereklidir:",
+    "requestPermission": "İzin İste"
 }

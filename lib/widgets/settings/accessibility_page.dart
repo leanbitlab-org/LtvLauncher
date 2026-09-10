@@ -46,12 +46,14 @@ class _AccessibilityPageState extends State<AccessibilityPage> with WidgetsBindi
     final launcherState = context.read<LauncherState>();
     await launcherState.refresh(appsService);
 
-    final bool enabled = await FLauncherChannel().checkAccessibilityPermission();
-    if (mounted) {
-      setState(() {
-        _accessibilityEnabled = enabled;
-      });
-    }
+    try {
+      final bool enabled = await FLauncherChannel().checkAccessibilityPermission();
+      if (mounted) {
+        setState(() {
+          _accessibilityEnabled = enabled;
+        });
+      }
+    } catch (_) {}
   }
 
   @override

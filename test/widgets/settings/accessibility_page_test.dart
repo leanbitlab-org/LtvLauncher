@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flauncher/providers/settings_service.dart';
 import '../../mocks.mocks.dart';
 
 void main() {
@@ -21,14 +22,19 @@ void main() {
   testWidgets("AccessibilityPage renders correctly when default launcher", (tester) async {
     final appsService = MockAppsService();
     final launcherState = LauncherState();
+    final settingsService = MockSettingsService();
 
     when(appsService.isDefaultLauncher()).thenAnswer((_) async => true);
+    when(settingsService.appHighlightAnimationEnabled).thenReturn(true);
+    when(settingsService.startOnBoot).thenReturn(false);
+    when(settingsService.accentColorHex).thenReturn("7C4DFF");
 
     await tester.pumpWidget(
       MultiProvider(
         providers: [
           ChangeNotifierProvider<AppsService>.value(value: appsService),
           ChangeNotifierProvider<LauncherState>.value(value: launcherState),
+          ChangeNotifierProvider<SettingsService>.value(value: settingsService),
         ],
         builder: (_, __) => MaterialApp(
           localizationsDelegates: const [
@@ -52,14 +58,19 @@ void main() {
   testWidgets("AccessibilityPage renders correctly when not default launcher", (tester) async {
     final appsService = MockAppsService();
     final launcherState = LauncherState();
+    final settingsService = MockSettingsService();
 
     when(appsService.isDefaultLauncher()).thenAnswer((_) async => false);
+    when(settingsService.appHighlightAnimationEnabled).thenReturn(true);
+    when(settingsService.startOnBoot).thenReturn(false);
+    when(settingsService.accentColorHex).thenReturn("7C4DFF");
 
     await tester.pumpWidget(
       MultiProvider(
         providers: [
           ChangeNotifierProvider<AppsService>.value(value: appsService),
           ChangeNotifierProvider<LauncherState>.value(value: launcherState),
+          ChangeNotifierProvider<SettingsService>.value(value: settingsService),
         ],
         builder: (_, __) => MaterialApp(
           localizationsDelegates: const [

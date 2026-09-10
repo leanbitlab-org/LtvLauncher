@@ -479,4 +479,19 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get breezyWeatherSetupHint => 'Breezy Weather를 설치하고 설정에서 \'로컬 데이터 공유\' / \'Gadgetbridge\'를 활성화하면 날씨 및 강우 경보가 표시됩니다.';
+
+  @override
+  String get displayAndScreensaver => '디스플레이 및 화면 보호기';
+
+  @override
+  String get notifications => '알림';
+
+  @override
+  String get continueWatchingDescription => '홈 화면에 최근 시청한 영화 및 TV 프로그램 표시';
+
+  @override
+  String get continueWatchingPermissionDesc => 'TV 앱의 시청 기록을 읽으려면 특별한 권한이 필요합니다:';
+
+  @override
+  String get requestPermission => '권한 요청';
 }

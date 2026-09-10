@@ -479,4 +479,19 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get breezyWeatherSetupHint => 'Hava durumu ve yağmur uyarılarını görmek için Breezy Weather\'ı yükleyin ve ayarlarından \'Yerel veri paylaşımı\' / \'Gadgetbridge\' özelliğini etkinleştirin.';
+
+  @override
+  String get displayAndScreensaver => 'Ekran ve Ekran Koruyucu';
+
+  @override
+  String get notifications => 'Bildirimler';
+
+  @override
+  String get continueWatchingDescription => 'Son izlenen filmleri ve dizileri ana ekranda göster';
+
+  @override
+  String get continueWatchingPermissionDesc => 'TV uygulamalarından izleme geçmişini okumak için özel izin gereklidir:';
+
+  @override
+  String get requestPermission => 'İzin İste';
 }

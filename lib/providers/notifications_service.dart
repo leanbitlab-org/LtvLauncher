@@ -105,10 +105,24 @@ class NotificationsService extends ChangeNotifier with WidgetsBindingObserver {
     final bool allowed = await _channel.checkNotificationListenerPermission();
     if (localCallCount != _callCount) return;
 
-    if (_hasPermission != allowed) {
-      _hasPermission = allowed;
-      notifyListeners();
+    final wasAllowed = _hasPermission;
+    _hasPermission = allowed;
+
+    if (allowed && (!wasAllowed || _subscription == null)) {
+      try {
+        final List<Map<dynamic, dynamic>> list = await _channel.getActiveNotifications();
+        if (localCallCount == _callCount) {
+          _updateNotificationCounts(list);
+        }
+      } catch (e) {
+        // ignore
+      }
+      _subscription ??= _channel.addNotificationsChangedListener((eventList) {
+        _updateNotificationCounts(eventList);
+      });
     }
+
+    notifyListeners();
   }
 
   Future<void> refreshNotifications() async {

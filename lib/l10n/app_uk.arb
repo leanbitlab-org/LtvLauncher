@@ -213,5 +213,10 @@
     "temperatureUnit": "Одиниця температури",
     "celsius": "Цельсій (°C)",
     "fahrenheit": "Фаренгейт (°F)",
-    "breezyWeatherSetupHint": "Встановіть Breezy Weather та увімкніть 'Локальний обмін даними' / 'Gadgetbridge' у налаштуваннях для перегляду погоди та попереджень про дощ."
+    "breezyWeatherSetupHint": "Встановіть Breezy Weather та увімкніть 'Локальний обмін даними' / 'Gadgetbridge' у налаштуваннях для перегляду погоди та попереджень про дощ.",
+    "displayAndScreensaver": "Екран та заставка",
+    "notifications": "Сповіщення",
+    "continueWatchingDescription": "Показувати нещодавно переглянуті фільми та серіали на головному екрані",
+    "continueWatchingPermissionDesc": "Для читання історії перегляду з ТВ-додатків потрібен спеціальний дозвіл:",
+    "requestPermission": "Запитати дозвіл"
 }

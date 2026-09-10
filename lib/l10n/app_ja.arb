@@ -213,5 +213,10 @@
     "temperatureUnit": "温度単位",
     "celsius": "摂氏 (°C)",
     "fahrenheit": "華氏 (°F)",
-    "breezyWeatherSetupHint": "Breezy Weather をインストールし、設定で「ローカルデータ共有」/「Gadgetbridge」を有効にすると、天気と雨の警告が表示されます。"
+    "breezyWeatherSetupHint": "Breezy Weather をインストールし、設定で「ローカルデータ共有」/「Gadgetbridge」を有効にすると、天気と雨の警告が表示されます。",
+    "displayAndScreensaver": "ディスプレイとスクリーンセーバー",
+    "notifications": "通知",
+    "continueWatchingDescription": "ホーム画面に最近再生した映画や番組を表示します",
+    "continueWatchingPermissionDesc": "TVアプリの視聴履歴を読み取るには特別な権限が必要です:",
+    "requestPermission": "権限をリクエスト"
 }

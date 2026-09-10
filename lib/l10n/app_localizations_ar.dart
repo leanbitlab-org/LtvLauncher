@@ -479,4 +479,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get breezyWeatherSetupHint => 'قم بتثبيت تطبيق Breezy Weather وتفعيل \'مشاركة البيانات المحلية\' في إعداداته لعرض الطقس وتحذيرات الأمطار.';
+
+  @override
+  String get displayAndScreensaver => 'الشاشة وشاشة التوقف';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get continueWatchingDescription => 'عرض الأفلام والبرامج التلفزيونية التي تمت مشاهدتها مؤخرًا على الشاشة الرئيسية';
+
+  @override
+  String get continueWatchingPermissionDesc => 'يلزم الحصول على إذن خاص لقراءة سجل المشاهدة من تطبيقات التلفزيون:';
+
+  @override
+  String get requestPermission => 'طلب الإذن';
 }

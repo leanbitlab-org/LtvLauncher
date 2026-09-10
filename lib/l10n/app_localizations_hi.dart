@@ -479,4 +479,19 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get breezyWeatherSetupHint => 'मौसम और बारिश की चेतावनी देखने के लिए Breezy Weather इंस्टॉल करें और उसकी सेटिंग्स में \'स्थानीय डेटा साझाकरण\' सक्षम करें।';
+
+  @override
+  String get displayAndScreensaver => 'डिस्प्ले और स्क्रीनसेवर';
+
+  @override
+  String get notifications => 'सूचनाएं';
+
+  @override
+  String get continueWatchingDescription => 'होम स्क्रीन पर हाल ही में देखी गई फिल्में और टीवी शो दिखाएं';
+
+  @override
+  String get continueWatchingPermissionDesc => 'टीवी ऐप्स से देखने का इतिहास पढ़ने के लिए विशेष अनुमति की आवश्यकता है:';
+
+  @override
+  String get requestPermission => 'अनुमति का अनुरोध करें';
 }

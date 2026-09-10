@@ -213,5 +213,10 @@
     "temperatureUnit": "وحدة درجة الحرارة",
     "celsius": "مئوية (°C)",
     "fahrenheit": "فهرنهايت (°F)",
-    "breezyWeatherSetupHint": "قم بتثبيت تطبيق Breezy Weather وتفعيل 'مشاركة البيانات المحلية' في إعداداته لعرض الطقس وتحذيرات الأمطار."
+    "breezyWeatherSetupHint": "قم بتثبيت تطبيق Breezy Weather وتفعيل 'مشاركة البيانات المحلية' في إعداداته لعرض الطقس وتحذيرات الأمطار.",
+    "displayAndScreensaver": "الشاشة وشاشة التوقف",
+    "notifications": "الإشعارات",
+    "continueWatchingDescription": "عرض الأفلام والبرامج التلفزيونية التي تمت مشاهدتها مؤخرًا على الشاشة الرئيسية",
+    "continueWatchingPermissionDesc": "يلزم الحصول على إذن خاص لقراءة سجل المشاهدة من تطبيقات التلفزيون:",
+    "requestPermission": "طلب الإذن"
 }

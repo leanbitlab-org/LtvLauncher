@@ -479,4 +479,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get breezyWeatherSetupHint => '安装 Breezy Weather 并在其设置中开启“本地数据共享”/“Gadgetbridge”以显示天气和降雨预警。';
+
+  @override
+  String get displayAndScreensaver => '显示与屏幕保护程序';
+
+  @override
+  String get notifications => '通知';
+
+  @override
+  String get continueWatchingDescription => '在主屏幕上显示支持的应用最近观看的电影和电视剧';
+
+  @override
+  String get continueWatchingPermissionDesc => '需要特殊权限才能读取电视应用的观看历史记录：';
+
+  @override
+  String get requestPermission => '请求权限';
 }

@@ -1001,13 +1001,33 @@ public class MainActivity extends FlutterActivity {
     }
 
     private boolean checkNotificationListenerPermission() {
+        if (LauncherNotificationListenerService.getInstance() != null) {
+            return true;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (nm != null) {
+                ComponentName cn = new ComponentName(this, LauncherNotificationListenerService.class);
+                if (nm.isNotificationListenerAccessGranted(cn)) {
+                    return true;
+                }
+            }
+        }
+
         String packageName = getPackageName();
         String flat = Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners");
-        if (flat != null) {
+        if (flat != null && !flat.isEmpty()) {
+            if (flat.contains(packageName) || flat.contains("com.leanbitlab.ltvL")) {
+                return true;
+            }
             String[] names = flat.split(":");
             for (String name : names) {
+                if (name.contains(packageName) || name.contains("com.leanbitlab.ltvL")) {
+                    return true;
+                }
                 ComponentName cn = ComponentName.unflattenFromString(name);
-                if (cn != null && cn.getPackageName().equals(packageName)) {
+                if (cn != null && (cn.getPackageName().equals(packageName) || cn.getPackageName().contains("leanbitlab"))) {
                     return true;
                 }
             }

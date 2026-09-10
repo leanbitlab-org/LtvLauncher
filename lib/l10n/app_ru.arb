@@ -213,5 +213,10 @@
     "temperatureUnit": "Единица температуры",
     "celsius": "Цельсий (°C)",
     "fahrenheit": "Фаренгейт (°F)",
-    "breezyWeatherSetupHint": "Установите Breezy Weather и включите 'Локальный обмен данными' / 'Gadgetbridge' в его настройках для отображения погоды и предупреждений."
+    "breezyWeatherSetupHint": "Установите Breezy Weather и включите 'Локальный обмен данными' / 'Gadgetbridge' в его настройках для отображения погоды и предупреждений.",
+    "displayAndScreensaver": "Экран и заставка",
+    "notifications": "Уведомления",
+    "continueWatchingDescription": "Показывать недавно просмотренные фильмы и передачи на главном экране",
+    "continueWatchingPermissionDesc": "Для чтения истории просмотров из ТВ-приложений требуется специальное разрешение:",
+    "requestPermission": "Запросить разрешение"
 }

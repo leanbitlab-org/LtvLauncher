@@ -479,4 +479,19 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get breezyWeatherSetupHint => 'Installa Breezy Weather e abilita \'Condivisione dati locali\' / \'Gadgetbridge\' nelle impostazioni per visualizzare meteo e avvisi di pioggia.';
+
+  @override
+  String get displayAndScreensaver => 'Schermo e salvaschermo';
+
+  @override
+  String get notifications => 'Notifiche';
+
+  @override
+  String get continueWatchingDescription => 'Mostra film e programmi TV visti di recente sulla schermata iniziale';
+
+  @override
+  String get continueWatchingPermissionDesc => 'È richiesta un\'autorizzazione speciale per leggere la cronologia di visualizzazione:';
+
+  @override
+  String get requestPermission => 'Richiedi autorizzazione';
 }

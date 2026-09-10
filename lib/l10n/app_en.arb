@@ -213,5 +213,10 @@
     "temperatureUnit": "Temperature Unit",
     "celsius": "Celsius (°C)",
     "fahrenheit": "Fahrenheit (°F)",
-    "breezyWeatherSetupHint": "Install Breezy Weather and enable 'Local data sharing' / 'Gadgetbridge' in its settings to see weather and rain warnings."
+    "breezyWeatherSetupHint": "Install Breezy Weather and enable 'Local data sharing' / 'Gadgetbridge' in its settings to see weather and rain warnings.",
+    "displayAndScreensaver": "Display & Screensaver",
+    "notifications": "Notifications",
+    "continueWatchingDescription": "Show recently watched movies and TV shows from supported apps on your home screen",
+    "continueWatchingPermissionDesc": "Special permission is required to read watch history from TV apps. You can grant it using the button below or via ADB:",
+    "requestPermission": "Request Permission"
 }

@@ -479,4 +479,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get breezyWeatherSetupHint => 'Installieren Sie Breezy Weather und aktivieren Sie \'Lokale Datenfreigabe\' / \'Gadgetbridge\' in den Einstellungen, um Wetter und Regenwarnungen anzuzeigen.';
+
+  @override
+  String get displayAndScreensaver => 'Display & Bildschirmschoner';
+
+  @override
+  String get notifications => 'Benachrichtigungen';
+
+  @override
+  String get continueWatchingDescription => 'Zuletzt angesehene Filme und Serien von unterstützten Apps auf dem Startbildschirm anzeigen';
+
+  @override
+  String get continueWatchingPermissionDesc => 'Zum Lesen des Wiedergabeverlaufs von TV-Apps ist eine spezielle Berechtigung erforderlich:';
+
+  @override
+  String get requestPermission => 'Berechtigung anfordern';
 }

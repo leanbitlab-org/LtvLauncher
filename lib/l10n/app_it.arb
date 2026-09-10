@@ -213,5 +213,10 @@
     "temperatureUnit": "Unità di temperatura",
     "celsius": "Celsius (°C)",
     "fahrenheit": "Fahrenheit (°F)",
-    "breezyWeatherSetupHint": "Installa Breezy Weather e abilita 'Condivisione dati locali' / 'Gadgetbridge' nelle impostazioni per visualizzare meteo e avvisi di pioggia."
+    "breezyWeatherSetupHint": "Installa Breezy Weather e abilita 'Condivisione dati locali' / 'Gadgetbridge' nelle impostazioni per visualizzare meteo e avvisi di pioggia.",
+    "displayAndScreensaver": "Schermo e salvaschermo",
+    "notifications": "Notifiche",
+    "continueWatchingDescription": "Mostra film e programmi TV visti di recente sulla schermata iniziale",
+    "continueWatchingPermissionDesc": "È richiesta un'autorizzazione speciale per leggere la cronologia di visualizzazione:",
+    "requestPermission": "Richiedi autorizzazione"
 }

@@ -1030,6 +1030,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Install Breezy Weather and enable \'Local data sharing\' / \'Gadgetbridge\' in its settings to see weather and rain warnings.'**
   String get breezyWeatherSetupHint;
+
+  /// No description provided for @displayAndScreensaver.
+  ///
+  /// In en, this message translates to:
+  /// **'Display & Screensaver'**
+  String get displayAndScreensaver;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @continueWatchingDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Show recently watched movies and TV shows from supported apps on your home screen'**
+  String get continueWatchingDescription;
+
+  /// No description provided for @continueWatchingPermissionDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Special permission is required to read watch history from TV apps. You can grant it using the button below or via ADB:'**
+  String get continueWatchingPermissionDesc;
+
+  /// No description provided for @requestPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Permission'**
+  String get requestPermission;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

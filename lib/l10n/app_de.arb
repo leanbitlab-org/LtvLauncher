@@ -213,5 +213,10 @@
     "temperatureUnit": "Temperatureinheit",
     "celsius": "Celsius (°C)",
     "fahrenheit": "Fahrenheit (°F)",
-    "breezyWeatherSetupHint": "Installieren Sie Breezy Weather und aktivieren Sie 'Lokale Datenfreigabe' / 'Gadgetbridge' in den Einstellungen, um Wetter und Regenwarnungen anzuzeigen."
+    "breezyWeatherSetupHint": "Installieren Sie Breezy Weather und aktivieren Sie 'Lokale Datenfreigabe' / 'Gadgetbridge' in den Einstellungen, um Wetter und Regenwarnungen anzuzeigen.",
+    "displayAndScreensaver": "Display & Bildschirmschoner",
+    "notifications": "Benachrichtigungen",
+    "continueWatchingDescription": "Zuletzt angesehene Filme und Serien von unterstützten Apps auf dem Startbildschirm anzeigen",
+    "continueWatchingPermissionDesc": "Zum Lesen des Wiedergabeverlaufs von TV-Apps ist eine spezielle Berechtigung erforderlich:",
+    "requestPermission": "Berechtigung anfordern"
 }
