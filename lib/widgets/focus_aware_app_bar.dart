@@ -87,6 +87,10 @@ class FocusAwareAppBarState extends State<FocusAwareAppBar>
       },
       child: RepaintBoundary(
         child: AppBar(
+          // Line the settings glyph up with the left edge of the app tiles below
+          // (sections indent 16 + 8 card margin + 8 tile inset = 32dp; the icon
+          // button adds 4 padding + 2 border + 2 glyph inset, so start at 24).
+          titleSpacing: 24,
           elevation: 0,
           scrolledUnderElevation: 0,
           backgroundColor: Colors.transparent,
