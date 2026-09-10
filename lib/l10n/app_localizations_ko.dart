@@ -388,6 +388,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get homeButtonFix => '홈 버튼 수정 (Google TV)';
 
   @override
+  String get startOnBoot => '부팅 시 시작 (Google TV / Fire TV)';
+
+  @override
   String get appLanguage => '언어';
 
   @override

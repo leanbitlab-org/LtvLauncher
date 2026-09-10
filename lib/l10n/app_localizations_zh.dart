@@ -388,6 +388,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeButtonFix => 'Home 键修复（Google TV）';
 
   @override
+  String get startOnBoot => '开机时启动 (Google TV / Fire TV)';
+
+  @override
   String get appLanguage => '语言';
 
   @override

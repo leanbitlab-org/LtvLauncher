@@ -388,6 +388,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeButtonFix => 'Исправление кнопки «Домой» (Google TV)';
 
   @override
+  String get startOnBoot => 'Запускать при включении (Google TV / Fire TV)';
+
+  @override
   String get appLanguage => 'Язык';
 
   @override

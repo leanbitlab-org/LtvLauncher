@@ -388,6 +388,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeButtonFix => 'إصلاح زر الصفحة الرئيسية (Google TV)';
 
   @override
+  String get startOnBoot => 'التشغيل عند بدء الجهاز (Google TV / Fire TV)';
+
+  @override
   String get appLanguage => 'اللغة';
 
   @override

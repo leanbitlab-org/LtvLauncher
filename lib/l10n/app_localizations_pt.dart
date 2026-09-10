@@ -388,6 +388,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get homeButtonFix => 'Correção do botão Home (Google TV)';
 
   @override
+  String get startOnBoot => 'Iniciar ao ligar (Google TV / Fire TV)';
+
+  @override
   String get appLanguage => 'Idioma';
 
   @override

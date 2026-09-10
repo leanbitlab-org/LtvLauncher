@@ -388,6 +388,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get homeButtonFix => 'Ana Sayfa Düğmesi Düzeltmesi (Google TV)';
 
   @override
+  String get startOnBoot => 'Açılışta başlat (Google TV / Fire TV)';
+
+  @override
   String get appLanguage => 'Dil';
 
   @override

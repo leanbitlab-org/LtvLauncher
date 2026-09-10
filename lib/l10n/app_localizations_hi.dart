@@ -388,6 +388,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get homeButtonFix => 'होम बटन फिक्स (Google TV)';
 
   @override
+  String get startOnBoot => 'बूट पर शुरू करें (Google TV / Fire TV)';
+
+  @override
   String get appLanguage => 'भाषा';
 
   @override

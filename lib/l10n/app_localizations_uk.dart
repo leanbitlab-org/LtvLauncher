@@ -388,6 +388,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get homeButtonFix => 'Виправлення кнопки «Домівка» (Google TV)';
 
   @override
+  String get startOnBoot => 'Запускати після завантаження (Google TV / Fire TV)';
+
+  @override
   String get appLanguage => 'Мова';
 
   @override

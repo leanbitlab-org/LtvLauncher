@@ -845,6 +845,12 @@ abstract class AppLocalizations {
   /// **'Home Button Fix (Google TV)'**
   String get homeButtonFix;
 
+  /// No description provided for @startOnBoot.
+  ///
+  /// In en, this message translates to:
+  /// **'Start on boot (Google TV / Fire TV)'**
+  String get startOnBoot;
+
   /// No description provided for @appLanguage.
   ///
   /// In en, this message translates to:
