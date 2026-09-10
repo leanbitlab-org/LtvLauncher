@@ -77,7 +77,8 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
                         color: _focused
                             ? theme.colorScheme.primary
                             : (isWarning ? Colors.amber.withOpacity(0.4) : Colors.white.withOpacity(0.12)),
-                        width: _focused ? 2 : 1,
+                        // Constant width: a 1px->2px change resizes the chip and shifts its neighbours.
+                        width: 2,
                       ),
                       boxShadow: _focused
                           ? [

@@ -326,9 +326,13 @@ class _FocusableIconButtonState extends State<_FocusableIconButton> {
             decoration: BoxDecoration(
               color: _focused ? Colors.black.withOpacity(0.3) : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
-              border: _focused
-                ? Border.all(color: Theme.of(context).colorScheme.primary, width: 2)
-                : null,
+              // Always reserve the border width: a BoxDecoration border adds to the
+              // Container's padding, so toggling it between null and 2px would resize
+              // the button and shift its siblings horizontally on every focus change.
+              border: Border.all(
+                color: _focused ? Theme.of(context).colorScheme.primary : Colors.transparent,
+                width: 2,
+              ),
               boxShadow: _focused
                 ? const [BoxShadow(color: Colors.black54, blurRadius: 8, spreadRadius: 1)]
                 : null,
