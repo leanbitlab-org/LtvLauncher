@@ -94,6 +94,19 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
         }
         newPrograms.add(program);
       }
+
+      // Explicitly sort programs so the most recently watched content is first
+      newPrograms.sort((a, b) {
+        int timeA = a.lastEngagementTime;
+        int timeB = b.lastEngagementTime;
+        if (timeA > 0 && timeA < 10000000000) timeA *= 1000;
+        if (timeB > 0 && timeB < 10000000000) timeB *= 1000;
+        if (timeA != timeB) {
+          return timeB.compareTo(timeA);
+        }
+        return b.id.compareTo(a.id);
+      });
+
       _programs = newPrograms;
       if (callSnapshot == _callCount) notifyListeners();
 

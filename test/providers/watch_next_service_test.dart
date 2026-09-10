@@ -61,6 +61,46 @@ void main() {
       verify(mockChannel.getWatchNextPrograms()).called(1);
       verify(mockChannel.getWatchNextPoster('content://netflix/poster/1')).called(1);
     });
+
+    test('sorts watch next programs with most recently watched first', () async {
+      final fakePrograms = [
+        {
+          'id': 1,
+          'packageName': 'com.lagradost.cloudstream3',
+          'title': 'Older Stream',
+          'description': 'Episode 1',
+          'watchNextType': 1,
+          'lastEngagementTime': 1600000000000,
+          'playbackPosition': 500,
+          'duration': 3000,
+          'intentUri': 'intent://older',
+          'posterArtUri': ''
+        },
+        {
+          'id': 2,
+          'packageName': 'in.startv.hotstar',
+          'title': 'Recent Movie',
+          'description': 'Watched Just Now',
+          'watchNextType': 1,
+          'lastEngagementTime': 1700000000000,
+          'playbackPosition': 200,
+          'duration': 7200,
+          'intentUri': 'intent://recent',
+          'posterArtUri': ''
+        }
+      ];
+
+      when(mockChannel.getWatchNextPrograms()).thenAnswer((_) async => fakePrograms);
+
+      watchNextService = WatchNextService(mockChannel);
+      while (!watchNextService.initialized) {
+        await Future.delayed(Duration.zero);
+      }
+
+      expect(watchNextService.programs.length, 2);
+      expect(watchNextService.programs[0].title, 'Recent Movie');
+      expect(watchNextService.programs[1].title, 'Older Stream');
+    });
     test('handles missing permission by setting hasPermission to false and clearing programs', () async {
       when(mockChannel.checkWatchNextPermission()).thenAnswer((_) async => false);
 

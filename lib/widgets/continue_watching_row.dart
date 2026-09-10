@@ -21,29 +21,7 @@ class ContinueWatchingRow extends StatelessWidget {
     return Consumer2<WatchNextService, AppsService>(
       builder: (context, watchNextService, appsService, _) {
         if (!watchNextService.hasPermission) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.redAccent.withOpacity(0.4)),
-              ),
-              child: const Row(
-                children: [
-                  Icon(Icons.warning_amber_rounded, color: Colors.redAccent, size: 20),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'ADB grant required for Continue Watching: adb shell pm grant com.leanbitlab.ltvL com.android.providers.tv.permission.READ_WRITE_WATCH_NEXT_PROGRAMS',
-                      style: TextStyle(color: Colors.white70, fontSize: 12),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
+          return const SizedBox.shrink();
         }
 
         final List<WatchNextProgram> programs = watchNextService.programs
@@ -117,10 +95,14 @@ class WatchNextCard extends StatefulWidget {
   State<WatchNextCard> createState() => _WatchNextCardState();
 }
 
-class _WatchNextCardState extends State<WatchNextCard> {
+class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProviderStateMixin {
   late final FocusNode _focusNode;
   bool _focused = false;
   Future<Uint8List>? _iconFuture;
+  late final AnimationController _animation = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1200),
+  );
 
   @override
   void initState() {
@@ -156,6 +138,7 @@ class _WatchNextCardState extends State<WatchNextCard> {
   void dispose() {
     _focusNode.removeListener(_onFocusChange);
     _focusNode.dispose();
+    _animation.dispose();
     super.dispose();
   }
 
@@ -166,9 +149,135 @@ class _WatchNextCardState extends State<WatchNextCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final accentColor = theme.colorScheme.primary;
-    final cardWidth = 240.0;
-    final cardHeight = 135.0;
+    final String themes = context.select<SettingsService, String>((s) => s.themes);
+    final String accentColorHex = context.select<SettingsService, String>((s) => s.accentColorHex);
+    final bool appHighlightAnimationEnabled = context.select<SettingsService, bool>((s) => s.appHighlightAnimationEnabled);
+    final bool hideHighlightOutlineOnHomescreen = context.select<SettingsService, bool>((s) => s.hideHighlightOutlineOnHomescreen);
+    final bool appSelectorTransitionAnimationEnabled = context.select<SettingsService, bool>((s) => s.appSelectorTransitionAnimationEnabled);
+
+    final Color accentColor = Color(int.parse('FF$accentColorHex', radix: 16));
+    const cardWidth = 240.0;
+    const cardHeight = 135.0;
+
+    BorderRadius borderRadius;
+    BorderRadius innerBorderRadius;
+
+    switch (themes) {
+      case 'premium':
+        borderRadius = BorderRadius.circular(16);
+        innerBorderRadius = BorderRadius.circular(14);
+        break;
+      case 'classic':
+        borderRadius = BorderRadius.zero;
+        innerBorderRadius = BorderRadius.zero;
+        break;
+      case 'capsule':
+        borderRadius = BorderRadius.circular(100);
+        innerBorderRadius = BorderRadius.circular(98);
+        break;
+      case 'modern':
+      default:
+        borderRadius = BorderRadius.circular(8);
+        innerBorderRadius = BorderRadius.circular(6);
+        break;
+    }
+
+    double scale = 1.0;
+    if (_focused) {
+      if (themes == 'premium') {
+        scale = 1.15;
+      } else if (themes == 'classic') {
+        scale = 1.0;
+      } else {
+        scale = 1.1;
+      }
+    }
+
+    final double elevation = _focused
+        ? (themes == 'premium' ? 32 : (themes == 'classic' ? 8 : 16))
+        : 0;
+    final Color shadowColor = _focused && themes == 'premium'
+        ? accentColor.withOpacity(0.6)
+        : Colors.black;
+
+    Widget? highlightWidget;
+    if (_focused && !hideHighlightOutlineOnHomescreen) {
+      if (themes == 'premium') {
+        _animation.stop();
+      } else if (themes == 'classic') {
+        _animation.stop();
+        highlightWidget = IgnorePointer(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: borderRadius,
+              border: Border.all(color: accentColor, width: 4),
+            ),
+          ),
+        );
+      } else if (appHighlightAnimationEnabled) {
+        _animation.repeat(reverse: true);
+        highlightWidget = AnimatedBuilder(
+          animation: CurvedAnimation(parent: _animation, curve: Curves.easeInOut),
+          builder: (context, child) {
+            final opacity = 0.4 + (_animation.value * 0.6);
+            return IgnorePointer(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: borderRadius,
+                      border: Border.all(
+                        color: accentColor.withOpacity(opacity),
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: innerBorderRadius,
+                        border: Border.all(
+                          color: Colors.black.withOpacity(opacity),
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      } else {
+        _animation.stop();
+        highlightWidget = IgnorePointer(
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: borderRadius,
+                  border: Border.all(color: accentColor, width: 2),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(2),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: innerBorderRadius,
+                    border: Border.all(color: Colors.black, width: 2),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+    } else {
+      _animation.stop();
+    }
 
     // Progress percentage
     double progress = 0;
@@ -197,44 +306,21 @@ class _WatchNextCardState extends State<WatchNextCard> {
       child: GestureDetector(
         onTap: _onPressed,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeOutCubic,
+          duration: appSelectorTransitionAnimationEnabled
+              ? const Duration(milliseconds: 200)
+              : Duration.zero,
+          curve: Curves.easeOutBack,
           width: cardWidth,
           height: cardHeight,
-          transform: _focused
-              ? (Matrix4.identity()..scale(1.05, 1.05))
-              : Matrix4.identity(),
+          transform: Matrix4.diagonal3Values(scale, scale, 1.0),
           transformAlignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: _focused ? accentColor : Colors.white10,
-              width: _focused ? 2.5 : 1.0,
-            ),
-            boxShadow: _focused
-                ? [
-                    BoxShadow(
-                      color: accentColor.withOpacity(0.35),
-                      blurRadius: 16,
-                      spreadRadius: 2,
-                    ),
-                    BoxShadow(
-                      color: accentColor.withOpacity(0.15),
-                      blurRadius: 32,
-                      spreadRadius: 4,
-                    ),
-                  ]
-                : [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      blurRadius: 6,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+          child: Material(
+            borderRadius: borderRadius,
+            clipBehavior: Clip.antiAlias,
+            elevation: elevation,
+            shadowColor: shadowColor,
             child: Stack(
+              fit: StackFit.expand,
               children: [
                 // Poster background
                 Positioned.fill(
@@ -359,6 +445,7 @@ class _WatchNextCardState extends State<WatchNextCard> {
                     ),
                   ),
                 ),
+                if (highlightWidget != null) highlightWidget,
               ],
             ),
           ),
