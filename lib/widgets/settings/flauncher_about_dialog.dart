@@ -43,9 +43,9 @@ class LTvLauncherAboutDialog extends StatelessWidget {
       backgroundColor: Colors.transparent,
       insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Container(
-        width: 360,
+        width: 380,
         constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height * 0.85,
+          maxHeight: MediaQuery.of(context).size.height * 0.88,
         ),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
@@ -65,12 +65,12 @@ class LTvLauncherAboutDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
                   "assets/icon.png",
-                  height: 64,
-                  width: 64,
+                  height: 56,
+                  width: 56,
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 10),
 
               // Title & Version
               const Text(
@@ -81,7 +81,7 @@ class LTvLauncherAboutDialog extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 2),
               Text(
                 "v${packageInfo.version} (${packageInfo.buildNumber})",
                 style: const TextStyle(
@@ -95,34 +95,93 @@ class LTvLauncherAboutDialog extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 13,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
 
-              // Sponsor Button
-              _AboutButton(
-                icon: Icons.favorite,
-                iconColor: const Color(0xFFE91E63),
-                label: "Sponsor Project",
-                accentColor: accentColor,
-                autofocus: true,
-                onPressed: () {
-                  FLauncherChannel().openUrl("https://github.com/sponsors/LeanBitLab");
-                },
+              // About info description
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.04),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Text(
+                  "A fast, private, and customizable open-source launcher designed for Android TV, Google TV, and Fire TV. 100% ad-free and tracker-free.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 11,
+                    height: 1.4,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 14),
+
+              // Social Links Section
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Community & Links",
+                  style: TextStyle(
+                    color: Colors.white54,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                  ),
+                ),
               ),
               const SizedBox(height: 8),
 
-              // Source Code Button
+              // Official Website
+              _AboutButton(
+                icon: Icons.language,
+                iconColor: const Color(0xFF7C4DFF),
+                label: "Website",
+                accentColor: accentColor,
+                autofocus: true,
+                onPressed: () {
+                  FLauncherChannel().openUrl("https://leanbitlab.github.io/LeanBitLab/");
+                },
+              ),
+              const SizedBox(height: 6),
+
+              // Source Code / GitHub
               _AboutButton(
                 icon: Icons.code,
                 iconColor: Colors.white70,
-                label: "Source Code",
+                label: "GitHub Repository",
                 accentColor: accentColor,
                 onPressed: () {
                   FLauncherChannel().openUrl("https://github.com/leanbitlab-org/LtvLauncher");
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 6),
+
+              // Telegram Channel
+              _AboutButton(
+                icon: Icons.send_rounded,
+                iconColor: const Color(0xFF2CA5E0),
+                label: "Telegram (@LeanBitLab)",
+                accentColor: accentColor,
+                onPressed: () {
+                  FLauncherChannel().openUrl("https://t.me/LeanBitLab");
+                },
+              ),
+              const SizedBox(height: 6),
+
+              // Reddit Community
+              _AboutButton(
+                icon: Icons.forum_rounded,
+                iconColor: const Color(0xFFFF4500),
+                label: "Reddit (r/LeanBitLab_)",
+                accentColor: accentColor,
+                onPressed: () {
+                  FLauncherChannel().openUrl("https://www.reddit.com/r/LeanBitLab_/");
+                },
+              ),
+              const SizedBox(height: 10),
 
               // Close Action
               TextButton(

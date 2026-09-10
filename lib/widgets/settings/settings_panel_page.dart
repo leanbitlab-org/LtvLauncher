@@ -19,6 +19,7 @@
 import 'package:flauncher/providers/apps_service.dart';
 import 'package:flauncher/widgets/settings/accessibility_page.dart';
 import 'package:flauncher/widgets/settings/applications_panel_page.dart';
+import 'package:flauncher/widgets/settings/donate_dialog.dart';
 import 'package:flauncher/widgets/settings/flauncher_about_dialog.dart';
 import 'package:flauncher/widgets/settings/interface_settings_page.dart';
 import 'package:flauncher/widgets/settings/display_settings_page.dart';
@@ -96,6 +97,14 @@ class SettingsPanelPage extends StatelessWidget {
                           ? LTvLauncherAboutDialog(packageInfo: snapshot.data!)
                           : Container(),
                     ),
+                  ),
+                ),
+                FocusableSettingsTile(
+                  leading: const Icon(Icons.favorite_rounded, color: Color(0xFFE91E63)),
+                  title: Text("Support & Donate", style: Theme.of(context).textTheme.bodyMedium),
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (_) => const DonateDialog(),
                   ),
                 ),
               ],

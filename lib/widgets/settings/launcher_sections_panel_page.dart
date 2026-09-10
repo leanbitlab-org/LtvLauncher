@@ -66,6 +66,32 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
       children: [
         Text(localizations.launcherSections, style: Theme.of(context).textTheme.titleLarge),
         const Divider(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.06),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.white12),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.swap_vert, size: 16, color: Colors.white70),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'Select with ◄ / ► then use ▲ / ▼ to reorder',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.white70,
+                      fontSize: 11,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         Consumer<AppsService>(
           builder: (_, service, __) {
             List<LauncherSection> sections = service.launcherSections;

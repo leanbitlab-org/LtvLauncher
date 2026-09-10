@@ -194,11 +194,9 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
     }
 
     final double elevation = _focused
-        ? (themes == 'premium' ? 32 : (themes == 'classic' ? 8 : 16))
+        ? (themes == 'classic' ? 8 : 16)
         : 0;
-    final Color shadowColor = _focused && themes == 'premium'
-        ? accentColor.withOpacity(0.6)
-        : Colors.black;
+    final Color shadowColor = Colors.black;
 
     Widget? highlightWidget;
     if (_focused && !hideHighlightOutlineOnHomescreen) {

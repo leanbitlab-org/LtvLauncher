@@ -234,8 +234,8 @@ class _AppCardState extends State<AppCard> with TickerProviderStateMixin {
                             child: Material(
                           borderRadius: borderRadius,
                           clipBehavior: Clip.antiAlias,
-                          elevation: shouldHighlight ? (themes == 'premium' ? 32 : (themes == 'classic' ? 8 : 16)) : 0,
-                          shadowColor: shouldHighlight ? Theme.of(context).primaryColor.withOpacity(0.6) : Colors.black,
+                          elevation: shouldHighlight ? (themes == 'classic' ? 8 : 16) : 0,
+                          shadowColor: Colors.black,
                           child: Stack(
                             fit: StackFit.expand,
                             children: [

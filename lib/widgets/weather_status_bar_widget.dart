@@ -39,8 +39,6 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
             String displayText;
             if (isWarning && weather.warningText != null) {
               displayText = "$tempText • ${weather.warningText}";
-            } else if (weather.currentCondition != null && weather.currentCondition!.isNotEmpty) {
-              displayText = "$tempText • ${weather.currentCondition}";
             } else {
               displayText = tempText;
             }

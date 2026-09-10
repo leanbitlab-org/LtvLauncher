@@ -195,7 +195,7 @@ class SettingsService extends ChangeNotifier {
     _dateFormat = _sharedPreferences.getString(_dateFormatKey) ?? defaultDateFormat;
     _timeFormat = _sharedPreferences.getString(_timeFormatKey) ?? defaultTimeFormat;
     _dataUsagePeriod = _sharedPreferences.getString(_dataUsagePeriodKey) ?? DATA_USAGE_DAILY;
-    _showDataWidgetInStatusBar = _sharedPreferences.getBool(_showDataWidgetInStatusBarKey) ?? true;
+    _showDataWidgetInStatusBar = _sharedPreferences.getBool(_showDataWidgetInStatusBarKey) ?? false;
     _showNetworkIndicatorInStatusBar = _sharedPreferences.getBool(_showNetworkIndicatorInStatusBarKey) ?? true;
     _accentColorHex = _sharedPreferences.getString(_accentColorKey) ?? ACCENT_COLOR_PURPLE;
     _screensaverClockStyle = _sharedPreferences.getString(_screensaverClockStyleKey) ?? "minimal";

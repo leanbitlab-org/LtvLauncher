@@ -24,6 +24,7 @@ import 'package:flauncher/widgets/settings/general_settings_page.dart';
 import 'package:flauncher/widgets/settings/display_settings_page.dart';
 import 'package:flauncher/widgets/settings/notifications_settings_page.dart';
 import 'package:flauncher/widgets/settings/accessibility_page.dart';
+import 'package:flauncher/widgets/settings/donate_dialog.dart';
 import 'package:flauncher/widgets/settings/flauncher_about_dialog.dart';
 import 'package:flauncher/widgets/settings/settings_panel_page.dart';
 import 'package:flutter/material.dart';
@@ -160,6 +161,21 @@ void main() {
     await tester.tap(find.text("About LTvLauncher"));
     await tester.pumpAndSettle();
     expect(find.byType(LTvLauncherAboutDialog), findsOneWidget);
+  });
+
+  testWidgets("'Support & Donate' opens donate dialog", (tester) async {
+    final settingsService = MockSettingsService();
+    final appsService = MockAppsService();
+    when(appsService.launcherSections).thenReturn([]);
+    when(appsService.applications).thenReturn([]);
+    when(settingsService.appHighlightAnimationEnabled).thenReturn(true);
+    when(settingsService.accentColorHex).thenReturn("7C4DFF");
+
+    await _pumpWidgetWithProviders(tester, settingsService, appsService);
+
+    await tester.tap(find.text("Support & Donate"));
+    await tester.pumpAndSettle();
+    expect(find.byType(DonateDialog), findsOneWidget);
   });
 }
 
