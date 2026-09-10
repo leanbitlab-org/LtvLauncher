@@ -1,0 +1,5 @@
+- Sort Continue Watching row by latest watch timestamp and harmonize card shapes with active launcher theme.
+- Support Breezy Weather integration with automatic Kelvin conversion and clean status bar styling.
+- Reorganize Settings into modular categories and redesign Blocked Apps page with intuitive TV keypad controls.
+- Add Start on Boot option and enhance Home Button Fix accessibility remapper for Google TV.
+- Expand localization with support for 10+ new languages and fix status bar focus alignment.
