@@ -16,7 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'dart:typed_data';
 
 import 'package:flauncher/providers/apps_service.dart';
 
@@ -174,6 +173,11 @@ class _ApplicationsPanelPageState extends State<ApplicationsPanelPage> {
   Widget navButton(bool selected, bool focused, int index, String title, IconData icon) {
     // ... (same)
     return InkWell(
+      canRequestFocus: false,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: () {
         _selectTab(index, title);
       },
@@ -472,23 +476,24 @@ class _AppListItemState extends State<_AppListItem>
             builder: (context) {
               final focused = Focus.of(context).hasFocus;
               final primaryColor = Theme.of(context).colorScheme.primary;
-              return AnimatedContainer(
-                duration: const Duration(milliseconds: 50),
+              return Container(
                 decoration: BoxDecoration(
-                  color: focused ? Colors.white.withOpacity(0.05) : Colors.white.withOpacity(0.05), // Keep background consistent or same logic
+                  color: Colors.white.withOpacity(0.05),
                   borderRadius: BorderRadius.circular(12),
                   border: focused
                       ? Border.all(color: primaryColor, width: 2)
                       : Border.all(color: Colors.transparent, width: 2),
-                  boxShadow: focused
-                      ? const [BoxShadow(color: Colors.black54, blurRadius: 8, spreadRadius: 1)]
-                      : null,
                 ),
-                child: Material( // Needed for InkWell to show ripple on top of container color if needed, or inside.
+                child: Material(
                   color: Colors.transparent,
                   child: InkWell(
+                    canRequestFocus: false,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
                     borderRadius: BorderRadius.circular(12),
-                  onTap: _openAppDetails,
+                    onTap: _openAppDetails,
                   child: FutureBuilder(
                     future: _iconLoadFuture,
                     builder: (context, snapshot) {

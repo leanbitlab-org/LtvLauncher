@@ -1195,7 +1195,8 @@ public class MainActivity extends FlutterActivity {
             TvContract.WatchNextPrograms.COLUMN_LAST_PLAYBACK_POSITION_MILLIS,
             TvContract.WatchNextPrograms.COLUMN_DURATION_MILLIS,
             TvContract.WatchNextPrograms.COLUMN_INTENT_URI,
-            TvContract.WatchNextPrograms.COLUMN_POSTER_ART_URI
+            TvContract.WatchNextPrograms.COLUMN_POSTER_ART_URI,
+            TvContract.WatchNextPrograms.COLUMN_THUMBNAIL_URI
         };
 
         try (android.database.Cursor cursor = getContentResolver().query(
@@ -1223,6 +1224,11 @@ public class MainActivity extends FlutterActivity {
                     }
                 }
 
+                String poster = cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_POSTER_ART_URI);
+                if (poster.isEmpty()) {
+                    poster = cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_THUMBNAIL_URI);
+                }
+
                 Map<String, Object> map = new HashMap<>();
                 map.put("id", cursor.getLong(cursor.getColumnIndexOrThrow(TvContract.WatchNextPrograms._ID)));
                 map.put("packageName", cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_PACKAGE_NAME));
@@ -1233,7 +1239,7 @@ public class MainActivity extends FlutterActivity {
                 map.put("playbackPosition", cursor.getLong(cursor.getColumnIndexOrThrow(TvContract.WatchNextPrograms.COLUMN_LAST_PLAYBACK_POSITION_MILLIS)));
                 map.put("duration", cursor.getLong(cursor.getColumnIndexOrThrow(TvContract.WatchNextPrograms.COLUMN_DURATION_MILLIS)));
                 map.put("intentUri", cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_INTENT_URI));
-                map.put("posterArtUri", cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_POSTER_ART_URI));
+                map.put("posterArtUri", poster);
                 list.add(map);
             }
 
@@ -1265,16 +1271,36 @@ public class MainActivity extends FlutterActivity {
             return null;
         }
         try {
-            Uri uri = Uri.parse(posterArtUri);
-            try (java.io.InputStream inputStream = getContentResolver().openInputStream(uri)) {
-                if (inputStream != null) {
-                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[4096];
-                    int bytesRead;
-                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                        outputStream.write(buffer, 0, bytesRead);
+            if (posterArtUri.startsWith("http://") || posterArtUri.startsWith("https://")) {
+                java.net.URL url = new java.net.URL(posterArtUri);
+                java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+                conn.setConnectTimeout(6000);
+                conn.setReadTimeout(6000);
+                conn.setDoInput(true);
+                conn.connect();
+                try (java.io.InputStream inputStream = conn.getInputStream()) {
+                    if (inputStream != null) {
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[4096];
+                        int bytesRead;
+                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, bytesRead);
+                        }
+                        return outputStream.toByteArray();
                     }
-                    return outputStream.toByteArray();
+                }
+            } else {
+                Uri uri = Uri.parse(posterArtUri);
+                try (java.io.InputStream inputStream = getContentResolver().openInputStream(uri)) {
+                    if (inputStream != null) {
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[4096];
+                        int bytesRead;
+                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, bytesRead);
+                        }
+                        return outputStream.toByteArray();
+                    }
                 }
             }
         } catch (Exception e) {

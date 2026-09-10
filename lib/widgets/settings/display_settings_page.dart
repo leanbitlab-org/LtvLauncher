@@ -20,7 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flauncher/l10n/app_localizations.dart';
 import 'focusable_settings_tile.dart';
-import 'brightness_settings_page.dart';
 import 'screensaver_clock_style_page.dart';
 
 class DisplaySettingsPage extends StatelessWidget {
@@ -50,11 +49,6 @@ class DisplaySettingsPage extends StatelessWidget {
                   leading: const Icon(Icons.watch_later_outlined),
                   title: Text(localizations.screensaverClockStyle, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(ScreensaverClockStylePage.routeName),
-                ),
-                FocusableSettingsTile(
-                  leading: const Icon(Icons.brightness_6),
-                  title: Text(localizations.brightnessScheduler, style: Theme.of(context).textTheme.bodyMedium),
-                  onPressed: () => Navigator.of(context).pushNamed(BrightnessSettingsPage.routeName),
                 ),
               ],
             ),

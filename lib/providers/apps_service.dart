@@ -240,6 +240,15 @@ class AppsService extends ChangeNotifier {
         .where((application) => application.sideloaded == true);
 
     return _database.transaction(() async {
+      if (tvApplications.isNotEmpty) {
+        int categoryId = await addCategory("TV Apps",
+            type: CategoryType.grid, shouldNotifyListeners: false);
+
+        Category tvAppsCategory = _categoriesById[categoryId]!;
+        await addAllToCategory(tvApplications, tvAppsCategory,
+            shouldNotifyListeners: false);
+      }
+
       if (nonTvApplications.isNotEmpty) {
         int categoryId = await addCategory(
           "Non-TV Apps",
@@ -247,15 +256,6 @@ class AppsService extends ChangeNotifier {
         );
         Category nonTvAppsCategory = _categoriesById[categoryId]!;
         await addAllToCategory(nonTvApplications, nonTvAppsCategory,
-            shouldNotifyListeners: false);
-      }
-
-      if (tvApplications.isNotEmpty) {
-        int categoryId = await addCategory("TV Apps",
-            type: CategoryType.grid, shouldNotifyListeners: false);
-
-        Category tvAppsCategory = _categoriesById[categoryId]!;
-        await addAllToCategory(tvApplications, tvAppsCategory,
             shouldNotifyListeners: false);
       }
 
@@ -378,9 +378,17 @@ class AppsService extends ChangeNotifier {
 
   void sortCategory(Category category) {
     if (category.sort == CategorySort.alphabetical) {
-      category.applications.sortBy((application) => application.name);
+      category.applications.sort((a, b) {
+        if (a.sideloaded != b.sideloaded) {
+          return a.sideloaded ? 1 : -1;
+        }
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
     } else if (category.sort == CategorySort.lastUsed) {
       category.applications.sort((a, b) {
+        if (a.sideloaded != b.sideloaded) {
+          return a.sideloaded ? 1 : -1;
+        }
         final aTime =
             a.lastLaunchedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
         final bTime =
