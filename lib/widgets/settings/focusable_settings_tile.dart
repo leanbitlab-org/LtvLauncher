@@ -27,50 +27,51 @@ class _FocusableSettingsTileState extends State<FocusableSettingsTile> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-      child: RepaintBoundary(
-        child: Actions(
-          actions: <Type, Action<Intent>>{
-            ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPressed?.call()),
-            ButtonActivateIntent: CallbackAction<ButtonActivateIntent>(onInvoke: (_) => widget.onPressed?.call()),
+      child: Actions(
+        actions: <Type, Action<Intent>>{
+          ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPressed?.call()),
+          ButtonActivateIntent: CallbackAction<ButtonActivateIntent>(onInvoke: (_) => widget.onPressed?.call()),
+        },
+        child: Focus(
+          autofocus: widget.autofocus,
+          onFocusChange: (hasFocus) {
+            setState(() => _focused = hasFocus);
+            if (hasFocus) {
+              Scrollable.ensureVisible(
+                context,
+                alignment: 0.5,
+                duration: const Duration(milliseconds: 100),
+              );
+            }
           },
-          child: Focus(
-            autofocus: widget.autofocus,
-            onFocusChange: (hasFocus) {
-              setState(() => _focused = hasFocus);
-              if (hasFocus) {
-                Scrollable.ensureVisible(
-                  context,
-                  alignment: 0.5,
-                  duration: const Duration(milliseconds: 100),
-                );
-              }
-            },
-            child: InkWell(
-              onTap: widget.onPressed,
-              borderRadius: BorderRadius.circular(12),
-              focusColor: Colors.transparent,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: _focused ? Colors.white.withOpacity(0.05) : Colors.transparent,
-                  borderRadius: BorderRadius.circular(12),
-                  border: _focused
-                      ? Border.all(color: Theme.of(context).colorScheme.primary, width: 2)
-                      : Border.all(color: Colors.transparent, width: 2),
-                ),
-                child: Row(
-                  children: [
-                    if (widget.leading != null) ...[
-                      widget.leading!,
-                      const SizedBox(width: 16),
-                    ],
-                    Expanded(child: widget.title),
-                    if (widget.trailing != null) ...[
-                      const SizedBox(width: 16),
-                      widget.trailing!,
-                    ],
+          child: InkWell(
+            onTap: widget.onPressed,
+            borderRadius: BorderRadius.circular(12),
+            focusColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: _focused ? Colors.white.withOpacity(0.05) : Colors.transparent,
+                borderRadius: BorderRadius.circular(12),
+                border: _focused
+                    ? Border.all(color: Theme.of(context).colorScheme.primary, width: 2)
+                    : Border.all(color: Colors.transparent, width: 2),
+              ),
+              child: Row(
+                children: [
+                  if (widget.leading != null) ...[
+                    widget.leading!,
+                    const SizedBox(width: 16),
                   ],
-                ),
+                  Expanded(child: widget.title),
+                  if (widget.trailing != null) ...[
+                    const SizedBox(width: 16),
+                    widget.trailing!,
+                  ],
+                ],
               ),
             ),
           ),

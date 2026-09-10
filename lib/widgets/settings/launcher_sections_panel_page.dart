@@ -34,8 +34,10 @@ class LauncherSectionsPanelPage extends StatefulWidget {
 }
 
 class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
-  int? _movingIndex;
+  LauncherSection? _movingSection;
   late AppsService _appsService;
+  final Map<Object, FocusNode> _focusNodes = {};
+  DateTime? _lastMoveTime;
 
   @override
   void didChangeDependencies() {
@@ -43,9 +45,17 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
     _appsService = Provider.of<AppsService>(context, listen: false);
   }
 
+  FocusNode _getFocusNode(LauncherSection section) {
+    final key = ObjectKey(section);
+    return _focusNodes.putIfAbsent(key, () => FocusNode());
+  }
+
   @override
   void dispose() {
     _appsService.persistSectionsOrder();
+    for (final node in _focusNodes.values) {
+      node.dispose();
+    }
     super.dispose();
   }
 
@@ -55,7 +65,7 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
     return Column(
       children: [
         Text(localizations.launcherSections, style: Theme.of(context).textTheme.titleLarge),
-        Divider(),
+        const Divider(),
         Consumer<AppsService>(
           builder: (_, service, __) {
             List<LauncherSection> sections = service.launcherSections;
@@ -73,9 +83,9 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
             );
           },
         ),
-        SizedBox(height: 4, width: 0),
+        const SizedBox(height: 4, width: 0),
         FocusableSettingsTile(
-          leading: Icon(Icons.add),
+          leading: const Icon(Icons.add),
           title: Text(localizations.addSection, style: Theme.of(context).textTheme.bodyMedium),
           onPressed: () {
             Navigator.pushNamed(context, LauncherSectionPanelPage.routeName);
@@ -99,13 +109,14 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
       }
     }
 
-    final bool isMoving = _movingIndex == index;
+    final bool isMoving = _movingSection == section;
+    final focusNode = _getFocusNode(section);
 
     return Padding(
-      // Use ObjectKey to ensure uniqueness even if IDs collide across different types
       key: ObjectKey(section),
       padding: const EdgeInsets.only(bottom: 12),
       child: Focus(
+        focusNode: focusNode,
         onFocusChange: (focused) {
           if (focused) {
             Scrollable.ensureVisible(
@@ -120,15 +131,11 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
 
           if (isMoving) {
             if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
-              if (index > 0) {
-                _move(index, index - 1);
-                return KeyEventResult.handled;
-              }
+              _moveSection(section, -1);
+              return KeyEventResult.handled;
             } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
-              if (index < totalCount - 1) {
-                _move(index, index + 1);
-                return KeyEventResult.handled;
-              }
+              _moveSection(section, 1);
+              return KeyEventResult.handled;
             } else if (event.logicalKey == LogicalKeyboardKey.select ||
                 event.logicalKey == LogicalKeyboardKey.enter ||
                 event.logicalKey == LogicalKeyboardKey.gameButtonA ||
@@ -143,13 +150,14 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
             if (event.logicalKey == LogicalKeyboardKey.arrowLeft ||
                 event.logicalKey == LogicalKeyboardKey.arrowRight) {
               setState(() {
-                _movingIndex = index;
+                _movingSection = section;
               });
               return KeyEventResult.handled;
             } else if (event.logicalKey == LogicalKeyboardKey.select ||
                 event.logicalKey == LogicalKeyboardKey.enter ||
                 event.logicalKey == LogicalKeyboardKey.gameButtonA) {
-              Navigator.pushNamed(context, LauncherSectionPanelPage.routeName, arguments: index);
+              final idx = _appsService.launcherSections.indexOf(section);
+              Navigator.pushNamed(context, LauncherSectionPanelPage.routeName, arguments: idx);
               return KeyEventResult.handled;
             }
           }
@@ -176,13 +184,14 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
                    if (isMoving) {
                       _endMove();
                    } else {
-                      Navigator.pushNamed(context, LauncherSectionPanelPage.routeName, arguments: index);
+                      final idx = _appsService.launcherSections.indexOf(section);
+                      Navigator.pushNamed(context, LauncherSectionPanelPage.routeName, arguments: idx);
                    }
               },
               onLongPress: () {
                    if (!isMoving) {
                       setState(() {
-                        _movingIndex = index;
+                        _movingSection = section;
                       });
                    }
               },
@@ -193,12 +202,9 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
                   color: backgroundColor,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: focused ? colorScheme.primary : (isMoving ? colorScheme.primary : Colors.transparent),
-                    width: focused ? 2 : (isMoving ? 1 : 0),
+                    color: (focused || isMoving) ? colorScheme.primary : Colors.transparent,
+                    width: 2,
                   ),
-                  boxShadow: focused 
-                      ? [BoxShadow(color: Colors.black45, blurRadius: 8, offset: Offset(0, 4))] 
-                      : null,
                 ),
                 child: Row(
                   children: [
@@ -226,7 +232,7 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
                        const SizedBox(width: 4),
                        Icon(Icons.keyboard_arrow_down, color: textColor),
                     ] else ...[
-                       Icon(Icons.chevron_right, color: Colors.white24),
+                       const Icon(Icons.chevron_right, color: Colors.white24),
                     ],
                   ],
                 ),
@@ -238,18 +244,35 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
     );
   }
 
+  void _moveSection(LauncherSection movingSection, int direction) {
+    final now = DateTime.now();
+    if (_lastMoveTime != null && now.difference(_lastMoveTime!) < const Duration(milliseconds: 60)) {
+      return;
+    }
+    _lastMoveTime = now;
 
-  void _move(int oldIndex, int newIndex) {
-    context.read<AppsService>().moveSectionInMemory(oldIndex, newIndex);
+    final sections = _appsService.launcherSections;
+    final currentIndex = sections.indexOf(movingSection);
+    if (currentIndex == -1) return;
+    final newIndex = currentIndex + direction;
+    if (newIndex < 0 || newIndex >= sections.length) return;
+
+    _appsService.moveSectionInMemory(currentIndex, newIndex);
     setState(() {
-      _movingIndex = newIndex;
+      _movingSection = movingSection;
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _getFocusNode(movingSection).requestFocus();
+      }
     });
   }
 
   void _endMove() {
-    context.read<AppsService>().persistSectionsOrder();
+    _appsService.persistSectionsOrder();
     setState(() {
-      _movingIndex = null;
+      _movingSection = null;
     });
   }
 }

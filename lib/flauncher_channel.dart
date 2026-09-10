@@ -166,6 +166,11 @@ class FLauncherChannel {
     return success ?? false;
   }
 
+  Future<bool> openAppNotificationSettings() async {
+    final bool? success = await _methodChannel.invokeMethod<bool>("openAppNotificationSettings");
+    return success ?? false;
+  }
+
   Future<bool> checkOverlayPermission() async =>
       await _methodChannel.invokeMethod("checkOverlayPermission");
 

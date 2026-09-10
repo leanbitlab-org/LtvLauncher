@@ -163,15 +163,16 @@ class _NotificationsSettingsPageState extends State<NotificationsSettingsPage> w
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Notification Access'),
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Notification Access (ADB Required)'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'On this device, the Notification Access settings screen could not be opened automatically.\n\n'
-              'To enable notifications, grant permission manually via ADB from a computer connected to the TV:',
+              'Android TV does not provide a system settings screen for "Notification Access" (listening to notifications from other apps).\n\n'
+              'Note: Enabling "Show notifications" in TV App Settings only controls outgoing notifications from this app, not Notification Access.\n\n'
+              'To grant Notification Access, connect your TV via ADB and run:',
             ),
             const SizedBox(height: 12),
             Container(
@@ -189,7 +190,14 @@ class _NotificationsSettingsPageState extends State<NotificationsSettingsPage> w
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Navigator.of(dialogContext).pop();
+              context.read<NotificationsService>().openAppNotificationSettings();
+            },
+            child: const Text('Open App Info'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
             child: const Text('OK'),
           ),
         ],

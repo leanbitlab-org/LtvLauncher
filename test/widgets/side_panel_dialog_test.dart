@@ -33,7 +33,7 @@ void main() {
     expect(
       materialWidget.borderRadius,
       const BorderRadius.horizontal(
-        right: Radius.circular(28),
+        right: Radius.circular(24),
         left: Radius.zero,
       ),
     );
@@ -80,7 +80,7 @@ void main() {
       materialWidget.borderRadius,
       const BorderRadius.horizontal(
         right: Radius.zero,
-        left: Radius.circular(28),
+        left: Radius.circular(24),
       ),
     );
   });

@@ -256,6 +256,10 @@ class NotificationsService extends ChangeNotifier with WidgetsBindingObserver {
     return await _channel.requestNotificationListenerPermission();
   }
 
+  Future<bool> openAppNotificationSettings() async {
+    return await _channel.openAppNotificationSettings();
+  }
+
   Future<void> checkOverlayPermission() async {
     final localCallCount = ++_callCount;
     final bool allowed = await _channel.checkOverlayPermission();
