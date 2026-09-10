@@ -261,6 +261,7 @@ class _TVTab extends StatelessWidget {
                 .asMap()
                 .entries
                 .map((entry) => EnsureVisible(
+                      key: ValueKey(entry.value.packageName),
                       alignment: 0.5,
                       child: _AppListItem(entry.value, autofocus: entry.key == 0, isFirst: entry.key == 0),
                     ))
@@ -283,6 +284,7 @@ class _SideloadedTab extends StatelessWidget {
                 .asMap()
                 .entries
                 .map((entry) => EnsureVisible(
+                      key: ValueKey(entry.value.packageName),
                       alignment: 0.5,
                       child: _AppListItem(entry.value, autofocus: entry.key == 0, isFirst: entry.key == 0),
                     ))
@@ -311,6 +313,7 @@ class _FavoritesTab extends StatelessWidget {
                 .asMap()
                 .entries
                 .map((entry) => EnsureVisible(
+                      key: ValueKey(entry.value.packageName),
                       alignment: 0.5,
                       child: _AppListItem(entry.value, autofocus: entry.key == 0, isFirst: entry.key == 0),
                     ))
@@ -333,6 +336,7 @@ class _HiddenTab extends StatelessWidget {
                 .asMap()
                 .entries
                 .map((entry) => EnsureVisible(
+                      key: ValueKey(entry.value.packageName),
                       alignment: 0.5,
                       child: _AppListItem(entry.value, autofocus: entry.key == 0, isFirst: entry.key == 0),
                     ))
@@ -420,6 +424,14 @@ class _AppListItemState extends State<_AppListItem>
 
         _focusNode.requestFocus();
       });
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant _AppListItem oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.application.packageName != widget.application.packageName) {
+      _iconLoadFuture = _loadAppIcon(Provider.of<AppsService>(context, listen: false));
     }
   }
 
