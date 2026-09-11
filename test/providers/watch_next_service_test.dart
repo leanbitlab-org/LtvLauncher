@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -7,13 +8,23 @@ import '../mocks.mocks.dart';
 
 void main() {
   late MockFLauncherChannel mockChannel;
+  late StreamController<dynamic> watchNextStreamController;
   late WatchNextService watchNextService;
 
   setUp(() {
     mockChannel = MockFLauncherChannel();
+    watchNextStreamController = StreamController<dynamic>.broadcast();
     // Default stubs
     when(mockChannel.getWatchNextPrograms()).thenAnswer((_) async => []);
     when(mockChannel.checkWatchNextPermission()).thenAnswer((_) async => true);
+    when(mockChannel.addWatchNextChangedListener(any)).thenAnswer((invocation) {
+      final void Function(dynamic) listener = invocation.positionalArguments[0];
+      return watchNextStreamController.stream.listen(listener);
+    });
+  });
+
+  tearDown(() {
+    watchNextStreamController.close();
   });
 
   group('WatchNextService Initialization', () {
@@ -24,6 +35,39 @@ void main() {
       }
 
       expect(watchNextService.programs, isEmpty);
+      verify(mockChannel.getWatchNextPrograms()).called(1);
+    });
+
+    test('refreshes watch next programs when event stream emits change', () async {
+      watchNextService = WatchNextService(mockChannel);
+      while (!watchNextService.initialized) {
+        await Future.delayed(Duration.zero);
+      }
+
+      expect(watchNextService.programs, isEmpty);
+      verify(mockChannel.getWatchNextPrograms()).called(1);
+
+      final fakePrograms = [
+        {
+          'id': 10,
+          'packageName': 'com.google.android.youtube.tv',
+          'title': 'YouTube Video',
+          'description': 'Channel Name',
+          'watchNextType': 1,
+          'lastEngagementTime': 1600000000,
+          'playbackPosition': 100,
+          'duration': 500,
+          'intentUri': 'intent://youtube',
+          'posterArtUri': ''
+        }
+      ];
+      when(mockChannel.getWatchNextPrograms()).thenAnswer((_) async => fakePrograms);
+
+      watchNextStreamController.add(true);
+      await pumpEventQueue();
+
+      expect(watchNextService.programs.length, 1);
+      expect(watchNextService.programs[0].title, 'YouTube Video');
       verify(mockChannel.getWatchNextPrograms()).called(1);
     });
 

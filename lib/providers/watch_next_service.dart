@@ -11,6 +11,7 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
   bool _initialized = false;
   bool _hasPermission = true;
   Timer? _refreshTimer;
+  StreamSubscription<dynamic>? _watchNextSubscription;
   int _callCount = 0;
   bool _isFetching = false;
   bool _hasPendingRefresh = false;
@@ -33,13 +34,21 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
     _initialized = true;
     notifyListeners();
 
+    try {
+      _watchNextSubscription = _channel.addWatchNextChangedListener((_) {
+        refresh();
+      });
+    } catch (e) {
+      log('Failed to listen to watch next events', name: 'WatchNextService', error: e);
+    }
+
     _startPeriodicTimer();
   }
 
   void _startPeriodicTimer() {
     _refreshTimer?.cancel();
-    // Refresh every 30 seconds to keep EPG/Playback progress up to date
-    _refreshTimer = Timer.periodic(const Duration(seconds: 30), (_) => refresh());
+    // Refresh fallback every 5 minutes (reactive ContentObserver handles real-time updates)
+    _refreshTimer = Timer.periodic(const Duration(minutes: 5), (_) => refresh());
   }
 
   @override
@@ -187,6 +196,7 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
     if (!_isTest) {
       WidgetsBinding.instance.removeObserver(this);
     }
+    _watchNextSubscription?.cancel();
     _refreshTimer?.cancel();
     super.dispose();
   }

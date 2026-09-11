@@ -133,6 +133,8 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="nodomain.freeyourgadget.gadgetbridge.ACTION_GENERIC_WEATHER" />
+                <action android:name="org.breezyweather.ACTION_UPDATE_NOTIFIER" />
+                <action android:name="org.breezyweather.debug.ACTION_UPDATE_NOTIFIER" />
             </intent-filter>
         </receiver>
 

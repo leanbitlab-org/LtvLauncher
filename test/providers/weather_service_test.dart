@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flauncher/models/weather_data.dart';
 import 'package:flauncher/providers/weather_service.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -103,6 +104,48 @@ void main() {
       final success = await weatherService.openBreezyWeather();
       expect(success, true);
       verify(mockChannel.openBreezyWeather()).called(1);
+    });
+
+    test('deduplicates identical weather json without notifying listeners', () async {
+      weatherService = WeatherService(mockChannel);
+      while (!weatherService.initialized) {
+        await Future.delayed(Duration.zero);
+      }
+
+      int notifyCount = 0;
+      weatherService.addListener(() {
+        notifyCount++;
+      });
+
+      // Emitting the exact same JSON that was loaded on init
+      weatherStreamController.add(validWeatherJson);
+      await Future.delayed(Duration.zero);
+
+      expect(notifyCount, 0);
+    });
+
+    test('refreshes weather on app lifecycle resumed', () async {
+      weatherService = WeatherService(mockChannel);
+      while (!weatherService.initialized) {
+        await Future.delayed(Duration.zero);
+      }
+
+      const updatedJson = '''
+      {
+        "location": "Hamburg",
+        "currentTemp": 15,
+        "currentConditionCode": 800,
+        "currentCondition": "Clear",
+        "forecasts": []
+      }
+      ''';
+      when(mockChannel.getLatestWeatherData()).thenAnswer((_) async => updatedJson);
+
+      weatherService.didChangeAppLifecycleState(AppLifecycleState.resumed);
+      await pumpEventQueue();
+
+      expect(weatherService.weatherData?.location, "Hamburg");
+      expect(weatherService.weatherData?.currentTemp, 15);
     });
   });
 }

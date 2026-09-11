@@ -36,6 +36,9 @@ import android.util.Pair;
 import android.media.tv.TvInputManager;
 import android.media.tv.TvInputInfo;
 import android.media.tv.TvContract;
+import android.database.ContentObserver;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 
@@ -77,6 +80,7 @@ public class MainActivity extends FlutterActivity {
     private final String NETWORK_EVENT_CHANNEL = "me.efesser.flauncher/event_network";
     private final String NOTIFICATIONS_EVENT_CHANNEL = "me.efesser.flauncher/event_notifications";
     private final String WEATHER_EVENT_CHANNEL = "me.efesser.flauncher/event_weather";
+    private final String WATCH_NEXT_EVENT_CHANNEL = "me.efesser.flauncher/event_watch_next";
     private MethodChannel.Result pendingPermissionResult;
     private static final ExecutorService sIoExecutor = Executors.newFixedThreadPool(4);
 
@@ -252,6 +256,61 @@ public class MainActivity extends FlutterActivity {
                     @Override
                     public void onCancel(Object arguments) {
                         WeatherReceiver.setListener(null);
+                    }
+                }
+        );
+
+        new EventChannel(messenger, WATCH_NEXT_EVENT_CHANNEL).setStreamHandler(
+                new EventChannel.StreamHandler() {
+                    private ContentObserver watchNextObserver;
+                    private Runnable debounceRunnable;
+                    private final Handler mainHandler = new Handler(Looper.getMainLooper());
+
+                    @Override
+                    public void onListen(Object arguments, EventChannel.EventSink events) {
+                        watchNextObserver = new ContentObserver(mainHandler) {
+                            @Override
+                            public void onChange(boolean selfChange, Uri uri) {
+                                super.onChange(selfChange, uri);
+                                if (debounceRunnable != null) {
+                                    mainHandler.removeCallbacks(debounceRunnable);
+                                }
+                                debounceRunnable = () -> {
+                                    try {
+                                        events.success(true);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                };
+                                mainHandler.postDelayed(debounceRunnable, 500);
+                            }
+                        };
+
+                        try {
+                            getContentResolver().registerContentObserver(
+                                    TvContract.WatchNextPrograms.CONTENT_URI,
+                                    true,
+                                    watchNextObserver
+                            );
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onCancel(Object arguments) {
+                        if (debounceRunnable != null) {
+                            mainHandler.removeCallbacks(debounceRunnable);
+                            debounceRunnable = null;
+                        }
+                        if (watchNextObserver != null) {
+                            try {
+                                getContentResolver().unregisterContentObserver(watchNextObserver);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            watchNextObserver = null;
+                        }
                     }
                 }
         );
