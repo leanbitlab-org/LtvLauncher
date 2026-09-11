@@ -41,6 +41,9 @@ import 'package:flauncher/widgets/settings/blocked_notifications_page.dart';
 import 'package:flauncher/widgets/settings/display_settings_page.dart';
 import 'package:flauncher/widgets/settings/notifications_settings_page.dart';
 import 'package:flauncher/widgets/settings/continue_watching_settings_page.dart';
+import 'package:flauncher/widgets/settings/continue_watching_card_size_page.dart';
+import 'package:flauncher/widgets/settings/continue_watching_max_items_page.dart';
+import 'package:flauncher/widgets/settings/continue_watching_apps_page.dart';
 import 'package:flauncher/models/app.dart';
 import 'package:flutter/material.dart';
 
@@ -125,6 +128,12 @@ class _SettingsPanelState extends State<SettingsPanel> {
                       return _FastPageRoute(builder: (_) => const NotificationsSettingsPage());
                     case ContinueWatchingSettingsPage.routeName:
                       return _FastPageRoute(builder: (_) => const ContinueWatchingSettingsPage());
+                    case ContinueWatchingCardSizePage.routeName:
+                      return _FastPageRoute(builder: (_) => const ContinueWatchingCardSizePage());
+                    case ContinueWatchingMaxItemsPage.routeName:
+                      return _FastPageRoute(builder: (_) => const ContinueWatchingMaxItemsPage());
+                    case ContinueWatchingAppsPage.routeName:
+                      return _FastPageRoute(builder: (_) => const ContinueWatchingAppsPage());
                     case AppDetailsPage.routeName:
                       return _FastPageRoute(
                           builder: (_) => AppDetailsPage(application: settings.arguments as App));

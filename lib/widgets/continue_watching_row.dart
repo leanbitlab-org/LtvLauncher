@@ -411,26 +411,15 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
         return KeyEventResult.ignored;
       },
       builder: (context) {
-        return Actions(
-          actions: <Type, Action<Intent>>{
-            ActivateIntent: CallbackAction<ActivateIntent>(
-              onInvoke: (_) => _onPressed(),
-            ),
-            ButtonActivateIntent: CallbackAction<ButtonActivateIntent>(
-              onInvoke: (_) => _onPressed(),
-            ),
-          },
-          child: Focus(
-            focusNode: _focusNode,
-            child: InkWell(
-              canRequestFocus: false,
-              focusColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: _onPressed,
-              onLongPress: _onLongPress,
-              child: AnimatedScale(
+        return InkWell(
+          focusNode: _focusNode,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onTap: _onPressed,
+          onLongPress: _onLongPress,
+          child: AnimatedScale(
               scale: _clicked ? 0.9 : 1.0,
               duration: const Duration(milliseconds: 150),
               curve: Curves.easeOutCubic,
@@ -569,12 +558,10 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       );
-    },
-    );
-  }
+    }
 
   Widget _buildPoster(ThemeData theme) {
     if (widget.program.posterBytes != null && widget.program.posterBytes!.isNotEmpty) {

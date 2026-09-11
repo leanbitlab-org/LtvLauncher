@@ -491,6 +491,18 @@ class SettingsService extends ChangeNotifier {
     }
   }
 
+  Future<void> unhideAllWatchNextPackages() async {
+    _hiddenWatchNextPackages = [];
+    await _sharedPreferences.remove(_hiddenWatchNextPackagesKey);
+    notifyListeners();
+  }
+
+  Future<void> clearHiddenWatchNextPrograms() async {
+    _hiddenWatchNextProgramIds = [];
+    await _sharedPreferences.remove(_hiddenWatchNextProgramIdsKey);
+    notifyListeners();
+  }
+
   Future<void> clearAllHiddenWatchNext() async {
     _hiddenWatchNextProgramIds = [];
     _hiddenWatchNextPackages = [];

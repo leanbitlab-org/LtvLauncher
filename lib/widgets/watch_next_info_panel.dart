@@ -1,3 +1,21 @@
+/*
+ * FLauncher
+ * Copyright (C) 2026 LeanBitLab
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import 'dart:typed_data';
 
 import 'package:collection/collection.dart';
@@ -9,7 +27,7 @@ import 'package:flauncher/widgets/side_panel_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WatchNextInfoPanel extends StatelessWidget {
+class WatchNextInfoPanel extends StatefulWidget {
   final WatchNextProgram program;
   final WatchNextService watchNextService;
   final AppsService appsService;
@@ -24,13 +42,33 @@ class WatchNextInfoPanel extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<WatchNextInfoPanel> createState() => _WatchNextInfoPanelState();
+}
+
+class _WatchNextInfoPanelState extends State<WatchNextInfoPanel> {
+  late final DateTime _openedAt;
+
+  @override
+  void initState() {
+    super.initState();
+    _openedAt = DateTime.now();
+  }
+
+  bool get _canInteract => DateTime.now().difference(_openedAt) >= const Duration(milliseconds: 350);
+
+  void _safeAction(VoidCallback action) {
+    if (!_canInteract) return;
+    action();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final app = appsService.applications.firstWhereOrNull((a) => a.packageName == program.packageName);
-    final appName = (app != null && app.name.isNotEmpty) ? app.name : program.packageName;
+    final app = widget.appsService.applications.firstWhereOrNull((a) => a.packageName == widget.program.packageName);
+    final appName = (app != null && app.name.isNotEmpty) ? app.name : widget.program.packageName;
 
     return SidePanelDialog(
-      width: 320,
+      width: 300,
       isRightSide: false,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,17 +77,14 @@ class WatchNextInfoPanel extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (appIconBytes != null)
-                Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.white12),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(9),
-                    child: Image.memory(appIconBytes!, fit: BoxFit.cover),
+              if (widget.appIconBytes != null && widget.appIconBytes!.isNotEmpty)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.memory(
+                    widget.appIconBytes!,
+                    width: 44,
+                    height: 44,
+                    fit: BoxFit.cover,
                   ),
                 )
               else
@@ -58,17 +93,17 @@ class WatchNextInfoPanel extends StatelessWidget {
                   height: 44,
                   decoration: BoxDecoration(
                     color: Colors.white10,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Icon(Icons.play_circle_outline, color: Colors.white70),
+                  child: const Icon(Icons.play_circle_outline, color: Colors.white70, size: 28),
                 ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      program.title,
+                      widget.program.title,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -90,72 +125,33 @@ class WatchNextInfoPanel extends StatelessWidget {
               ),
             ],
           ),
-          if (program.description.isNotEmpty) ...[
-            const SizedBox(height: 8),
+          if (widget.program.description.isNotEmpty) ...[
+            const SizedBox(height: 6),
             Text(
-              program.description,
-              style: theme.textTheme.bodySmall?.copyWith(color: Colors.white70),
+              widget.program.description,
+              style: theme.textTheme.bodySmall?.copyWith(color: Colors.white70, fontSize: 11),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
           ],
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           const Divider(),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // 1. Play / Resume
-                  TextButton(
-                    autofocus: true,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      watchNextService.launch(program);
-                    },
-                    child: Row(
-                      children: [
-                        const Icon(Icons.play_arrow_rounded, color: Colors.greenAccent),
-                        const SizedBox(width: 12),
-                        Text('Play / Resume', style: theme.textTheme.bodyMedium),
-                      ],
-                    ),
-                  ),
-                  // 2. Open App
-                  TextButton(
-                    onPressed: () async {
-                      Navigator.of(context).pop();
-                      if (app != null) {
-                        await appsService.launchApp(app);
-                      } else {
-                        await watchNextService.launch(program);
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        const Icon(Icons.open_in_new_rounded),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            'Open $appName',
-                            style: theme.textTheme.bodyMedium,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // 3. Remove from Continue Watching
+                  // 1. Remove from Continue Watching
                   Consumer<SettingsService>(
                     builder: (context, settingsService, _) => TextButton(
-                      onPressed: () async {
+                      onPressed: () => _safeAction(() async {
                         Navigator.of(context).pop();
-                        await settingsService.hideWatchNextProgram(program.id);
-                        await watchNextService.deleteProgram(program);
-                      },
+                        await settingsService.hideWatchNextProgram(widget.program.id);
+                        await widget.watchNextService.deleteProgram(widget.program);
+                      }),
                       child: Row(
                         children: [
-                          const Icon(Icons.delete_outline_rounded, color: Colors.orangeAccent),
-                          const SizedBox(width: 12),
+                          const Icon(Icons.visibility_off_outlined, color: Colors.orangeAccent),
+                          Container(width: 8),
                           Expanded(
                             child: Text(
                               'Remove from Continue Watching',
@@ -167,18 +163,18 @@ class WatchNextInfoPanel extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // 4. Hide all from this app
+                  // 2. Hide all from this app
                   Consumer<SettingsService>(
                     builder: (context, settingsService, _) => TextButton(
-                      onPressed: () async {
+                      onPressed: () => _safeAction(() async {
                         Navigator.of(context).pop();
-                        await settingsService.hideWatchNextPackage(program.packageName);
-                        await watchNextService.refresh();
-                      },
+                        await settingsService.hideWatchNextPackage(widget.program.packageName);
+                        await widget.watchNextService.refresh();
+                      }),
                       child: Row(
                         children: [
-                          const Icon(Icons.visibility_off_outlined, color: Colors.redAccent),
-                          const SizedBox(width: 12),
+                          const Icon(Icons.block, color: Colors.redAccent),
+                          Container(width: 8),
                           Expanded(
                             child: Text(
                               'Hide all from $appName',
@@ -190,18 +186,56 @@ class WatchNextInfoPanel extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // 5. App Info
+                  // 3. Play / Resume
                   TextButton(
-                    onPressed: () async {
+                    onPressed: () => _safeAction(() {
+                      Navigator.of(context).pop();
+                      widget.watchNextService.launch(widget.program);
+                    }),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.play_arrow_rounded, color: Colors.greenAccent),
+                        Container(width: 8),
+                        Text('Play / Resume', style: theme.textTheme.bodyMedium),
+                      ],
+                    ),
+                  ),
+                  // 4. Open App
+                  TextButton(
+                    onPressed: () => _safeAction(() async {
                       Navigator.of(context).pop();
                       if (app != null) {
-                        await appsService.openAppInfo(app);
+                        await widget.appsService.launchApp(app);
+                      } else {
+                        await widget.watchNextService.launch(widget.program);
                       }
-                    },
+                    }),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.open_in_new_rounded),
+                        Container(width: 8),
+                        Expanded(
+                          child: Text(
+                            'Open $appName',
+                            style: theme.textTheme.bodyMedium,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // 5. App Info
+                  TextButton(
+                    onPressed: () => _safeAction(() async {
+                      Navigator.of(context).pop();
+                      if (app != null) {
+                        await widget.appsService.openAppInfo(app);
+                      }
+                    }),
                     child: Row(
                       children: [
                         const Icon(Icons.info_outline_rounded),
-                        const SizedBox(width: 12),
+                        Container(width: 8),
                         Text('App Info', style: theme.textTheme.bodyMedium),
                       ],
                     ),
