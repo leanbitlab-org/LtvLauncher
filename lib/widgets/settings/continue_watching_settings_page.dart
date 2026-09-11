@@ -74,6 +74,26 @@ class _ContinueWatchingSettingsPageState extends State<ContinueWatchingSettingsP
     final settingsService = context.watch<SettingsService>();
     final watchNextService = context.watch<WatchNextService>();
 
+    String sizeLabel;
+    switch (settingsService.continueWatchingCardSize) {
+      case 'compact':
+        sizeLabel = 'Compact (200x112)';
+        break;
+      case 'large':
+        sizeLabel = 'Large (280x157)';
+        break;
+      case 'normal':
+      default:
+        sizeLabel = 'Standard (240x135)';
+        break;
+    }
+
+    final maxItems = settingsService.continueWatchingMaxItems;
+    final maxItemsLabel = maxItems <= 0 ? 'Unlimited' : maxItems.toString();
+
+    final hiddenCount = settingsService.hiddenWatchNextProgramIds.length +
+        settingsService.hiddenWatchNextPackages.length;
+
     return Column(
       children: [
         Text(localizations.continueWatching, style: Theme.of(context).textTheme.titleLarge),
@@ -118,6 +138,45 @@ class _ContinueWatchingSettingsPageState extends State<ContinueWatchingSettingsP
                 ),
                 secondary: const Icon(Icons.play_circle_outline),
               ),
+              if (settingsService.showContinueWatching) ...[
+                const SizedBox(height: 8),
+                // Card Size
+                FocusableSettingsTile(
+                  leading: const Icon(Icons.aspect_ratio_outlined),
+                  title: const Text('Card Size'),
+                  trailing: Text(sizeLabel, style: const TextStyle(color: Colors.white70)),
+                  onPressed: () => _showCardSizeDialog(context, settingsService),
+                ),
+                // Max items
+                FocusableSettingsTile(
+                  leading: const Icon(Icons.format_list_numbered_outlined),
+                  title: const Text('Maximum Items'),
+                  trailing: Text(maxItemsLabel, style: const TextStyle(color: Colors.white70)),
+                  onPressed: () => _showMaxItemsDialog(context, settingsService),
+                ),
+                // Show progress bar
+                RoundedSwitchListTile(
+                  value: settingsService.continueWatchingShowProgress,
+                  onChanged: (v) => settingsService.setContinueWatchingShowProgress(v),
+                  title: const Text('Playback Progress Bar'),
+                  secondary: const Icon(Icons.linear_scale_outlined),
+                ),
+                // Show description
+                RoundedSwitchListTile(
+                  value: settingsService.continueWatchingShowDescription,
+                  onChanged: (v) => settingsService.setContinueWatchingShowDescription(v),
+                  title: const Text('Episode & Video Details'),
+                  secondary: const Icon(Icons.subtitles_outlined),
+                ),
+                // Hidden content manager
+                if (hiddenCount > 0)
+                  FocusableSettingsTile(
+                    leading: const Icon(Icons.visibility_off_outlined),
+                    title: const Text('Hidden Items & Apps'),
+                    trailing: Text('$hiddenCount hidden', style: const TextStyle(color: Colors.orangeAccent)),
+                    onPressed: () => _showHiddenContentDialog(context, settingsService, watchNextService),
+                  ),
+              ],
               const SizedBox(height: 12),
               FocusableSettingsTile(
                 leading: const Icon(Icons.security),
@@ -181,10 +240,128 @@ class _ContinueWatchingSettingsPageState extends State<ContinueWatchingSettingsP
                   ),
                 ),
               ],
+              // App Integration Tips
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.05),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.white12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.lightbulb_outline, size: 18, color: Theme.of(context).colorScheme.primary),
+                        const SizedBox(width: 8),
+                        Text('App Integration Tips',
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '• SmartTube: In SmartTube, open Settings → General → Channels → enable "Watch Next" to display paused videos here.\n'
+                      '• Breezy Weather: In Breezy Weather, open Settings → Integration / Broadcast → enable "Gadgetbridge broadcast" for real-time background status bar weather updates.',
+                      style: const TextStyle(fontSize: 12, color: Colors.white70, height: 1.4),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  void _showCardSizeDialog(BuildContext context, SettingsService settings) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: const Text('Select Card Size'),
+          children: [
+            SimpleDialogOption(
+              onPressed: () {
+                settings.setContinueWatchingCardSize('compact');
+                Navigator.of(context).pop();
+              },
+              child: const Text('Compact (200 × 112)'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                settings.setContinueWatchingCardSize('normal');
+                Navigator.of(context).pop();
+              },
+              child: const Text('Standard (240 × 135)'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                settings.setContinueWatchingCardSize('large');
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cinematic Large (280 × 157)'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showMaxItemsDialog(BuildContext context, SettingsService settings) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: const Text('Maximum Items'),
+          children: [
+            for (final count in [5, 10, 15, 20, 0])
+              SimpleDialogOption(
+                onPressed: () {
+                  settings.setContinueWatchingMaxItems(count);
+                  Navigator.of(context).pop();
+                },
+                child: Text(count == 0 ? 'Unlimited' : '$count items'),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showHiddenContentDialog(BuildContext context, SettingsService settings, WatchNextService watchNext) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Hidden Content'),
+          content: Text(
+            'You have ${settings.hiddenWatchNextProgramIds.length} hidden program(s) and '
+            '${settings.hiddenWatchNextPackages.length} hidden app(s).\n\n'
+            'Would you like to restore all hidden items to Continue Watching?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await settings.clearAllHiddenWatchNext();
+                await watchNext.refresh();
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                }
+              },
+              child: const Text('Restore All'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

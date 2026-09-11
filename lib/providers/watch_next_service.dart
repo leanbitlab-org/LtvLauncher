@@ -191,6 +191,20 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
     return launched;
   }
 
+  Future<bool> deleteProgram(WatchNextProgram program) async {
+    // Optimistically remove from local list for instant UI feedback
+    _programs = _programs.where((p) => p.id != program.id).toList();
+    notifyListeners();
+
+    bool deleted = false;
+    try {
+      deleted = await _channel.deleteWatchNextProgram(program.id);
+    } catch (e) {
+      log('Failed to delete watch next program', name: 'WatchNextService', error: e);
+    }
+    return deleted;
+  }
+
   @override
   void dispose() {
     if (!_isTest) {

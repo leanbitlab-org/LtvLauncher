@@ -136,26 +136,36 @@ class _NetworkIconButtonState extends State<_NetworkIconButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Focus(
-      onFocusChange: (hasFocus) => setState(() => _focused = hasFocus),
-      child: InkWell(
-        onTap: widget.onTap,
-        borderRadius: BorderRadius.circular(8),
-        child: Container(
-          padding: const EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            color: _focused ? Colors.black.withOpacity(0.3) : Colors.transparent,
-            borderRadius: BorderRadius.circular(8),
-            // Constant border width so focus changes never resize the widget.
-            border: Border.all(
-              color: _focused ? Theme.of(context).colorScheme.primary : Colors.transparent,
-              width: 2,
+    return Actions(
+      actions: <Type, Action<Intent>>{
+        ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onTap()),
+        ButtonActivateIntent: CallbackAction<ButtonActivateIntent>(onInvoke: (_) => widget.onTap()),
+      },
+      child: Focus(
+        onFocusChange: (hasFocus) => setState(() => _focused = hasFocus),
+        child: InkWell(
+          onTap: widget.onTap,
+          canRequestFocus: false,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color: _focused ? Colors.black.withOpacity(0.3) : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+              // Constant border width so focus changes never resize the widget.
+              border: Border.all(
+                color: _focused ? Theme.of(context).colorScheme.primary : Colors.transparent,
+                width: 2,
+              ),
+              boxShadow: _focused
+                  ? const [BoxShadow(color: Colors.black54, blurRadius: 8, spreadRadius: 1)]
+                  : null,
             ),
-            boxShadow: _focused
-                ? const [BoxShadow(color: Colors.black54, blurRadius: 8, spreadRadius: 1)]
-                : null,
+            child: widget.child,
           ),
-          child: widget.child,
         ),
       ),
     );

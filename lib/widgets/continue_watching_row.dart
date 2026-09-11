@@ -5,6 +5,7 @@ import 'package:flauncher/providers/watch_next_service.dart';
 import 'package:flauncher/actions.dart';
 import 'package:flauncher/widgets/app_card_keys.dart';
 import 'package:flauncher/widgets/focus_keyboard_listener.dart';
+import 'package:flauncher/widgets/watch_next_info_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -26,11 +27,37 @@ class ContinueWatchingRow extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        final List<WatchNextProgram> programs = watchNextService.programs
-            .where((p) => !appsService.applications.any((app) => app.packageName == p.packageName && app.hidden))
+        final hiddenProgramIds = settingsService.hiddenWatchNextProgramIds;
+        final hiddenPackages = settingsService.hiddenWatchNextPackages;
+
+        List<WatchNextProgram> programs = watchNextService.programs
+            .where((p) =>
+                !hiddenProgramIds.contains(p.id.toString()) &&
+                !hiddenPackages.contains(p.packageName) &&
+                !appsService.applications.any((app) => app.packageName == p.packageName && app.hidden))
             .toList();
+
+        final maxItems = settingsService.continueWatchingMaxItems;
+        if (maxItems > 0 && programs.length > maxItems) {
+          programs = programs.sublist(0, maxItems);
+        }
+
         if (programs.isEmpty) {
           return const SizedBox.shrink();
+        }
+
+        double rowHeight;
+        switch (settingsService.continueWatchingCardSize) {
+          case 'compact':
+            rowHeight = 145;
+            break;
+          case 'large':
+            rowHeight = 195;
+            break;
+          case 'normal':
+          default:
+            rowHeight = 170;
+            break;
         }
 
         return Padding(
@@ -40,34 +67,50 @@ class ContinueWatchingRow extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 16, bottom: 8),
-                child: Text(
-                  AppLocalizations.of(context)!.continueWatching,
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    shadows: [
-                      const Shadow(
-                        color: Colors.black54,
-                        offset: Offset(1, 1),
-                        blurRadius: 8,
-                      )
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.continueWatching,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        shadows: [
+                          const Shadow(
+                            color: Colors.black54,
+                            offset: Offset(1, 1),
+                            blurRadius: 8,
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      '•  ${programs.length}',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Colors.white54,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
-                height: 170, // Increased for larger cards
+                height: rowHeight,
                 child: ListView.builder(
                   clipBehavior: Clip.none,
                   padding: const EdgeInsets.all(8),
+                  physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: programs.length,
                   itemBuilder: (context, index) {
                     final program = programs[index];
                     return Padding(
+                      key: ValueKey(program.id),
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: WatchNextCard(
-                        program: program,
-                        appsService: appsService,
-                        watchNextService: watchNextService,
+                      child: RepaintBoundary(
+                        child: WatchNextCard(
+                          program: program,
+                          appsService: appsService,
+                          watchNextService: watchNextService,
+                        ),
                       ),
                     );
                   },
@@ -101,7 +144,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
   late final FocusNode _focusNode;
   bool _focused = false;
   bool _clicked = false;
-  Future<Uint8List>? _iconFuture;
+  Uint8List? _appIconBytes;
   late final AnimationController _animation = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 1200),
@@ -112,14 +155,23 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
     super.initState();
     _focusNode = FocusNode();
     _focusNode.addListener(_onFocusChange);
-    _iconFuture = widget.appsService.getAppIcon(widget.program.packageName);
+    _loadAppIcon();
+  }
+
+  Future<void> _loadAppIcon() async {
+    try {
+      final bytes = await widget.appsService.getAppIcon(widget.program.packageName);
+      if (mounted && bytes.isNotEmpty) {
+        setState(() => _appIconBytes = bytes);
+      }
+    } catch (_) {}
   }
 
   @override
   void didUpdateWidget(covariant WatchNextCard oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.program.packageName != widget.program.packageName) {
-      _iconFuture = widget.appsService.getAppIcon(widget.program.packageName);
+      _loadAppIcon();
     }
   }
 
@@ -160,6 +212,18 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
     }
   }
 
+  void _onLongPress() {
+    showDialog(
+      context: context,
+      builder: (context) => WatchNextInfoPanel(
+        program: widget.program,
+        watchNextService: widget.watchNextService,
+        appsService: widget.appsService,
+        appIconBytes: _appIconBytes,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -168,10 +232,28 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
     final bool appHighlightAnimationEnabled = context.select<SettingsService, bool>((s) => s.appHighlightAnimationEnabled);
     final bool hideHighlightOutlineOnHomescreen = context.select<SettingsService, bool>((s) => s.hideHighlightOutlineOnHomescreen);
     final bool appSelectorTransitionAnimationEnabled = context.select<SettingsService, bool>((s) => s.appSelectorTransitionAnimationEnabled);
+    final String cardSize = context.select<SettingsService, String>((s) => s.continueWatchingCardSize);
+    final bool showProgress = context.select<SettingsService, bool>((s) => s.continueWatchingShowProgress);
+    final bool showDescription = context.select<SettingsService, bool>((s) => s.continueWatchingShowDescription);
 
     final Color accentColor = Color(int.parse('FF$accentColorHex', radix: 16));
-    const cardWidth = 240.0;
-    const cardHeight = 135.0;
+    double cardWidth;
+    double cardHeight;
+    switch (cardSize) {
+      case 'compact':
+        cardWidth = 200.0;
+        cardHeight = 112.0;
+        break;
+      case 'large':
+        cardWidth = 280.0;
+        cardHeight = 157.0;
+        break;
+      case 'normal':
+      default:
+        cardWidth = 240.0;
+        cardHeight = 135.0;
+        break;
+    }
 
     BorderRadius borderRadius;
     BorderRadius innerBorderRadius;
@@ -309,11 +391,19 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
         }
         return KeyEventResult.ignored;
       },
+      onLongPress: (key) {
+        if (AppCardKeys.longPressableKeys.contains(key)) {
+          _onLongPress();
+          return KeyEventResult.handled;
+        }
+        return KeyEventResult.ignored;
+      },
       builder: (context) {
         return Focus(
           focusNode: _focusNode,
           child: GestureDetector(
             onTap: _onPressed,
+            onLongPress: _onLongPress,
             child: AnimatedScale(
               scale: _clicked ? 0.9 : 1.0,
               duration: const Duration(milliseconds: 150),
@@ -343,32 +433,25 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                           child: _buildPoster(theme),
                         ),
                         // App icon badge (top-right, glass effect)
-                        Positioned(
-                          top: 8,
-                          right: 8,
-                          child: FutureBuilder<Uint8List>(
-                            future: _iconFuture,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return Container(
-                                  width: 28,
-                                  height: 28,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black45,
-                                    borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(
-                                      color: Colors.white.withOpacity(0.15),
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  padding: const EdgeInsets.all(3),
-                                  child: Image.memory(snapshot.data!),
-                                );
-                              }
-                              return const SizedBox.shrink();
-                            },
+                        if (_appIconBytes != null)
+                          Positioned(
+                            top: 8,
+                            right: 8,
+                            child: Container(
+                              width: 28,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: Colors.black45,
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(
+                                  color: Colors.white.withOpacity(0.15),
+                                  width: 0.5,
+                                ),
+                              ),
+                              padding: const EdgeInsets.all(3),
+                              child: Image.memory(_appIconBytes!),
+                            ),
                           ),
-                        ),
                         // Title + progress overlay (bottom)
                         Positioned(
                           left: 0,
@@ -408,7 +491,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                if (widget.program.description.isNotEmpty)
+                                if (showDescription && widget.program.description.isNotEmpty)
                                   Padding(
                                     padding: const EdgeInsets.only(top: 2),
                                     child: Text(
@@ -421,7 +504,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-                                if (progress > 0)
+                                if (showProgress && progress > 0)
                                   Padding(
                                     padding: const EdgeInsets.only(top: 6),
                                     child: Row(
@@ -471,8 +554,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
       return Image.memory(
         widget.program.posterBytes!,
         fit: BoxFit.cover,
-        cacheWidth: 480,
-        filterQuality: FilterQuality.medium,
+        filterQuality: FilterQuality.low,
         errorBuilder: (context, error, stackTrace) => _emptyPosterFallback(theme),
       );
     }
@@ -481,8 +563,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
       return Image.network(
         widget.program.posterArtUri,
         fit: BoxFit.cover,
-        cacheWidth: 480,
-        filterQuality: FilterQuality.medium,
+        filterQuality: FilterQuality.low,
         errorBuilder: (context, error, stackTrace) => _emptyPosterFallback(theme),
       );
     }
@@ -502,22 +583,16 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
         ),
       ),
       child: Center(
-        child: FutureBuilder<Uint8List>(
-          future: _iconFuture,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Opacity(
+        child: _appIconBytes != null
+            ? Opacity(
                 opacity: 0.4,
-                child: Image.memory(snapshot.data!, width: 48, height: 48),
-              );
-            }
-            return Icon(
-              Icons.play_circle_outline,
-              size: 48,
-              color: Colors.white.withOpacity(0.15),
-            );
-          },
-        ),
+                child: Image.memory(_appIconBytes!, width: 48, height: 48),
+              )
+            : Icon(
+                Icons.play_circle_outline,
+                size: 48,
+                color: Colors.white.withOpacity(0.15),
+              ),
       ),
     );
   }

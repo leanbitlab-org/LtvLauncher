@@ -237,4 +237,44 @@ void main() async {
       expect(service.useFahrenheit, isTrue);
     });
   });
+
+  group("continue watching settings", () {
+    test("defaults and setters for continue watching options", () async {
+      final sp = await SharedPreferences.getInstance();
+      final service = SettingsService(sp);
+
+      expect(service.continueWatchingCardSize, "normal");
+      expect(service.continueWatchingMaxItems, 15);
+      expect(service.continueWatchingShowProgress, isTrue);
+      expect(service.continueWatchingShowDescription, isTrue);
+      expect(service.hiddenWatchNextProgramIds, isEmpty);
+      expect(service.hiddenWatchNextPackages, isEmpty);
+
+      await service.setContinueWatchingCardSize("compact");
+      await service.setContinueWatchingMaxItems(20);
+      await service.setContinueWatchingShowProgress(false);
+      await service.setContinueWatchingShowDescription(false);
+      await service.hideWatchNextProgram(123);
+      await service.hideWatchNextPackage("com.test.app");
+
+      expect(service.continueWatchingCardSize, "compact");
+      expect(service.continueWatchingMaxItems, 20);
+      expect(service.continueWatchingShowProgress, isFalse);
+      expect(service.continueWatchingShowDescription, isFalse);
+      expect(service.hiddenWatchNextProgramIds, contains("123"));
+      expect(service.hiddenWatchNextPackages, contains("com.test.app"));
+
+      await service.unhideWatchNextProgram(123);
+      expect(service.hiddenWatchNextProgramIds, isNot(contains("123")));
+
+      await service.unhideWatchNextPackage("com.test.app");
+      expect(service.hiddenWatchNextPackages, isNot(contains("com.test.app")));
+
+      await service.hideWatchNextProgram(456);
+      await service.hideWatchNextPackage("com.another.app");
+      await service.clearAllHiddenWatchNext();
+      expect(service.hiddenWatchNextProgramIds, isEmpty);
+      expect(service.hiddenWatchNextPackages, isEmpty);
+    });
+  });
 }

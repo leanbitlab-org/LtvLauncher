@@ -248,6 +248,15 @@ class FLauncherChannel {
     }
   }
 
+  Future<bool> deleteWatchNextProgram(int id) async {
+    try {
+      final bool? success = await _methodChannel.invokeMethod<bool>("deleteWatchNextProgram", {"id": id});
+      return success ?? false;
+    } catch (_) {
+      return false;
+    }
+  }
+
   Future<bool> checkWatchNextPermission() async {
     try {
       final bool? allowed = await _methodChannel.invokeMethod<bool>("checkWatchNextPermission");

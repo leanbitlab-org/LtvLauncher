@@ -324,6 +324,10 @@ class _FocusableIconButtonState extends State<_FocusableIconButton> {
         onFocusChange: (hasFocus) => setState(() => _focused = hasFocus),
         child: InkWell(
           onTap: widget.onPressed,
+          canRequestFocus: false,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
           borderRadius: BorderRadius.circular(8),
           child: Container(
             padding: const EdgeInsets.all(4),  // Match network indicator padding

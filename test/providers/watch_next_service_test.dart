@@ -293,4 +293,39 @@ void main() {
       verify(mockChannel.launchApp('com.netflix.mediaclient')).called(1);
     });
   });
+
+  group('WatchNextService deleteProgram', () {
+    test('calls mockChannel.deleteWatchNextProgram and removes from programs list', () async {
+      final fakePrograms = [
+        {
+          'id': 42,
+          'packageName': 'com.netflix.mediaclient',
+          'title': 'Stranger Things',
+          'description': 'S1:E1 Chapter One',
+          'watchNextType': 1,
+          'lastEngagementTime': 1600000000,
+          'playbackPosition': 500,
+          'duration': 3000,
+          'intentUri': 'intent://netflix_uri',
+          'posterArtUri': ''
+        }
+      ];
+      when(mockChannel.getWatchNextPrograms()).thenAnswer((_) async => fakePrograms);
+      when(mockChannel.deleteWatchNextProgram(42)).thenAnswer((_) async => true);
+
+      watchNextService = WatchNextService(mockChannel);
+      while (!watchNextService.initialized) {
+        await Future.delayed(Duration.zero);
+      }
+
+      expect(watchNextService.programs.length, 1);
+      final program = watchNextService.programs.first;
+
+      final result = await watchNextService.deleteProgram(program);
+
+      expect(result, isTrue);
+      expect(watchNextService.programs, isEmpty);
+      verify(mockChannel.deleteWatchNextProgram(42)).called(1);
+    });
+  });
 }

@@ -174,6 +174,14 @@ public class MainActivity extends FlutterActivity {
                     }
                 }
                 case "getWatchNextPrograms" -> result.success(getWatchNextPrograms());
+                case "deleteWatchNextProgram" -> {
+                    Number id = call.argument("id");
+                    if (id != null) {
+                        result.success(deleteWatchNextProgram(id.longValue()));
+                    } else {
+                        result.error("INVALID_ARGUMENT", "Missing id", null);
+                    }
+                }
                 case "getWatchNextPoster" -> {
                     String posterArtUri = call.argument("posterArtUri");
                     sIoExecutor.execute(() -> {
@@ -1271,6 +1279,17 @@ public class MainActivity extends FlutterActivity {
             e.printStackTrace();
         }
         return list;
+    }
+
+    private boolean deleteWatchNextProgram(long id) {
+        try {
+            Uri uri = TvContract.buildWatchNextProgramUri(id);
+            int rowsDeleted = getContentResolver().delete(uri, null, null);
+            return rowsDeleted > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private byte[] getWatchNextPoster(String posterArtUri) {

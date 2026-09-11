@@ -45,6 +45,12 @@ const String _screensaverClockStyleKey = "screensaver_clock_style";
 const String _timeBasedWallpaperEnabledKey = "time_based_wallpaper_enabled";
 const String _showInputsWidgetInStatusBarKey = "show_inputs_widget_in_status_bar";
 const String _showContinueWatchingKey = "show_continue_watching";
+const String _continueWatchingCardSizeKey = "continue_watching_card_size";
+const String _continueWatchingMaxItemsKey = "continue_watching_max_items";
+const String _continueWatchingShowProgressKey = "continue_watching_show_progress";
+const String _continueWatchingShowDescriptionKey = "continue_watching_show_description";
+const String _hiddenWatchNextProgramIdsKey = "hidden_watch_next_program_ids";
+const String _hiddenWatchNextPackagesKey = "hidden_watch_next_packages";
 const String _startOnBootKey = "start_on_boot";
 const String _showNotificationsWidgetInStatusBarKey = "show_notifications_widget_in_status_bar";
 const String _autoHideNotificationsWidgetKey = "auto_hide_notifications_widget";
@@ -105,6 +111,12 @@ class SettingsService extends ChangeNotifier {
   late bool _timeBasedWallpaperEnabled;
   late bool _showInputsWidgetInStatusBar;
   late bool _showContinueWatching;
+  late String _continueWatchingCardSize;
+  late int _continueWatchingMaxItems;
+  late bool _continueWatchingShowProgress;
+  late bool _continueWatchingShowDescription;
+  late List<String> _hiddenWatchNextProgramIds;
+  late List<String> _hiddenWatchNextPackages;
   late bool _startOnBoot;
   late bool _showNotificationsWidgetInStatusBar;
   late bool _autoHideNotificationsWidget;
@@ -149,6 +161,12 @@ class SettingsService extends ChangeNotifier {
 
   bool get showInputsWidgetInStatusBar => _showInputsWidgetInStatusBar;
   bool get showContinueWatching => _showContinueWatching;
+  String get continueWatchingCardSize => _continueWatchingCardSize;
+  int get continueWatchingMaxItems => _continueWatchingMaxItems;
+  bool get continueWatchingShowProgress => _continueWatchingShowProgress;
+  bool get continueWatchingShowDescription => _continueWatchingShowDescription;
+  List<String> get hiddenWatchNextProgramIds => List.unmodifiable(_hiddenWatchNextProgramIds);
+  List<String> get hiddenWatchNextPackages => List.unmodifiable(_hiddenWatchNextPackages);
   bool get startOnBoot => _startOnBoot;
   bool get showNotificationsWidgetInStatusBar => _showNotificationsWidgetInStatusBar;
   bool get autoHideNotificationsWidget => _autoHideNotificationsWidget;
@@ -202,6 +220,12 @@ class SettingsService extends ChangeNotifier {
     _timeBasedWallpaperEnabled = _sharedPreferences.getBool(_timeBasedWallpaperEnabledKey) ?? false;
     _showInputsWidgetInStatusBar = _sharedPreferences.getBool(_showInputsWidgetInStatusBarKey) ?? true;
     _showContinueWatching = _sharedPreferences.getBool(_showContinueWatchingKey) ?? false;
+    _continueWatchingCardSize = _sharedPreferences.getString(_continueWatchingCardSizeKey) ?? "normal";
+    _continueWatchingMaxItems = _sharedPreferences.getInt(_continueWatchingMaxItemsKey) ?? 15;
+    _continueWatchingShowProgress = _sharedPreferences.getBool(_continueWatchingShowProgressKey) ?? true;
+    _continueWatchingShowDescription = _sharedPreferences.getBool(_continueWatchingShowDescriptionKey) ?? true;
+    _hiddenWatchNextProgramIds = _sharedPreferences.getStringList(_hiddenWatchNextProgramIdsKey) ?? [];
+    _hiddenWatchNextPackages = _sharedPreferences.getStringList(_hiddenWatchNextPackagesKey) ?? [];
     _startOnBoot = _sharedPreferences.getBool(_startOnBootKey) ?? false;
     _showNotificationsWidgetInStatusBar = _sharedPreferences.getBool(_showNotificationsWidgetInStatusBarKey) ?? true;
     _autoHideNotificationsWidget = _sharedPreferences.getBool(_autoHideNotificationsWidgetKey) ?? false;
@@ -236,6 +260,12 @@ class SettingsService extends ChangeNotifier {
       _timeBasedWallpaperEnabledKey: _timeBasedWallpaperEnabled,
       _showInputsWidgetInStatusBarKey: _showInputsWidgetInStatusBar,
       _showContinueWatchingKey: _showContinueWatching,
+      _continueWatchingCardSizeKey: _continueWatchingCardSize,
+      _continueWatchingMaxItemsKey: _continueWatchingMaxItems,
+      _continueWatchingShowProgressKey: _continueWatchingShowProgress,
+      _continueWatchingShowDescriptionKey: _continueWatchingShowDescription,
+      _hiddenWatchNextProgramIdsKey: _hiddenWatchNextProgramIds,
+      _hiddenWatchNextPackagesKey: _hiddenWatchNextPackages,
       _startOnBootKey: _startOnBoot,
       _showNotificationsWidgetInStatusBarKey: _showNotificationsWidgetInStatusBar,
       _autoHideNotificationsWidgetKey: _autoHideNotificationsWidget,
@@ -400,6 +430,72 @@ class SettingsService extends ChangeNotifier {
   Future<void> setShowContinueWatching(bool show) async {
     await _sharedPreferences.setBool(_showContinueWatchingKey, show);
     _showContinueWatching = show;
+    notifyListeners();
+  }
+
+  Future<void> setContinueWatchingCardSize(String size) async {
+    await _sharedPreferences.setString(_continueWatchingCardSizeKey, size);
+    _continueWatchingCardSize = size;
+    notifyListeners();
+  }
+
+  Future<void> setContinueWatchingMaxItems(int count) async {
+    await _sharedPreferences.setInt(_continueWatchingMaxItemsKey, count);
+    _continueWatchingMaxItems = count;
+    notifyListeners();
+  }
+
+  Future<void> setContinueWatchingShowProgress(bool show) async {
+    await _sharedPreferences.setBool(_continueWatchingShowProgressKey, show);
+    _continueWatchingShowProgress = show;
+    notifyListeners();
+  }
+
+  Future<void> setContinueWatchingShowDescription(bool show) async {
+    await _sharedPreferences.setBool(_continueWatchingShowDescriptionKey, show);
+    _continueWatchingShowDescription = show;
+    notifyListeners();
+  }
+
+  Future<void> hideWatchNextProgram(int id) async {
+    final strId = id.toString();
+    if (!_hiddenWatchNextProgramIds.contains(strId)) {
+      _hiddenWatchNextProgramIds = List<String>.from(_hiddenWatchNextProgramIds)..add(strId);
+      await _sharedPreferences.setStringList(_hiddenWatchNextProgramIdsKey, _hiddenWatchNextProgramIds);
+      notifyListeners();
+    }
+  }
+
+  Future<void> unhideWatchNextProgram(int id) async {
+    final strId = id.toString();
+    if (_hiddenWatchNextProgramIds.contains(strId)) {
+      _hiddenWatchNextProgramIds = List<String>.from(_hiddenWatchNextProgramIds)..remove(strId);
+      await _sharedPreferences.setStringList(_hiddenWatchNextProgramIdsKey, _hiddenWatchNextProgramIds);
+      notifyListeners();
+    }
+  }
+
+  Future<void> hideWatchNextPackage(String packageName) async {
+    if (!_hiddenWatchNextPackages.contains(packageName)) {
+      _hiddenWatchNextPackages = List<String>.from(_hiddenWatchNextPackages)..add(packageName);
+      await _sharedPreferences.setStringList(_hiddenWatchNextPackagesKey, _hiddenWatchNextPackages);
+      notifyListeners();
+    }
+  }
+
+  Future<void> unhideWatchNextPackage(String packageName) async {
+    if (_hiddenWatchNextPackages.contains(packageName)) {
+      _hiddenWatchNextPackages = List<String>.from(_hiddenWatchNextPackages)..remove(packageName);
+      await _sharedPreferences.setStringList(_hiddenWatchNextPackagesKey, _hiddenWatchNextPackages);
+      notifyListeners();
+    }
+  }
+
+  Future<void> clearAllHiddenWatchNext() async {
+    _hiddenWatchNextProgramIds = [];
+    _hiddenWatchNextPackages = [];
+    await _sharedPreferences.remove(_hiddenWatchNextProgramIdsKey);
+    await _sharedPreferences.remove(_hiddenWatchNextPackagesKey);
     notifyListeners();
   }
 
