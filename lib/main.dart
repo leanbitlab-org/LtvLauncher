@@ -54,7 +54,7 @@ Future<void> main() async {
 
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Material(
-      color: const Color(0xFF1E1E1E),
+      color: const Color(0xFF0F0F0F),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

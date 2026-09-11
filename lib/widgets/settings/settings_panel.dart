@@ -64,7 +64,7 @@ class _SettingsPanelState extends State<SettingsPanel> {
     return WillPopScope(
       onWillPop: () async => !await _navigatorKey.currentState!.maybePop(),
       child: Scaffold(
-        backgroundColor: Colors.black54, // Dim the background
+        backgroundColor: Colors.black.withOpacity(0.70), // Dim the background
         body: Stack(
           children: [
             // Tap outside to close

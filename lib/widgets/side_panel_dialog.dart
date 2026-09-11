@@ -22,7 +22,7 @@ class SidePanelDialog extends StatelessWidget {
     return Align(
       alignment: isRightSide ? Alignment.centerRight : Alignment.centerLeft,
       child: Material(
-        color: const Color(0xFF1E1E1E),
+        color: const Color(0xFF0F0F0F),
         elevation: 24,
         shadowColor: Colors.black,
         borderRadius: borderRadius,
@@ -31,7 +31,7 @@ class SidePanelDialog extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: borderRadius,
             border: Border.all(
-              color: Colors.white.withOpacity(0.12),
+              color: Colors.white.withOpacity(0.08),
               width: 1,
             ),
           ),

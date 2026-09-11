@@ -15,7 +15,7 @@ class InputsPanel extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: Colors.black54, // Dim background
+      backgroundColor: Colors.black.withOpacity(0.70), // Dim background
       body: Stack(
         children: [
           // Tap outside to close

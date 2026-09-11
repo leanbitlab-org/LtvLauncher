@@ -85,13 +85,13 @@ class FLauncherApp extends StatelessWidget
             brightness: Brightness.dark,
             primary: accentColor,
             secondary: accentColor,
-            surface: const Color(0xFF1E1E1E),
-            background: const Color(0xFF121212),
+            surface: const Color(0xFF0F0F0F),
+            background: const Color(0xFF0A0A0A),
           ),
-          cardColor: const Color(0xFF1E1E1E), // Dark surface color
-          canvasColor: const Color(0xFF121212), // Dark background
-          dialogBackgroundColor: const Color(0xFF1E1E1E),
-          scaffoldBackgroundColor: const Color(0xFF121212), // Dark background
+          cardColor: const Color(0xFF0F0F0F), // Dark surface color
+          canvasColor: const Color(0xFF0A0A0A), // Dark background
+          dialogBackgroundColor: const Color(0xFF0F0F0F),
+          scaffoldBackgroundColor: const Color(0xFF0A0A0A), // Dark background
           textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white, // Revert to white for settings list
@@ -100,7 +100,7 @@ class FLauncherApp extends StatelessWidget
           ),
           dialogTheme: DialogTheme(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            backgroundColor: const Color(0xFF1E1E1E),
+            backgroundColor: const Color(0xFF0F0F0F),
             titleTextStyle: Typography.material2018().white.titleLarge,
             contentTextStyle: Typography.material2018().white.bodyMedium,
           ),
