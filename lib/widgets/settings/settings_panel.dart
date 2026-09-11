@@ -41,7 +41,6 @@ import 'package:flauncher/widgets/settings/blocked_notifications_page.dart';
 import 'package:flauncher/widgets/settings/display_settings_page.dart';
 import 'package:flauncher/widgets/settings/notifications_settings_page.dart';
 import 'package:flauncher/widgets/settings/continue_watching_settings_page.dart';
-import 'package:flauncher/widgets/settings/app_sort_priority_page.dart';
 import 'package:flauncher/models/app.dart';
 import 'package:flutter/material.dart';
 
@@ -126,8 +125,6 @@ class _SettingsPanelState extends State<SettingsPanel> {
                       return _FastPageRoute(builder: (_) => const NotificationsSettingsPage());
                     case ContinueWatchingSettingsPage.routeName:
                       return _FastPageRoute(builder: (_) => const ContinueWatchingSettingsPage());
-                    case AppSortPriorityPage.routeName:
-                      return _FastPageRoute(builder: (_) => const AppSortPriorityPage());
                     case AppDetailsPage.routeName:
                       return _FastPageRoute(
                           builder: (_) => AppDetailsPage(application: settings.arguments as App));

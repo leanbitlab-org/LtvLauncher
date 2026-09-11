@@ -515,28 +515,4 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get dpadDismissHint => 'Вліво: Закрити • OK: Параметри';
-
-  @override
-  String get appSortPriority => 'App Sort Priority';
-
-  @override
-  String get appSortPriorityDesc => 'Choose which types of applications are sorted first in categories';
-
-  @override
-  String get tvAppsFirst => 'TV Apps First';
-
-  @override
-  String get tvAppsFirstDesc => 'TV-optimized applications appear first in sorted categories';
-
-  @override
-  String get nonTvAppsFirst => 'Non-TV Apps First';
-
-  @override
-  String get nonTvAppsFirstDesc => 'Sideloaded and non-TV applications appear first in sorted categories';
-
-  @override
-  String get noSortPriority => 'None (All Mixed)';
-
-  @override
-  String get noSortPriorityDesc => 'Sort all applications purely by name or last used';
 }

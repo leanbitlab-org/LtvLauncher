@@ -61,22 +61,6 @@ class AppsService extends ChangeNotifier {
 
   bool get initialized => _initialized;
 
-  String _appSortPriority = "tv_first";
-  String get appSortPriority => _appSortPriority;
-
-  void setAppSortPriority(String priority) {
-    if (_appSortPriority != priority) {
-      _appSortPriority = priority;
-      _prefs?.setString("app_sort_priority", priority);
-      for (final category in _categoriesById.values) {
-        if (category.sort != CategorySort.manual) {
-          sortCategory(category);
-        }
-      }
-      notifyListeners();
-    }
-  }
-
   String? _pendingReorderFocusPackage;
   int? _pendingReorderFocusCategoryId;
   int? _pendingReorderFocusIndex;
@@ -109,11 +93,11 @@ class AppsService extends ChangeNotifier {
   }
 
   Future<void> _init() async {
-    final prefs = await _prefsAsync;
-    _appSortPriority = prefs.getString("app_sort_priority") ?? "tv_first";
     await _refreshState(shouldNotifyListeners: false);
     if (_database.wasCreated) {
       await _initDefaultCategories();
+    } else {
+      await _ensureTvAppsSectionOrder();
     }
 
     _fLauncherChannel.addAppsChangedListener((event) async {
@@ -258,27 +242,60 @@ class AppsService extends ChangeNotifier {
         .where((application) => application.sideloaded == true);
 
     return _database.transaction(() async {
+      int tvCategoryId = await addCategory("TV Apps",
+          type: CategoryType.grid, shouldNotifyListeners: false);
       if (tvApplications.isNotEmpty) {
-        int categoryId = await addCategory("TV Apps",
-            type: CategoryType.grid, shouldNotifyListeners: false);
-
-        Category tvAppsCategory = _categoriesById[categoryId]!;
+        Category tvAppsCategory = _categoriesById[tvCategoryId]!;
         await addAllToCategory(tvApplications, tvAppsCategory,
             shouldNotifyListeners: false);
       }
 
+      int nonTvCategoryId = await addCategory(
+        "Non-TV Apps",
+        shouldNotifyListeners: false,
+      );
       if (nonTvApplications.isNotEmpty) {
-        int categoryId = await addCategory(
-          "Non-TV Apps",
-          shouldNotifyListeners: false,
-        );
-        Category nonTvAppsCategory = _categoriesById[categoryId]!;
+        Category nonTvAppsCategory = _categoriesById[nonTvCategoryId]!;
         await addAllToCategory(nonTvApplications, nonTvAppsCategory,
             shouldNotifyListeners: false);
       }
 
       await addCategory("Favorites", shouldNotifyListeners: false);
     });
+  }
+
+  /// Ensures that "TV Apps" section is placed above "Non-TV Apps" section by default.
+  /// This fixes existing installs where "Non-TV Apps" was previously created at order 0.
+  Future<void> _ensureTvAppsSectionOrder() async {
+    final prefs = await _prefsAsync;
+    const migrationKey = "tv_apps_section_order_default_v1";
+    if (prefs.getBool(migrationKey) == true) {
+      return;
+    }
+
+    int tvAppsIndex = -1;
+    int nonTvAppsIndex = -1;
+
+    for (int i = 0; i < _launcherSections.length; i++) {
+      final section = _launcherSections[i];
+      if (section is Category) {
+        final name = section.name.toLowerCase();
+        if (name == "tv apps" || name == "tv applications") {
+          tvAppsIndex = i;
+        } else if (name == "non-tv apps" || name == "non-tv applications") {
+          nonTvAppsIndex = i;
+        }
+      }
+    }
+
+    if (tvAppsIndex != -1 && nonTvAppsIndex != -1 && tvAppsIndex > nonTvAppsIndex) {
+      final tvAppsSection = _launcherSections.removeAt(tvAppsIndex);
+      _launcherSections.insert(nonTvAppsIndex, tvAppsSection);
+      await persistSectionsOrder();
+      notifyListeners();
+    }
+
+    await prefs.setBool(migrationKey, true);
   }
 
   Future<void> refreshState() => _refreshState(shouldNotifyListeners: true);
@@ -395,35 +412,20 @@ class AppsService extends ChangeNotifier {
   }
 
   void sortCategory(Category category) {
-    int Function(App, App) comparator;
     if (category.sort == CategorySort.alphabetical) {
-      comparator = (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      category.applications.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     } else if (category.sort == CategorySort.lastUsed) {
-      comparator = (a, b) {
+      category.applications.sort((a, b) {
         final aTime =
             a.lastLaunchedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
         final bTime =
             b.lastLaunchedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
         return bTime.compareTo(aTime); // Descending (newest first)
-      };
+      });
     } else {
       category.applications.sortBy<num>(
           (application) => application.categoryOrders[category.id]!);
-      return;
     }
-
-    category.applications.sort((a, b) {
-      if (_appSortPriority == "tv_first") {
-        if (a.sideloaded != b.sideloaded) {
-          return a.sideloaded ? 1 : -1;
-        }
-      } else if (_appSortPriority == "non_tv_first") {
-        if (a.sideloaded != b.sideloaded) {
-          return a.sideloaded ? -1 : 1;
-        }
-      }
-      return comparator(a, b);
-    });
   }
 
   /// Finds the appropriate category for a newly installed app.

@@ -14,10 +14,11 @@ import '../mocks.dart';
 import '../mocks.mocks.dart';
 
 void main() {
+  setUp(() async {
+    SharedPreferences.setMockInitialValues({});
+  });
+
   group("removeCustomAppBanner", () {
-    setUp(() async {
-      SharedPreferencesStorePlatform.instance = InMemorySharedPreferencesStore.empty();
-    });
 
     test("removes custom banner and deletes file if it exists", () async {
       final channel = MockFLauncherChannel();
@@ -181,49 +182,68 @@ void main() {
       expect(testApp1.categoryOrders[1], 1);
     });
 
-    test("sortCategory respects appSortPriority (tv_first, non_tv_first, none)", () async {
+    test("sortCategory sorts alphabetically case-insensitively", () async {
       final channel = MockFLauncherChannel();
       final database = MockFLauncherDatabase();
 
-      final tvAppA = App(packageName: "tv.a", name: "Alpha TV", version: "1.0", hidden: false);
-      final tvAppZ = App(packageName: "tv.z", name: "Zulu TV", version: "1.0", hidden: false);
-      final sideloadedAppB = App(packageName: "sl.b", name: "Bravo SL", version: "1.0", hidden: false)..sideloaded = true;
-      final sideloadedAppY = App(packageName: "sl.y", name: "Yankee SL", version: "1.0", hidden: false)..sideloaded = true;
+      final appB = App(packageName: "b", name: "bravo", version: "1.0", hidden: false);
+      final appA = App(packageName: "a", name: "Alpha", version: "1.0", hidden: false);
+      final appC = App(packageName: "c", name: "charlie", version: "1.0", hidden: false);
 
       final category = Category(id: 1, name: "Test Category", order: 0, sort: CategorySort.alphabetical);
-      category.applications.addAll([sideloadedAppY, tvAppZ, sideloadedAppB, tvAppA]);
+      category.applications.addAll([appB, appC, appA]);
 
       final appsService = await _buildInitialisedAppsService(channel, database);
-
-      // Default is tv_first
-      appsService.setAppSortPriority("tv_first");
       appsService.sortCategory(category);
-      expect(category.applications.map((a) => a.packageName).toList(), [
-        "tv.a",
-        "tv.z",
-        "sl.b",
-        "sl.y",
-      ]);
 
-      // non_tv_first
-      appsService.setAppSortPriority("non_tv_first");
-      appsService.sortCategory(category);
-      expect(category.applications.map((a) => a.packageName).toList(), [
-        "sl.b",
-        "sl.y",
-        "tv.a",
-        "tv.z",
-      ]);
+      expect(category.applications.map((a) => a.packageName).toList(), ["a", "b", "c"]);
+    });
 
-      // none (pure alphabetical)
-      appsService.setAppSortPriority("none");
-      appsService.sortCategory(category);
-      expect(category.applications.map((a) => a.packageName).toList(), [
-        "tv.a",
-        "sl.b",
-        "sl.y",
-        "tv.z",
-      ]);
+    test("default categories places TV Apps section before Non-TV Apps section", () async {
+      final channel = MockFLauncherChannel();
+      final database = MockFLauncherDatabase();
+
+      when(database.insertCategory(any)).thenAnswer((inv) {
+        return Future.value(1);
+      });
+      when(database.insertAppsCategories(any)).thenAnswer((_) => Future.value());
+
+      final appsService = await _buildInitialisedAppsService(channel, database);
+      await appsService.addCategory("TV Apps");
+      await appsService.addCategory("Non-TV Apps");
+
+      expect((appsService.launcherSections[0] as Category).name, "TV Apps");
+      expect((appsService.launcherSections[1] as Category).name, "Non-TV Apps");
+    });
+
+    test("existing install with Non-TV Apps above TV Apps is reordered so TV Apps is on top", () async {
+      final channel = MockFLauncherChannel();
+      final database = MockFLauncherDatabase();
+
+      final nonTvCat = Category(id: 1, name: "Non-TV Apps", order: 0);
+      final tvCat = Category(id: 2, name: "TV Apps", order: 1);
+
+      when(channel.getApplications()).thenAnswer((_) => Future.value([]));
+      when(channel.getApplicationIcon(any)).thenAnswer((_) => Future.value(Uint8List(0)));
+      when(channel.getApplicationBanner(any)).thenAnswer((_) => Future.value(Uint8List(0)));
+      when(database.getApplications()).thenAnswer((_) => Future.value([]));
+      when(database.getAppsCategories()).thenAnswer((_) => Future.value([]));
+      when(database.getCategories()).thenAnswer((_) => Future.value([nonTvCat, tvCat]));
+      when(database.getLauncherSpacers()).thenAnswer((_) => Future.value([]));
+      when(database.transaction(any)).thenAnswer((realInvocation) => realInvocation.positionalArguments[0]());
+      when(database.persistApps(any)).thenAnswer((_) => Future.value());
+      when(database.updateCategories(any)).thenAnswer((_) => Future.value());
+      when(database.updateSpacers(any)).thenAnswer((_) => Future.value());
+      when(database.updateCategory(any, any)).thenAnswer((_) => Future.value(true));
+      when(database.wasCreated).thenReturn(false);
+
+      final appsService = AppsService(channel, database);
+      while (!appsService.initialized) {
+        await Future.delayed(const Duration(milliseconds: 10));
+      }
+
+      expect((appsService.launcherSections[0] as Category).name, "TV Apps");
+      expect((appsService.launcherSections[1] as Category).name, "Non-TV Apps");
     });
   });
 }

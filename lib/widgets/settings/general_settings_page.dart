@@ -24,7 +24,6 @@ import 'back_button_action_page.dart';
 import 'data_usage_period_page.dart';
 import 'backup_restore_page.dart';
 import 'app_language_page.dart';
-import 'app_sort_priority_page.dart';
 
 class GeneralSettingsPage extends StatelessWidget {
   static const String routeName = "general_settings_panel";
@@ -48,11 +47,6 @@ class GeneralSettingsPage extends StatelessWidget {
                   leading: const Icon(Icons.language),
                   title: Text(localizations.appLanguage, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(AppLanguagePage.routeName),
-                ),
-                FocusableSettingsTile(
-                  leading: const Icon(Icons.sort),
-                  title: Text(localizations.appSortPriority, style: Theme.of(context).textTheme.bodyMedium),
-                  onPressed: () => Navigator.of(context).pushNamed(AppSortPriorityPage.routeName),
                 ),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.date_range),

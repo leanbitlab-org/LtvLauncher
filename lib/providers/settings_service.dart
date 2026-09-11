@@ -52,11 +52,6 @@ const String _appLanguageKey = "app_language";
 const String _showWeatherInStatusBarKey = "show_weather_in_status_bar";
 const String _showWeatherWarningsKey = "show_weather_warnings";
 const String _temperatureUnitKey = "temperature_unit";
-const String _appSortPriorityKey = "app_sort_priority";
-
-const String APP_SORT_TV_FIRST = "tv_first";
-const String APP_SORT_NON_TV_FIRST = "non_tv_first";
-const String APP_SORT_NONE = "none";
 
 const String TEMPERATURE_UNIT_CELSIUS = "celsius";
 const String TEMPERATURE_UNIT_FAHRENHEIT = "fahrenheit";
@@ -117,9 +112,6 @@ class SettingsService extends ChangeNotifier {
   late bool _showWeatherInStatusBar;
   late bool _showWeatherWarnings;
   late String _temperatureUnit;
-  late String _appSortPriority;
-
-  String get appSortPriority => _appSortPriority;
 
   bool get appHighlightAnimationEnabled => _appHighlightAnimationEnabled;
 
@@ -217,7 +209,6 @@ class SettingsService extends ChangeNotifier {
     _showWeatherInStatusBar = _sharedPreferences.getBool(_showWeatherInStatusBarKey) ?? false;
     _showWeatherWarnings = _sharedPreferences.getBool(_showWeatherWarningsKey) ?? true;
     _temperatureUnit = _sharedPreferences.getString(_temperatureUnitKey) ?? TEMPERATURE_UNIT_CELSIUS;
-    _appSortPriority = _sharedPreferences.getString(_appSortPriorityKey) ?? APP_SORT_TV_FIRST;
     notifyListeners();
   }
 
@@ -252,7 +243,6 @@ class SettingsService extends ChangeNotifier {
       _showWeatherInStatusBarKey: _showWeatherInStatusBar,
       _showWeatherWarningsKey: _showWeatherWarnings,
       _temperatureUnitKey: _temperatureUnit,
-      _appSortPriorityKey: _appSortPriority,
     };
   }
 
@@ -446,12 +436,6 @@ class SettingsService extends ChangeNotifier {
   Future<void> setTemperatureUnit(String unit) async {
     await _sharedPreferences.setString(_temperatureUnitKey, unit);
     _temperatureUnit = unit;
-    notifyListeners();
-  }
-
-  Future<void> setAppSortPriority(String priority) async {
-    await _sharedPreferences.setString(_appSortPriorityKey, priority);
-    _appSortPriority = priority;
     notifyListeners();
   }
 }
