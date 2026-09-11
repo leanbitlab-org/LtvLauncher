@@ -5,32 +5,39 @@ As an open-source, community-funded project, we operate on a very limited budget
 ## 🚀 What's New in v2026.09.11
 
 ### ✨ Highlights & Enhancements
-- **Watch Next & Continue Watching Recency Sorting**:
-  - Automatically sorts Continue Watching media cards by last watch timestamp, ensuring the most recently watched content always appears first.
-  - Adapted continue-watching card shapes, glow indicators, and borders to harmoniously match the selected launcher theme (Modern, Classic, Premium, Capsule).
-  - Cleaned up home screen ADB permission notices and moved toggle configuration cleanly into Settings.
+- **Watch Next & Continue Watching Upgrades**:
+  - **Reorderable Home Section**: Continue Watching is now a first-class section in Launcher Sections, freely reorderable anywhere alongside categories and spacers.
+  - **Recency Sorting**: Content automatically sorts by latest watch timestamp so your ongoing media is always front and center.
+  - **Granular Display Settings**: Configure card sizes (Compact, Standard, Large), adjust maximum items, and toggle progress bars or descriptions.
+  - **Category Title Synchronization**: Header cleanly syncs with the "Show category titles" preference.
+  - **Contextual Actions & Per-App Blocklist**: Long-press any card to hide individual items, block source apps from recommendations, or jump directly to app settings.
+  - **Theme-Adapted Cards**: Visual shapes, borders, and focus glows seamlessly adapt to Modern, Classic, Premium, and Capsule themes.
+- **Snappy & OLED-Dark Settings Interface**:
+  - **Refined Contrast**: Ultra-dark background (`#0A0A0A`) and card surfaces (`#0F0F0F`) optimized for OLED displays and high contrast.
+  - **Instant Navigation**: Eliminated transition delay and route ghosting for snappy sub-page switches.
+  - **Instant Remote Feedback**: Removed click animations and ink ripples across all settings tiles for immediate D-pad responsiveness.
+  - **Streamlined Layout**: Categorized into modular panels with the section reordering guide positioned cleanly at the bottom.
+  - **Dedicated Support & Donation**: Moved support tile below Accessibility with clean monochrome icon and dedicated QR donate dialog.
 - **Weather & Status Bar Harmonization**:
-  - Added full Celsius / Fahrenheit / Kelvin auto-conversion for Breezy Weather integration to prevent high-temperature Kelvin display issues.
-  - Unified weather typography and icon styling to match the launcher status bar.
+  - Full Celsius, Fahrenheit, and Kelvin auto-conversion for Breezy Weather integration to eliminate temperature display glitches.
+  - Weather icon and typography styled to match the status bar, with option to preserve current conditions during active weather warnings.
   - Made weather display disabled by default for a minimalist initial experience.
-- **Categorized Settings & TV Keypad Blocked Apps Management**:
-  - Reorganized the settings screen into intuitive categories: Appearance, Applications, Status Bar & Weather, System & Integration, and Accessibility.
-  - Redesigned the Blocked Notifications / Blocked Apps settings page with full D-pad keypad controls (Up/Down navigation, Left/Right quick remove, Clear All).
-- **Navigation & Accessibility**:
-  - Added Start on Boot option for devices whose stock launcher owns HOME.
+- **TV-Friendly Navigation & Keypad Controls**:
+  - Redesigned Blocked Notifications / Blocked Apps settings page with full remote D-pad keypad controls (Up/Down navigation, Left/Right quick remove, Clear All).
+  - TV apps automatically default to the top row above non-TV apps out of the box.
+  - Smooth horizontal scrolling for card carousels and preserved status bar focus alignment.
+- **Accessibility & System Integration**:
+  - Added Start on Boot option for devices whose stock launcher intercepts HOME.
   - Enhanced Home Button Fix accessibility remapper for Google TV and Fire TV devices.
-  - Improved D-pad scrolling for off-screen sections (>6 sections) using fallback focus traversal and clamping scroll physics (#108).
+  - Improved D-pad scrolling for off-screen sections (>6 sections) via robust scrollable visibility context.
 - **Expanded Localization**:
   - Added and updated translations for 10+ languages (French, German, Japanese, Portuguese, Russian, Italian, Hindi, Korean, Arabic, Turkish, Chinese, Ukrainian).
 
 ### 🐛 Bug Fixes & Refinements
-- **Status Bar Focus & Alignment**:
-  - Fixed status bar network widget D-pad focus jump by separating WiFi and VPN focus targets.
-  - Aligned settings icon with the left edge of application tiles.
-  - Kept status bar icons stationary during remote focus movements.
-- **App List & Sorting Integrity**:
-  - Kept application icons with their names when the application list changes.
-  - Ensured newly installed applications respect category sort order immediately.
+- **Watch Next**: Resolved background-thread thumbnail loading and Android TV card click launch intents.
+- **Status Bar**: Fixed WiFi/VPN focus jumps, aligned settings icon with app tiles, and kept icons stationary during focus shifts.
+- **App List Integrity**: Preserved icon bindings when apps list updates, and ensured newly installed apps immediately respect category sorting.
+- **Settings & Android TV**: Fixed notification access redirect on Android TV and added missing platform imports in MainActivity.
 
 ## 📦 Downloads (Choose Your Architecture)
 
