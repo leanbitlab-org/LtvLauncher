@@ -43,11 +43,6 @@ class _ContinueWatchingSettingsPageState extends State<ContinueWatchingSettingsP
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        context.read<WatchNextService>().refresh();
-      }
-    });
   }
 
   @override

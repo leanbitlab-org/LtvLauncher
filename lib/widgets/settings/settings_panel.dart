@@ -150,14 +150,12 @@ class _SettingsPanelState extends State<SettingsPanel> {
   }
 }
 
-/// A faster page route with a 150ms slide transition instead of
-/// the default 300ms Material transition.
-class _FastPageRoute<T> extends MaterialPageRoute<T> {
-  _FastPageRoute({required super.builder});
-
-  @override
-  Duration get transitionDuration => const Duration(milliseconds: 150);
-
-  @override
-  Duration get reverseTransitionDuration => const Duration(milliseconds: 120);
+/// A snappy page route with zero transition delay for instant, glitch-free TV navigation.
+class _FastPageRoute<T> extends PageRouteBuilder<T> {
+  _FastPageRoute({required Widget Function(BuildContext) builder})
+      : super(
+          pageBuilder: (context, _, __) => builder(context),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        );
 }

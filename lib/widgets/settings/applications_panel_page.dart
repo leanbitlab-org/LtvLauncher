@@ -494,53 +494,47 @@ class _AppListItemState extends State<_AppListItem>
                     highlightColor: Colors.transparent,
                     borderRadius: BorderRadius.circular(12),
                     onTap: _openAppDetails,
-                  child: FutureBuilder(
-                    future: _iconLoadFuture,
-                    builder: (context, snapshot) {
-                      Widget appIcon;
-                      
-                      if (snapshot.hasData) {
-                        appIcon = Image(image: snapshot.data!, height: 40);
-                      }
-                      else if (snapshot.hasError) {
-                        appIcon = const Icon(Icons.warning);
-                      }
-                      else {
-                        appIcon = const SizedBox(
-                          height: 40,
-                          width: 40,
-                          child: Padding(
-                            padding: EdgeInsets.all(8),
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                        );
-                      }
+                    child: FutureBuilder<ImageProvider>(
+                      future: _iconLoadFuture,
+                      builder: (context, snapshot) {
+                        Widget appIcon;
+                        if (snapshot.hasData) {
+                          appIcon = Image(image: snapshot.data!, height: 40);
+                        } else if (snapshot.hasError) {
+                          appIcon = const Icon(Icons.warning, size: 36);
+                        } else {
+                          appIcon = const Icon(Icons.android, size: 36, color: Colors.white24);
+                        }
 
-                      return ListTile(
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                        title: Text(
-                          widget.application.name,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.white,
-                              fontWeight: focused ? FontWeight.bold : FontWeight.normal
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        leading: appIcon,
-                        trailing: Icon(
-                          Icons.chevron_right, 
-                          size: 20, 
-                          color: focused ? primaryColor : Colors.white30
-                        ),
-                      );
-                    },
+                        return _buildTile(context, appIcon, focused, primaryColor);
+                      },
+                    ),
                   ),
-                )
-              ));
-            }
+                ),
+              );
+            },
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTile(BuildContext context, Widget appIcon, bool focused, Color primaryColor) {
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      title: Text(
+        widget.application.name,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Colors.white,
+            fontWeight: focused ? FontWeight.bold : FontWeight.normal),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      leading: appIcon,
+      trailing: Icon(
+        Icons.chevron_right,
+        size: 20,
+        color: focused ? primaryColor : Colors.white30,
       ),
     );
   }

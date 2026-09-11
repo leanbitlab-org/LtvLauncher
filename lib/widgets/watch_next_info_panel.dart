@@ -150,7 +150,7 @@ class _WatchNextInfoPanelState extends State<WatchNextInfoPanel> {
                       }),
                       child: Row(
                         children: [
-                          const Icon(Icons.visibility_off_outlined, color: Colors.orangeAccent),
+                          const Icon(Icons.visibility_off_outlined),
                           Container(width: 8),
                           Expanded(
                             child: Text(
@@ -173,7 +173,7 @@ class _WatchNextInfoPanelState extends State<WatchNextInfoPanel> {
                       }),
                       child: Row(
                         children: [
-                          const Icon(Icons.block, color: Colors.redAccent),
+                          const Icon(Icons.block),
                           Container(width: 8),
                           Expanded(
                             child: Text(
@@ -194,7 +194,7 @@ class _WatchNextInfoPanelState extends State<WatchNextInfoPanel> {
                     }),
                     child: Row(
                       children: [
-                        const Icon(Icons.play_arrow_rounded, color: Colors.greenAccent),
+                        const Icon(Icons.play_arrow_rounded),
                         Container(width: 8),
                         Text('Play / Resume', style: theme.textTheme.bodyMedium),
                       ],

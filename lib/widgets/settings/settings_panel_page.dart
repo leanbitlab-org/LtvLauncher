@@ -80,6 +80,14 @@ class SettingsPanelPage extends StatelessWidget {
                   title: Text(localizations.accessibility, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(AccessibilityPage.routeName),
                 ),
+                FocusableSettingsTile(
+                  leading: const Icon(Icons.favorite_rounded),
+                  title: Text("Support & Donate", style: Theme.of(context).textTheme.bodyMedium),
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (_) => const DonateDialog(),
+                  ),
+                ),
                 const Divider(),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.settings_outlined),
@@ -97,14 +105,6 @@ class SettingsPanelPage extends StatelessWidget {
                           ? LTvLauncherAboutDialog(packageInfo: snapshot.data!)
                           : Container(),
                     ),
-                  ),
-                ),
-                FocusableSettingsTile(
-                  leading: const Icon(Icons.favorite_rounded, color: Color(0xFFE91E63)),
-                  title: Text("Support & Donate", style: Theme.of(context).textTheme.bodyMedium),
-                  onPressed: () => showDialog(
-                    context: context,
-                    builder: (_) => const DonateDialog(),
                   ),
                 ),
               ],
