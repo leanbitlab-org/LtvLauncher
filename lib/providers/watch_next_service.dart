@@ -110,7 +110,7 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
       _programs = newPrograms;
       if (callSnapshot == _callCount) notifyListeners();
 
-      // Phase 2: Fetch missing posters concurrently with 5s timeout, then notify again
+      // Phase 2: Fetch missing posters concurrently with 12s timeout, then notify again
       final needsPoster = newPrograms.where(
         (p) => p.posterArtUri.isNotEmpty && p.posterBytes == null
       ).toList();
@@ -118,13 +118,16 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
         await Future.wait(
           needsPoster.map((p) async {
             try {
-              p.posterBytes = await _channel.getWatchNextPoster(p.posterArtUri);
+              final bytes = await _channel.getWatchNextPoster(p.posterArtUri);
+              if (bytes != null && bytes.isNotEmpty) {
+                p.posterBytes = bytes;
+              }
             } catch (e) {
               log('Failed to fetch poster for ${p.title}', name: 'WatchNextService', error: e);
             }
           }),
         ).timeout(
-          const Duration(seconds: 5),
+          const Duration(seconds: 12),
           onTimeout: () => [],
         );
         if (callSnapshot == _callCount) notifyListeners();
@@ -160,18 +163,23 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
   }
 
   Future<bool> launch(WatchNextProgram program) async {
+    bool launched = false;
     if (program.intentUri.isNotEmpty) {
-      return await _channel.launchWatchNextProgram(program.intentUri);
-    } else if (program.packageName.isNotEmpty) {
       try {
-        await _channel.launchApp(program.packageName);
-        return true;
+        launched = await _channel.launchWatchNextProgram(program.intentUri);
       } catch (e) {
-        log('Failed to launch app ${program.packageName}', name: 'WatchNextService', error: e);
-        return false;
+        log('Failed to launch watch next program intent', name: 'WatchNextService', error: e);
       }
     }
-    return false;
+    if (!launched && program.packageName.isNotEmpty) {
+      try {
+        await _channel.launchApp(program.packageName);
+        launched = true;
+      } catch (e) {
+        log('Failed to launch app ${program.packageName}', name: 'WatchNextService', error: e);
+      }
+    }
+    return launched;
   }
 
   @override

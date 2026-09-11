@@ -219,5 +219,34 @@ void main() {
       expect(success, isTrue);
       verify(mockChannel.launchApp('com.netflix.mediaclient')).called(1);
     });
+
+    test('fallback launches app packageName when intentUri returns false', () async {
+      watchNextService = WatchNextService(mockChannel);
+      while (!watchNextService.initialized) {
+        await Future.delayed(Duration.zero);
+      }
+
+      final program = WatchNextProgram(
+        id: 1,
+        packageName: 'com.netflix.mediaclient',
+        title: 'Stranger Things',
+        description: 'S1:E1',
+        watchNextType: 1,
+        lastEngagementTime: 1600000000,
+        playbackPosition: 500,
+        duration: 3000,
+        intentUri: 'intent://invalid_intent',
+        posterArtUri: '',
+      );
+
+      when(mockChannel.launchWatchNextProgram(any)).thenAnswer((_) async => false);
+      when(mockChannel.launchApp(any)).thenAnswer((_) async => null);
+
+      final success = await watchNextService.launch(program);
+
+      expect(success, isTrue);
+      verify(mockChannel.launchWatchNextProgram('intent://invalid_intent')).called(1);
+      verify(mockChannel.launchApp('com.netflix.mediaclient')).called(1);
+    });
   });
 }

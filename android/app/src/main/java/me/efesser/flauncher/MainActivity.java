@@ -78,6 +78,7 @@ public class MainActivity extends FlutterActivity {
     private final String NOTIFICATIONS_EVENT_CHANNEL = "me.efesser.flauncher/event_notifications";
     private final String WEATHER_EVENT_CHANNEL = "me.efesser.flauncher/event_weather";
     private MethodChannel.Result pendingPermissionResult;
+    private static final ExecutorService sIoExecutor = Executors.newFixedThreadPool(4);
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
@@ -171,7 +172,10 @@ public class MainActivity extends FlutterActivity {
                 case "getWatchNextPrograms" -> result.success(getWatchNextPrograms());
                 case "getWatchNextPoster" -> {
                     String posterArtUri = call.argument("posterArtUri");
-                    result.success(getWatchNextPoster(posterArtUri));
+                    sIoExecutor.execute(() -> {
+                        byte[] posterBytes = getWatchNextPoster(posterArtUri);
+                        runOnUiThread(() -> result.success(posterBytes));
+                    });
                 }
                 case "launchWatchNextProgram" -> {
                     String intentUri = call.argument("intentUri");
@@ -1216,29 +1220,118 @@ public class MainActivity extends FlutterActivity {
         }
         try {
             if (posterArtUri.startsWith("http://") || posterArtUri.startsWith("https://")) {
-                java.net.URL url = new java.net.URL(posterArtUri);
-                java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
-                conn.setConnectTimeout(6000);
-                conn.setReadTimeout(6000);
-                conn.setDoInput(true);
-                conn.connect();
-                try (java.io.InputStream inputStream = conn.getInputStream()) {
+                String currentUrl = posterArtUri;
+                for (int redirect = 0; redirect < 5; redirect++) {
+                    java.net.URL url = new java.net.URL(currentUrl);
+                    java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    conn.setInstanceFollowRedirects(true);
+                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 10; TV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36");
+                    conn.setDoInput(true);
+                    int responseCode = conn.getResponseCode();
+                    if (responseCode == java.net.HttpURLConnection.HTTP_MOVED_PERM
+                            || responseCode == java.net.HttpURLConnection.HTTP_MOVED_TEMP
+                            || responseCode == java.net.HttpURLConnection.HTTP_SEE_OTHER
+                            || responseCode == 307
+                            || responseCode == 308) {
+                        String location = conn.getHeaderField("Location");
+                        if (location != null && !location.isEmpty()) {
+                            currentUrl = location;
+                            conn.disconnect();
+                            continue;
+                        }
+                    }
+                    if (responseCode >= 200 && responseCode < 300) {
+                        try (java.io.InputStream inputStream = conn.getInputStream()) {
+                            if (inputStream != null) {
+                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                byte[] buffer = new byte[8192];
+                                int bytesRead;
+                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                    outputStream.write(buffer, 0, bytesRead);
+                                }
+                                return outputStream.toByteArray();
+                            }
+                        }
+                    }
+                    conn.disconnect();
+                    break;
+                }
+            } else if (posterArtUri.startsWith("file://")) {
+                Uri fileUri = Uri.parse(posterArtUri);
+                java.io.File file = new java.io.File(fileUri.getPath());
+                if (file.exists() && file.canRead()) {
+                    try (java.io.FileInputStream fis = new java.io.FileInputStream(file)) {
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[8192];
+                        int bytesRead;
+                        while ((bytesRead = fis.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, bytesRead);
+                        }
+                        return outputStream.toByteArray();
+                    }
+                }
+            } else if (posterArtUri.startsWith("/")) {
+                java.io.File file = new java.io.File(posterArtUri);
+                if (file.exists() && file.canRead()) {
+                    try (java.io.FileInputStream fis = new java.io.FileInputStream(file)) {
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[8192];
+                        int bytesRead;
+                        while ((bytesRead = fis.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, bytesRead);
+                        }
+                        return outputStream.toByteArray();
+                    }
+                }
+            } else if (posterArtUri.startsWith("android.resource://")) {
+                Uri uri = Uri.parse(posterArtUri);
+                try (java.io.InputStream inputStream = getContentResolver().openInputStream(uri)) {
                     if (inputStream != null) {
                         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                        byte[] buffer = new byte[4096];
+                        byte[] buffer = new byte[8192];
                         int bytesRead;
                         while ((bytesRead = inputStream.read(buffer)) != -1) {
                             outputStream.write(buffer, 0, bytesRead);
                         }
                         return outputStream.toByteArray();
                     }
-                }
+                } catch (Exception ignored) {}
+                try {
+                    String authority = uri.getAuthority();
+                    if (authority != null && !authority.isEmpty()) {
+                        android.content.res.Resources res = getPackageManager().getResourcesForApplication(authority);
+                        List<String> pathSegments = uri.getPathSegments();
+                        int resId = 0;
+                        if (pathSegments.size() == 1) {
+                            try {
+                                resId = Integer.parseInt(pathSegments.get(0));
+                            } catch (NumberFormatException ignored) {}
+                        } else if (pathSegments.size() >= 2) {
+                            String type = pathSegments.get(0);
+                            String name = pathSegments.get(1);
+                            resId = res.getIdentifier(name, type, authority);
+                        }
+                        if (resId != 0) {
+                            try (java.io.InputStream is = res.openRawResource(resId)) {
+                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                byte[] buffer = new byte[8192];
+                                int bytesRead;
+                                while ((bytesRead = is.read(buffer)) != -1) {
+                                    outputStream.write(buffer, 0, bytesRead);
+                                }
+                                return outputStream.toByteArray();
+                            }
+                        }
+                    }
+                } catch (Exception ignored) {}
             } else {
                 Uri uri = Uri.parse(posterArtUri);
                 try (java.io.InputStream inputStream = getContentResolver().openInputStream(uri)) {
                     if (inputStream != null) {
                         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                        byte[] buffer = new byte[4096];
+                        byte[] buffer = new byte[8192];
                         int bytesRead;
                         while ((bytesRead = inputStream.read(buffer)) != -1) {
                             outputStream.write(buffer, 0, bytesRead);
@@ -1257,21 +1350,14 @@ public class MainActivity extends FlutterActivity {
         if (intentUri == null || intentUri.isEmpty()) {
             return false;
         }
-        // Security: only allow safe URI schemes
-        String lower = intentUri.toLowerCase();
-        if (!lower.startsWith("intent://") && !lower.startsWith("https://") &&
-            !lower.startsWith("http://") && !lower.startsWith("content://")) {
-            return false;
-        }
         try {
             Intent intent = Intent.parseUri(intentUri, Intent.URI_INTENT_SCHEME);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            return true;
+            return tryStartActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
     private boolean isAccessibilityServiceEnabled() {
