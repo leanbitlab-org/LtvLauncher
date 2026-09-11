@@ -225,5 +225,13 @@
     "noBlockedAppsDesc": "All applications are currently allowed to show notifications",
     "notificationsAllowed": "Notifications Allowed",
     "notificationsBlocked": "Notifications Blocked",
-    "dpadDismissHint": "Left: Dismiss • OK: Options"
+    "dpadDismissHint": "Left: Dismiss • OK: Options",
+    "appSortPriority": "App Sort Priority",
+    "appSortPriorityDesc": "Choose which types of applications are sorted first in categories",
+    "tvAppsFirst": "TV Apps First",
+    "tvAppsFirstDesc": "TV-optimized applications appear first in sorted categories",
+    "nonTvAppsFirst": "Non-TV Apps First",
+    "nonTvAppsFirstDesc": "Sideloaded and non-TV applications appear first in sorted categories",
+    "noSortPriority": "None (All Mixed)",
+    "noSortPriorityDesc": "Sort all applications purely by name or last used"
 }

@@ -180,6 +180,51 @@ void main() {
       expect(testApp2.categoryOrders[1], 0);
       expect(testApp1.categoryOrders[1], 1);
     });
+
+    test("sortCategory respects appSortPriority (tv_first, non_tv_first, none)", () async {
+      final channel = MockFLauncherChannel();
+      final database = MockFLauncherDatabase();
+
+      final tvAppA = App(packageName: "tv.a", name: "Alpha TV", version: "1.0", hidden: false);
+      final tvAppZ = App(packageName: "tv.z", name: "Zulu TV", version: "1.0", hidden: false);
+      final sideloadedAppB = App(packageName: "sl.b", name: "Bravo SL", version: "1.0", hidden: false)..sideloaded = true;
+      final sideloadedAppY = App(packageName: "sl.y", name: "Yankee SL", version: "1.0", hidden: false)..sideloaded = true;
+
+      final category = Category(id: 1, name: "Test Category", order: 0, sort: CategorySort.alphabetical);
+      category.applications.addAll([sideloadedAppY, tvAppZ, sideloadedAppB, tvAppA]);
+
+      final appsService = await _buildInitialisedAppsService(channel, database);
+
+      // Default is tv_first
+      appsService.setAppSortPriority("tv_first");
+      appsService.sortCategory(category);
+      expect(category.applications.map((a) => a.packageName).toList(), [
+        "tv.a",
+        "tv.z",
+        "sl.b",
+        "sl.y",
+      ]);
+
+      // non_tv_first
+      appsService.setAppSortPriority("non_tv_first");
+      appsService.sortCategory(category);
+      expect(category.applications.map((a) => a.packageName).toList(), [
+        "sl.b",
+        "sl.y",
+        "tv.a",
+        "tv.z",
+      ]);
+
+      // none (pure alphabetical)
+      appsService.setAppSortPriority("none");
+      appsService.sortCategory(category);
+      expect(category.applications.map((a) => a.packageName).toList(), [
+        "tv.a",
+        "sl.b",
+        "sl.y",
+        "tv.z",
+      ]);
+    });
   });
 }
 

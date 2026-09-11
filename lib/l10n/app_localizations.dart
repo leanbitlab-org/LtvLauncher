@@ -1102,6 +1102,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Left: Dismiss • OK: Options'**
   String get dpadDismissHint;
+
+  /// No description provided for @appSortPriority.
+  ///
+  /// In en, this message translates to:
+  /// **'App Sort Priority'**
+  String get appSortPriority;
+
+  /// No description provided for @appSortPriorityDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose which types of applications are sorted first in categories'**
+  String get appSortPriorityDesc;
+
+  /// No description provided for @tvAppsFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'TV Apps First'**
+  String get tvAppsFirst;
+
+  /// No description provided for @tvAppsFirstDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'TV-optimized applications appear first in sorted categories'**
+  String get tvAppsFirstDesc;
+
+  /// No description provided for @nonTvAppsFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Non-TV Apps First'**
+  String get nonTvAppsFirst;
+
+  /// No description provided for @nonTvAppsFirstDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Sideloaded and non-TV applications appear first in sorted categories'**
+  String get nonTvAppsFirstDesc;
+
+  /// No description provided for @noSortPriority.
+  ///
+  /// In en, this message translates to:
+  /// **'None (All Mixed)'**
+  String get noSortPriority;
+
+  /// No description provided for @noSortPriorityDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort all applications purely by name or last used'**
+  String get noSortPriorityDesc;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

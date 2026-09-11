@@ -61,6 +61,22 @@ class AppsService extends ChangeNotifier {
 
   bool get initialized => _initialized;
 
+  String _appSortPriority = "tv_first";
+  String get appSortPriority => _appSortPriority;
+
+  void setAppSortPriority(String priority) {
+    if (_appSortPriority != priority) {
+      _appSortPriority = priority;
+      _prefs?.setString("app_sort_priority", priority);
+      for (final category in _categoriesById.values) {
+        if (category.sort != CategorySort.manual) {
+          sortCategory(category);
+        }
+      }
+      notifyListeners();
+    }
+  }
+
   String? _pendingReorderFocusPackage;
   int? _pendingReorderFocusCategoryId;
   int? _pendingReorderFocusIndex;
@@ -93,6 +109,8 @@ class AppsService extends ChangeNotifier {
   }
 
   Future<void> _init() async {
+    final prefs = await _prefsAsync;
+    _appSortPriority = prefs.getString("app_sort_priority") ?? "tv_first";
     await _refreshState(shouldNotifyListeners: false);
     if (_database.wasCreated) {
       await _initDefaultCategories();
@@ -377,28 +395,35 @@ class AppsService extends ChangeNotifier {
   }
 
   void sortCategory(Category category) {
+    int Function(App, App) comparator;
     if (category.sort == CategorySort.alphabetical) {
-      category.applications.sort((a, b) {
-        if (a.sideloaded != b.sideloaded) {
-          return a.sideloaded ? 1 : -1;
-        }
-        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
-      });
+      comparator = (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase());
     } else if (category.sort == CategorySort.lastUsed) {
-      category.applications.sort((a, b) {
-        if (a.sideloaded != b.sideloaded) {
-          return a.sideloaded ? 1 : -1;
-        }
+      comparator = (a, b) {
         final aTime =
             a.lastLaunchedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
         final bTime =
             b.lastLaunchedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
         return bTime.compareTo(aTime); // Descending (newest first)
-      });
+      };
     } else {
       category.applications.sortBy<num>(
           (application) => application.categoryOrders[category.id]!);
+      return;
     }
+
+    category.applications.sort((a, b) {
+      if (_appSortPriority == "tv_first") {
+        if (a.sideloaded != b.sideloaded) {
+          return a.sideloaded ? 1 : -1;
+        }
+      } else if (_appSortPriority == "non_tv_first") {
+        if (a.sideloaded != b.sideloaded) {
+          return a.sideloaded ? -1 : 1;
+        }
+      }
+      return comparator(a, b);
+    });
   }
 
   /// Finds the appropriate category for a newly installed app.

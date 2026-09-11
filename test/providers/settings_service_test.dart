@@ -237,4 +237,38 @@ void main() async {
       expect(service.useFahrenheit, isTrue);
     });
   });
+
+  group("appSortPriority", () {
+    test("default is tv_first", () async {
+      final sp = await SharedPreferences.getInstance();
+      final service = SettingsService(sp);
+      expect(service.appSortPriority, APP_SORT_TV_FIRST);
+    });
+
+    test("sets value and notifies listeners", () async {
+      final sp = await SharedPreferences.getInstance();
+      final service = SettingsService(sp);
+      bool notified = false;
+      service.addListener(() => notified = true);
+
+      await service.setAppSortPriority(APP_SORT_NON_TV_FIRST);
+      expect(service.appSortPriority, APP_SORT_NON_TV_FIRST);
+      expect(notified, isTrue);
+
+      await service.setAppSortPriority(APP_SORT_NONE);
+      expect(service.appSortPriority, APP_SORT_NONE);
+    });
+
+    test("exports and imports appSortPriority correctly", () async {
+      final sp1 = await SharedPreferences.getInstance();
+      final service1 = SettingsService(sp1);
+      await service1.setAppSortPriority(APP_SORT_NON_TV_FIRST);
+      final exported = service1.exportSettingsMap();
+      expect(exported['app_sort_priority'], APP_SORT_NON_TV_FIRST);
+
+      final service2 = SettingsService(sp1);
+      await service2.importSettingsMap(exported);
+      expect(service2.appSortPriority, APP_SORT_NON_TV_FIRST);
+    });
+  });
 }
