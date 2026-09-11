@@ -30,6 +30,11 @@ abstract class AppCardKeys {
     LogicalKeyboardKey.accept,
   ];
 
+  static const List<LogicalKeyboardKey> menuKeys = [
+    LogicalKeyboardKey.contextMenu,
+    LogicalKeyboardKey.info,
+  ];
+
   static const List<LogicalKeyboardKey> longPressableKeys = [
     LogicalKeyboardKey.select,
     LogicalKeyboardKey.enter,
@@ -37,6 +42,8 @@ abstract class AppCardKeys {
     LogicalKeyboardKey.gameButtonA,
     LogicalKeyboardKey.gameButtonSelect,
     LogicalKeyboardKey.space,
+    LogicalKeyboardKey.contextMenu,
+    LogicalKeyboardKey.info,
   ];
 
   static const List<LogicalKeyboardKey> cancelKeys = [

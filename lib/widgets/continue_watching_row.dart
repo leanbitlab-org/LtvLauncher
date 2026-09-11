@@ -46,19 +46,25 @@ class ContinueWatchingRow extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        double rowHeight;
-        switch (settingsService.continueWatchingCardSize) {
-          case 'compact':
-            rowHeight = 145;
-            break;
-          case 'large':
-            rowHeight = 195;
-            break;
-          case 'normal':
-          default:
-            rowHeight = 170;
-            break;
+        double cardHeight;
+        final int? customHeight = int.tryParse(settingsService.continueWatchingCardSize);
+        if (customHeight != null) {
+          cardHeight = customHeight.toDouble();
+        } else {
+          switch (settingsService.continueWatchingCardSize) {
+            case 'compact':
+              cardHeight = 112.0;
+              break;
+            case 'large':
+              cardHeight = 157.0;
+              break;
+            case 'normal':
+            default:
+              cardHeight = 135.0;
+              break;
+          }
         }
+        final double rowHeight = cardHeight + 36.0;
 
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
@@ -239,20 +245,26 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
     final Color accentColor = Color(int.parse('FF$accentColorHex', radix: 16));
     double cardWidth;
     double cardHeight;
-    switch (cardSize) {
-      case 'compact':
-        cardWidth = 200.0;
-        cardHeight = 112.0;
-        break;
-      case 'large':
-        cardWidth = 280.0;
-        cardHeight = 157.0;
-        break;
-      case 'normal':
-      default:
-        cardWidth = 240.0;
-        cardHeight = 135.0;
-        break;
+    final int? customHeight = int.tryParse(cardSize);
+    if (customHeight != null) {
+      cardHeight = customHeight.toDouble();
+      cardWidth = (cardHeight * 16 / 9).roundToDouble();
+    } else {
+      switch (cardSize) {
+        case 'compact':
+          cardWidth = 200.0;
+          cardHeight = 112.0;
+          break;
+        case 'large':
+          cardWidth = 280.0;
+          cardHeight = 157.0;
+          break;
+        case 'normal':
+        default:
+          cardWidth = 240.0;
+          cardHeight = 135.0;
+          break;
+      }
     }
 
     BorderRadius borderRadius;
@@ -392,19 +404,33 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
         return KeyEventResult.ignored;
       },
       onLongPress: (key) {
-        if (AppCardKeys.longPressableKeys.contains(key)) {
+        if (AppCardKeys.longPressableKeys.contains(key) || AppCardKeys.menuKeys.contains(key)) {
           _onLongPress();
           return KeyEventResult.handled;
         }
         return KeyEventResult.ignored;
       },
       builder: (context) {
-        return Focus(
-          focusNode: _focusNode,
-          child: GestureDetector(
-            onTap: _onPressed,
-            onLongPress: _onLongPress,
-            child: AnimatedScale(
+        return Actions(
+          actions: <Type, Action<Intent>>{
+            ActivateIntent: CallbackAction<ActivateIntent>(
+              onInvoke: (_) => _onPressed(),
+            ),
+            ButtonActivateIntent: CallbackAction<ButtonActivateIntent>(
+              onInvoke: (_) => _onPressed(),
+            ),
+          },
+          child: Focus(
+            focusNode: _focusNode,
+            child: InkWell(
+              canRequestFocus: false,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: _onPressed,
+              onLongPress: _onLongPress,
+              child: AnimatedScale(
               scale: _clicked ? 0.9 : 1.0,
               duration: const Duration(milliseconds: 150),
               curve: Curves.easeOutCubic,
@@ -544,8 +570,9 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
               ),
             ),
           ),
-        );
-      },
+        ),
+      );
+    },
     );
   }
 
