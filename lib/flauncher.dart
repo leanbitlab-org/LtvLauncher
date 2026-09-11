@@ -80,21 +80,25 @@ class _FLauncherState extends State<FLauncher> {
                       return Selector<WatchNextService, bool>(
                         selector: (_, watchNext) => watchNext.programs.isNotEmpty,
                         builder: (context, hasContinuingPrograms, _) =>
-                            Selector<SettingsService, bool>(
-                              selector: (_, settings) => settings.showContinueWatching,
-                              builder: (context, showContinueWatching, _) =>
+                            Selector<SettingsService, ({bool show, int order})>(
+                              selector: (_, settings) => (
+                                show: settings.showContinueWatching,
+                                order: settings.continueWatchingOrder,
+                              ),
+                              builder: (context, cwSettings, _) =>
                                   SingleChildScrollView(
                                     physics: const ClampingScrollPhysics(),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const ContinueWatchingRow(),
                                         _sections(
                                             appsService.launcherSections,
                                             continueWatchingActive:
-                                                showContinueWatching &&
-                                                hasContinuingPrograms),
+                                                cwSettings.show &&
+                                                hasContinuingPrograms,
+                                            continueWatchingOrder:
+                                                cwSettings.order),
                                       ],
                                     ),
                                   ),
@@ -114,15 +118,29 @@ class _FLauncherState extends State<FLauncher> {
     ),
   );
 
-  Widget _sections(List<LauncherSection> sections, {bool continueWatchingActive = false}) {
+  Widget _sections(
+    List<LauncherSection> sections, {
+    bool continueWatchingActive = false,
+    int continueWatchingOrder = 0,
+  }) {
     List<Widget> children = [];
-    bool firstCategoryFound = continueWatchingActive;
+    bool firstCategoryFound = false;
+    bool cwInserted = false;
+    const cwWidget = ContinueWatchingRow();
 
+    int sectionIdx = 0;
     for (var section in sections) {
+      if (continueWatchingActive && !cwInserted && sectionIdx == continueWatchingOrder) {
+        children.add(cwWidget);
+        cwInserted = true;
+        firstCategoryFound = true;
+      }
+
       final Key sectionKey = Key(section.id.toString());
 
       if (section is LauncherSpacer) {
         children.add(SizedBox(key: sectionKey, height: section.height.toDouble()));
+        sectionIdx++;
         continue;
       }
 
@@ -141,7 +159,7 @@ class _FLauncherState extends State<FLauncher> {
               applications: category.applications,
               isFirstSection: isFirstSection
           );
-          break; // Added break
+          break;
         case CategoryType.grid:
           categoryWidget = AppsGrid(
               key: sectionKey,
@@ -149,13 +167,19 @@ class _FLauncherState extends State<FLauncher> {
               applications: category.applications,
               isFirstSection: isFirstSection
           );
-          break; // Added break
+          break;
       }
 
       children.add(Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: categoryWidget
       ));
+      sectionIdx++;
+    }
+
+    if (continueWatchingActive && !cwInserted) {
+      children.add(cwWidget);
+      cwInserted = true;
     }
 
     return Column(children: children);

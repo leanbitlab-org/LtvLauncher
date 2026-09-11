@@ -115,3 +115,12 @@ class LauncherSpacer extends LauncherSection
     this.height = 0
   }): super(id: id, order: order);
 }
+
+class ContinueWatchingSection extends LauncherSection
+{
+  static const int sectionId = -999;
+
+  ContinueWatchingSection({
+    int order = 0,
+  }): super(id: sectionId, order: order);
+}

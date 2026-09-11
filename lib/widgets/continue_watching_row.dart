@@ -71,33 +71,34 @@ class ContinueWatchingRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16, bottom: 8),
-                child: Row(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.continueWatching,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        shadows: [
-                          const Shadow(
-                            color: Colors.black54,
-                            offset: Offset(1, 1),
-                            blurRadius: 8,
-                          )
-                        ],
+              if (settingsService.showCategoryTitles)
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, bottom: 8),
+                  child: Row(
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.continueWatching,
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          shadows: [
+                            const Shadow(
+                              color: Colors.black54,
+                              offset: Offset(1, 1),
+                              blurRadius: 8,
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      '•  ${programs.length}',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white54,
-                        fontWeight: FontWeight.bold,
+                      const SizedBox(width: 8),
+                      Text(
+                        '•  ${programs.length}',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.white54,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
               SizedBox(
                 height: rowHeight,
                 child: ListView.builder(

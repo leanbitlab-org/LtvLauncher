@@ -92,10 +92,14 @@ class FLauncherApp extends StatelessWidget
           canvasColor: const Color(0xFF0A0A0A), // Dark background
           dialogBackgroundColor: const Color(0xFF0F0F0F),
           scaffoldBackgroundColor: const Color(0xFF0A0A0A), // Dark background
+          splashFactory: NoSplash.splashFactory,
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
           textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white, // Revert to white for settings list
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                splashFactory: NoSplash.splashFactory,
               )
           ),
           dialogTheme: DialogTheme(

@@ -17,6 +17,8 @@
  */
 
 import 'package:flauncher/providers/apps_service.dart';
+import 'package:flauncher/providers/settings_service.dart';
+import 'package:flauncher/widgets/settings/continue_watching_settings_page.dart';
 import 'package:flauncher/widgets/settings/focusable_settings_tile.dart';
 import 'package:flauncher/widgets/settings/launcher_section_panel_page.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +40,7 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
   late AppsService _appsService;
   final Map<Object, FocusNode> _focusNodes = {};
   DateTime? _lastMoveTime;
+  final ContinueWatchingSection _continueWatchingSection = ContinueWatchingSection();
 
   @override
   void didChangeDependencies() {
@@ -59,51 +62,37 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
     super.dispose();
   }
 
+  List<LauncherSection> _getDisplaySections(List<LauncherSection> appSections, SettingsService? settingsService) {
+    final list = List<LauncherSection>.from(appSections);
+    if (settingsService != null) {
+      final cwOrder = settingsService.continueWatchingOrder.clamp(0, list.length);
+      _continueWatchingSection.order = cwOrder;
+      list.insert(cwOrder, _continueWatchingSection);
+    }
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
+    final settingsService = Provider.of<SettingsService?>(context);
+
     return Column(
       children: [
         Text(localizations.launcherSections, style: Theme.of(context).textTheme.titleLarge),
         const Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.06),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.white12),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.swap_vert, size: 16, color: Colors.white70),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'Select with ◄ / ► then use ▲ / ▼ to reorder',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white70,
-                      fontSize: 11,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
         Consumer<AppsService>(
           builder: (_, service, __) {
-            List<LauncherSection> sections = service.launcherSections;
+            final displaySections = _getDisplaySections(service.launcherSections, settingsService);
 
             return Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.only(bottom: 80),
                 cacheExtent: 1000,
-                itemCount: sections.length,
+                itemCount: displaySections.length,
                 itemBuilder: (context, index) {
-                  final section = sections[index];
-                  return _section(context, section, index, sections.length);
+                  final section = displaySections[index];
+                  return _section(context, section, index, displaySections.length, displaySections, settingsService);
                 },
               ),
             );
@@ -117,17 +106,50 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
             Navigator.pushNamed(context, LauncherSectionPanelPage.routeName);
           },
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.info_outline, size: 20, color: Colors.white70),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    'Select with ◄ / ► then use ▲ / ▼ to reorder',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.white70,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
 
-  Widget _section(BuildContext context, LauncherSection section, int index, int totalCount) {
+  Widget _section(
+    BuildContext context,
+    LauncherSection section,
+    int index,
+    int totalCount,
+    List<LauncherSection> displaySections,
+    SettingsService? settingsService,
+  ) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
     String title = localizations.spacer;
-    if (section is Category) {
+    if (section is ContinueWatchingSection) {
+      title = localizations.continueWatching;
+    } else if (section is Category) {
       title = section.name;
 
       if (title == localizations.spacer) {
@@ -144,9 +166,9 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
       child: Focus(
         focusNode: focusNode,
         onFocusChange: (focused) {
-          if (focused) {
+          if (focused && focusNode.context != null) {
             Scrollable.ensureVisible(
-              context,
+              focusNode.context!,
               alignment: 0.5,
               duration: const Duration(milliseconds: 100),
             );
@@ -157,10 +179,10 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
 
           if (isMoving) {
             if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
-              _moveSection(section, -1);
+              _moveSection(section, -1, displaySections, settingsService);
               return KeyEventResult.handled;
             } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
-              _moveSection(section, 1);
+              _moveSection(section, 1, displaySections, settingsService);
               return KeyEventResult.handled;
             } else if (event.logicalKey == LogicalKeyboardKey.select ||
                 event.logicalKey == LogicalKeyboardKey.enter ||
@@ -182,8 +204,12 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
             } else if (event.logicalKey == LogicalKeyboardKey.select ||
                 event.logicalKey == LogicalKeyboardKey.enter ||
                 event.logicalKey == LogicalKeyboardKey.gameButtonA) {
-              final idx = _appsService.launcherSections.indexOf(section);
-              Navigator.pushNamed(context, LauncherSectionPanelPage.routeName, arguments: idx);
+              if (section is ContinueWatchingSection) {
+                Navigator.pushNamed(context, ContinueWatchingSettingsPage.routeName);
+              } else {
+                final idx = _appsService.launcherSections.indexOf(section);
+                Navigator.pushNamed(context, LauncherSectionPanelPage.routeName, arguments: idx);
+              }
               return KeyEventResult.handled;
             }
           }
@@ -207,22 +233,25 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
 
             return GestureDetector(
               onTap: () {
-                   if (isMoving) {
-                      _endMove();
-                   } else {
-                      final idx = _appsService.launcherSections.indexOf(section);
-                      Navigator.pushNamed(context, LauncherSectionPanelPage.routeName, arguments: idx);
-                   }
+                if (isMoving) {
+                  _endMove();
+                } else {
+                  if (section is ContinueWatchingSection) {
+                    Navigator.pushNamed(context, ContinueWatchingSettingsPage.routeName);
+                  } else {
+                    final idx = _appsService.launcherSections.indexOf(section);
+                    Navigator.pushNamed(context, LauncherSectionPanelPage.routeName, arguments: idx);
+                  }
+                }
               },
               onLongPress: () {
-                   if (!isMoving) {
-                      setState(() {
-                        _movingSection = section;
-                      });
-                   }
+                if (!isMoving) {
+                  setState(() {
+                    _movingSection = section;
+                  });
+                }
               },
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 50),
+              child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
                   color: backgroundColor,
@@ -254,11 +283,11 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
                     
                     // Move Indicators
                     if (isMoving) ...[
-                       Icon(Icons.keyboard_arrow_up, color: textColor),
-                       const SizedBox(width: 4),
-                       Icon(Icons.keyboard_arrow_down, color: textColor),
+                      Icon(Icons.keyboard_arrow_up, color: textColor),
+                      const SizedBox(width: 4),
+                      Icon(Icons.keyboard_arrow_down, color: textColor),
                     ] else ...[
-                       const Icon(Icons.chevron_right, color: Colors.white24),
+                      const Icon(Icons.chevron_right, color: Colors.white24),
                     ],
                   ],
                 ),
@@ -270,20 +299,37 @@ class _LauncherSectionsPanelPageState extends State<LauncherSectionsPanelPage> {
     );
   }
 
-  void _moveSection(LauncherSection movingSection, int direction) {
+  void _moveSection(
+    LauncherSection movingSection,
+    int direction,
+    List<LauncherSection> displaySections,
+    SettingsService? settingsService,
+  ) {
     final now = DateTime.now();
     if (_lastMoveTime != null && now.difference(_lastMoveTime!) < const Duration(milliseconds: 60)) {
       return;
     }
     _lastMoveTime = now;
 
-    final sections = _appsService.launcherSections;
-    final currentIndex = sections.indexOf(movingSection);
+    final currentIndex = displaySections.indexOf(movingSection);
     if (currentIndex == -1) return;
     final newIndex = currentIndex + direction;
-    if (newIndex < 0 || newIndex >= sections.length) return;
+    if (newIndex < 0 || newIndex >= displaySections.length) return;
 
-    _appsService.moveSectionInMemory(currentIndex, newIndex);
+    final otherSection = displaySections[newIndex];
+    if (movingSection is ContinueWatchingSection) {
+      settingsService?.setContinueWatchingOrder(newIndex);
+    } else if (otherSection is ContinueWatchingSection) {
+      settingsService?.setContinueWatchingOrder(currentIndex);
+    } else {
+      final appSections = _appsService.launcherSections;
+      final oldAppIndex = appSections.indexOf(movingSection);
+      final newAppIndex = appSections.indexOf(otherSection);
+      if (oldAppIndex != -1 && newAppIndex != -1) {
+        _appsService.moveSectionInMemory(oldAppIndex, newAppIndex);
+      }
+    }
+
     setState(() {
       _movingSection = movingSection;
     });

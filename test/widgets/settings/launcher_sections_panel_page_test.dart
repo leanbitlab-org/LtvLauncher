@@ -18,6 +18,9 @@
 
 import 'package:flauncher/models/category.dart';
 import 'package:flauncher/providers/apps_service.dart';
+import 'package:flauncher/providers/settings_service.dart';
+import 'package:flauncher/widgets/settings/continue_watching_settings_page.dart';
+import 'package:flauncher/widgets/settings/focusable_settings_tile.dart';
 import 'package:flauncher/widgets/settings/launcher_sections_panel_page.dart';
 import 'package:flauncher/widgets/settings/launcher_section_panel_page.dart';
 import 'package:flutter/material.dart';
@@ -123,13 +126,75 @@ void main() {
     // Section 9 should now be visible and in the tree
     expect(find.text("Section 9"), findsOneWidget);
   });
+
+  testWidgets("Continue watching section is displayed when SettingsService is provided", (tester) async {
+    final appsService = MockAppsService();
+    when(appsService.launcherSections).thenReturn([
+      fakeCategory(name: "Favorites"),
+      fakeCategory(name: "Applications"),
+    ]);
+    final settingsService = MockSettingsService();
+    when(settingsService.continueWatchingOrder).thenReturn(0);
+
+    await _pumpWidgetWithProviders(tester, appsService, settingsService: settingsService);
+
+    expect(find.text("Continue Watching"), findsOneWidget);
+    expect(find.text("Favorites"), findsOneWidget);
+    expect(find.text("Applications"), findsOneWidget);
+  });
+
+  testWidgets("Tapping 'Continue Watching' opens ContinueWatchingSettingsPage", (tester) async {
+    final appsService = MockAppsService();
+    when(appsService.launcherSections).thenReturn([
+      fakeCategory(name: "Favorites"),
+      fakeCategory(name: "Applications"),
+    ]);
+    final settingsService = MockSettingsService();
+    when(settingsService.continueWatchingOrder).thenReturn(0);
+
+    await _pumpWidgetWithProviders(tester, appsService, settingsService: settingsService);
+
+    await tester.tap(find.text("Continue Watching"));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(Key("ContinueWatchingSettingsPage")), findsOneWidget);
+  });
+
+  testWidgets("'Arrow down' on Continue Watching changes continue watching order", (tester) async {
+    final appsService = MockAppsService();
+    when(appsService.launcherSections).thenReturn([
+      fakeCategory(name: "Favorites"),
+      fakeCategory(name: "Applications"),
+    ]);
+    final settingsService = MockSettingsService();
+    when(settingsService.continueWatchingOrder).thenReturn(0);
+
+    await _pumpWidgetWithProviders(tester, appsService, settingsService: settingsService);
+
+    Focus.of(tester.element(find.text("Continue Watching"))).requestFocus();
+    await tester.pumpAndSettle();
+
+    // Enter move state and move down
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pumpAndSettle();
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    await tester.pumpAndSettle();
+
+    verify(settingsService.setContinueWatchingOrder(1));
+  });
 }
 
-Future<void> _pumpWidgetWithProviders(WidgetTester tester, AppsService appsService) async {
+Future<void> _pumpWidgetWithProviders(
+  WidgetTester tester,
+  AppsService appsService, {
+  SettingsService? settingsService,
+}) async {
   await tester.pumpWidget(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AppsService>.value(value: appsService),
+        if (settingsService != null)
+          ChangeNotifierProvider<SettingsService>.value(value: settingsService),
       ],
       builder: (_, __) => MaterialApp(
         localizationsDelegates: const [
@@ -140,6 +205,7 @@ Future<void> _pumpWidgetWithProviders(WidgetTester tester, AppsService appsServi
         supportedLocales: AppLocalizations.supportedLocales,
         routes: {
           LauncherSectionPanelPage.routeName: (_) => Container(key: Key("LauncherSectionPanelPage")),
+          ContinueWatchingSettingsPage.routeName: (_) => Container(key: Key("ContinueWatchingSettingsPage")),
         },
         home: Scaffold(body: LauncherSectionsPanelPage()),
       ),

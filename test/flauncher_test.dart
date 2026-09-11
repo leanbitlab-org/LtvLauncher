@@ -604,6 +604,7 @@ SettingsService mkSettingsService() {
   when(settingsService.hideHighlightOutlineOnHomescreen).thenReturn(false);
   when(settingsService.appSelectorTransitionAnimationEnabled).thenReturn(true);
   when(settingsService.showContinueWatching).thenReturn(false);
+  when(settingsService.continueWatchingOrder).thenReturn(0);
   when(settingsService.showNotificationsWidgetInStatusBar).thenReturn(true);
   when(settingsService.autoHideNotificationsWidget).thenReturn(false);
   when(settingsService.showWeatherInStatusBar).thenReturn(false);

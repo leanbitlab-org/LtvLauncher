@@ -44,13 +44,9 @@ class _FocusableSettingsTileState extends State<FocusableSettingsTile> {
               );
             }
           },
-          child: InkWell(
+          child: GestureDetector(
             onTap: widget.onPressed,
-            borderRadius: BorderRadius.circular(12),
-            focusColor: Colors.transparent,
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            hoverColor: Colors.transparent,
+            behavior: HitTestBehavior.opaque,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
