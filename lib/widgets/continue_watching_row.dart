@@ -152,6 +152,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
   bool _focused = false;
   bool _clicked = false;
   Uint8List? _appIconBytes;
+  String? _appName;
   late final AnimationController _animation = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 1200),
@@ -162,23 +163,45 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
     super.initState();
     _focusNode = FocusNode();
     _focusNode.addListener(_onFocusChange);
-    _loadAppIcon();
+    _loadAppDetails();
   }
 
-  Future<void> _loadAppIcon() async {
+  Future<void> _loadAppDetails() async {
     try {
+      final app = widget.appsService.getApp(widget.program.packageName);
+      if (app != null && app.name.isNotEmpty) {
+        _appName = app.name;
+      }
       final bytes = await widget.appsService.getAppIcon(widget.program.packageName);
-      if (mounted && bytes.isNotEmpty) {
-        setState(() => _appIconBytes = bytes);
+      if (mounted) {
+        setState(() {
+          if (bytes.isNotEmpty) _appIconBytes = bytes;
+        });
       }
     } catch (_) {}
+  }
+
+  String get _displayAppName {
+    if (_appName != null && _appName!.isNotEmpty) return _appName!;
+    final app = widget.appsService.getApp(widget.program.packageName);
+    if (app != null && app.name.isNotEmpty) return app.name;
+    final pkg = widget.program.packageName;
+    if (pkg.contains('.')) {
+      final parts = pkg.split('.');
+      for (final part in parts.reversed) {
+        if (part != 'tv' && part != 'android' && part != 'app') {
+          return part[0].toUpperCase() + part.substring(1);
+        }
+      }
+    }
+    return pkg;
   }
 
   @override
   void didUpdateWidget(covariant WatchNextCard oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.program.packageName != widget.program.packageName) {
-      _loadAppIcon();
+      _loadAppDetails();
     }
   }
 
@@ -441,115 +464,112 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                     clipBehavior: Clip.antiAlias,
                     elevation: elevation,
                     shadowColor: shadowColor,
+                    color: Colors.transparent,
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
-                        // Poster background
-                        Positioned.fill(
-                          child: _buildPoster(theme),
-                        ),
-                        // App icon badge (top-right, glass effect)
-                        if (_appIconBytes != null)
-                          Positioned(
-                            top: 8,
-                            right: 8,
-                            child: Container(
-                              width: 28,
-                              height: 28,
-                              decoration: BoxDecoration(
-                                color: Colors.black45,
-                                borderRadius: BorderRadius.circular(6),
-                                border: Border.all(
-                                  color: Colors.white.withOpacity(0.15),
-                                  width: 0.5,
-                                ),
-                              ),
-                              padding: const EdgeInsets.all(3),
-                              child: Image.memory(_appIconBytes!),
+                        // Card surface with subtle dark gradient and border
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: borderRadius,
+                            gradient: const LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color(0xFF24272D),
+                                Color(0xFF16181B),
+                              ],
+                            ),
+                            border: Border.all(
+                              color: _focused ? Colors.transparent : Colors.white.withOpacity(0.08),
+                              width: 1,
                             ),
                           ),
-                        // Title + progress overlay (bottom)
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                colors: [
-                                  Colors.black.withOpacity(0.9),
-                                  Colors.black.withOpacity(0.5),
-                                  Colors.transparent,
-                                ],
-                                stops: const [0.0, 0.6, 1.0],
-                              ),
-                            ),
-                            padding: const EdgeInsets.fromLTRB(10, 28, 10, 8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  widget.program.title,
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    shadows: [
-                                      const Shadow(
-                                        color: Colors.black87,
-                                        blurRadius: 4,
-                                        offset: Offset(0, 1),
-                                      )
-                                    ],
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                if (showDescription && widget.program.description.isNotEmpty)
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 2),
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Top row: App icon + App Name + Progress badge
+                              Row(
+                                children: [
+                                  if (_appIconBytes != null)
+                                    Container(
+                                      width: 22,
+                                      height: 22,
+                                      margin: const EdgeInsets.only(right: 8),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(4),
+                                        child: Image.memory(
+                                          _appIconBytes!,
+                                          fit: BoxFit.contain,
+                                          filterQuality: FilterQuality.low,
+                                        ),
+                                      ),
+                                    ),
+                                  Expanded(
                                     child: Text(
-                                      widget.program.description,
+                                      _displayAppName.toUpperCase(),
                                       style: theme.textTheme.bodySmall?.copyWith(
-                                        color: Colors.white60,
-                                        fontSize: 10,
+                                        color: Colors.white70,
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.5,
                                       ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-                                if (showProgress && progress > 0)
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 6),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(2),
-                                            child: LinearProgressIndicator(
-                                              value: progress,
-                                              backgroundColor: Colors.white.withOpacity(0.15),
-                                              valueColor: AlwaysStoppedAnimation<Color>(accentColor),
-                                              minHeight: 4,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 6),
-                                        Text(
-                                          '${(progress * 100).round()}%',
-                                          style: theme.textTheme.bodySmall?.copyWith(
-                                            color: Colors.white54,
-                                            fontSize: 9,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
+                                  if (showProgress && progress > 0)
+                                    Text(
+                                      '${(progress * 100).round()}%',
+                                      style: theme.textTheme.bodySmall?.copyWith(
+                                        color: accentColor,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
+                                ],
+                              ),
+                              const Spacer(),
+                              // Program Title
+                              Text(
+                                widget.program.title,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 13.5,
+                                  height: 1.25,
+                                ),
+                                maxLines: showDescription && widget.program.description.isNotEmpty ? 2 : 3,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              if (showDescription && widget.program.description.isNotEmpty) ...[
+                                const SizedBox(height: 3),
+                                Text(
+                                  widget.program.description,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: Colors.white60,
+                                    fontSize: 10.5,
                                   ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ],
-                            ),
+                              const Spacer(),
+                              // Bottom progress indicator
+                              if (showProgress && progress > 0)
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(2),
+                                  child: LinearProgressIndicator(
+                                    value: progress,
+                                    backgroundColor: Colors.white.withOpacity(0.12),
+                                    valueColor: AlwaysStoppedAnimation<Color>(accentColor),
+                                    minHeight: 3.5,
+                                  ),
+                                )
+                              else
+                                const SizedBox(height: 3.5),
+                            ],
                           ),
                         ),
                         if (highlightWidget != null) highlightWidget,
@@ -563,52 +583,4 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
         },
       );
     }
-
-  Widget _buildPoster(ThemeData theme) {
-    if (widget.program.posterBytes != null && widget.program.posterBytes!.isNotEmpty) {
-      return Image.memory(
-        widget.program.posterBytes!,
-        fit: BoxFit.cover,
-        filterQuality: FilterQuality.low,
-        errorBuilder: (context, error, stackTrace) => _emptyPosterFallback(theme),
-      );
-    }
-    if (widget.program.posterArtUri.startsWith('http://') ||
-        widget.program.posterArtUri.startsWith('https://')) {
-      return Image.network(
-        widget.program.posterArtUri,
-        fit: BoxFit.cover,
-        filterQuality: FilterQuality.low,
-        errorBuilder: (context, error, stackTrace) => _emptyPosterFallback(theme),
-      );
-    }
-    return _emptyPosterFallback(theme);
-  }
-
-  Widget _emptyPosterFallback(ThemeData theme) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.grey.shade900,
-            Colors.grey.shade800,
-          ],
-        ),
-      ),
-      child: Center(
-        child: _appIconBytes != null
-            ? Opacity(
-                opacity: 0.4,
-                child: Image.memory(_appIconBytes!, width: 48, height: 48),
-              )
-            : Icon(
-                Icons.play_circle_outline,
-                size: 48,
-                color: Colors.white.withOpacity(0.15),
-              ),
-      ),
-    );
-  }
 }

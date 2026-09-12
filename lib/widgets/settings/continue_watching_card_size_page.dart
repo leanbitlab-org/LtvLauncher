@@ -27,18 +27,18 @@ class ContinueWatchingCardSizePage extends StatelessWidget {
   const ContinueWatchingCardSizePage({super.key});
 
   static const List<(int, String, String)> cardSizePresets = [
-    (80, '80 dp • Extra Small', '142 × 80 dp (16:9)'),
-    (90, '90 dp • Very Small', '160 × 90 dp (16:9)'),
-    (100, '100 dp • Small', '178 × 100 dp (16:9)'),
-    (110, '110 dp • Compact', '196 × 110 dp (16:9)'),
-    (120, '120 dp • Medium Small', '213 × 120 dp (16:9)'),
-    (130, '130 dp • Medium', '231 × 130 dp (16:9)'),
-    (135, '135 dp • Standard (Default)', '240 × 135 dp (16:9)'),
-    (140, '140 dp • Medium Large', '249 × 140 dp (16:9)'),
-    (150, '150 dp • Large', '267 × 150 dp (16:9)'),
-    (160, '160 dp • Very Large', '284 × 160 dp (16:9)'),
-    (170, '170 dp • Extra Large', '302 × 170 dp (16:9)'),
-    (180, '180 dp • Huge', '320 × 180 dp (16:9)'),
+    (80, '80 dp • Extra Small', '142 × 80 dp'),
+    (90, '90 dp • Very Small', '160 × 90 dp'),
+    (100, '100 dp • Small', '178 × 100 dp'),
+    (110, '110 dp • Compact', '196 × 110 dp'),
+    (120, '120 dp • Medium Small', '213 × 120 dp'),
+    (130, '130 dp • Medium', '231 × 130 dp'),
+    (135, '135 dp • Standard (Default)', '240 × 135 dp'),
+    (140, '140 dp • Medium Large', '249 × 140 dp'),
+    (150, '150 dp • Large', '267 × 150 dp'),
+    (160, '160 dp • Very Large', '284 × 160 dp'),
+    (170, '170 dp • Extra Large', '302 × 170 dp'),
+    (180, '180 dp • Huge', '320 × 180 dp'),
   ];
 
   @override

@@ -119,9 +119,12 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
       _programs = newPrograms;
       if (callSnapshot == _callCount) notifyListeners();
 
-      // Phase 2: Fetch missing posters concurrently with 12s timeout, then notify again
+      // Phase 2: Fetch local posters if present (content://, android.resource://, file://)
       final needsPoster = newPrograms.where(
-        (p) => p.posterArtUri.isNotEmpty && p.posterBytes == null
+        (p) => p.posterArtUri.isNotEmpty &&
+               p.posterBytes == null &&
+               !p.posterArtUri.startsWith('http://') &&
+               !p.posterArtUri.startsWith('https://'),
       ).toList();
       if (needsPoster.isNotEmpty) {
         await Future.wait(
@@ -136,7 +139,7 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
             }
           }),
         ).timeout(
-          const Duration(seconds: 12),
+          const Duration(seconds: 2),
           onTimeout: () => [],
         );
         if (callSnapshot == _callCount) notifyListeners();

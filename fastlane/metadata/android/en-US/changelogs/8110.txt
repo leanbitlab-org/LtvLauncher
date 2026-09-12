@@ -1,0 +1,3 @@
+- Restored 100% offline status by removing INTERNET permission and cleartext traffic flag.
+- Redesigned Continue Watching cards into clean, title-centric cards with app branding, bold typography, and playback progress.
+- Instantaneous Watch Next row loading with zero network latency or background HTTP roundtrips.

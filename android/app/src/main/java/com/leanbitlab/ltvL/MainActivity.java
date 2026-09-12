@@ -1354,44 +1354,8 @@ public class MainActivity extends FlutterActivity {
         }
         try {
             if (posterArtUri.startsWith("http://") || posterArtUri.startsWith("https://")) {
-                String currentUrl = posterArtUri;
-                for (int redirect = 0; redirect < 5; redirect++) {
-                    java.net.URL url = new java.net.URL(currentUrl);
-                    java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
-                    conn.setConnectTimeout(8000);
-                    conn.setReadTimeout(8000);
-                    conn.setInstanceFollowRedirects(true);
-                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 10; TV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36");
-                    conn.setDoInput(true);
-                    int responseCode = conn.getResponseCode();
-                    if (responseCode == java.net.HttpURLConnection.HTTP_MOVED_PERM
-                            || responseCode == java.net.HttpURLConnection.HTTP_MOVED_TEMP
-                            || responseCode == java.net.HttpURLConnection.HTTP_SEE_OTHER
-                            || responseCode == 307
-                            || responseCode == 308) {
-                        String location = conn.getHeaderField("Location");
-                        if (location != null && !location.isEmpty()) {
-                            currentUrl = location;
-                            conn.disconnect();
-                            continue;
-                        }
-                    }
-                    if (responseCode >= 200 && responseCode < 300) {
-                        try (java.io.InputStream inputStream = conn.getInputStream()) {
-                            if (inputStream != null) {
-                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                byte[] buffer = new byte[8192];
-                                int bytesRead;
-                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                    outputStream.write(buffer, 0, bytesRead);
-                                }
-                                return outputStream.toByteArray();
-                            }
-                        }
-                    }
-                    conn.disconnect();
-                    break;
-                }
+                // Fully offline launcher: remote network fetching disabled
+                return null;
             } else if (posterArtUri.startsWith("file://")) {
                 Uri fileUri = Uri.parse(posterArtUri);
                 java.io.File file = new java.io.File(fileUri.getPath());

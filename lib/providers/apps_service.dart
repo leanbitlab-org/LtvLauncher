@@ -511,6 +511,8 @@ class AppsService extends ChangeNotifier {
     return prefs.containsKey('custom_banner_$packageName');
   }
 
+  App? getApp(String packageName) => _applications[packageName];
+
   Future<Uint8List> getAppIcon(String packageName) async {
     if (_iconCache.containsKey(packageName)) {
       return _iconCache[packageName]!;
