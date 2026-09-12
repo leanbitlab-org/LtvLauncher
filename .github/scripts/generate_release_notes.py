@@ -68,10 +68,17 @@ def get_git_changelog(current_tag):
     except Exception as e:
         return f"- New changes in release {current_tag}"
 
-def get_file_size(path):
-    if os.path.exists(path):
-        size_bytes = os.path.getsize(path)
-        return f"{size_bytes / (1024 * 1024):.1f} MB"
+def find_apk_size(*filenames):
+    candidate_dirs = [
+        "build/app/outputs/flutter-apk",
+        "build/app/outputs/apk/release",
+    ]
+    for filename in filenames:
+        for directory in candidate_dirs:
+            p = os.path.join(directory, filename)
+            if os.path.exists(p):
+                size_bytes = os.path.getsize(p)
+                return f"{size_bytes / (1024 * 1024):.1f} MB"
     return "0.0 MB"
 
 def main():
@@ -92,9 +99,9 @@ def main():
     if not changelog:
         changelog = get_git_changelog(tag_name)
     
-    size_universal = get_file_size("build/app/outputs/flutter-apk/app-release.apk")
-    size_armv7 = get_file_size("build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk")
-    size_arm64 = get_file_size("build/app/outputs/flutter-apk/app-arm64-v8a-release.apk")
+    size_universal = find_apk_size("LTvLauncher-universal-release.apk", "app-release.apk")
+    size_armv7 = find_apk_size("LTvLauncher-armeabi-v7a-release.apk", "app-armeabi-v7a-release.apk")
+    size_arm64 = find_apk_size("LTvLauncher-arm64-v8a-release.apk", "app-arm64-v8a-release.apk")
 
     release_notes = f"""### 💖 Support Our Work
 
