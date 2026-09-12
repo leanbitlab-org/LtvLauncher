@@ -152,7 +152,6 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
   bool _focused = false;
   bool _clicked = false;
   Uint8List? _appIconBytes;
-  String? _appName;
   late final AnimationController _animation = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 1200),
@@ -163,45 +162,23 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
     super.initState();
     _focusNode = FocusNode();
     _focusNode.addListener(_onFocusChange);
-    _loadAppDetails();
+    _loadAppIcon();
   }
 
-  Future<void> _loadAppDetails() async {
+  Future<void> _loadAppIcon() async {
     try {
-      final app = widget.appsService.getApp(widget.program.packageName);
-      if (app != null && app.name.isNotEmpty) {
-        _appName = app.name;
-      }
       final bytes = await widget.appsService.getAppIcon(widget.program.packageName);
-      if (mounted) {
-        setState(() {
-          if (bytes.isNotEmpty) _appIconBytes = bytes;
-        });
+      if (mounted && bytes.isNotEmpty) {
+        setState(() => _appIconBytes = bytes);
       }
     } catch (_) {}
-  }
-
-  String get _displayAppName {
-    if (_appName != null && _appName!.isNotEmpty) return _appName!;
-    final app = widget.appsService.getApp(widget.program.packageName);
-    if (app != null && app.name.isNotEmpty) return app.name;
-    final pkg = widget.program.packageName;
-    if (pkg.contains('.')) {
-      final parts = pkg.split('.');
-      for (final part in parts.reversed) {
-        if (part != 'tv' && part != 'android' && part != 'app') {
-          return part[0].toUpperCase() + part.substring(1);
-        }
-      }
-    }
-    return pkg;
   }
 
   @override
   void didUpdateWidget(covariant WatchNextCard oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.program.packageName != widget.program.packageName) {
-      _loadAppDetails();
+      _loadAppIcon();
     }
   }
 
@@ -489,16 +466,16 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Top row: App icon + App Name + Progress badge
+                              // Top row: App icon + Progress badge (no text app title)
                               Row(
                                 children: [
                                   if (_appIconBytes != null)
                                     Container(
-                                      width: 22,
-                                      height: 22,
+                                      width: 24,
+                                      height: 24,
                                       margin: const EdgeInsets.only(right: 8),
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(4),
+                                        borderRadius: BorderRadius.circular(5),
                                         child: Image.memory(
                                           _appIconBytes!,
                                           fit: BoxFit.contain,
@@ -506,25 +483,13 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                                         ),
                                       ),
                                     ),
-                                  Expanded(
-                                    child: Text(
-                                      _displayAppName.toUpperCase(),
-                                      style: theme.textTheme.bodySmall?.copyWith(
-                                        color: Colors.white70,
-                                        fontSize: 10.5,
-                                        fontWeight: FontWeight.w700,
-                                        letterSpacing: 0.5,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
+                                  const Spacer(),
                                   if (showProgress && progress > 0)
                                     Text(
                                       '${(progress * 100).round()}%',
                                       style: theme.textTheme.bodySmall?.copyWith(
                                         color: accentColor,
-                                        fontSize: 10,
+                                        fontSize: 10.5,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -533,20 +498,28 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                               const Spacer(),
                               // Program Title
                               Text(
-                                widget.program.title,
+                                widget.program.title.trim(),
                                 style: theme.textTheme.bodyMedium?.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 13.5,
                                   height: 1.25,
                                 ),
-                                maxLines: showDescription && widget.program.description.isNotEmpty ? 2 : 3,
+                                maxLines: (showDescription &&
+                                        widget.program.description.trim().isNotEmpty &&
+                                        widget.program.description.trim().toLowerCase() !=
+                                            widget.program.title.trim().toLowerCase())
+                                    ? 2
+                                    : 3,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              if (showDescription && widget.program.description.isNotEmpty) ...[
+                              if (showDescription &&
+                                  widget.program.description.trim().isNotEmpty &&
+                                  widget.program.description.trim().toLowerCase() !=
+                                      widget.program.title.trim().toLowerCase()) ...[
                                 const SizedBox(height: 3),
                                 Text(
-                                  widget.program.description,
+                                  widget.program.description.trim(),
                                   style: theme.textTheme.bodySmall?.copyWith(
                                     color: Colors.white60,
                                     fontSize: 10.5,
