@@ -249,6 +249,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
     final bool appSelectorTransitionAnimationEnabled = context.select<SettingsService, bool>((s) => s.appSelectorTransitionAnimationEnabled);
     final String cardSize = context.select<SettingsService, String>((s) => s.continueWatchingCardSize);
     final bool showProgress = context.select<SettingsService, bool>((s) => s.continueWatchingShowProgress);
+    final bool showPercentage = context.select<SettingsService, bool>((s) => s.continueWatchingShowPercentage);
     final bool showDescription = context.select<SettingsService, bool>((s) => s.continueWatchingShowDescription);
 
     final Color accentColor = Color(int.parse('FF$accentColorHex', radix: 16));
@@ -492,7 +493,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                                       ),
                                     ),
                                   const Spacer(),
-                                  if (showProgress && progress > 0)
+                                  if (showProgress && showPercentage && progress > 0)
                                     Text(
                                       '${(progress * 100).round()}%',
                                       style: theme.textTheme.bodySmall?.copyWith(

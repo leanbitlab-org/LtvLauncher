@@ -48,6 +48,7 @@ const String _showContinueWatchingKey = "show_continue_watching";
 const String _continueWatchingCardSizeKey = "continue_watching_card_size";
 const String _continueWatchingMaxItemsKey = "continue_watching_max_items";
 const String _continueWatchingShowProgressKey = "continue_watching_show_progress";
+const String _continueWatchingShowPercentageKey = "continue_watching_show_percentage";
 const String _continueWatchingShowDescriptionKey = "continue_watching_show_description";
 const String _continueWatchingOrderKey = "continue_watching_order";
 const String _hiddenWatchNextProgramIdsKey = "hidden_watch_next_program_ids";
@@ -115,6 +116,7 @@ class SettingsService extends ChangeNotifier {
   late String _continueWatchingCardSize;
   late int _continueWatchingMaxItems;
   late bool _continueWatchingShowProgress;
+  late bool _continueWatchingShowPercentage;
   late bool _continueWatchingShowDescription;
   late int _continueWatchingOrder;
   late List<String> _hiddenWatchNextProgramIds;
@@ -166,6 +168,7 @@ class SettingsService extends ChangeNotifier {
   String get continueWatchingCardSize => _continueWatchingCardSize;
   int get continueWatchingMaxItems => _continueWatchingMaxItems;
   bool get continueWatchingShowProgress => _continueWatchingShowProgress;
+  bool get continueWatchingShowPercentage => _continueWatchingShowPercentage;
   bool get continueWatchingShowDescription => _continueWatchingShowDescription;
   int get continueWatchingOrder => _continueWatchingOrder;
   List<String> get hiddenWatchNextProgramIds => List.unmodifiable(_hiddenWatchNextProgramIds);
@@ -226,6 +229,7 @@ class SettingsService extends ChangeNotifier {
     _continueWatchingCardSize = _sharedPreferences.getString(_continueWatchingCardSizeKey) ?? "normal";
     _continueWatchingMaxItems = _sharedPreferences.getInt(_continueWatchingMaxItemsKey) ?? 15;
     _continueWatchingShowProgress = _sharedPreferences.getBool(_continueWatchingShowProgressKey) ?? true;
+    _continueWatchingShowPercentage = _sharedPreferences.getBool(_continueWatchingShowPercentageKey) ?? true;
     _continueWatchingShowDescription = _sharedPreferences.getBool(_continueWatchingShowDescriptionKey) ?? true;
     _continueWatchingOrder = _sharedPreferences.getInt(_continueWatchingOrderKey) ?? 0;
     _hiddenWatchNextProgramIds = _sharedPreferences.getStringList(_hiddenWatchNextProgramIdsKey) ?? [];
@@ -267,6 +271,7 @@ class SettingsService extends ChangeNotifier {
       _continueWatchingCardSizeKey: _continueWatchingCardSize,
       _continueWatchingMaxItemsKey: _continueWatchingMaxItems,
       _continueWatchingShowProgressKey: _continueWatchingShowProgress,
+      _continueWatchingShowPercentageKey: _continueWatchingShowPercentage,
       _continueWatchingShowDescriptionKey: _continueWatchingShowDescription,
       _continueWatchingOrderKey: _continueWatchingOrder,
       _hiddenWatchNextProgramIdsKey: _hiddenWatchNextProgramIds,
@@ -453,6 +458,12 @@ class SettingsService extends ChangeNotifier {
   Future<void> setContinueWatchingShowProgress(bool show) async {
     await _sharedPreferences.setBool(_continueWatchingShowProgressKey, show);
     _continueWatchingShowProgress = show;
+    notifyListeners();
+  }
+
+  Future<void> setContinueWatchingShowPercentage(bool show) async {
+    await _sharedPreferences.setBool(_continueWatchingShowPercentageKey, show);
+    _continueWatchingShowPercentage = show;
     notifyListeners();
   }
 

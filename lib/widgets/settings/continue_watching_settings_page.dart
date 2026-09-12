@@ -172,6 +172,13 @@ class _ContinueWatchingSettingsPageState extends State<ContinueWatchingSettingsP
                   title: Text('Playback Progress Bar', style: Theme.of(context).textTheme.bodyMedium),
                   secondary: const Icon(Icons.linear_scale_outlined),
                 ),
+                // Show percentage badge
+                RoundedSwitchListTile(
+                  value: settingsService.continueWatchingShowPercentage,
+                  onChanged: (v) => settingsService.setContinueWatchingShowPercentage(v),
+                  title: Text('Playback Percentage', style: Theme.of(context).textTheme.bodyMedium),
+                  secondary: const Icon(Icons.percent_outlined),
+                ),
                 // Show description
                 RoundedSwitchListTile(
                   value: settingsService.continueWatchingShowDescription,
