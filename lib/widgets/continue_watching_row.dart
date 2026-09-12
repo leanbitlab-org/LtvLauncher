@@ -493,7 +493,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                                       ),
                                     ),
                                   const Spacer(),
-                                  if (showProgress && showPercentage && progress > 0)
+                                  if (showPercentage && progress > 0)
                                     Text(
                                       '${(progress * 100).round()}%',
                                       style: theme.textTheme.bodySmall?.copyWith(
