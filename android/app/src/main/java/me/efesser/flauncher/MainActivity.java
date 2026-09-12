@@ -1205,6 +1205,8 @@ public class MainActivity extends FlutterActivity {
                 TvContract.WatchNextPrograms.COLUMN_PACKAGE_NAME,
                 TvContract.WatchNextPrograms.COLUMN_TITLE,
                 TvContract.WatchNextPrograms.COLUMN_SHORT_DESCRIPTION,
+                TvContract.WatchNextPrograms.COLUMN_LONG_DESCRIPTION,
+                TvContract.WatchNextPrograms.COLUMN_EPISODE_TITLE,
                 TvContract.WatchNextPrograms.COLUMN_WATCH_NEXT_TYPE,
                 TvContract.WatchNextPrograms.COLUMN_LAST_ENGAGEMENT_TIME_UTC_MILLIS,
                 TvContract.WatchNextPrograms.COLUMN_LAST_PLAYBACK_POSITION_MILLIS,
@@ -1244,11 +1246,29 @@ public class MainActivity extends FlutterActivity {
                         poster = cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_THUMBNAIL_URI);
                     }
 
+                    String title = cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_TITLE);
+                    String episodeTitle = cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_EPISODE_TITLE);
+                    if (title.isEmpty() && !episodeTitle.isEmpty()) {
+                        title = episodeTitle;
+                    }
+
+                    String shortDesc = cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_SHORT_DESCRIPTION);
+                    String longDesc = cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_LONG_DESCRIPTION);
+
+                    String description = shortDesc;
+                    if (description.isEmpty() || description.trim().equalsIgnoreCase(title.trim())) {
+                        if (!longDesc.isEmpty() && !longDesc.trim().equalsIgnoreCase(title.trim())) {
+                            description = longDesc;
+                        } else if (!episodeTitle.isEmpty() && !episodeTitle.trim().equalsIgnoreCase(title.trim())) {
+                            description = episodeTitle;
+                        }
+                    }
+
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", cursor.getLong(cursor.getColumnIndexOrThrow(TvContract.WatchNextPrograms._ID)));
                     map.put("packageName", cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_PACKAGE_NAME));
-                    map.put("title", cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_TITLE));
-                    map.put("description", cursorStringOrEmpty(cursor, TvContract.WatchNextPrograms.COLUMN_SHORT_DESCRIPTION));
+                    map.put("title", title);
+                    map.put("description", description);
                     map.put("watchNextType", cursor.getInt(cursor.getColumnIndexOrThrow(TvContract.WatchNextPrograms.COLUMN_WATCH_NEXT_TYPE)));
                     map.put("lastEngagementTime", time);
                     map.put("playbackPosition", cursor.getLong(cursor.getColumnIndexOrThrow(TvContract.WatchNextPrograms.COLUMN_LAST_PLAYBACK_POSITION_MILLIS)));
