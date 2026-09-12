@@ -12,7 +12,12 @@ import 'package:provider/provider.dart';
 import 'package:flauncher/l10n/app_localizations.dart';
 
 class ContinueWatchingRow extends StatelessWidget {
-  const ContinueWatchingRow({Key? key}) : super(key: key);
+  final bool isFirstSection;
+
+  const ContinueWatchingRow({
+    Key? key,
+    this.isFirstSection = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -117,6 +122,7 @@ class ContinueWatchingRow extends StatelessWidget {
                           program: program,
                           appsService: appsService,
                           watchNextService: watchNextService,
+                          handleUpNavigationToSettings: isFirstSection,
                         ),
                       ),
                     );
@@ -135,12 +141,14 @@ class WatchNextCard extends StatefulWidget {
   final WatchNextProgram program;
   final AppsService appsService;
   final WatchNextService watchNextService;
+  final bool handleUpNavigationToSettings;
 
   const WatchNextCard({
     Key? key,
     required this.program,
     required this.appsService,
     required this.watchNextService,
+    this.handleUpNavigationToSettings = true,
   }) : super(key: key);
 
   @override
@@ -395,7 +403,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
 
     return FocusKeyboardListener(
       onPressed: (key) {
-        if (key == LogicalKeyboardKey.arrowUp) {
+        if (key == LogicalKeyboardKey.arrowUp && widget.handleUpNavigationToSettings) {
           Actions.invoke(context, const MoveFocusToSettingsIntent());
           return KeyEventResult.handled;
         } else if (AppCardKeys.validationKeys.contains(key)) {
@@ -453,12 +461,12 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Color(0xFF24272D),
-                                Color(0xFF16181B),
+                                Color(0xFF141517),
+                                Color(0xFF090A0B),
                               ],
                             ),
                             border: Border.all(
-                              color: _focused ? Colors.transparent : Colors.white.withOpacity(0.08),
+                              color: _focused ? Colors.transparent : Colors.white.withOpacity(0.06),
                               width: 1,
                             ),
                           ),

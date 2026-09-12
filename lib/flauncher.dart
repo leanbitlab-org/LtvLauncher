@@ -126,12 +126,12 @@ class _FLauncherState extends State<FLauncher> {
     List<Widget> children = [];
     bool firstCategoryFound = false;
     bool cwInserted = false;
-    const cwWidget = ContinueWatchingRow();
 
     int sectionIdx = 0;
     for (var section in sections) {
       if (continueWatchingActive && !cwInserted && sectionIdx == continueWatchingOrder) {
-        children.add(cwWidget);
+        final bool isFirstSection = !firstCategoryFound;
+        children.add(ContinueWatchingRow(isFirstSection: isFirstSection));
         cwInserted = true;
         firstCategoryFound = true;
       }
@@ -178,8 +178,10 @@ class _FLauncherState extends State<FLauncher> {
     }
 
     if (continueWatchingActive && !cwInserted) {
-      children.add(cwWidget);
+      final bool isFirstSection = !firstCategoryFound;
+      children.add(ContinueWatchingRow(isFirstSection: isFirstSection));
       cwInserted = true;
+      firstCategoryFound = true;
     }
 
     return Column(children: children);
