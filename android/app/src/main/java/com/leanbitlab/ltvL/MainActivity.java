@@ -294,14 +294,16 @@ public class MainActivity extends FlutterActivity {
                             }
                         };
 
-                        try {
-                            getContentResolver().registerContentObserver(
-                                    TvContract.WatchNextPrograms.CONTENT_URI,
-                                    true,
-                                    watchNextObserver
-                            );
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            try {
+                                getContentResolver().registerContentObserver(
+                                        TvContract.WatchNextPrograms.CONTENT_URI,
+                                        true,
+                                        watchNextObserver
+                                );
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 
