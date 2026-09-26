@@ -395,6 +395,9 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
       _animation.stop();
     }
 
+    final bool hasPoster =
+        widget.program.posterBytes != null && widget.program.posterBytes!.isNotEmpty;
+
     // Progress percentage
     double progress = 0;
     if (widget.program.duration > 0 && widget.program.playbackPosition >= 0) {
@@ -454,18 +457,40 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
-                        // Card surface with subtle dark gradient and border
+                        // Poster art behind the card (fork: poster cards)
+                        if (hasPoster)
+                          Image.memory(
+                            widget.program.posterBytes!,
+                            fit: BoxFit.cover,
+                            cacheWidth: (cardWidth * MediaQuery.devicePixelRatioOf(context)).round(),
+                            filterQuality: FilterQuality.medium,
+                            gaplessPlayback: true,
+                            errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+                          ),
+                        // Card surface: dark gradient, or a bottom scrim over the poster
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: borderRadius,
-                            gradient: const LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xFF141517),
-                                Color(0xFF090A0B),
-                              ],
-                            ),
+                            gradient: hasPoster
+                                ? LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    stops: const [0.0, 0.3, 0.55, 1.0],
+                                    colors: [
+                                      Colors.black.withOpacity(0.35),
+                                      Colors.black.withOpacity(0.05),
+                                      Colors.black.withOpacity(0.45),
+                                      Colors.black.withOpacity(0.92),
+                                    ],
+                                  )
+                                : const LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [
+                                      Color(0xFF141517),
+                                      Color(0xFF090A0B),
+                                    ],
+                                  ),
                             border: Border.all(
                               color: _focused ? Colors.transparent : Colors.white.withOpacity(0.06),
                               width: 1,
@@ -537,7 +562,7 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ],
-                              const Spacer(),
+                              if (hasPoster) const SizedBox(height: 8) else const Spacer(),
                               // Bottom progress indicator
                               if (showProgress && progress > 0)
                                 ClipRRect(

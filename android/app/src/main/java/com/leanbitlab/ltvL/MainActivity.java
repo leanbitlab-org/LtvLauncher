@@ -89,6 +89,7 @@ public class MainActivity extends FlutterActivity {
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
+        new Thread(this::prunePosterCache, "poster-cache-prune").start();
 
         BinaryMessenger messenger = flutterEngine.getDartExecutor().getBinaryMessenger();
 
@@ -1398,14 +1399,138 @@ public class MainActivity extends FlutterActivity {
         }
     }
 
+    // Fork: disk cache for remote Watch Next posters, downscaled so the row loads
+    // instantly after a restart and full-size artwork never crosses the channel.
+    private static final int POSTER_MAX_WIDTH = 640;
+    private static final long POSTER_CACHE_MAX_AGE_MS = 30L * 24 * 60 * 60 * 1000;
+
+    private java.io.File posterCacheDir() {
+        java.io.File dir = new java.io.File(getCacheDir(), "posters");
+        if (!dir.exists()) dir.mkdirs();
+        return dir;
+    }
+
+    private static String sha1Hex(String s) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-1");
+            StringBuilder sb = new StringBuilder();
+            for (byte b : md.digest(s.getBytes(java.nio.charset.StandardCharsets.UTF_8))) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            return Integer.toHexString(s.hashCode());
+        }
+    }
+
+    private void prunePosterCache() {
+        long cutoff = System.currentTimeMillis() - POSTER_CACHE_MAX_AGE_MS;
+        java.io.File[] files = posterCacheDir().listFiles();
+        if (files == null) return;
+        for (java.io.File f : files) {
+            if (f.lastModified() < cutoff) f.delete();
+        }
+    }
+
+    private static byte[] downscalePoster(byte[] raw) {
+        try {
+            android.graphics.BitmapFactory.Options bounds = new android.graphics.BitmapFactory.Options();
+            bounds.inJustDecodeBounds = true;
+            android.graphics.BitmapFactory.decodeByteArray(raw, 0, raw.length, bounds);
+            if (bounds.outWidth <= 0) return raw;
+            int sample = 1;
+            while (bounds.outWidth / (sample * 2) >= POSTER_MAX_WIDTH) sample *= 2;
+            android.graphics.BitmapFactory.Options opts = new android.graphics.BitmapFactory.Options();
+            opts.inSampleSize = sample;
+            android.graphics.Bitmap bmp = android.graphics.BitmapFactory.decodeByteArray(raw, 0, raw.length, opts);
+            if (bmp == null) return raw;
+            if (bmp.getWidth() > POSTER_MAX_WIDTH) {
+                int h = Math.round(bmp.getHeight() * (POSTER_MAX_WIDTH / (float) bmp.getWidth()));
+                android.graphics.Bitmap scaled = android.graphics.Bitmap.createScaledBitmap(bmp, POSTER_MAX_WIDTH, h, true);
+                bmp.recycle();
+                bmp = scaled;
+            }
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, out);
+            bmp.recycle();
+            return out.toByteArray();
+        } catch (Throwable t) {
+            return raw;
+        }
+    }
+
     private byte[] getWatchNextPoster(String posterArtUri) {
+        if (posterArtUri == null || !(posterArtUri.startsWith("http://") || posterArtUri.startsWith("https://"))) {
+            return fetchWatchNextPoster(posterArtUri);
+        }
+        java.io.File cached = new java.io.File(posterCacheDir(), sha1Hex(posterArtUri) + ".jpg");
+        if (cached.exists() && cached.length() > 0) {
+            try {
+                byte[] bytes = new byte[(int) cached.length()];
+                try (java.io.DataInputStream in = new java.io.DataInputStream(new java.io.FileInputStream(cached))) {
+                    in.readFully(bytes);
+                }
+                cached.setLastModified(System.currentTimeMillis());
+                return bytes;
+            } catch (Exception ignored) {
+                cached.delete();
+            }
+        }
+        byte[] raw = fetchWatchNextPoster(posterArtUri);
+        if (raw == null || raw.length == 0) return raw;
+        byte[] small = downscalePoster(raw);
+        try (java.io.FileOutputStream fos = new java.io.FileOutputStream(cached)) {
+            fos.write(small);
+        } catch (Exception ignored) {
+            cached.delete();
+        }
+        return small;
+    }
+
+    private byte[] fetchWatchNextPoster(String posterArtUri) {
         if (posterArtUri == null || posterArtUri.isEmpty()) {
             return null;
         }
         try {
             if (posterArtUri.startsWith("http://") || posterArtUri.startsWith("https://")) {
-                // Fully offline launcher: remote network fetching disabled
-                return null;
+                String currentUrl = posterArtUri;
+                for (int redirect = 0; redirect < 5; redirect++) {
+                    java.net.URL url = new java.net.URL(currentUrl);
+                    java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(8000);
+                    conn.setInstanceFollowRedirects(true);
+                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 10; TV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36");
+                    conn.setDoInput(true);
+                    int responseCode = conn.getResponseCode();
+                    if (responseCode == java.net.HttpURLConnection.HTTP_MOVED_PERM
+                            || responseCode == java.net.HttpURLConnection.HTTP_MOVED_TEMP
+                            || responseCode == java.net.HttpURLConnection.HTTP_SEE_OTHER
+                            || responseCode == 307
+                            || responseCode == 308) {
+                        String location = conn.getHeaderField("Location");
+                        if (location != null && !location.isEmpty()) {
+                            currentUrl = location;
+                            conn.disconnect();
+                            continue;
+                        }
+                    }
+                    if (responseCode >= 200 && responseCode < 300) {
+                        try (java.io.InputStream inputStream = conn.getInputStream()) {
+                            if (inputStream != null) {
+                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                byte[] buffer = new byte[8192];
+                                int bytesRead;
+                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                    outputStream.write(buffer, 0, bytesRead);
+                                }
+                                return outputStream.toByteArray();
+                            }
+                        }
+                    }
+                    conn.disconnect();
+                    break;
+                }
             } else if (posterArtUri.startsWith("file://")) {
                 Uri fileUri = Uri.parse(posterArtUri);
                 java.io.File file = new java.io.File(fileUri.getPath());

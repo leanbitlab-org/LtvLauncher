@@ -74,6 +74,7 @@ android {
         targetSdk 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        manifestPlaceholders = [appLabel: "LTvLauncher"]
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
@@ -100,6 +101,9 @@ android {
             }
         }
         release {
+            // Fork: install alongside upstream LTvLauncher
+            applicationIdSuffix '.posters'
+            manifestPlaceholders = [appLabel: "LTv Posters"]
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
