@@ -119,30 +119,30 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
       _programs = newPrograms;
       if (callSnapshot == _callCount) notifyListeners();
 
-      // Phase 2: Fetch local posters if present (content://, android.resource://, file://)
-      final needsPoster = newPrograms.where(
-        (p) => p.posterArtUri.isNotEmpty &&
-               p.posterBytes == null &&
-               !p.posterArtUri.startsWith('http://') &&
-               !p.posterArtUri.startsWith('https://'),
+      // Phase 2: Fetch missing posters (local or remote) with a small worker pool.
+      // Each fetch has its own timeout and cards update as posters arrive, so slow
+      // devices don't drop the tail of the row behind one global deadline.
+      final queue = newPrograms.where(
+        (p) => p.posterArtUri.isNotEmpty && p.posterBytes == null
       ).toList();
-      if (needsPoster.isNotEmpty) {
-        await Future.wait(
-          needsPoster.map((p) async {
-            try {
-              final bytes = await _channel.getWatchNextPoster(p.posterArtUri);
-              if (bytes != null && bytes.isNotEmpty) {
-                p.posterBytes = bytes;
-              }
-            } catch (e) {
-              log('Failed to fetch poster for ${p.title}', name: 'WatchNextService', error: e);
+      Future<void> worker() async {
+        while (queue.isNotEmpty) {
+          final p = queue.removeAt(0);
+          try {
+            final bytes = await _channel
+                .getWatchNextPoster(p.posterArtUri)
+                .timeout(const Duration(seconds: 15));
+            if (bytes != null && bytes.isNotEmpty) {
+              p.posterBytes = bytes;
+              if (callSnapshot == _callCount) notifyListeners();
             }
-          }),
-        ).timeout(
-          const Duration(seconds: 2),
-          onTimeout: () => [],
-        );
-        if (callSnapshot == _callCount) notifyListeners();
+          } catch (e) {
+            log('Failed to fetch poster for ${p.title}', name: 'WatchNextService', error: e);
+          }
+        }
+      }
+      if (queue.isNotEmpty) {
+        await Future.wait(List.generate(3, (_) => worker()));
       }
     } catch (e) {
       log('Failed to refresh watch next programs', name: 'WatchNextService', error: e);

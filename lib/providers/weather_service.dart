@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:developer' as developer;
 import 'dart:io' show Platform;
 import 'package:flauncher/flauncher_channel.dart';
+import 'package:flauncher/fork/fork_config.dart';
+import 'package:flauncher/fork/open_meteo.dart';
 import 'package:flauncher/models/weather_data.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,6 +13,7 @@ class WeatherService extends ChangeNotifier with WidgetsBindingObserver {
   Timer? _refreshTimer;
   DateTime? _lastResumeCheck;
   String? _lastJson;
+  DateTime? _lastOpenMeteoFetch;
 
   WeatherData? _weatherData;
   bool _isBreezyInstalled = false;
@@ -80,9 +83,27 @@ class WeatherService extends ChangeNotifier with WidgetsBindingObserver {
       final latestJson = await _channel.getLatestWeatherData();
       if (latestJson != null && latestJson.isNotEmpty) {
         _processWeatherJson(latestJson);
+      } else if (!_isBreezyInstalled) {
+        await _fetchOpenMeteo();
       }
     } catch (e, stack) {
       developer.log("Failed to fetch latest weather data", error: e, stackTrace: stack);
+    }
+  }
+
+  // Fork: without Breezy Weather, fetch directly from Open-Meteo (at most every 30 min).
+  Future<void> _fetchOpenMeteo() async {
+    final now = DateTime.now();
+    if (_lastOpenMeteoFetch != null && now.difference(_lastOpenMeteoFetch!).inMinutes < 30 && _weatherData != null) {
+      return;
+    }
+    try {
+      final config = await ForkConfig.load();
+      final json = await fetchOpenMeteoWeatherJson(config.weather);
+      _lastOpenMeteoFetch = now;
+      _processWeatherJson(json);
+    } catch (e, stack) {
+      developer.log("Open-Meteo fetch failed", error: e, stackTrace: stack);
     }
   }
 

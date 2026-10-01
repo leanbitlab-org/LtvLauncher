@@ -17,6 +17,7 @@
  */
 
 
+import 'package:flauncher/fork/jellyfin_rows.dart';
 import 'package:flauncher/actions.dart';
 import 'package:flauncher/custom_traversal_policy.dart';
 import 'package:flauncher/providers/apps_service.dart';
@@ -132,6 +133,7 @@ class _FLauncherState extends State<FLauncher> {
       if (continueWatchingActive && !cwInserted && sectionIdx == continueWatchingOrder) {
         final bool isFirstSection = !firstCategoryFound;
         children.add(ContinueWatchingRow(isFirstSection: isFirstSection));
+        children.add(const JellyfinRows());
         cwInserted = true;
         firstCategoryFound = true;
       }
@@ -180,6 +182,7 @@ class _FLauncherState extends State<FLauncher> {
     if (continueWatchingActive && !cwInserted) {
       final bool isFirstSection = !firstCategoryFound;
       children.add(ContinueWatchingRow(isFirstSection: isFirstSection));
+        children.add(const JellyfinRows());
       cwInserted = true;
       firstCategoryFound = true;
     }
