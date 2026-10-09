@@ -656,14 +656,8 @@ class _CategorySettingsState extends State<_CategorySettings>
         }
       }
 
-      _SettingsState state = context.read();
-      try {
-         // Try to find the section we just created to set it as active
-         final createdSection = service.launcherSections.firstWhere((s) => s is Category && s.id == categoryId);
-         state.setLauncherSection(createdSection);
-      } catch (e) {
-         // Fallback to first section
-         state.setLauncherSection(service.launcherSections[0]);
+      if (mounted) {
+        Navigator.of(context).pop();
       }
     }
     else {
@@ -768,9 +762,9 @@ class _LauncherSpacerSettingsState extends State<_LauncherSpacerSettings>
     if (_creating) {
       await service.addSpacer(_numberValue);
 
-      _SettingsState state = context.read();
-      int index = service.launcherSections.length - 1;
-      state.setLauncherSection(service.launcherSections[index]);
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
     }
     else {
       assert(_spacer != null);
