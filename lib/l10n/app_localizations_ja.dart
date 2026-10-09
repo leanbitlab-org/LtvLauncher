@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -257,7 +259,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get setAsDefaultLauncher => 'デフォルトのランチャーに設定';
 
   @override
-  String get defaultLauncherDescription => 'デフォルトのランチャーに設定すると、ホームボタンは常にLTvLauncherに戻ります。TVの起動時も直接LTvLauncherが起動します。';
+  String get defaultLauncherDescription =>
+      'デフォルトのランチャーに設定すると、ホームボタンは常にLTvLauncherに戻ります。TVの起動時も直接LTvLauncherが起動します。';
 
   @override
   String get inputs => '入力';
@@ -308,10 +311,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get localNetworkSharingActive => 'ローカルネットワーク共有が有効です！';
 
   @override
-  String get localNetworkSharingInstructions => '他のデバイスを同じWi-Fiネットワークに接続し、Webブラウザで次のURLを開きます：';
+  String get localNetworkSharingInstructions =>
+      '他のデバイスを同じWi-Fiネットワークに接続し、Webブラウザで次のURLを開きます：';
 
   @override
-  String get localNetworkSharingDetails => 'ここでTVの設定/レイアウトをダウンロードするか、バックアップファイルをこのTVにアップロードできます。';
+  String get localNetworkSharingDetails =>
+      'ここでTVの設定/レイアウトをダウンロードするか、バックアップファイルをこのTVにアップロードできます。';
 
   @override
   String failedToStartServer(String error) {
@@ -481,7 +486,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get fahrenheit => '華氏 (°F)';
 
   @override
-  String get breezyWeatherSetupHint => 'Breezy Weather をインストールし、設定で「ローカルデータ共有」/「Gadgetbridge」を有効にすると、天気と雨の警告が表示されます。';
+  String get breezyWeatherSetupHint =>
+      'Breezy Weather をインストールし、設定で「ローカルデータ共有」/「Gadgetbridge」を有効にすると、天気と雨の警告が表示されます。';
 
   @override
   String get displayAndScreensaver => 'ディスプレイとスクリーンセーバー';

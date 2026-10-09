@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -19,7 +21,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get alphabetical => 'За алфавітом';
 
   @override
-  String get appCardHighlightAnimation => 'Анімація виділення картки застосунку';
+  String get appCardHighlightAnimation =>
+      'Анімація виділення картки застосунку';
 
   @override
   String get appInfo => 'Інформація про застосунок';
@@ -64,7 +67,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get dialogOptionBackButtonActionShowClock => 'Показати годинник';
 
   @override
-  String get dialogTextNoFileExplorer => 'Будь ласка, встановіть файловий менеджер, щоб вибрати зображення.';
+  String get dialogTextNoFileExplorer =>
+      'Будь ласка, встановіть файловий менеджер, щоб вибрати зображення.';
 
   @override
   String get dialogTitleBackButtonAction => 'Виберіть дію кнопки «Назад»';
@@ -183,16 +187,19 @@ class AppLocalizationsUk extends AppLocalizations {
   String get showCategoryTitles => 'Показувати назви категорій';
 
   @override
-  String get showCategoryAppCount => 'Показувати кількість додатків у категоріях';
+  String get showCategoryAppCount =>
+      'Показувати кількість додатків у категоріях';
 
   @override
   String get themes => 'Теми';
 
   @override
-  String get hideHighlightOutlineOnHomescreen => 'Приховати контур виділення на головному екрані';
+  String get hideHighlightOutlineOnHomescreen =>
+      'Приховати контур виділення на головному екрані';
 
   @override
-  String get appSelectorTransitionAnimation => 'Анімація переходу вибору застосунку';
+  String get appSelectorTransitionAnimation =>
+      'Анімація переходу вибору застосунку';
 
   @override
   String get sort => 'Сортування';
@@ -212,7 +219,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get time => 'Час';
 
   @override
-  String get titleStatusBarSettingsPage => 'Виберіть, що відображати в рядку стану';
+  String get titleStatusBarSettingsPage =>
+      'Виберіть, що відображати в рядку стану';
 
   @override
   String get tvApplications => 'Застосунки для ТБ';
@@ -248,16 +256,19 @@ class AppLocalizationsUk extends AppLocalizations {
   String get accessibility => 'Спеціальні можливості';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher є лаунчером за замовчуванням';
+  String get defaultLauncherIsDefault =>
+      'LTvLauncher є лаунчером за замовчуванням';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher не є лаунчером за замовчуванням';
+  String get defaultLauncherNotDefault =>
+      'LTvLauncher не є лаунчером за замовчуванням';
 
   @override
   String get setAsDefaultLauncher => 'Встановити як лаунчер за замовчуванням';
 
   @override
-  String get defaultLauncherDescription => 'Якщо встановлено як лаунчер за замовчуванням, кнопка «Домівка» завжди повертатиме до LTvLauncher. Телевізор також завантажуватиметься одразу в LTvLauncher.';
+  String get defaultLauncherDescription =>
+      'Якщо встановлено як лаунчер за замовчуванням, кнопка «Домівка» завжди повертатиме до LTvLauncher. Телевізор також завантажуватиметься одразу в LTvLauncher.';
 
   @override
   String get inputs => 'Джерела сигналу';
@@ -283,7 +294,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get importSuccess => 'Резервну копію успішно імпортовано';
 
   @override
-  String get importConfirm => 'Ви впевнені, що хочете імпортувати резервну копію? Це замінить поточні налаштування та розташування.';
+  String get importConfirm =>
+      'Ви впевнені, що хочете імпортувати резервну копію? Це замінить поточні налаштування та розташування.';
 
   @override
   String importError(String error) {
@@ -299,19 +311,23 @@ class AppLocalizationsUk extends AppLocalizations {
   String get shareBackup => 'Поділитися резервною копією';
 
   @override
-  String get shareBackupDescription => 'Поділитися резервною копією з іншими пристроями в локальній мережі';
+  String get shareBackupDescription =>
+      'Поділитися резервною копією з іншими пристроями в локальній мережі';
 
   @override
   String get stopSharing => 'Зупинити спільний доступ';
 
   @override
-  String get localNetworkSharingActive => 'Спільний доступ у локальній мережі активний!';
+  String get localNetworkSharingActive =>
+      'Спільний доступ у локальній мережі активний!';
 
   @override
-  String get localNetworkSharingInstructions => 'Підключіть інший пристрій до тієї самої мережі Wi-Fi та відкрийте таку адресу у веббраузері:';
+  String get localNetworkSharingInstructions =>
+      'Підключіть інший пристрій до тієї самої мережі Wi-Fi та відкрийте таку адресу у веббраузері:';
 
   @override
-  String get localNetworkSharingDetails => 'Тут ви можете завантажити налаштування/розташування вашого ТБ або вивантажити файл резервної копії назад на цей телевізор.';
+  String get localNetworkSharingDetails =>
+      'Тут ви можете завантажити налаштування/розташування вашого ТБ або вивантажити файл резервної копії назад на цей телевізор.';
 
   @override
   String failedToStartServer(String error) {
@@ -322,16 +338,19 @@ class AppLocalizationsUk extends AppLocalizations {
   String get notificationBell => 'Дзвіночок сповіщень';
 
   @override
-  String get autoHideNotificationBell => 'Автоматично приховувати дзвіночок сповіщень';
+  String get autoHideNotificationBell =>
+      'Автоматично приховувати дзвіночок сповіщень';
 
   @override
   String get continueWatching => 'Продовжити перегляд';
 
   @override
-  String get showContinueWatchingOnHome => 'Показувати «Продовжити перегляд» на головному екрані';
+  String get showContinueWatchingOnHome =>
+      'Показувати «Продовжити перегляд» на головному екрані';
 
   @override
-  String get permissionDeniedContinueWatching => 'Потрібен дозвіл для показу «Продовжити перегляд»';
+  String get permissionDeniedContinueWatching =>
+      'Потрібен дозвіл для показу «Продовжити перегляд»';
 
   @override
   String get interface => 'Інтерфейс';
@@ -379,7 +398,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get disabled => 'Вимкнено';
 
   @override
-  String get showAppNamesBelowIcons => 'Показувати назви застосунків під іконками';
+  String get showAppNamesBelowIcons =>
+      'Показувати назви застосунків під іконками';
 
   @override
   String get dataUsage => 'Використання даних';
@@ -391,7 +411,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get homeButtonFix => 'Виправлення кнопки «Домівка» (Google TV)';
 
   @override
-  String get startOnBoot => 'Запускати після завантаження (Google TV / Fire TV)';
+  String get startOnBoot =>
+      'Запускати після завантаження (Google TV / Fire TV)';
 
   @override
   String get appLanguage => 'Мова';
@@ -445,7 +466,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get hidePersistentNotifications => 'Приховати постійні сповіщення';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Приховувати фонові та системні сповіщення';
+  String get hidePersistentNotificationsDesc =>
+      'Приховувати фонові та системні сповіщення';
 
   @override
   String get blockedNotificationApps => 'Заблоковані додатки';
@@ -481,7 +503,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get fahrenheit => 'Фаренгейт (°F)';
 
   @override
-  String get breezyWeatherSetupHint => 'Встановіть Breezy Weather та увімкніть \'Локальний обмін даними\' / \'Gadgetbridge\' у налаштуваннях для перегляду погоди та попереджень про дощ.';
+  String get breezyWeatherSetupHint =>
+      'Встановіть Breezy Weather та увімкніть \'Локальний обмін даними\' / \'Gadgetbridge\' у налаштуваннях для перегляду погоди та попереджень про дощ.';
 
   @override
   String get displayAndScreensaver => 'Екран та заставка';
@@ -490,10 +513,12 @@ class AppLocalizationsUk extends AppLocalizations {
   String get notifications => 'Сповіщення';
 
   @override
-  String get continueWatchingDescription => 'Показувати нещодавно переглянуті фільми та серіали на головному екрані';
+  String get continueWatchingDescription =>
+      'Показувати нещодавно переглянуті фільми та серіали на головному екрані';
 
   @override
-  String get continueWatchingPermissionDesc => 'Для читання історії перегляду з ТВ-додатків потрібен спеціальний дозвіл:';
+  String get continueWatchingPermissionDesc =>
+      'Для читання історії перегляду з ТВ-додатків потрібен спеціальний дозвіл:';
 
   @override
   String get requestPermission => 'Запитати дозвіл';
@@ -508,7 +533,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get notificationOptions => 'Параметри сповіщення';
 
   @override
-  String get noBlockedAppsDesc => 'Усім програмам наразі дозволено показувати сповіщення';
+  String get noBlockedAppsDesc =>
+      'Усім програмам наразі дозволено показувати сповіщення';
 
   @override
   String get notificationsAllowed => 'Сповіщення дозволено';

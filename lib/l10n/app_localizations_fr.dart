@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -19,7 +21,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get alphabetical => 'Alphabétique';
 
   @override
-  String get appCardHighlightAnimation => 'Animation de surbrillance de la carte d\'application';
+  String get appCardHighlightAnimation =>
+      'Animation de surbrillance de la carte d\'application';
 
   @override
   String get appInfo => 'Infos sur l\'application';
@@ -58,16 +61,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dialogOptionBackButtonActionDoNothing => 'Ne rien faire';
 
   @override
-  String get dialogOptionBackButtonActionShowScreensaver => 'Afficher l\'écran de veille';
+  String get dialogOptionBackButtonActionShowScreensaver =>
+      'Afficher l\'écran de veille';
 
   @override
   String get dialogOptionBackButtonActionShowClock => 'Afficher l\'horloge';
 
   @override
-  String get dialogTextNoFileExplorer => 'Veuillez installer un explorateur de fichiers pour sélectionner une image.';
+  String get dialogTextNoFileExplorer =>
+      'Veuillez installer un explorateur de fichiers pour sélectionner une image.';
 
   @override
-  String get dialogTitleBackButtonAction => 'Choisir l\'action du bouton retour';
+  String get dialogTitleBackButtonAction =>
+      'Choisir l\'action du bouton retour';
 
   @override
   String disambiguateCategoryTitle(String title) {
@@ -139,7 +145,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get open => 'Ouvrir';
 
   @override
-  String get orSelectFormatSpecifiers => 'Ou sélectionner les spécificateurs de format';
+  String get orSelectFormatSpecifiers =>
+      'Ou sélectionner les spécificateurs de format';
 
   @override
   String get picture => 'Image';
@@ -168,7 +175,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get spacer => 'Espace';
 
   @override
-  String get spacerMaxHeightRequirement => 'Doit être supérieur à 0 et inférieur ou égal à 500';
+  String get spacerMaxHeightRequirement =>
+      'Doit être supérieur à 0 et inférieur ou égal à 500';
 
   @override
   String get statusBar => 'Barre d\'état';
@@ -183,16 +191,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get showCategoryTitles => 'Afficher les titres des catégories';
 
   @override
-  String get showCategoryAppCount => 'Afficher le nombre d\'applications dans les catégories';
+  String get showCategoryAppCount =>
+      'Afficher le nombre d\'applications dans les catégories';
 
   @override
   String get themes => 'Thèmes';
 
   @override
-  String get hideHighlightOutlineOnHomescreen => 'Masquer le contour de surbrillance sur l\'écran d\'accueil';
+  String get hideHighlightOutlineOnHomescreen =>
+      'Masquer le contour de surbrillance sur l\'écran d\'accueil';
 
   @override
-  String get appSelectorTransitionAnimation => 'Animation de transition du sélecteur d\'application';
+  String get appSelectorTransitionAnimation =>
+      'Animation de transition du sélecteur d\'application';
 
   @override
   String get sort => 'Trier';
@@ -212,7 +223,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get time => 'Heure';
 
   @override
-  String get titleStatusBarSettingsPage => 'Choisir ce qu\'il faut afficher dans la barre d\'état';
+  String get titleStatusBarSettingsPage =>
+      'Choisir ce qu\'il faut afficher dans la barre d\'état';
 
   @override
   String get tvApplications => 'Applications TV';
@@ -248,16 +260,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get accessibility => 'Accessibilité';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher est le lanceur par défaut';
+  String get defaultLauncherIsDefault =>
+      'LTvLauncher est le lanceur par défaut';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher n\'est pas le lanceur par défaut';
+  String get defaultLauncherNotDefault =>
+      'LTvLauncher n\'est pas le lanceur par défaut';
 
   @override
   String get setAsDefaultLauncher => 'Définir comme lanceur par défaut';
 
   @override
-  String get defaultLauncherDescription => 'Lorsqu\'il est défini comme lanceur par défaut, le bouton Accueil reviendra toujours à LTvLauncher. La TV démarrera également directement sur LTvLauncher.';
+  String get defaultLauncherDescription =>
+      'Lorsqu\'il est défini comme lanceur par défaut, le bouton Accueil reviendra toujours à LTvLauncher. La TV démarrera également directement sur LTvLauncher.';
 
   @override
   String get inputs => 'Entrées';
@@ -283,7 +298,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get importSuccess => 'Sauvegarde importée avec succès';
 
   @override
-  String get importConfirm => 'Voulez-vous vraiment importer la sauvegarde ? Cela remplacera vos paramètres et votre disposition actuels.';
+  String get importConfirm =>
+      'Voulez-vous vraiment importer la sauvegarde ? Cela remplacera vos paramètres et votre disposition actuels.';
 
   @override
   String importError(String error) {
@@ -299,19 +315,23 @@ class AppLocalizationsFr extends AppLocalizations {
   String get shareBackup => 'Partager la sauvegarde';
 
   @override
-  String get shareBackupDescription => 'Partager la sauvegarde avec d\'autres appareils sur le réseau local';
+  String get shareBackupDescription =>
+      'Partager la sauvegarde avec d\'autres appareils sur le réseau local';
 
   @override
   String get stopSharing => 'Arrêter le partage';
 
   @override
-  String get localNetworkSharingActive => 'Le partage sur le réseau local est actif !';
+  String get localNetworkSharingActive =>
+      'Le partage sur le réseau local est actif !';
 
   @override
-  String get localNetworkSharingInstructions => 'Connectez un autre appareil au même réseau Wi-Fi et ouvrez l\'URL suivante dans un navigateur Web :';
+  String get localNetworkSharingInstructions =>
+      'Connectez un autre appareil au même réseau Wi-Fi et ouvrez l\'URL suivante dans un navigateur Web :';
 
   @override
-  String get localNetworkSharingDetails => 'Ici, vous pouvez télécharger les paramètres/disposition de votre TV ou importer un fichier de sauvegarde vers cette TV.';
+  String get localNetworkSharingDetails =>
+      'Ici, vous pouvez télécharger les paramètres/disposition de votre TV ou importer un fichier de sauvegarde vers cette TV.';
 
   @override
   String failedToStartServer(String error) {
@@ -322,16 +342,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get notificationBell => 'Cloche de notification';
 
   @override
-  String get autoHideNotificationBell => 'Masquer automatiquement la cloche de notification';
+  String get autoHideNotificationBell =>
+      'Masquer automatiquement la cloche de notification';
 
   @override
   String get continueWatching => 'Continuer à regarder';
 
   @override
-  String get showContinueWatchingOnHome => 'Afficher Continuer à regarder sur l\'accueil';
+  String get showContinueWatchingOnHome =>
+      'Afficher Continuer à regarder sur l\'accueil';
 
   @override
-  String get permissionDeniedContinueWatching => 'Autorisation requise pour afficher Continuer à regarder';
+  String get permissionDeniedContinueWatching =>
+      'Autorisation requise pour afficher Continuer à regarder';
 
   @override
   String get interface => 'Interface';
@@ -367,10 +390,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get permissionRequired => 'Autorisation requise';
 
   @override
-  String get systemWidePopupAlert => 'Alerte contextuelle à l\'échelle du système';
+  String get systemWidePopupAlert =>
+      'Alerte contextuelle à l\'échelle du système';
 
   @override
-  String get overlayPermissionRequired => 'Autorisation de superposition requise';
+  String get overlayPermissionRequired =>
+      'Autorisation de superposition requise';
 
   @override
   String get enabled => 'Activé';
@@ -379,7 +404,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get disabled => 'Désactivé';
 
   @override
-  String get showAppNamesBelowIcons => 'Afficher les noms des applications sous les icônes';
+  String get showAppNamesBelowIcons =>
+      'Afficher les noms des applications sous les icônes';
 
   @override
   String get dataUsage => 'Utilisation des données';
@@ -442,10 +468,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get turkish => 'Turc';
 
   @override
-  String get hidePersistentNotifications => 'Masquer les notifications persistantes';
+  String get hidePersistentNotifications =>
+      'Masquer les notifications persistantes';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Masquer les notifications des services d\'arrière-plan et du système';
+  String get hidePersistentNotificationsDesc =>
+      'Masquer les notifications des services d\'arrière-plan et du système';
 
   @override
   String get blockedNotificationApps => 'Applications bloquées';
@@ -481,7 +509,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fahrenheit => 'Fahrenheit (°F)';
 
   @override
-  String get breezyWeatherSetupHint => 'Installez Breezy Weather et activez le \'Partage local des données\' / \'Gadgetbridge\' dans ses paramètres pour afficher la météo et les alertes de pluie.';
+  String get breezyWeatherSetupHint =>
+      'Installez Breezy Weather et activez le \'Partage local des données\' / \'Gadgetbridge\' dans ses paramètres pour afficher la météo et les alertes de pluie.';
 
   @override
   String get displayAndScreensaver => 'Affichage et écran de veille';
@@ -490,10 +519,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get notifications => 'Notifications';
 
   @override
-  String get continueWatchingDescription => 'Afficher les films et séries récemment regardés sur l\'écran d\'accueil';
+  String get continueWatchingDescription =>
+      'Afficher les films et séries récemment regardés sur l\'écran d\'accueil';
 
   @override
-  String get continueWatchingPermissionDesc => 'Une autorisation spéciale est requise pour lire l\'historique de lecture des applications TV :';
+  String get continueWatchingPermissionDesc =>
+      'Une autorisation spéciale est requise pour lire l\'historique de lecture des applications TV :';
 
   @override
   String get requestPermission => 'Demander l\'autorisation';
@@ -508,7 +539,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get notificationOptions => 'Options de notification';
 
   @override
-  String get noBlockedAppsDesc => 'Toutes les applications sont actuellement autorisées à afficher des notifications';
+  String get noBlockedAppsDesc =>
+      'Toutes les applications sont actuellement autorisées à afficher des notifications';
 
   @override
   String get notificationsAllowed => 'Notifications autorisées';
