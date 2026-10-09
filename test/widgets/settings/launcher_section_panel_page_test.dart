@@ -70,6 +70,49 @@ void main() {
 
     verify(appsService.deleteSection(0));
   });
+
+  testWidgets("Saving a new section returns to the previous page", (tester) async {
+    final appsService = MockAppsService();
+    when(appsService.launcherSections).thenReturn([fakeCategory(name: "Favorites")]);
+    when(appsService.addSpacer(any)).thenAnswer((_) async {});
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<AppsService>.value(
+        value: appsService,
+        child: MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Builder(
+            builder: (context) => TextButton(
+              child: const Text("Open"),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => Scaffold(body: LauncherSectionPanelPage())),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text("Open"));
+    await tester.pumpAndSettle();
+    expect(find.text("New section"), findsOneWidget);
+
+    await tester.tap(find.text("Category"));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text("Spacer").last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text("Save"));
+    await tester.pumpAndSettle();
+
+    verify(appsService.addSpacer(any));
+    // A live "New section" form here let the Type dropdown crash the panel.
+    expect(find.text("New section"), findsNothing);
+    expect(find.text("Open"), findsOneWidget);
+  });
 }
 
 Future<void> _pumpWidgetWithProviders(WidgetTester tester, AppsService appsService, int sectionIndex) async {
