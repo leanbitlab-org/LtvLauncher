@@ -69,8 +69,8 @@ android {
 
     defaultConfig {
         applicationId "com.leanbitlab.ltvL"
-        compileSdk 35
-        minSdk 21
+        compileSdk 37
+        minSdkVersion flutter.minSdkVersion
         targetSdk 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -102,7 +102,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             if (hasKeystore) {
                 signingConfig signingConfigs.release
             }

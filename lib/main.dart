@@ -41,6 +41,10 @@ import 'flauncher_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // A TV launcher is driven by a remote, never touch. Remote keys injected by the system (phone
+  // remote apps, HDMI-CEC) arrive from the virtual keyboard, which Flutter no longer counts as
+  // keyboard interaction, so without this focus highlights would never be drawn.
+  FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
   initializeDateFormatting();
 
   // Configure LRU Image Cache bounds to preserve RAM on Android TV devices

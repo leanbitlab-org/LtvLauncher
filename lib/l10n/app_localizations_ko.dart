@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -257,7 +259,8 @@ class AppLocalizationsKo extends AppLocalizations {
   String get setAsDefaultLauncher => '기본 런처로 설정';
 
   @override
-  String get defaultLauncherDescription => '기본 런처로 설정하면 홈 버튼은 항상 LTvLauncher로 돌아갑니다. TV도 직접 LTvLauncher로 부팅됩니다.';
+  String get defaultLauncherDescription =>
+      '기본 런처로 설정하면 홈 버튼은 항상 LTvLauncher로 돌아갑니다. TV도 직접 LTvLauncher로 부팅됩니다.';
 
   @override
   String get inputs => '입력';
@@ -308,10 +311,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get localNetworkSharingActive => '로컬 네트워크 공유가 활성화되었습니다!';
 
   @override
-  String get localNetworkSharingInstructions => '다른 기기를 동일한 Wi-Fi 네트워크에 연결하고 웹 브라우저에서 다음 URL을 엽니다.';
+  String get localNetworkSharingInstructions =>
+      '다른 기기를 동일한 Wi-Fi 네트워크에 연결하고 웹 브라우저에서 다음 URL을 엽니다.';
 
   @override
-  String get localNetworkSharingDetails => '여기에서 TV 설정/레이아웃을 다운로드하거나 이 TV로 백업 파일을 업로드할 수 있습니다.';
+  String get localNetworkSharingDetails =>
+      '여기에서 TV 설정/레이아웃을 다운로드하거나 이 TV로 백업 파일을 업로드할 수 있습니다.';
 
   @override
   String failedToStartServer(String error) {
@@ -481,7 +486,8 @@ class AppLocalizationsKo extends AppLocalizations {
   String get fahrenheit => '화씨 (°F)';
 
   @override
-  String get breezyWeatherSetupHint => 'Breezy Weather를 설치하고 설정에서 \'로컬 데이터 공유\' / \'Gadgetbridge\'를 활성화하면 날씨 및 강우 경보가 표시됩니다.';
+  String get breezyWeatherSetupHint =>
+      'Breezy Weather를 설치하고 설정에서 \'로컬 데이터 공유\' / \'Gadgetbridge\'를 활성화하면 날씨 및 강우 경보가 표시됩니다.';
 
   @override
   String get displayAndScreensaver => '디스플레이 및 화면 보호기';
@@ -493,7 +499,8 @@ class AppLocalizationsKo extends AppLocalizations {
   String get continueWatchingDescription => '홈 화면에 최근 시청한 영화 및 TV 프로그램 표시';
 
   @override
-  String get continueWatchingPermissionDesc => 'TV 앱의 시청 기록을 읽으려면 특별한 권한이 필요합니다:';
+  String get continueWatchingPermissionDesc =>
+      'TV 앱의 시청 기록을 읽으려면 특별한 권한이 필요합니다:';
 
   @override
   String get requestPermission => '권한 요청';

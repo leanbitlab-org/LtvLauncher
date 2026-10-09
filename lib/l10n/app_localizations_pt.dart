@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -19,7 +21,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get alphabetical => 'Alfabético';
 
   @override
-  String get appCardHighlightAnimation => 'Animação de destaque do cartão do app';
+  String get appCardHighlightAnimation =>
+      'Animação de destaque do cartão do app';
 
   @override
   String get appInfo => 'Informações do app';
@@ -58,13 +61,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get dialogOptionBackButtonActionDoNothing => 'Não fazer nada';
 
   @override
-  String get dialogOptionBackButtonActionShowScreensaver => 'Mostrar protetor de tela';
+  String get dialogOptionBackButtonActionShowScreensaver =>
+      'Mostrar protetor de tela';
 
   @override
   String get dialogOptionBackButtonActionShowClock => 'Mostrar relógio';
 
   @override
-  String get dialogTextNoFileExplorer => 'Por favor, instale um explorador de arquivos para escolher uma imagem.';
+  String get dialogTextNoFileExplorer =>
+      'Por favor, instale um explorador de arquivos para escolher uma imagem.';
 
   @override
   String get dialogTitleBackButtonAction => 'Escolha a ação do botão voltar';
@@ -139,7 +144,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get open => 'Abrir';
 
   @override
-  String get orSelectFormatSpecifiers => 'Ou selecione especificadores de formato';
+  String get orSelectFormatSpecifiers =>
+      'Ou selecione especificadores de formato';
 
   @override
   String get picture => 'Imagem';
@@ -168,7 +174,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get spacer => 'Espaçador';
 
   @override
-  String get spacerMaxHeightRequirement => 'Deve ser maior que 0 e menor ou igual a 500';
+  String get spacerMaxHeightRequirement =>
+      'Deve ser maior que 0 e menor ou igual a 500';
 
   @override
   String get statusBar => 'Barra de status';
@@ -189,10 +196,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get themes => 'Temas';
 
   @override
-  String get hideHighlightOutlineOnHomescreen => 'Ocultar contorno de destaque na tela inicial';
+  String get hideHighlightOutlineOnHomescreen =>
+      'Ocultar contorno de destaque na tela inicial';
 
   @override
-  String get appSelectorTransitionAnimation => 'Animação de transição do seletor de apps';
+  String get appSelectorTransitionAnimation =>
+      'Animação de transição do seletor de apps';
 
   @override
   String get sort => 'Ordenar';
@@ -212,7 +221,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get time => 'Hora';
 
   @override
-  String get titleStatusBarSettingsPage => 'Escolha o que exibir na barra de status';
+  String get titleStatusBarSettingsPage =>
+      'Escolha o que exibir na barra de status';
 
   @override
   String get tvApplications => 'Apps de TV';
@@ -257,7 +267,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get setAsDefaultLauncher => 'Definir como launcher padrão';
 
   @override
-  String get defaultLauncherDescription => 'Quando definido como launcher padrão, o botão Home sempre retornará ao LTvLauncher. A TV também iniciará diretamente no LTvLauncher.';
+  String get defaultLauncherDescription =>
+      'Quando definido como launcher padrão, o botão Home sempre retornará ao LTvLauncher. A TV também iniciará diretamente no LTvLauncher.';
 
   @override
   String get inputs => 'Entradas';
@@ -283,7 +294,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get importSuccess => 'Backup importado com sucesso';
 
   @override
-  String get importConfirm => 'Tem certeza de que deseja importar o backup? Isso substituirá suas configurações e layout atuais.';
+  String get importConfirm =>
+      'Tem certeza de que deseja importar o backup? Isso substituirá suas configurações e layout atuais.';
 
   @override
   String importError(String error) {
@@ -299,19 +311,23 @@ class AppLocalizationsPt extends AppLocalizations {
   String get shareBackup => 'Compartilhar Backup';
 
   @override
-  String get shareBackupDescription => 'Compartilhar backup com outros dispositivos na rede local';
+  String get shareBackupDescription =>
+      'Compartilhar backup com outros dispositivos na rede local';
 
   @override
   String get stopSharing => 'Parar Compartilhamento';
 
   @override
-  String get localNetworkSharingActive => 'O compartilhamento na rede local está ativo!';
+  String get localNetworkSharingActive =>
+      'O compartilhamento na rede local está ativo!';
 
   @override
-  String get localNetworkSharingInstructions => 'Conecte outro dispositivo à mesma rede Wi-Fi e abra a seguinte URL em um navegador da web:';
+  String get localNetworkSharingInstructions =>
+      'Conecte outro dispositivo à mesma rede Wi-Fi e abra a seguinte URL em um navegador da web:';
 
   @override
-  String get localNetworkSharingDetails => 'Aqui você pode baixar as configurações/layout da sua TV ou enviar um arquivo de backup de volta para esta TV.';
+  String get localNetworkSharingDetails =>
+      'Aqui você pode baixar as configurações/layout da sua TV ou enviar um arquivo de backup de volta para esta TV.';
 
   @override
   String failedToStartServer(String error) {
@@ -322,16 +338,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get notificationBell => 'Sino de Notificação';
 
   @override
-  String get autoHideNotificationBell => 'Ocultar Sino de Notificação automaticamente';
+  String get autoHideNotificationBell =>
+      'Ocultar Sino de Notificação automaticamente';
 
   @override
   String get continueWatching => 'Continuar assistindo';
 
   @override
-  String get showContinueWatchingOnHome => 'Mostrar Continuar assistindo na tela inicial';
+  String get showContinueWatchingOnHome =>
+      'Mostrar Continuar assistindo na tela inicial';
 
   @override
-  String get permissionDeniedContinueWatching => 'Permissão necessária para mostrar Continuar assistindo';
+  String get permissionDeniedContinueWatching =>
+      'Permissão necessária para mostrar Continuar assistindo';
 
   @override
   String get interface => 'Interface';
@@ -370,7 +389,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get systemWidePopupAlert => 'Alerta pop-up de todo o sistema';
 
   @override
-  String get overlayPermissionRequired => 'Permissão de sobreposição necessária';
+  String get overlayPermissionRequired =>
+      'Permissão de sobreposição necessária';
 
   @override
   String get enabled => 'Ativado';
@@ -379,7 +399,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get disabled => 'Desativado';
 
   @override
-  String get showAppNamesBelowIcons => 'Mostrar nomes dos apps abaixo dos ícones';
+  String get showAppNamesBelowIcons =>
+      'Mostrar nomes dos apps abaixo dos ícones';
 
   @override
   String get dataUsage => 'Uso de dados';
@@ -445,7 +466,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get hidePersistentNotifications => 'Ocultar notificações persistentes';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Ocultar notificações de serviços em segundo plano e do sistema';
+  String get hidePersistentNotificationsDesc =>
+      'Ocultar notificações de serviços em segundo plano e do sistema';
 
   @override
   String get blockedNotificationApps => 'Aplicativos bloqueados';
@@ -481,7 +503,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get fahrenheit => 'Fahrenheit (°F)';
 
   @override
-  String get breezyWeatherSetupHint => 'Instale o Breezy Weather e ative o \'Compartilhamento local de dados\' / \'Gadgetbridge\' nas configurações para ver o clima e alertas de chuva.';
+  String get breezyWeatherSetupHint =>
+      'Instale o Breezy Weather e ative o \'Compartilhamento local de dados\' / \'Gadgetbridge\' nas configurações para ver o clima e alertas de chuva.';
 
   @override
   String get displayAndScreensaver => 'Tela e protetor de tela';
@@ -490,10 +513,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get notifications => 'Notificações';
 
   @override
-  String get continueWatchingDescription => 'Mostrar filmes e programas assistidos recentemente na tela inicial';
+  String get continueWatchingDescription =>
+      'Mostrar filmes e programas assistidos recentemente na tela inicial';
 
   @override
-  String get continueWatchingPermissionDesc => 'É necessária uma permissão especial para ler o histórico de reprodução:';
+  String get continueWatchingPermissionDesc =>
+      'É necessária uma permissão especial para ler o histórico de reprodução:';
 
   @override
   String get requestPermission => 'Solicitar permissão';
@@ -508,7 +533,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get notificationOptions => 'Opções de notificação';
 
   @override
-  String get noBlockedAppsDesc => 'Todos os aplicativos estão atualmente autorizados a exibir notificações';
+  String get noBlockedAppsDesc =>
+      'Todos os aplicativos estão atualmente autorizados a exibir notificações';
 
   @override
   String get notificationsAllowed => 'Notificações permitidas';

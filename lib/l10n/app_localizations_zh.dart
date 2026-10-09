@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -257,7 +259,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get setAsDefaultLauncher => '设为默认桌面';
 
   @override
-  String get defaultLauncherDescription => '设为默认桌面后，按 Home 键将始终返回 LTvLauncher。电视开机也会直接进入 LTvLauncher。';
+  String get defaultLauncherDescription =>
+      '设为默认桌面后，按 Home 键将始终返回 LTvLauncher。电视开机也会直接进入 LTvLauncher。';
 
   @override
   String get inputs => '输入源';
@@ -308,7 +311,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get localNetworkSharingActive => '局域网共享已开启！';
 
   @override
-  String get localNetworkSharingInstructions => '将另一台设备连接到同一 Wi-Fi 网络，并在浏览器中打开以下地址：';
+  String get localNetworkSharingInstructions =>
+      '将另一台设备连接到同一 Wi-Fi 网络，并在浏览器中打开以下地址：';
 
   @override
   String get localNetworkSharingDetails => '你可以在此下载电视的设置/布局，或将备份文件上传回这台电视。';
@@ -481,7 +485,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get fahrenheit => '华氏度 (°F)';
 
   @override
-  String get breezyWeatherSetupHint => '安装 Breezy Weather 并在其设置中开启“本地数据共享”/“Gadgetbridge”以显示天气和降雨预警。';
+  String get breezyWeatherSetupHint =>
+      '安装 Breezy Weather 并在其设置中开启“本地数据共享”/“Gadgetbridge”以显示天气和降雨预警。';
 
   @override
   String get displayAndScreensaver => '显示与屏幕保护程序';

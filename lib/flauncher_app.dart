@@ -102,7 +102,7 @@ class FLauncherApp extends StatelessWidget
                 splashFactory: NoSplash.splashFactory,
               )
           ),
-          dialogTheme: DialogTheme(
+          dialogTheme: DialogThemeData(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             backgroundColor: const Color(0xFF0F0F0F),
             titleTextStyle: Typography.material2018().white.titleLarge,
