@@ -1058,6 +1058,13 @@ public class MainActivity extends FlutterActivity {
             return true;
         }
 
+        // Sony's TV Settings keeps the package but renames the activity.
+        tvIntent.setClassName("com.android.tv.settings",
+                "com.sony.dtv.settings.device.display.daydream.DaydreamActivity");
+        if (tryStartActivity(tvIntent)) {
+            return true;
+        }
+
         // 2. Try standard Android screensaver/dream settings
         Intent dreamIntent = new Intent(Settings.ACTION_DREAM_SETTINGS);
         if (tryStartActivity(dreamIntent)) {
