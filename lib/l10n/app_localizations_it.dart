@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -19,7 +21,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get alphabetical => 'Alfabetico';
 
   @override
-  String get appCardHighlightAnimation => 'Animazione evidenziazione scheda app';
+  String get appCardHighlightAnimation =>
+      'Animazione evidenziazione scheda app';
 
   @override
   String get appInfo => 'Info app';
@@ -58,16 +61,19 @@ class AppLocalizationsIt extends AppLocalizations {
   String get dialogOptionBackButtonActionDoNothing => 'Non fare nulla';
 
   @override
-  String get dialogOptionBackButtonActionShowScreensaver => 'Mostra salvaschermo';
+  String get dialogOptionBackButtonActionShowScreensaver =>
+      'Mostra salvaschermo';
 
   @override
   String get dialogOptionBackButtonActionShowClock => 'Mostra orologio';
 
   @override
-  String get dialogTextNoFileExplorer => 'Installa un file manager per selezionare un\'immagine.';
+  String get dialogTextNoFileExplorer =>
+      'Installa un file manager per selezionare un\'immagine.';
 
   @override
-  String get dialogTitleBackButtonAction => 'Scegli l\'azione del pulsante Indietro';
+  String get dialogTitleBackButtonAction =>
+      'Scegli l\'azione del pulsante Indietro';
 
   @override
   String disambiguateCategoryTitle(String title) {
@@ -139,7 +145,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get open => 'Apri';
 
   @override
-  String get orSelectFormatSpecifiers => 'Oppure seleziona specificatori di formato';
+  String get orSelectFormatSpecifiers =>
+      'Oppure seleziona specificatori di formato';
 
   @override
   String get picture => 'Immagine';
@@ -168,7 +175,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get spacer => 'Spaziatore';
 
   @override
-  String get spacerMaxHeightRequirement => 'Deve essere maggiore di 0 e minore o uguale a 500';
+  String get spacerMaxHeightRequirement =>
+      'Deve essere maggiore di 0 e minore o uguale a 500';
 
   @override
   String get statusBar => 'Barra di stato';
@@ -189,10 +197,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get themes => 'Temi';
 
   @override
-  String get hideHighlightOutlineOnHomescreen => 'Nascondi contorno evidenziazione nella schermata Home';
+  String get hideHighlightOutlineOnHomescreen =>
+      'Nascondi contorno evidenziazione nella schermata Home';
 
   @override
-  String get appSelectorTransitionAnimation => 'Animazione transizione selettore app';
+  String get appSelectorTransitionAnimation =>
+      'Animazione transizione selettore app';
 
   @override
   String get sort => 'Ordina';
@@ -212,7 +222,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get time => 'Ora';
 
   @override
-  String get titleStatusBarSettingsPage => 'Scegli cosa mostrare nella barra di stato';
+  String get titleStatusBarSettingsPage =>
+      'Scegli cosa mostrare nella barra di stato';
 
   @override
   String get tvApplications => 'App TV';
@@ -248,16 +259,19 @@ class AppLocalizationsIt extends AppLocalizations {
   String get accessibility => 'Accessibilità';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher è il launcher predefinito';
+  String get defaultLauncherIsDefault =>
+      'LTvLauncher è il launcher predefinito';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher non è il launcher predefinito';
+  String get defaultLauncherNotDefault =>
+      'LTvLauncher non è il launcher predefinito';
 
   @override
   String get setAsDefaultLauncher => 'Imposta come launcher predefinito';
 
   @override
-  String get defaultLauncherDescription => 'Quando impostato come launcher predefinito, il pulsante Home tornerà sempre a LTvLauncher. La TV si avvierà direttamente su LTvLauncher.';
+  String get defaultLauncherDescription =>
+      'Quando impostato come launcher predefinito, il pulsante Home tornerà sempre a LTvLauncher. La TV si avvierà direttamente su LTvLauncher.';
 
   @override
   String get inputs => 'Ingressi';
@@ -283,7 +297,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get importSuccess => 'Backup importato con successo';
 
   @override
-  String get importConfirm => 'Sei sicuro di voler importare il backup? Questo sovrascriverà le tue impostazioni e il layout attuali.';
+  String get importConfirm =>
+      'Sei sicuro di voler importare il backup? Questo sovrascriverà le tue impostazioni e il layout attuali.';
 
   @override
   String importError(String error) {
@@ -299,19 +314,23 @@ class AppLocalizationsIt extends AppLocalizations {
   String get shareBackup => 'Condividi Backup';
 
   @override
-  String get shareBackupDescription => 'Condividi il backup con altri dispositivi sulla rete locale';
+  String get shareBackupDescription =>
+      'Condividi il backup con altri dispositivi sulla rete locale';
 
   @override
   String get stopSharing => 'Interrompi condivisione';
 
   @override
-  String get localNetworkSharingActive => 'La condivisione sulla rete locale è attiva!';
+  String get localNetworkSharingActive =>
+      'La condivisione sulla rete locale è attiva!';
 
   @override
-  String get localNetworkSharingInstructions => 'Collega un altro dispositivo alla stessa rete Wi-Fi e apri il seguente URL in un browser web:';
+  String get localNetworkSharingInstructions =>
+      'Collega un altro dispositivo alla stessa rete Wi-Fi e apri il seguente URL in un browser web:';
 
   @override
-  String get localNetworkSharingDetails => 'Qui puoi scaricare le impostazioni/layout della tua TV o caricare un file di backup su questa TV.';
+  String get localNetworkSharingDetails =>
+      'Qui puoi scaricare le impostazioni/layout della tua TV o caricare un file di backup su questa TV.';
 
   @override
   String failedToStartServer(String error) {
@@ -322,16 +341,19 @@ class AppLocalizationsIt extends AppLocalizations {
   String get notificationBell => 'Campanella notifiche';
 
   @override
-  String get autoHideNotificationBell => 'Nascondi automaticamente campanella notifiche';
+  String get autoHideNotificationBell =>
+      'Nascondi automaticamente campanella notifiche';
 
   @override
   String get continueWatching => 'Continua a guardare';
 
   @override
-  String get showContinueWatchingOnHome => 'Mostra Continua a guardare nella Home';
+  String get showContinueWatchingOnHome =>
+      'Mostra Continua a guardare nella Home';
 
   @override
-  String get permissionDeniedContinueWatching => 'Autorizzazione richiesta per mostrare Continua a guardare';
+  String get permissionDeniedContinueWatching =>
+      'Autorizzazione richiesta per mostrare Continua a guardare';
 
   @override
   String get interface => 'Interfaccia';
@@ -370,7 +392,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get systemWidePopupAlert => 'Avviso popup di sistema';
 
   @override
-  String get overlayPermissionRequired => 'Autorizzazione sovrapposizione richiesta';
+  String get overlayPermissionRequired =>
+      'Autorizzazione sovrapposizione richiesta';
 
   @override
   String get enabled => 'Abilitato';
@@ -445,7 +468,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get hidePersistentNotifications => 'Nascondi notifiche persistenti';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Nascondi le notifiche dei servizi in background e di sistema';
+  String get hidePersistentNotificationsDesc =>
+      'Nascondi le notifiche dei servizi in background e di sistema';
 
   @override
   String get blockedNotificationApps => 'App bloccate';
@@ -481,7 +505,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get fahrenheit => 'Fahrenheit (°F)';
 
   @override
-  String get breezyWeatherSetupHint => 'Installa Breezy Weather e abilita \'Condivisione dati locali\' / \'Gadgetbridge\' nelle impostazioni per visualizzare meteo e avvisi di pioggia.';
+  String get breezyWeatherSetupHint =>
+      'Installa Breezy Weather e abilita \'Condivisione dati locali\' / \'Gadgetbridge\' nelle impostazioni per visualizzare meteo e avvisi di pioggia.';
 
   @override
   String get displayAndScreensaver => 'Schermo e salvaschermo';
@@ -490,10 +515,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get notifications => 'Notifiche';
 
   @override
-  String get continueWatchingDescription => 'Mostra film e programmi TV visti di recente sulla schermata iniziale';
+  String get continueWatchingDescription =>
+      'Mostra film e programmi TV visti di recente sulla schermata iniziale';
 
   @override
-  String get continueWatchingPermissionDesc => 'È richiesta un\'autorizzazione speciale per leggere la cronologia di visualizzazione:';
+  String get continueWatchingPermissionDesc =>
+      'È richiesta un\'autorizzazione speciale per leggere la cronologia di visualizzazione:';
 
   @override
   String get requestPermission => 'Richiedi autorizzazione';
@@ -508,7 +535,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get notificationOptions => 'Opzioni notifica';
 
   @override
-  String get noBlockedAppsDesc => 'Tutte le applicazioni possono attualmente mostrare notifiche';
+  String get noBlockedAppsDesc =>
+      'Tutte le applicazioni possono attualmente mostrare notifiche';
 
   @override
   String get notificationsAllowed => 'Notifiche consentite';

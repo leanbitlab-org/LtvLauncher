@@ -5,7 +5,7 @@ version: 2026.10.03+8112
 
 environment:
   sdk: ">=3.4.3"
-  flutter: 3.24.5
+  flutter: 3.47.7
 
 dependencies:
   flutter:
@@ -16,16 +16,15 @@ dependencies:
   drift: ^2.14.1
   path: ^1.9.0
   path_provider: ^2.0.13
-  package_info_plus: ^7.0.0
+  package_info_plus: ^10.2.2
   provider: ^6.0.5
   shared_preferences: ^2.3.3
-  google_fonts: 6.2.1
-  screen_brightness: ^1.0.1
-  sqlite3_flutter_libs: ^0.5.13
+  google_fonts: ^9.0.0
+  screen_brightness: ^2.1.11
   flutter_localizations:
     sdk: flutter
   pool: ^1.5.2
-  share_plus: ^10.0.0
+  share_plus: ^13.3.1
   qr_flutter: ^4.1.0
 
 dev_dependencies:
@@ -33,7 +32,7 @@ dev_dependencies:
     sdk: flutter
 
   build_runner: ^2.3.3
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   mockito: ^5.3.2
   drift_dev: ^2.5.2
   network_image_mock: ^2.1.1
@@ -43,12 +42,12 @@ dev_dependencies:
   path_provider_platform_interface: any
   plugin_platform_interface: any
   package_info_plus_platform_interface: any
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.4
 
 flutter_icons:
   android: "ic_launcher"
   ios: false
-  min_sdk_android: 21
+  min_sdk_android: 23
   image_path: "assets/icon.png"
   adaptive_icon_background: "#000000"
   adaptive_icon_foreground: "assets/icon.png"
