@@ -8,11 +8,10 @@ import 'package:flauncher/fork/fork_config.dart';
 import 'package:flauncher/models/watch_next_program.dart';
 import 'package:flutter/widgets.dart';
 
-const _jellyfinPackage = 'org.jellyfin.androidtv';
-
 /// Fork: "Next Up" and "Recently Added" from a Jellyfin server, exposed as
 /// WatchNextProgram objects so the Continue Watching card can render them.
-/// Selecting a card opens the item's page in the Jellyfin Android TV app.
+/// Selecting a card opens the item's page in the configured client app
+/// (Jellyfin Android TV or Wholphin, see [JellyfinClient]).
 class JellyfinService extends ChangeNotifier with WidgetsBindingObserver {
   final FLauncherChannel _channel;
   JellyfinConfig? _config;
@@ -117,16 +116,17 @@ class JellyfinService extends ChangeNotifier with WidgetsBindingObserver {
     }
 
     final posterUri = _imageUri(item);
+    final client = _config?.client ?? JellyfinClient.jellyfin;
     return WatchNextProgram(
       id: 'jf-$row-$id'.hashCode,
-      packageName: _jellyfinPackage,
+      packageName: client.packageName,
       title: title,
       description: description,
       watchNextType: 0,
       lastEngagementTime: 0,
       playbackPosition: ticksToMs(userData['PlaybackPositionTicks']),
       duration: ticksToMs(item['RunTimeTicks']),
-      intentUri: 'intent:#Intent;component=$_jellyfinPackage/.ui.startup.StartupActivity;S.ItemId=$id;end',
+      intentUri: client.itemIntentUri(id),
       posterArtUri: posterUri,
       posterBytes: _posterCache[posterUri],
     );

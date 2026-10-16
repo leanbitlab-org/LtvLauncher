@@ -12,7 +12,8 @@ import 'package:path_provider/path_provider.dart';
 ///
 /// {
 ///   "weather":  { "name": "Auckland", "latitude": -36.8485, "longitude": 174.7633 },
-///   "jellyfin": { "url": "http://192.168.0.243:8096", "apiKey": "...", "userId": "..." },
+///   "jellyfin": { "url": "http://192.168.0.243:8096", "apiKey": "...", "userId": "...",
+///                 "client": "wholphin" },   // optional: app the rows open, "jellyfin" (default) or "wholphin"
 ///   "seerr":    { "url": "https://requests.example.com", "apiKey": "..." }
 /// }
 class ForkConfig {
@@ -68,8 +69,9 @@ class JellyfinConfig {
   final String url;
   final String apiKey;
   final String userId;
+  final JellyfinClient client;
 
-  const JellyfinConfig({required this.url, required this.apiKey, required this.userId});
+  const JellyfinConfig({required this.url, required this.apiKey, required this.userId, this.client = JellyfinClient.jellyfin});
 
   static JellyfinConfig? fromJson(Map<String, dynamic>? json) {
     if (json == null) return null;
@@ -77,8 +79,24 @@ class JellyfinConfig {
     final apiKey = json['apiKey'] as String? ?? '';
     final userId = json['userId'] as String? ?? '';
     if (url.isEmpty || apiKey.isEmpty || userId.isEmpty) return null;
-    return JellyfinConfig(url: url, apiKey: apiKey, userId: userId);
+    final client = json['client'] == 'wholphin' ? JellyfinClient.wholphin : JellyfinClient.jellyfin;
+    return JellyfinConfig(url: url, apiKey: apiKey, userId: userId, client: client);
   }
+}
+
+/// Which Android TV app a Jellyfin card opens.
+enum JellyfinClient {
+  jellyfin('org.jellyfin.androidtv'),
+  wholphin('com.github.damontecres.wholphin');
+
+  final String packageName;
+  const JellyfinClient(this.packageName);
+
+  /// Intent that opens [itemId]'s detail page in this app.
+  String itemIntentUri(String itemId) => switch (this) {
+        jellyfin => 'intent:#Intent;component=$packageName/.ui.startup.StartupActivity;S.ItemId=$itemId;end',
+        wholphin => 'intent://view?itemId=$itemId#Intent;scheme=wholphin;package=$packageName;end',
+      };
 }
 
 class SeerrConfig {
