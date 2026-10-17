@@ -591,6 +591,12 @@ public class MainActivity extends FlutterActivity {
     }
 
     private boolean startAmbientMode() {
+        // Ask TV Settings to start the screensaver, as its "sleep" voice command does.
+        if (tryStartActivity(new Intent("com.google.android.pano.action.SLEEP")
+                .addCategory(Intent.CATEGORY_DEFAULT))) {
+            return true;
+        }
+
         Intent intent = new Intent(Intent.ACTION_MAIN)
                 .setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
 
