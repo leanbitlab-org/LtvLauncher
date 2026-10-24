@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -58,13 +60,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dialogOptionBackButtonActionDoNothing => 'Hiçbir şey yapma';
 
   @override
-  String get dialogOptionBackButtonActionShowScreensaver => 'Ekran koruyucuyu göster';
+  String get dialogOptionBackButtonActionShowScreensaver =>
+      'Ekran koruyucuyu göster';
 
   @override
   String get dialogOptionBackButtonActionShowClock => 'Saati göster';
 
   @override
-  String get dialogTextNoFileExplorer => 'Resim seçmek için lütfen bir dosya gezgini yükleyin.';
+  String get dialogTextNoFileExplorer =>
+      'Resim seçmek için lütfen bir dosya gezgini yükleyin.';
 
   @override
   String get dialogTitleBackButtonAction => 'Geri düğmesi eylemini seçin';
@@ -168,7 +172,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get spacer => 'Ayırıcı';
 
   @override
-  String get spacerMaxHeightRequirement => '0\'dan büyük ve 500\'den küçük veya eşit olmalıdır';
+  String get spacerMaxHeightRequirement =>
+      '0\'dan büyük ve 500\'den küçük veya eşit olmalıdır';
 
   @override
   String get statusBar => 'Durum çubuğu';
@@ -189,10 +194,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get themes => 'Temalar';
 
   @override
-  String get hideHighlightOutlineOnHomescreen => 'Ana ekranda vurgu anahattını gizle';
+  String get hideHighlightOutlineOnHomescreen =>
+      'Ana ekranda vurgu anahattını gizle';
 
   @override
-  String get appSelectorTransitionAnimation => 'Uygulama seçici geçiş animasyonu';
+  String get appSelectorTransitionAnimation =>
+      'Uygulama seçici geçiş animasyonu';
 
   @override
   String get sort => 'Sırala';
@@ -212,7 +219,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get time => 'Saat';
 
   @override
-  String get titleStatusBarSettingsPage => 'Durum çubuğunda neyin görüntüleneceğini seçin';
+  String get titleStatusBarSettingsPage =>
+      'Durum çubuğunda neyin görüntüleneceğini seçin';
 
   @override
   String get tvApplications => 'TV Uygulamaları';
@@ -251,13 +259,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get defaultLauncherIsDefault => 'LTvLauncher varsayılan başlatıcıdır';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher varsayılan başlatıcı değildir';
+  String get defaultLauncherNotDefault =>
+      'LTvLauncher varsayılan başlatıcı değildir';
 
   @override
   String get setAsDefaultLauncher => 'Varsayılan başlatıcı olarak ayarla';
 
   @override
-  String get defaultLauncherDescription => 'Varsayılan başlatıcı olarak ayarlandığında, Ana Sayfa düğmesi her zaman LTvLauncher\'a döner. TV de doğrudan LTvLauncher\'da başlar.';
+  String get defaultLauncherDescription =>
+      'Varsayılan başlatıcı olarak ayarlandığında, Ana Sayfa düğmesi her zaman LTvLauncher\'a döner. TV de doğrudan LTvLauncher\'da başlar.';
 
   @override
   String get inputs => 'Girişler';
@@ -283,7 +293,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get importSuccess => 'Yedek başarıyla içe aktarıldı';
 
   @override
-  String get importConfirm => 'Yedeği içe aktarmak istediğinizden emin misiniz? Bu işlem mevcut ayarlarınızın ve düzeninizin üzerine yazacaktır.';
+  String get importConfirm =>
+      'Yedeği içe aktarmak istediğinizden emin misiniz? Bu işlem mevcut ayarlarınızın ve düzeninizin üzerine yazacaktır.';
 
   @override
   String importError(String error) {
@@ -299,7 +310,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shareBackup => 'Yedeği Paylaş';
 
   @override
-  String get shareBackupDescription => 'Yedeği yerel ağdaki diğer cihazlarla paylaş';
+  String get shareBackupDescription =>
+      'Yedeği yerel ağdaki diğer cihazlarla paylaş';
 
   @override
   String get stopSharing => 'Paylaşımı Durdur';
@@ -308,10 +320,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get localNetworkSharingActive => 'Yerel ağ paylaşımı etkin!';
 
   @override
-  String get localNetworkSharingInstructions => 'Başka bir cihazı aynı Wi-Fi ağına bağlayın ve bir web tarayıcısında aşağıdaki URL\'yi açın:';
+  String get localNetworkSharingInstructions =>
+      'Başka bir cihazı aynı Wi-Fi ağına bağlayın ve bir web tarayıcısında aşağıdaki URL\'yi açın:';
 
   @override
-  String get localNetworkSharingDetails => 'Buradan TV ayarlarınızı/düzeninizi indirebilir veya bir yedek dosyasını bu TV\'ye geri yükleyebilirsiniz.';
+  String get localNetworkSharingDetails =>
+      'Buradan TV ayarlarınızı/düzeninizi indirebilir veya bir yedek dosyasını bu TV\'ye geri yükleyebilirsiniz.';
 
   @override
   String failedToStartServer(String error) {
@@ -328,10 +342,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get continueWatching => 'İzlemeye Devam Et';
 
   @override
-  String get showContinueWatchingOnHome => 'Ana Ekranda İzlemeye Devam Et\'i göster';
+  String get showContinueWatchingOnHome =>
+      'Ana Ekranda İzlemeye Devam Et\'i göster';
 
   @override
-  String get permissionDeniedContinueWatching => 'İzlemeye Devam Et\'i göstermek için izin gerekli';
+  String get permissionDeniedContinueWatching =>
+      'İzlemeye Devam Et\'i göstermek için izin gerekli';
 
   @override
   String get interface => 'Arayüz';
@@ -379,7 +395,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get disabled => 'Devre Dışı';
 
   @override
-  String get showAppNamesBelowIcons => 'Uygulama adlarını simgelerin altında göster';
+  String get showAppNamesBelowIcons =>
+      'Uygulama adlarını simgelerin altında göster';
 
   @override
   String get dataUsage => 'Veri Kullanımı';
@@ -445,7 +462,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get hidePersistentNotifications => 'Kalıcı Bildirimleri Gizle';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Arka plan servisi ve sistem bildirimlerini gizle';
+  String get hidePersistentNotificationsDesc =>
+      'Arka plan servisi ve sistem bildirimlerini gizle';
 
   @override
   String get blockedNotificationApps => 'Engellenen Uygulamalar';
@@ -481,7 +499,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get fahrenheit => 'Fahrenheit (°F)';
 
   @override
-  String get breezyWeatherSetupHint => 'Hava durumu ve yağmur uyarılarını görmek için Breezy Weather\'ı yükleyin ve ayarlarından \'Yerel veri paylaşımı\' / \'Gadgetbridge\' özelliğini etkinleştirin.';
+  String get breezyWeatherSetupHint =>
+      'Hava durumu ve yağmur uyarılarını görmek için Breezy Weather\'ı yükleyin ve ayarlarından \'Yerel veri paylaşımı\' / \'Gadgetbridge\' özelliğini etkinleştirin.';
 
   @override
   String get displayAndScreensaver => 'Ekran ve Ekran Koruyucu';
@@ -490,10 +509,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get notifications => 'Bildirimler';
 
   @override
-  String get continueWatchingDescription => 'Son izlenen filmleri ve dizileri ana ekranda göster';
+  String get continueWatchingDescription =>
+      'Son izlenen filmleri ve dizileri ana ekranda göster';
 
   @override
-  String get continueWatchingPermissionDesc => 'TV uygulamalarından izleme geçmişini okumak için özel izin gereklidir:';
+  String get continueWatchingPermissionDesc =>
+      'TV uygulamalarından izleme geçmişini okumak için özel izin gereklidir:';
 
   @override
   String get requestPermission => 'İzin İste';
@@ -508,7 +529,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get notificationOptions => 'Bildirim Seçenekleri';
 
   @override
-  String get noBlockedAppsDesc => 'Şu anda tüm uygulamaların bildirim göstermesine izin veriliyor';
+  String get noBlockedAppsDesc =>
+      'Şu anda tüm uygulamaların bildirim göstermesine izin veriliyor';
 
   @override
   String get notificationsAllowed => 'Bildirimlere İzin Verildi';

@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -58,13 +60,15 @@ class AppLocalizationsHi extends AppLocalizations {
   String get dialogOptionBackButtonActionDoNothing => 'कुछ न करें';
 
   @override
-  String get dialogOptionBackButtonActionShowScreensaver => 'स्क्रीनसेवर दिखाएं';
+  String get dialogOptionBackButtonActionShowScreensaver =>
+      'स्क्रीनसेवर दिखाएं';
 
   @override
   String get dialogOptionBackButtonActionShowClock => 'घड़ी दिखाएं';
 
   @override
-  String get dialogTextNoFileExplorer => 'कृपया चित्र चुनने के लिए फ़ाइल एक्सप्लोरर इंस्टॉल करें।';
+  String get dialogTextNoFileExplorer =>
+      'कृपया चित्र चुनने के लिए फ़ाइल एक्सप्लोरर इंस्टॉल करें।';
 
   @override
   String get dialogTitleBackButtonAction => 'बैक बटन एक्शन चुनें';
@@ -168,7 +172,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get spacer => 'स्पेसर';
 
   @override
-  String get spacerMaxHeightRequirement => '0 से अधिक और 500 से कम या बराबर होना चाहिए';
+  String get spacerMaxHeightRequirement =>
+      '0 से अधिक और 500 से कम या बराबर होना चाहिए';
 
   @override
   String get statusBar => 'स्टेटस बार';
@@ -189,7 +194,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get themes => 'थीम';
 
   @override
-  String get hideHighlightOutlineOnHomescreen => 'होम स्क्रीन पर हाइलाइट आउटलाइन छिपाएं';
+  String get hideHighlightOutlineOnHomescreen =>
+      'होम स्क्रीन पर हाइलाइट आउटलाइन छिपाएं';
 
   @override
   String get appSelectorTransitionAnimation => 'ऐप सेलेक्टर ट्रांज़िशन एनिमेशन';
@@ -212,7 +218,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get time => 'समय';
 
   @override
-  String get titleStatusBarSettingsPage => 'चुनें कि स्टेटस बार में क्या दिखाना है';
+  String get titleStatusBarSettingsPage =>
+      'चुनें कि स्टेटस बार में क्या दिखाना है';
 
   @override
   String get tvApplications => 'टीवी ऐप्स';
@@ -257,7 +264,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get setAsDefaultLauncher => 'डिफ़ॉल्ट लॉन्चर के रूप में सेट करें';
 
   @override
-  String get defaultLauncherDescription => 'डिफ़ॉल्ट लॉन्चर के रूप में सेट होने पर, होम बटन हमेशा LTvLauncher पर वापस आएगा। टीवी भी सीधे LTvLauncher में बूट होगा।';
+  String get defaultLauncherDescription =>
+      'डिफ़ॉल्ट लॉन्चर के रूप में सेट होने पर, होम बटन हमेशा LTvLauncher पर वापस आएगा। टीवी भी सीधे LTvLauncher में बूट होगा।';
 
   @override
   String get inputs => 'इनपुट';
@@ -283,7 +291,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get importSuccess => 'बैकअप सफलतापूर्वक आयात किया गया';
 
   @override
-  String get importConfirm => 'क्या आप वाकई बैकअप आयात करना चाहते हैं? यह आपकी वर्तमान सेटिंग्स और लेआउट को ओवरराइट कर देगा।';
+  String get importConfirm =>
+      'क्या आप वाकई बैकअप आयात करना चाहते हैं? यह आपकी वर्तमान सेटिंग्स और लेआउट को ओवरराइट कर देगा।';
 
   @override
   String importError(String error) {
@@ -299,7 +308,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get shareBackup => 'बैकअप साझा करें';
 
   @override
-  String get shareBackupDescription => 'स्थानीय नेटवर्क पर अन्य डिवाइसों के साथ बैकअप साझा करें';
+  String get shareBackupDescription =>
+      'स्थानीय नेटवर्क पर अन्य डिवाइसों के साथ बैकअप साझा करें';
 
   @override
   String get stopSharing => 'साझा करना बंद करें';
@@ -308,10 +318,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get localNetworkSharingActive => 'स्थानीय नेटवर्क साझाकरण सक्रिय है!';
 
   @override
-  String get localNetworkSharingInstructions => 'किसी अन्य डिवाइस को उसी Wi-Fi नेटवर्क से कनेक्ट करें और वेब ब्राउज़र में निम्न URL खोलें:';
+  String get localNetworkSharingInstructions =>
+      'किसी अन्य डिवाइस को उसी Wi-Fi नेटवर्क से कनेक्ट करें और वेब ब्राउज़र में निम्न URL खोलें:';
 
   @override
-  String get localNetworkSharingDetails => 'यहां आप अपने टीवी की सेटिंग्स/लेआउट डाउनलोड कर सकते हैं या बैकअप फ़ाइल को इस टीवी पर वापस अपलोड कर सकते हैं।';
+  String get localNetworkSharingDetails =>
+      'यहां आप अपने टीवी की सेटिंग्स/लेआउट डाउनलोड कर सकते हैं या बैकअप फ़ाइल को इस टीवी पर वापस अपलोड कर सकते हैं।';
 
   @override
   String failedToStartServer(String error) {
@@ -331,7 +343,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get showContinueWatchingOnHome => 'होम पर \'देखना जारी रखें\' दिखाएं';
 
   @override
-  String get permissionDeniedContinueWatching => '\'देखना जारी रखें\' दिखाने के लिए अनुमति आवश्यक है';
+  String get permissionDeniedContinueWatching =>
+      '\'देखना जारी रखें\' दिखाने के लिए अनुमति आवश्यक है';
 
   @override
   String get interface => 'इंटरफ़ेस';
@@ -445,7 +458,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get hidePersistentNotifications => 'स्थायी सूचनाएं छिपाएं';
 
   @override
-  String get hidePersistentNotificationsDesc => 'पृष्ठभूमि सेवा और सिस्टम सूचनाएं छिपाएं';
+  String get hidePersistentNotificationsDesc =>
+      'पृष्ठभूमि सेवा और सिस्टम सूचनाएं छिपाएं';
 
   @override
   String get blockedNotificationApps => 'अवरुद्ध ऐप्स';
@@ -481,7 +495,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get fahrenheit => 'फ़ारेनहाइट (°F)';
 
   @override
-  String get breezyWeatherSetupHint => 'मौसम और बारिश की चेतावनी देखने के लिए Breezy Weather इंस्टॉल करें और उसकी सेटिंग्स में \'स्थानीय डेटा साझाकरण\' सक्षम करें।';
+  String get breezyWeatherSetupHint =>
+      'मौसम और बारिश की चेतावनी देखने के लिए Breezy Weather इंस्टॉल करें और उसकी सेटिंग्स में \'स्थानीय डेटा साझाकरण\' सक्षम करें।';
 
   @override
   String get displayAndScreensaver => 'डिस्प्ले और स्क्रीनसेवर';
@@ -490,10 +505,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get notifications => 'सूचनाएं';
 
   @override
-  String get continueWatchingDescription => 'होम स्क्रीन पर हाल ही में देखी गई फिल्में और टीवी शो दिखाएं';
+  String get continueWatchingDescription =>
+      'होम स्क्रीन पर हाल ही में देखी गई फिल्में और टीवी शो दिखाएं';
 
   @override
-  String get continueWatchingPermissionDesc => 'टीवी ऐप्स से देखने का इतिहास पढ़ने के लिए विशेष अनुमति की आवश्यकता है:';
+  String get continueWatchingPermissionDesc =>
+      'टीवी ऐप्स से देखने का इतिहास पढ़ने के लिए विशेष अनुमति की आवश्यकता है:';
 
   @override
   String get requestPermission => 'अनुमति का अनुरोध करें';
@@ -508,7 +525,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get notificationOptions => 'सूचना विकल्प';
 
   @override
-  String get noBlockedAppsDesc => 'सभी ऐप्स को वर्तमान में सूचनाएं दिखाने की अनुमति है';
+  String get noBlockedAppsDesc =>
+      'सभी ऐप्स को वर्तमान में सूचनाएं दिखाने की अनुमति है';
 
   @override
   String get notificationsAllowed => 'सूचनाएं चालू हैं';
