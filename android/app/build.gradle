@@ -69,8 +69,8 @@ android {
 
     defaultConfig {
         applicationId "com.leanbitlab.ltvL"
-        compileSdk 35
-        minSdk 21
+        compileSdk 37
+        minSdkVersion flutter.minSdkVersion
         targetSdk 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -102,13 +102,22 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             if (hasKeystore) {
                 signingConfig signingConfigs.release
             }
             ndk {
                 abiFilters 'armeabi-v7a', 'arm64-v8a'
             }
+        }
+    }
+
+    // Keep native libraries compressed, as they were with minSdk 21. Stored
+    // uncompressed (AGP's default from minSdk 23), they double every APK and
+    // push the universal APK past IzzyOnDroid's 30 MB limit.
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
         }
     }
 

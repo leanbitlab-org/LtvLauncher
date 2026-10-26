@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -19,7 +21,8 @@ class AppLocalizationsSl extends AppLocalizations {
   String get alphabetical => 'Po abecedi';
 
   @override
-  String get appCardHighlightAnimation => 'Animacija označevanja kartice aplikacije';
+  String get appCardHighlightAnimation =>
+      'Animacija označevanja kartice aplikacije';
 
   @override
   String get appInfo => 'Podatki o aplikaciji';
@@ -58,13 +61,15 @@ class AppLocalizationsSl extends AppLocalizations {
   String get dialogOptionBackButtonActionDoNothing => 'Ne naredi ničesar';
 
   @override
-  String get dialogOptionBackButtonActionShowScreensaver => 'Prikaži ohranjevalnik zaslona';
+  String get dialogOptionBackButtonActionShowScreensaver =>
+      'Prikaži ohranjevalnik zaslona';
 
   @override
   String get dialogOptionBackButtonActionShowClock => 'Prikaži uro';
 
   @override
-  String get dialogTextNoFileExplorer => 'Za izbiro slike namestite raziskovalec datotek.';
+  String get dialogTextNoFileExplorer =>
+      'Za izbiro slike namestite raziskovalec datotek.';
 
   @override
   String get dialogTitleBackButtonAction => 'Izberite dejanje gumba Nazaj';
@@ -168,7 +173,8 @@ class AppLocalizationsSl extends AppLocalizations {
   String get spacer => 'Presledek';
 
   @override
-  String get spacerMaxHeightRequirement => 'Mora biti večje od 0 in manjše ali enako 500';
+  String get spacerMaxHeightRequirement =>
+      'Mora biti večje od 0 in manjše ali enako 500';
 
   @override
   String get statusBar => 'Vrstica stanja';
@@ -189,10 +195,12 @@ class AppLocalizationsSl extends AppLocalizations {
   String get themes => 'Teme';
 
   @override
-  String get hideHighlightOutlineOnHomescreen => 'Skrij obrobo poudarka na domačem zaslonu';
+  String get hideHighlightOutlineOnHomescreen =>
+      'Skrij obrobo poudarka na domačem zaslonu';
 
   @override
-  String get appSelectorTransitionAnimation => 'Prehodna animacija izbirnika aplikacij';
+  String get appSelectorTransitionAnimation =>
+      'Prehodna animacija izbirnika aplikacij';
 
   @override
   String get sort => 'Razvrsti';
@@ -212,7 +220,8 @@ class AppLocalizationsSl extends AppLocalizations {
   String get time => 'Čas';
 
   @override
-  String get titleStatusBarSettingsPage => 'Izberite, kaj naj bo prikazano v vrstici stanja';
+  String get titleStatusBarSettingsPage =>
+      'Izberite, kaj naj bo prikazano v vrstici stanja';
 
   @override
   String get tvApplications => 'TV aplikacije';
@@ -257,7 +266,8 @@ class AppLocalizationsSl extends AppLocalizations {
   String get setAsDefaultLauncher => 'Nastavi kot privzeti zaganjalnik';
 
   @override
-  String get defaultLauncherDescription => 'Ko je nastavljen kot privzeti zaganjalnik, se s pritiskom na gumb Domov vedno vrnete v LTvLauncher. TV se bo zagnal neposredno v LTvLauncher.';
+  String get defaultLauncherDescription =>
+      'Ko je nastavljen kot privzeti zaganjalnik, se s pritiskom na gumb Domov vedno vrnete v LTvLauncher. TV se bo zagnal neposredno v LTvLauncher.';
 
   @override
   String get inputs => 'Vhodi';
@@ -283,7 +293,8 @@ class AppLocalizationsSl extends AppLocalizations {
   String get importSuccess => 'Varnostna kopija uspešno uvožena';
 
   @override
-  String get importConfirm => 'Ali ste prepričani, da želite uvoziti varnostno kopijo? To bo prepisalo vaše trenutne nastavitve in postavitev.';
+  String get importConfirm =>
+      'Ali ste prepričani, da želite uvoziti varnostno kopijo? To bo prepisalo vaše trenutne nastavitve in postavitev.';
 
   @override
   String importError(String error) {
@@ -299,19 +310,23 @@ class AppLocalizationsSl extends AppLocalizations {
   String get shareBackup => 'Deli varnostno kopijo';
 
   @override
-  String get shareBackupDescription => 'Deli varnostno kopijo z drugimi napravami v lokalnem omrežju';
+  String get shareBackupDescription =>
+      'Deli varnostno kopijo z drugimi napravami v lokalnem omrežju';
 
   @override
   String get stopSharing => 'Ustavi deljenje';
 
   @override
-  String get localNetworkSharingActive => 'Deljenje v lokalnem omrežju je aktivno!';
+  String get localNetworkSharingActive =>
+      'Deljenje v lokalnem omrežju je aktivno!';
 
   @override
-  String get localNetworkSharingInstructions => 'Povežite drugo napravo v isto omrežje Wi-Fi in v spletnem brskalniku odprite naslednji naslov URL:';
+  String get localNetworkSharingInstructions =>
+      'Povežite drugo napravo v isto omrežje Wi-Fi in v spletnem brskalniku odprite naslednji naslov URL:';
 
   @override
-  String get localNetworkSharingDetails => 'Tukaj lahko prenesete nastavitve/postavitev televizorja ali naložite datoteko varnostne kopije nazaj na ta televizor.';
+  String get localNetworkSharingDetails =>
+      'Tukaj lahko prenesete nastavitve/postavitev televizorja ali naložite datoteko varnostne kopije nazaj na ta televizor.';
 
   @override
   String failedToStartServer(String error) {
@@ -328,10 +343,12 @@ class AppLocalizationsSl extends AppLocalizations {
   String get continueWatching => 'Nadaljuj z ogledom';
 
   @override
-  String get showContinueWatchingOnHome => 'Prikaži Nadaljuj z ogledom na domačem zaslonu';
+  String get showContinueWatchingOnHome =>
+      'Prikaži Nadaljuj z ogledom na domačem zaslonu';
 
   @override
-  String get permissionDeniedContinueWatching => 'Za prikaz Nadaljuj z ogledom je potrebno dovoljenje';
+  String get permissionDeniedContinueWatching =>
+      'Za prikaz Nadaljuj z ogledom je potrebno dovoljenje';
 
   @override
   String get interface => 'Vmesnik';
@@ -361,19 +378,22 @@ class AppLocalizationsSl extends AppLocalizations {
   String get screensaverAnimationBounce => 'DVD Bounce';
 
   @override
-  String get screensaverAnimationBounceSubtitle => 'Classic floating DVD logo bounce with wall color shifts';
+  String get screensaverAnimationBounceSubtitle =>
+      'Classic floating DVD logo bounce with wall color shifts';
 
   @override
   String get screensaverAnimationFade => 'Minimal Fade';
 
   @override
-  String get screensaverAnimationFadeSubtitle => 'Smooth fade out and in at new positions';
+  String get screensaverAnimationFadeSubtitle =>
+      'Smooth fade out and in at new positions';
 
   @override
   String get screensaverAnimationScatter => 'Character Scatter';
 
   @override
-  String get screensaverAnimationScatterSubtitle => 'Playful bouncing characters';
+  String get screensaverAnimationScatterSubtitle =>
+      'Playful bouncing characters';
 
   @override
   String get dataUsagePeriod => 'Obdobje porabe podatkov';
@@ -469,7 +489,8 @@ class AppLocalizationsSl extends AppLocalizations {
   String get hidePersistentNotifications => 'Skrij trajna obvestila';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Skrij obvestila trajnih storitev v ozadju in sistemska obvestila';
+  String get hidePersistentNotificationsDesc =>
+      'Skrij obvestila trajnih storitev v ozadju in sistemska obvestila';
 
   @override
   String get blockedNotificationApps => 'Blokirane aplikacije';
@@ -505,7 +526,8 @@ class AppLocalizationsSl extends AppLocalizations {
   String get fahrenheit => 'Fahrenheit (°F)';
 
   @override
-  String get breezyWeatherSetupHint => 'Namestite Breezy Weather in v njegovih nastavitvah omogočite »Lokalna skupna raba podatkov« / »Gadgetbridge«, da boste videli opozorila za vreme in dež.';
+  String get breezyWeatherSetupHint =>
+      'Namestite Breezy Weather in v njegovih nastavitvah omogočite »Lokalna skupna raba podatkov« / »Gadgetbridge«, da boste videli opozorila za vreme in dež.';
 
   @override
   String get displayAndScreensaver => 'Zaslon in ohranjevalnik';
@@ -514,10 +536,12 @@ class AppLocalizationsSl extends AppLocalizations {
   String get notifications => 'Obvestila';
 
   @override
-  String get continueWatchingDescription => 'Prikaži nedavno gledane filme in TV-oddaje iz podprtih aplikacij na domačem zaslonu';
+  String get continueWatchingDescription =>
+      'Prikaži nedavno gledane filme in TV-oddaje iz podprtih aplikacij na domačem zaslonu';
 
   @override
-  String get continueWatchingPermissionDesc => 'Za branje zgodovine ogledov iz TV aplikacij je potrebno posebno dovoljenje. Odobrite ga lahko s spodnjim gumbom ali prek ADB:';
+  String get continueWatchingPermissionDesc =>
+      'Za branje zgodovine ogledov iz TV aplikacij je potrebno posebno dovoljenje. Odobrite ga lahko s spodnjim gumbom ali prek ADB:';
 
   @override
   String get requestPermission => 'Zahtevaj dovoljenje';
@@ -532,7 +556,8 @@ class AppLocalizationsSl extends AppLocalizations {
   String get notificationOptions => 'Možnosti obvestil';
 
   @override
-  String get noBlockedAppsDesc => 'Vsem aplikacijam je trenutno dovoljeno prikazovanje obvestil';
+  String get noBlockedAppsDesc =>
+      'Vsem aplikacijam je trenutno dovoljeno prikazovanje obvestil';
 
   @override
   String get notificationsAllowed => 'Obvestila dovoljena';

@@ -67,6 +67,12 @@ class BackupService {
       addDir(await getDownloadsDirectory());
     } catch (_) {}
     try {
+      // Before path_provider_android 2.3, getDownloadsDirectory() returned
+      // <external files>/downloads; keep listing backups exported there.
+      final external = await getExternalStorageDirectory();
+      if (external != null) addDir(Directory(path.join(external.path, 'downloads')));
+    } catch (_) {}
+    try {
       addDir(await getExternalStorageDirectory());
     } catch (_) {}
     try {
@@ -116,6 +122,9 @@ class BackupService {
     final List<Directory> searchDirs = await getSearchDirectories();
     final List<BackupFileEntry> entries = [];
     final Set<String> seenPaths = {};
+    // One export can be reachable from several folders (app storage, the public
+    // Download copy and its /sdcard alias); list each backup once.
+    final Set<String> seenBackups = {};
 
     for (final dir in searchDirs) {
       if (!await dir.exists()) continue;
@@ -127,6 +136,7 @@ class BackupService {
               try {
                 final lastModified = await entity.lastModified();
                 final size = await entity.length();
+                if (!seenBackups.add('$name|$size')) continue;
                 entries.add(BackupFileEntry(
                   file: entity,
                   name: name,

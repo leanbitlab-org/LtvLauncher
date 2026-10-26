@@ -7,6 +7,8 @@ import 'package:flauncher/models/category.dart';
 import 'package:flauncher/providers/backup_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_preferences_platform_interface/shared_preferences_platform_interface.dart';
 
@@ -172,4 +174,54 @@ void main() {
     expect(categories[0].sort, CategorySort.manual);
     expect(categories[0].type, CategoryType.grid);
   });
+
+  test("Backup list includes backups exported before path_provider_android 2.3 moved the downloads folder", () async {
+    final originalPathProvider = PathProviderPlatform.instance;
+    addTearDown(() => PathProviderPlatform.instance = originalPathProvider);
+    final externalDir = Directory('${tempDir.path}/external')..createSync();
+    PathProviderPlatform.instance = _AndroidPathProviderPlatform(externalDir.path, tempDir.path);
+
+    // Older releases exported to <external files>/downloads; current ones use <external files>/Download.
+    final legacyDir = Directory('${externalDir.path}/downloads')..createSync();
+    final currentDir = Directory('${externalDir.path}/Download')..createSync();
+    File('${legacyDir.path}/ltv_backup_20260501_120000.json').writeAsStringSync('{}');
+    File('${currentDir.path}/ltv_backup_20261024_120000.json').writeAsStringSync('{}');
+
+    final names = (await backupService.getBackupFiles()).map((entry) => entry.name);
+
+    expect(names, containsAll(["ltv_backup_20260501_120000.json", "ltv_backup_20261024_120000.json"]));
+  });
+
+  test("Backup list shows a backup once when several folders hold a copy of it", () async {
+    final originalPathProvider = PathProviderPlatform.instance;
+    addTearDown(() => PathProviderPlatform.instance = originalPathProvider);
+    final externalDir = Directory('${tempDir.path}/external')..createSync();
+    PathProviderPlatform.instance = _AndroidPathProviderPlatform(externalDir.path, tempDir.path);
+
+    final downloadDir = Directory('${externalDir.path}/Download')..createSync();
+    File('${downloadDir.path}/ltv_backup_20261024_120000.json').writeAsStringSync('{"version": 1}');
+    File('${tempDir.path}/ltv_backup_20261024_120000.json').writeAsStringSync('{"version": 1}');
+    File('${downloadDir.path}/ltv_backup_20261024_130000.json').writeAsStringSync('{"version": 1}');
+
+    final names = (await backupService.getBackupFiles()).map((entry) => entry.name).toList();
+
+    expect(names..sort(), ["ltv_backup_20261024_120000.json", "ltv_backup_20261024_130000.json"]);
+  });
+}
+
+/// Mirrors path_provider_android 2.3+, which maps getDownloadsDirectory() to `<external files>/Download`.
+class _AndroidPathProviderPlatform extends Fake with MockPlatformInterfaceMixin implements PathProviderPlatform {
+  final String externalStoragePath;
+  final String documentsPath;
+
+  _AndroidPathProviderPlatform(this.externalStoragePath, this.documentsPath);
+
+  @override
+  Future<String?> getExternalStoragePath() async => externalStoragePath;
+
+  @override
+  Future<String?> getDownloadsPath() async => '$externalStoragePath/Download';
+
+  @override
+  Future<String?> getApplicationDocumentsPath() async => documentsPath;
 }
