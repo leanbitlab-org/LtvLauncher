@@ -171,6 +171,83 @@ void main() {
       expect(appsInCategory[2].packageName, "app.3");
     });
 
+    test("hidden app stays hidden when it updates", () async {
+      final channel = MockFLauncherChannel();
+      final database = MockFLauncherDatabase();
+
+      final visibleApp = App(
+          packageName: "app.1", name: "App 1", version: "1.0.0", hidden: false);
+      final hiddenApp = App(
+          packageName: "app.hidden",
+          name: "Hidden App",
+          version: "1.0.0",
+          hidden: true);
+      final category = Category(id: 1, name: "Test Category", order: 0);
+      final updatedHiddenAppInfo = {
+        'packageName': 'app.hidden',
+        'name': 'Hidden App',
+        'version': '1.0.1',
+        'sideloaded': false
+      };
+
+      when(channel.getApplications()).thenAnswer((_) => Future.value([
+            {
+              'packageName': 'app.1',
+              'name': 'App 1',
+              'version': '1.0.0',
+              'sideloaded': false
+            },
+            {
+              'packageName': 'app.hidden',
+              'name': 'Hidden App',
+              'version': '1.0.0',
+              'sideloaded': false
+            },
+          ]));
+      when(channel.getApplicationIcon(any))
+          .thenAnswer((_) => Future.value(Uint8List(0)));
+      when(channel.getApplicationBanner(any))
+          .thenAnswer((_) => Future.value(Uint8List(0)));
+
+      when(database.getApplications())
+          .thenAnswer((_) => Future.value([visibleApp, hiddenApp]));
+      when(database.getCategories())
+          .thenAnswer((_) => Future.value([category]));
+      when(database.getAppsCategories()).thenAnswer((_) => Future.value([
+            AppCategory(categoryId: 1, appPackageName: "app.1", order: 0),
+            AppCategory(categoryId: 1, appPackageName: "app.hidden", order: 1),
+          ]));
+      when(database.getLauncherSpacers()).thenAnswer((_) => Future.value([]));
+      when(database.transaction(any)).thenAnswer(
+          (realInvocation) => realInvocation.positionalArguments[0]());
+      when(database.wasCreated).thenReturn(false);
+      when(database.persistApps(any)).thenAnswer((_) => Future.value());
+      when(database.deleteApps(any)).thenAnswer((_) => Future.value());
+
+      final appsService = AppsService(channel, database);
+      while (!appsService.initialized) {
+        await Future.delayed(const Duration(milliseconds: 10));
+      }
+      final dynamic onAppsChanged =
+          verify(channel.addAppsChangedListener(captureAny)).captured.single;
+      List<String> appsInCategory() => appsService.categories[0].applications
+          .map((app) => app.packageName)
+          .toList();
+
+      expect(appsInCategory(), ["app.1"]);
+
+      // What Android reports when an installed app is updated.
+      await onAppsChanged(
+          {'action': 'PACKAGE_CHANGED', 'activityInfo': updatedHiddenAppInfo});
+      expect(appsInCategory(), ["app.1"]);
+
+      await onAppsChanged({
+        'action': 'PACKAGES_AVAILABLE',
+        'activitiesInfo': [updatedHiddenAppInfo]
+      });
+      expect(appsInCategory(), ["app.1"]);
+    });
+
     test("saveApplicationOrderInCategory updates local categoryOrders map",
         () async {
       final channel = MockFLauncherChannel();

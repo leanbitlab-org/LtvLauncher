@@ -131,7 +131,7 @@ class AppsService extends ChangeNotifier {
                 int index = category.applications.indexOf(existingApp);
                 if (index != -1) {
                   category.applications[index] = newApp;
-                } else {
+                } else if (!newApp.hidden) {
                   category.applications.add(newApp);
                 }
               }
@@ -165,7 +165,7 @@ class AppsService extends ChangeNotifier {
                   int index = category.applications.indexOf(existingApp);
                   if (index != -1) {
                     category.applications[index] = newApp;
-                  } else {
+                  } else if (!newApp.hidden) {
                     category.applications.add(newApp);
                   }
                 }
