@@ -209,6 +209,7 @@
     "arabic": "Arabic",
     "turkish": "Turkish",
     "slovenian": "Slovenian",
+    "hebrew": "Hebrew",
     "hidePersistentNotifications": "Hide Persistent Notifications",
     "hidePersistentNotificationsDesc": "Hide ongoing background service and system notifications",
     "blockedNotificationApps": "Blocked Apps",

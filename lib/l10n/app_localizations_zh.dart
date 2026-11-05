@@ -466,6 +466,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get slovenian => '斯洛文尼亚语';
 
   @override
+  String get hebrew => '希伯来语';
+
+  @override
   String get hidePersistentNotifications => '隐藏常驻通知';
 
   @override

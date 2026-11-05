@@ -1,0 +1,240 @@
+{
+    "aboutFlauncher": "אודות LTvLauncher",
+    "addCategory": "הוספת קטגוריה",
+    "addSection": "הוספת מקטע",
+    "alphabetical": "לפי סדר אלפביתי",
+    "appCardHighlightAnimation": "אנימציית הדגשת כרטיס אפליקציה",
+    "appInfo": "פרטי אפליקציה",
+    "appKeyClick": "צליל לחיצה בהקשת מקש",
+    "applications": "אפליקציות",
+    "autoHideAppBar": "הסתרה אוטומטית של שורת המצב",
+    "backButtonAction": "פעולת כפתור חזרה",
+    "category": "קטגוריה",
+    "categories": "קטגוריות",
+    "columnCount": "מספר עמודות",
+    "date": "תאריך",
+    "dateAndTimeFormat": "תבנית תאריך ושעה",
+    "delete": "מחיקה",
+    "dialogOptionBackButtonActionDoNothing": "אל תעשה דבר",
+    "dialogOptionBackButtonActionShowScreensaver": "הצגת שומר מסך",
+    "dialogOptionBackButtonActionShowClock": "הצגת שעון",
+    "dialogTextNoFileExplorer": "נא להתקין סייר קבצים כדי לבחור תמונה.",
+    "dialogTitleBackButtonAction": "בחירת פעולת כפתור חזרה",
+    "disambiguateCategoryTitle": "{title} (קטגוריה)",
+    "@disambiguateCategoryTitle": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "formattedDate": "תאריך מפורמט: {dateString}",
+    "@formattedDate": {
+        "placeholders": {
+            "dateString": {
+                "type": "String"
+            }
+        }
+    },
+    "formattedTime": "שעה מפורמטת: {timeString}",
+    "@formattedTime": {
+        "placeholders": {
+            "timeString": {
+                "type": "String"
+            }
+        }
+    },
+    "gradient": "גרדיאנט",
+    "favoriteApps": "אפליקציות מועדפות",
+    "grid": "רשת",
+    "height": "גובה",
+    "hide": "הסתרה",
+    "hiddenApplications": "אפליקציות מוסתרות",
+    "launcherSections": "מקטעים",
+    "layout": "פריסה",
+    "loading": "טוען...",
+    "manual": "ידני",
+    "modifySection": "עריכת מקטע",
+    "mustNotBeEmpty": "אינו יכול להיות ריק",
+    "name": "שם",
+    "newSection": "מקטע חדש",
+    "noDateFormatSpecified": "לא צוינה תבנית תאריך",
+    "noTimeFormatSpecified": "לא צוינה תבנית שעה",
+    "nonTvApplications": "אפליקציות שאינן לטלוויזיה",
+    "open": "פתיחה",
+    "orSelectFormatSpecifiers": "או בחר מזהי תבנית",
+    "picture": "תמונה",
+    "removeFrom": "הסרה מ-{name}",
+    "@removeFrom": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "renameCategory": "שינוי שם קטגוריה",
+    "reorder": "שינוי סדר",
+    "row": "שורה",
+    "rowHeight": "גובה שורה",
+    "save": "שמירה",
+    "spacer": "מרווח",
+    "spacerMaxHeightRequirement": "חייב להיות גדול מ-0 וקטן או שווה ל-500",
+    "statusBar": "שורת מצב",
+    "settings": "הגדרות",
+    "show": "הצגה",
+    "showCategoryTitles": "הצגת שמות קטגוריות",
+    "showCategoryAppCount": "הצגת מספר אפליקציות בקטגוריות",
+    "themes": "ערכות נושא",
+    "hideHighlightOutlineOnHomescreen": "הסתרת מסגרת הדגשה במסך הבית",
+    "appSelectorTransitionAnimation": "אנימציית מעבר בבחירת אפליקציות",
+    "sort": "מיון",
+    "systemSettings": "הגדרות מערכת",
+    "textAboutDialog": "LTvLauncher הוא מסך בית מותאם אישית בקוד פתוח עבור Android TV, המבוסס על FLauncher.\n\nפותח על ידי LeanBitLab.\nקוד המקור זמין ב-{repoUrl}.",
+    "@textAboutDialog": {
+        "placeholders": {
+            "repoUrl": {
+                "type": "String"
+            }
+        }
+    },
+    "textEmptyCategory": "קטגוריה זו ריקה.",
+    "time": "שעה",
+    "titleStatusBarSettingsPage": "בחירת הפריטים להצגה בשורת המצב",
+    "tvApplications": "אפליקציות טלוויזיה",
+    "type": "סוג",
+    "typeInTheDateFormat": "הקלד את תבנית התאריך",
+    "typeInTheHourFormat": "הקלד את תבנית השעה",
+    "uninstall": "הסרת התקנה",
+    "wallpaper": "טפט",
+    "withEllipsisAddTo": "הוספה אל...",
+    "timeBasedWallpaper": "טפט מבוסס זמן",
+    "pickDayWallpaper": "בחירת טפט ליום",
+    "pickNightWallpaper": "בחירת טפט ללילה",
+    "accessibility": "נגישות",
+    "defaultLauncherIsDefault": "LTvLauncher הוא מסך הבית המוגדר כברירת מחדל",
+    "defaultLauncherNotDefault": "LTvLauncher אינו מוגדר כמסך הבית כברירת מחדל",
+    "setAsDefaultLauncher": "הגדרה כמסך הבית כברירת מחדל",
+    "defaultLauncherDescription": "כאשר מוגדר כמסך הבית כברירת מחדל, כפתור הבית תמיד יחזיר אל LTvLauncher. הטלוויזיה גם תופעל ישירות לתוך LTvLauncher.",
+    "inputs": "כניסות",
+    "inputSources": "מקורות קלט",
+    "backupAndRestore": "גיבוי ושחזור",
+    "exportBackup": "ייצוא גיבוי",
+    "importBackup": "ייבוא גיבוי",
+    "exportSuccess": "הגיבוי יוצא בהצלחה אל {path}",
+    "@exportSuccess": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "importSuccess": "הגיבוי יובא בהצלחה",
+    "importConfirm": "האם אתה בטוח שברצונך לייבא את הגיבוי? פעולה זו תחליף את ההגדרות והפריסה הנוכחיות שלך.",
+    "importError": "ייבוא הגיבוי נכשל: {error}",
+    "@importError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "exportError": "ייצוא הגיבוי נכשל: {error}",
+    "@exportError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "shareBackup": "שיתוף גיבוי",
+    "shareBackupDescription": "שיתוף הגיבוי עם מכשירים אחרים ברשת המקומית",
+    "stopSharing": "הפסקת שיתוף",
+    "localNetworkSharingActive": "שיתוף ברשת המקומית פעיל!",
+    "localNetworkSharingInstructions": "חבר מכשיר נוסף לאותה רשת Wi-Fi ופתח את הכתובת הבאה בדפדפן האינטרנט:",
+    "localNetworkSharingDetails": "כאן תוכל להוריד את הגדרות ופריסת הטלוויזיה שלך או להעלות קובץ גיבוי בחזרה לטלוויזיה זו.",
+    "failedToStartServer": "הפעלת שרת השיתוף נכשלה: {error}",
+    "@failedToStartServer": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationBell": "פעמון התראות",
+    "autoHideNotificationBell": "הסתרה אוטומטית של פעמון ההתראות",
+    "continueWatching": "המשך צפייה",
+    "showContinueWatchingOnHome": "הצגת 'המשך צפייה' במסך הבית",
+    "permissionDeniedContinueWatching": "נדרשת הרשאה להצגת 'המשך צפייה'",
+    "interface": "ממשק",
+    "system": "מערכת",
+    "accentColor": "צבע הדגשה",
+    "miscellaneous": "שונות",
+    "brightnessScheduler": "מתזמן בהירות",
+    "screensaverSettings": "הגדרות שומר מסך",
+    "screensaverClockStyle": "סגנון שעון שומר מסך",
+    "screensaverAnimation": "אנימציית שומר מסך",
+    "screensaverAnimationBounce": "הקפצת DVD",
+    "screensaverAnimationBounceSubtitle": "הקפצה קלאסית של לוגו DVD מרחף עם שינויי צבע בקירות",
+    "screensaverAnimationFade": "עמעום מינימלי",
+    "screensaverAnimationFadeSubtitle": "עמעום חלק פנימה והחוצה במיקומים חדשים",
+    "screensaverAnimationScatter": "פיזור תווים",
+    "screensaverAnimationScatterSubtitle": "תווים קופצים ומשעשעים",
+    "dataUsagePeriod": "תקופת שימוש בנתונים",
+    "notificationAccess": "גישה להתראות",
+    "granted": "אושר",
+    "permissionRequired": "נדרשת הרשאה",
+    "systemWidePopupAlert": "התראת חלון קופץ בכלל המערכת",
+    "overlayPermissionRequired": "נדרשת הרשאת תצוגה מעל יישומים אחרים (Overlay)",
+    "enabled": "מופעל",
+    "disabled": "מושבת",
+    "showAppNamesBelowIcons": "הצגת שמות אפליקציות מתחת לסמלים",
+    "dataUsage": "שימוש בנתונים",
+    "networkIndicator": "מחוון רשת",
+    "homeButtonFix": "תיקון כפתור הבית (Google TV)",
+    "startOnBoot": "הפעלה בעת אתחול המכשיר (Google TV / Fire TV)",
+    "appLanguage": "שפה",
+    "systemDefault": "ברירת מחדל של המערכת",
+    "english": "אנגלית",
+    "spanish": "ספרדית",
+    "ukrainian": "אוקראינית",
+    "chinese": "סינית",
+    "french": "צרפתית",
+    "german": "גרמנית",
+    "japanese": "יפנית",
+    "portuguese": "פורטוגזית",
+    "russian": "רוסית",
+    "italian": "איטלקית",
+    "hindi": "הינדי",
+    "korean": "קוריאנית",
+    "arabic": "ערבית",
+    "turkish": "טורקית",
+    "slovenian": "סלובנית",
+    "hebrew": "עברית",
+    "hidePersistentNotifications": "הסתרת התראות קבועות",
+    "hidePersistentNotificationsDesc": "הסתרת התראות מערכת והתראות מתמשכות של שירותי רקע",
+    "blockedNotificationApps": "אפליקציות חסומות",
+    "blockAppNotifications": "חסימת התראות",
+    "unblockAppNotifications": "ביטול חסימת התראות",
+    "noBlockedApps": "אין אפליקציות חסומות",
+    "persistentNotification": "קבוע",
+    "unblockAll": "ביטול כל החסימות",
+    "weather": "מזג אוויר",
+    "showWeatherWarnings": "הצגת התראות מזג אוויר וגשם",
+    "temperatureUnit": "יחידת טמפרטורה",
+    "celsius": "צלזיוס (°C)",
+    "fahrenheit": "פרנהייט (°F)",
+    "breezyWeatherSetupHint": "יש להתקין את Breezy Weather ולהפעיל את 'Local data sharing' / 'Gadgetbridge' בהגדרות שלו כדי לראות התראות מזג אוויר וגשם.",
+    "displayAndScreensaver": "תצוגה ושומר מסך",
+    "notifications": "התראות",
+    "continueWatchingDescription": "הצגת סרטים ותוכניות טלוויזיה שנצפו לאחרונה מאפליקציות נתמכות במסך הבית שלך",
+    "continueWatchingPermissionDesc": "נדרשת הרשאה מיוחדת לקריאת היסטוריית צפייה מאפליקציות טלוויזיה. ניתן להעניק אותה באמצעות הכפתור למטה או דרך ADB:",
+    "requestPermission": "בקשת הרשאה",
+    "dismiss": "התעלמות",
+    "openApp": "פתיחה",
+    "notificationOptions": "אפשרויות התראה",
+    "noBlockedAppsDesc": "כל האפליקציות מורשות כרגע להציג התראות",
+    "notificationsAllowed": "התראות מורשות",
+    "notificationsBlocked": "התראות חסומות",
+    "dpadDismissHint": "שמאל: התעלמות • אישור: אפשרויות",
+    "autoAddNewApps": "הוספת אפליקציות חדשות שהותקנו למסך הבית"
+}

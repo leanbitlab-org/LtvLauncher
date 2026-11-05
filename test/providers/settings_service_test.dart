@@ -161,6 +161,14 @@ void main() async {
       await settingsService.setAppLanguage("es");
       expect(settingsService.appLanguage, "es");
       expect(settingsService.appLocale, equals(const Locale("es")));
+
+      await settingsService.setAppLanguage("he");
+      expect(settingsService.appLanguage, "he");
+      expect(settingsService.appLocale, equals(const Locale("he")));
+
+      await settingsService.setAppLanguage("iw");
+      expect(settingsService.appLanguage, "iw");
+      expect(settingsService.appLocale, equals(const Locale("he")));
     });
 
     test("setAppLanguage notifies listeners", () async {

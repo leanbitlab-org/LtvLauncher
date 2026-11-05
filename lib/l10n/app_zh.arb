@@ -202,6 +202,7 @@
     "arabic": "阿拉伯语",
     "turkish": "土耳其语",
     "slovenian": "斯洛文尼亚语",
+    "hebrew": "希伯来语",
     "hidePersistentNotifications": "隐藏常驻通知",
     "hidePersistentNotificationsDesc": "隐藏后台服务和系统常驻通知",
     "blockedNotificationApps": "已屏蔽的应用",

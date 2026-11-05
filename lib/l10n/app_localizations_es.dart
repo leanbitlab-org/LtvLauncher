@@ -466,6 +466,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get slovenian => 'Esloveno';
 
   @override
+  String get hebrew => 'Hebreo';
+
+  @override
   String get hidePersistentNotifications => 'Ocultar notificaciones persistentes';
 
   @override

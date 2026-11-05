@@ -466,6 +466,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get slovenian => 'Словенский';
 
   @override
+  String get hebrew => 'Иврит';
+
+  @override
   String get hidePersistentNotifications => 'Скрыть постоянные уведомления';
 
   @override

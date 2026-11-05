@@ -204,7 +204,7 @@ class SettingsService extends ChangeNotifier {
     if (_appLanguage.isEmpty) {
       return null;
     }
-    return Locale(_appLanguage);
+    return _appLanguage == 'iw' ? const Locale('he') : Locale(_appLanguage);
   }
 
   String get accentColorHex => _accentColorHex;

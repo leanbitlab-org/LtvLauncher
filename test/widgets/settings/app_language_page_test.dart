@@ -97,6 +97,19 @@ void main() {
     expect(settingsService.appLocale, equals(const Locale('sl')));
   });
 
+  testWidgets('tapping Hebrew option updates appLanguage preference to he', (WidgetTester tester) async {
+    await tester.pumpWidget(buildSubject());
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(find.text('Hebrew'), 300);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Hebrew'));
+    await tester.pumpAndSettle();
+
+    expect(settingsService.appLanguage, 'he');
+    expect(settingsService.appLocale, equals(const Locale('he')));
+  });
+
   testWidgets('autofocuses selected language tile', (WidgetTester tester) async {
     await settingsService.setAppLanguage('es');
     await tester.pumpWidget(buildSubject());
@@ -125,6 +138,12 @@ void main() {
 
       final slResolved = resolveAppLocale([const Locale('sl')], AppLocalizations.supportedLocales);
       expect(slResolved, equals(const Locale('sl')));
+
+      final heResolved = resolveAppLocale([const Locale('he')], AppLocalizations.supportedLocales);
+      expect(heResolved, equals(const Locale('he')));
+
+      final iwResolved = resolveAppLocale([const Locale('iw')], AppLocalizations.supportedLocales);
+      expect(iwResolved, equals(const Locale('he')));
     });
 
     test('respects user fallback order in preferredLocales', () {

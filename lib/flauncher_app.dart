@@ -161,8 +161,9 @@ class FLauncherApp extends StatelessWidget
 Locale resolveAppLocale(List<Locale>? preferredLocales, Iterable<Locale> supportedLocales) {
   if (preferredLocales != null) {
     for (final locale in preferredLocales) {
+      final code = locale.languageCode == 'iw' ? 'he' : locale.languageCode;
       for (final supported in supportedLocales) {
-        if (supported.languageCode == locale.languageCode) {
+        if (supported.languageCode == code) {
           return supported;
         }
       }

@@ -466,6 +466,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get slovenian => '슬로베니아어';
 
   @override
+  String get hebrew => '히브리어';
+
+  @override
   String get hidePersistentNotifications => '고정 알림 숨기기';
 
   @override

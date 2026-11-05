@@ -202,6 +202,7 @@
     "arabic": "アラビア語",
     "turkish": "トルコ語",
     "slovenian": "スロベニア語",
+    "hebrew": "ヘブライ語",
     "hidePersistentNotifications": "常駐通知を非表示",
     "hidePersistentNotificationsDesc": "バックグラウンドサービスやシステムの常駐通知を非表示",
     "blockedNotificationApps": "ブロックされたアプリ",

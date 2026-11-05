@@ -466,6 +466,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get slovenian => 'Slovenian';
 
   @override
+  String get hebrew => 'Hebrew';
+
+  @override
   String get hidePersistentNotifications => 'Hide Persistent Notifications';
 
   @override

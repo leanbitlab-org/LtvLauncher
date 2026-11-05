@@ -202,6 +202,7 @@
     "arabic": "아랍어",
     "turkish": "터키어",
     "slovenian": "슬로베니아어",
+    "hebrew": "히브리어",
     "hidePersistentNotifications": "고정 알림 숨기기",
     "hidePersistentNotificationsDesc": "백그라운드 서비스 및 시스템 고정 알림 숨기기",
     "blockedNotificationApps": "차단된 앱",
