@@ -16,9 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:flauncher/ltl/ltl_strings.dart';
 import 'package:flauncher/providers/apps_service.dart';
 import 'package:flauncher/widgets/settings/accessibility_page.dart';
 import 'package:flauncher/widgets/settings/applications_panel_page.dart';
+import 'package:flauncher/widgets/settings/developer_settings_page.dart';
 import 'package:flauncher/widgets/settings/donate_dialog.dart';
 import 'package:flauncher/widgets/settings/flauncher_about_dialog.dart';
 import 'package:flauncher/widgets/settings/interface_settings_page.dart';
@@ -40,6 +42,7 @@ class SettingsPanelPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
+    final ltl = LtlStrings.of(context);
 
     return Column(
       children: [
@@ -81,8 +84,13 @@ class SettingsPanelPage extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pushNamed(AccessibilityPage.routeName),
                 ),
                 FocusableSettingsTile(
+                  leading: const Icon(Icons.developer_mode),
+                  title: Text(ltl.developer, style: Theme.of(context).textTheme.bodyMedium),
+                  onPressed: () => Navigator.of(context).pushNamed(DeveloperSettingsPage.routeName),
+                ),
+                FocusableSettingsTile(
                   leading: const Icon(Icons.favorite_rounded),
-                  title: Text("Support & Donate", style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(ltl.supportAndDonate, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => showDialog(
                     context: context,
                     builder: (_) => const DonateDialog(),
