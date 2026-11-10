@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+      Needed to toggle ADB and animation scales from the launcher.
+      Android never grants it automatically; grant it once from a computer:
+      adb shell pm grant <package> android.permission.WRITE_SECURE_SETTINGS
+    -->
+    <uses-permission
+        android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- Package visibility for YaOS detection (Android 11+). -->
+    <queries>
+        <package android:name="com.yandex.tv.home" />
+        <package android:name="com.yandex.tv.services" />
+        <package android:name="ru.yandex.quasar.app" />
+    </queries>
+</manifest>

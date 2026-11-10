@@ -1,0 +1,19 @@
+name: ltl_system
+description: Native Android helpers for LTvLauncher (ADB and developer settings, device info, opening links).
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.4.3 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: ru.ltl.system
+        pluginClass: LtlSystemPlugin

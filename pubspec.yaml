@@ -26,6 +26,9 @@ dependencies:
   pool: ^1.5.2
   share_plus: ^10.0.0
   qr_flutter: ^4.1.0
+  # LTL: native helpers (ADB, developer settings, device info, links)
+  ltl_system:
+    path: packages/ltl_system
 
 dev_dependencies:
   flutter_test:
