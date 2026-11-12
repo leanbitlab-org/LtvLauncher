@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@android:color/black" />
-    <item
-        android:drawable="@mipmap/ic_launcher"
-        android:gravity="center" />
+    <!-- Color de respaldo por si la imagen tarda un instante en cargar -->
+    <item android:drawable="@color/morado_pastel" />
+    <!-- Tu imagen de fondo adaptada al centro o cubierta -->
+    <item>
+        <bitmap
+            android:src="@drawable/background"
+            android:gravity="fill" />
+    </item>
 </layer-list>
