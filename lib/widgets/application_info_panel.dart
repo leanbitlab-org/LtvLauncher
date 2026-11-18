@@ -102,11 +102,12 @@ class _ApplicationInfoPanelState extends State<ApplicationInfoPanel>
                  children: [
                    // Add to Category button (First as requested)
                    TextButton(
+                     autofocus: true,
                      child: Row(
                        children: [
                          const Icon(Icons.add_box_outlined),
                          Container(width: 8),
-                         Text('Add to Category', style: Theme.of(context).textTheme.bodyMedium),
+                         Text(localizations.withEllipsisAddTo, style: Theme.of(context).textTheme.bodyMedium),
                        ],
                      ),
                      onPressed: () async {
