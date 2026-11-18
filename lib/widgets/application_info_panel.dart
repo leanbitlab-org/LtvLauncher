@@ -20,8 +20,10 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flauncher/providers/apps_service.dart';
 import 'package:flauncher/widgets/add_to_category_dialog.dart';
+import 'package:flauncher/widgets/app_card_keys.dart';
 import 'package:flauncher/widgets/side_panel_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:flauncher/l10n/app_localizations.dart';
@@ -61,7 +63,16 @@ class _ApplicationInfoPanelState extends State<ApplicationInfoPanel>
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context) ?? AppLocalizationsEn();
 
-    return SidePanelDialog(
+    // The panel opens while the OK key is still held for the long press:
+    // drop its repeats so they don't activate the autofocused first option.
+    return Focus(
+      canRequestFocus: false,
+      skipTraversal: true,
+      onKeyEvent: (_, event) => event is KeyRepeatEvent &&
+              AppCardKeys.longPressableKeys.contains(event.logicalKey)
+          ? KeyEventResult.handled
+          : KeyEventResult.ignored,
+      child: SidePanelDialog(
         width: 300,
         isRightSide: false,
         child: Column(
@@ -317,7 +328,8 @@ class _ApplicationInfoPanelState extends State<ApplicationInfoPanel>
             )
           ]
         )
-      );
+      ),
+    );
   }
 }
 

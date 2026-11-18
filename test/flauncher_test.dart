@@ -30,6 +30,7 @@ import 'package:flauncher/providers/wallpaper_service.dart';
 import 'package:flauncher/providers/notifications_service.dart';
 import 'package:flauncher/providers/watch_next_service.dart';
 import 'package:flauncher/providers/weather_service.dart';
+import 'package:flauncher/widgets/add_to_category_dialog.dart';
 import 'package:flauncher/widgets/application_info_panel.dart';
 import 'package:flauncher/widgets/apps_grid.dart';
 import 'package:flauncher/widgets/category_row.dart';
@@ -196,6 +197,42 @@ void main() {
     await tester.pump();
 
     expect(find.byType(ApplicationInfoPanel), findsOneWidget);
+  });
+
+  testWidgets("Holding OK opens one panel and does not activate its first option", (tester) async {
+    final appsService = mkAppService();
+    final applicationsCategory = fakeCategory(name: "Applications", order: 1);
+    applicationsCategory.applications.add(fakeApp(
+      packageName: "me.efesser.flauncher",
+      name: "FLauncher",
+      version: "1.0.0",
+    ));
+    when(appsService.launcherSections).thenReturn([
+      fakeCategory(name: "Favorites", order: 0),
+      applicationsCategory,
+    ]);
+    await _pumpWidgetWith(tester, appsService);
+
+    final inkWellFinder = find.descendant(
+      of: find.byKey(Key("me.efesser.flauncher")),
+      matching: find.byType(InkWell),
+    );
+    tester.widget<InkWell>(inkWellFinder).focusNode!.requestFocus();
+    await tester.pump();
+
+    // A held remote OK key: one KeyDown, then repeats until release.
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.select);
+    await tester.pump(const Duration(milliseconds: 600));
+    await tester.pumpAndSettle();
+    for (var i = 0; i < 20; i++) {
+      await tester.sendKeyRepeatEvent(LogicalKeyboardKey.select);
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.select);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(ApplicationInfoPanel), findsOneWidget);
+    expect(find.byType(AddToCategoryDialog), findsNothing);
   });
 
   testWidgets("AppCard moves in grid", (tester) async {
