@@ -91,7 +91,7 @@ class AppDetailsPage extends StatelessWidget {
                 _buildListTile(
                   context,
                   icon: Icons.add_box_outlined,
-                  title: "Add to Category", // Need localization or string
+                  title: localizations.withEllipsisAddTo,
                   onTap: () => showDialog<Category>(
                     context: context,
                     builder: (_) => AddToCategoryDialog(application),
