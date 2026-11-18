@@ -80,6 +80,14 @@ class _FocusKeyboardListenerState extends State<FocusKeyboardListener> {
       }
     }
 
+    // A held OK key keeps repeating after the long press fired (or after
+    // focus moved here mid-press). Only a fresh KeyDown may arm a long press.
+    if (keyEvent is KeyRepeatEvent &&
+        _keyDownAt == null &&
+        AppCardKeys.longPressableKeys.contains(keyEvent.logicalKey)) {
+      return KeyEventResult.handled;
+    }
+
     switch (keyEvent.runtimeType) {
       case KeyDownEvent:
       case KeyRepeatEvent:
