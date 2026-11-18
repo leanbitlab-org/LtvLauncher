@@ -82,6 +82,7 @@ class _WatchNextInfoPanelState extends State<WatchNextInfoPanel> {
                   borderRadius: BorderRadius.circular(8),
                   child: Image.memory(
                     widget.appIconBytes!,
+                    cacheWidth: (44 * MediaQuery.devicePixelRatioOf(context)).ceil(),
                     width: 44,
                     height: 44,
                     fit: BoxFit.cover,

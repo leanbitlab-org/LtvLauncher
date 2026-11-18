@@ -600,6 +600,7 @@ class _WatchNextCardState extends State<WatchNextCard> with TickerProviderStateM
                                         borderRadius: BorderRadius.circular(5),
                                         child: Image.memory(
                                           _appIconBytes!,
+                                          cacheWidth: (24 * MediaQuery.devicePixelRatioOf(context)).ceil(),
                                           fit: BoxFit.contain,
                                           filterQuality: FilterQuality.low,
                                         ),

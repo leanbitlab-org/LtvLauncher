@@ -53,6 +53,7 @@ import android.app.usage.NetworkStats;
 import android.app.usage.NetworkStatsManager;
 import android.app.AppOpsManager;
 import android.os.RemoteException;
+import android.util.Log;
 
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
@@ -66,6 +67,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorCompletionService;
@@ -85,6 +87,24 @@ public class MainActivity extends FlutterActivity {
     private final String WATCH_NEXT_EVENT_CHANNEL = "me.efesser.flauncher/event_watch_next";
     private MethodChannel.Result pendingPermissionResult;
     private static final ExecutorService sIoExecutor = Executors.newFixedThreadPool(4);
+    private static final Handler sMainHandler = new Handler(Looper.getMainLooper());
+
+    /**
+     * Runs slow PackageManager / ContentResolver / binder work off the main thread.
+     * The main thread also delivers D-pad key events, so blocking it makes navigation lag.
+     * The reply is posted back to the main thread, as MethodChannel requires.
+     */
+    private static void replyAsync(MethodChannel.Result result, Callable<Object> task) {
+        sIoExecutor.execute(() -> {
+            try {
+                Object value = task.call();
+                sMainHandler.post(() -> result.success(value));
+            } catch (Throwable t) {
+                Log.e("MainActivity", "Background method call failed", t);
+                sMainHandler.post(() -> result.error("BACKGROUND_ERROR", t.toString(), null));
+            }
+        });
+    }
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
@@ -94,9 +114,15 @@ public class MainActivity extends FlutterActivity {
 
         new MethodChannel(messenger, METHOD_CHANNEL).setMethodCallHandler((call, result) -> {
             switch (call.method) {
-                case "getApplications" -> result.success(getApplications());
-                case "getApplicationBanner" -> result.success(getApplicationBanner(call.arguments()));
-                case "getApplicationIcon" -> result.success(getApplicationIcon(call.arguments()));
+                case "getApplications" -> replyAsync(result, this::getApplications);
+                case "getApplicationBanner" -> {
+                    String packageName = call.arguments();
+                    replyAsync(result, () -> getApplicationBanner(packageName));
+                }
+                case "getApplicationIcon" -> {
+                    String packageName = call.arguments();
+                    replyAsync(result, () -> getApplicationIcon(packageName));
+                }
                 case "launchActivityFromAction" -> result.success(launchActivityFromAction(call.arguments()));
                 case "launchApp" -> result.success(launchApp(call.arguments()));
                 case "openUrl" -> result.success(openUrl(call.arguments()));
@@ -150,12 +176,12 @@ public class MainActivity extends FlutterActivity {
                 case "openDefaultLauncherSettings" -> result.success(openDefaultLauncherSettings());
                 case "openWifiSettings" -> result.success(openWifiSettings());
                 case "openVpnSettings" -> result.success(openVpnSettings());
-                case "getTvInputs" -> result.success(getTvInputs());
+                case "getTvInputs" -> replyAsync(result, this::getTvInputs);
                 case "launchTvInput" -> result.success(launchTvInput(call.arguments()));
                 case "checkNotificationListenerPermission" -> result.success(checkNotificationListenerPermission());
                 case "requestNotificationListenerPermission" -> result.success(requestNotificationListenerPermission());
                 case "openAppNotificationSettings" -> result.success(openAppNotificationSettings());
-                case "getActiveNotifications" -> result.success(getActiveNotifications());
+                case "getActiveNotifications" -> replyAsync(result, this::getActiveNotifications);
                 case "dismissNotification" -> {
                     String key = call.argument("key");
                     result.success(dismissNotification(key));
@@ -180,7 +206,7 @@ public class MainActivity extends FlutterActivity {
                         result.success(true);
                     }
                 }
-                case "getWatchNextPrograms" -> result.success(getWatchNextPrograms());
+                case "getWatchNextPrograms" -> replyAsync(result, this::getWatchNextPrograms);
                 case "deleteWatchNextProgram" -> {
                     Number id = call.argument("id");
                     if (id != null) {
