@@ -18,6 +18,7 @@
 
 import 'dart:io';
 import 'dart:async';
+import 'dart:ui' show PlatformDispatcher;
 
 import 'package:flauncher/flauncher_channel.dart';
 import 'package:flauncher/gradients.dart';
@@ -36,6 +37,8 @@ class WallpaperService extends ChangeNotifier {
   Timer? _timer;
 
   ImageProvider? _wallpaper;
+  String? _wallpaperPath;
+  bool? _lastIsDay;
   int _version = 0;
   int _updateWallpaperCallCount = 0;
 
@@ -86,38 +89,61 @@ class WallpaperService extends ChangeNotifier {
   void _updateTimerState() {
     final enabled = _settingsService.timeBasedWallpaperEnabled;
     if (enabled && (_timer == null || !_timer!.isActive)) {
-      _timer = Timer.periodic(const Duration(minutes: 1), (_) => _updateWallpaper());
+      _timer = Timer.periodic(const Duration(minutes: 1), (_) => _onTick());
     } else if (!enabled && _timer != null) {
       _timer?.cancel();
       _timer = null;
     }
   }
 
+  static bool _isDayNow() {
+    final hour = DateTime.now().hour;
+    return hour >= 6 && hour < 18;
+  }
+
+  // The minute tick only touches the file system when day/night flips.
+  void _onTick() {
+    if (_isDayNow() != _lastIsDay) {
+      _updateWallpaper();
+    }
+  }
+
+  // Decode at screen width instead of the photo's full resolution (a 12MP
+  // photo is ~48 MB decoded). Height follows the aspect ratio, which keeps
+  // BoxFit.cover sharp for any image not wider than the screen.
+  static ImageProvider _sizedImage(File file) {
+    final views = PlatformDispatcher.instance.views;
+    final width = views.isEmpty ? 0 : views.first.physicalSize.width.round();
+    final image = FileImage(file);
+    return width > 0 ? ResizeImage(image, width: width) : image;
+  }
+
   Future<void> _updateWallpaper({bool force = false}) async {
     final callId = ++_updateWallpaperCallCount;
-    final now = DateTime.now();
-    final isDay = now.hour >= 6 && now.hour < 18;
+    final isDay = _isDayNow();
     final enabled = _settingsService.timeBasedWallpaperEnabled;
 
-    ImageProvider? newWallpaper;
+    File? newFile;
 
     if (enabled) {
       if (isDay && await _wallpaperDayFile.exists()) {
-        newWallpaper = FileImage(_wallpaperDayFile);
+        newFile = _wallpaperDayFile;
       } else if (!isDay && await _wallpaperNightFile.exists()) {
-        newWallpaper = FileImage(_wallpaperNightFile);
+        newFile = _wallpaperNightFile;
       } else if (await _wallpaperFile.exists()) {
-        newWallpaper = FileImage(_wallpaperFile); // Fallback
+        newFile = _wallpaperFile; // Fallback
       }
     } else {
       if (await _wallpaperFile.exists()) {
-        newWallpaper = FileImage(_wallpaperFile);
+        newFile = _wallpaperFile;
       }
     }
 
     if (callId == _updateWallpaperCallCount) {
-      if (_wallpaper != newWallpaper || force) {
-        _wallpaper = newWallpaper;
+      _lastIsDay = isDay;
+      if (_wallpaperPath != newFile?.path || force) {
+        _wallpaperPath = newFile?.path;
+        _wallpaper = newFile == null ? null : _sizedImage(newFile);
         notifyListeners();
       }
     }
@@ -150,6 +176,7 @@ class WallpaperService extends ChangeNotifier {
 
       // Evict from cache to ensure UI updates
       await FileImage(targetFile).evict();
+      await _sizedImage(targetFile).evict();
 
       _version++;
       await _updateWallpaper(force: true);
