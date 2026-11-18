@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "Mostrar protetor de tela",
     "dialogOptionBackButtonActionShowClock": "Mostrar relógio",
     "dialogTextNoFileExplorer": "Por favor, instale um explorador de arquivos para escolher uma imagem.",
-    "dialogTitleBackButtonAction": "Escolha a ação do botão voltar",
     "disambiguateCategoryTitle": "{title} (Categoria)",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "Data formatada: {dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "Hora formatada: {timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "Não pode estar vazio",
     "name": "Nome",
     "newSection": "Nova seção",
-    "noDateFormatSpecified": "Nenhum formato de data especificado",
-    "noTimeFormatSpecified": "Nenhum formato de hora especificado",
     "nonTvApplications": "Apps não-TV",
     "open": "Abrir",
-    "orSelectFormatSpecifiers": "Ou selecione especificadores de formato",
     "picture": "Imagem",
     "removeFrom": "Remover de {name}",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "Altura da linha",
     "save": "Salvar",
     "spacer": "Espaçador",
-    "spacerMaxHeightRequirement": "Deve ser maior que 0 e menor ou igual a 500",
     "statusBar": "Barra de status",
     "settings": "Configurações",
     "show": "Mostrar",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "Animação de transição do seletor de apps",
     "sort": "Ordenar",
     "systemSettings": "Configurações do sistema",
-    "textAboutDialog": "O LTvLauncher é um launcher open-source personalizado para Android TV, baseado no FLauncher.\n\nDesenvolvido por LeanBitLab.\nCódigo-fonte disponível em {repoUrl}.",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "Esta categoria está vazia.",
     "time": "Hora",
-    "titleStatusBarSettingsPage": "Escolha o que exibir na barra de status",
     "tvApplications": "Apps de TV",
     "type": "Tipo",
-    "typeInTheDateFormat": "Digite o formato de data",
-    "typeInTheHourFormat": "Digite o formato de hora",
     "uninstall": "Desinstalar",
     "wallpaper": "Papel de parede",
     "withEllipsisAddTo": "Adicionar a...",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "Compartilhar Backup",
-    "shareBackupDescription": "Compartilhar backup com outros dispositivos na rede local",
-    "stopSharing": "Parar Compartilhamento",
-    "localNetworkSharingActive": "O compartilhamento na rede local está ativo!",
-    "localNetworkSharingInstructions": "Conecte outro dispositivo à mesma rede Wi-Fi e abra a seguinte URL em um navegador da web:",
-    "localNetworkSharingDetails": "Aqui você pode baixar as configurações/layout da sua TV ou enviar um arquivo de backup de volta para esta TV.",
-    "failedToStartServer": "Falha ao iniciar o servidor de compartilhamento: {error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "Sino de Notificação",
     "autoHideNotificationBell": "Ocultar Sino de Notificação automaticamente",
     "continueWatching": "Continuar assistindo",
@@ -169,7 +124,6 @@
     "system": "Sistema",
     "accentColor": "Cor de destaque",
     "miscellaneous": "Diversos",
-    "brightnessScheduler": "Agendador de brilho",
     "screensaverSettings": "Configurações do protetor de tela",
     "screensaverClockStyle": "Estilo de relógio do protetor de tela",
     "dataUsagePeriod": "Período de uso de dados",
@@ -204,7 +158,6 @@
     "slovenian": "Esloveno",
     "hebrew": "Hebraico",
     "hidePersistentNotifications": "Ocultar notificações persistentes",
-    "hidePersistentNotificationsDesc": "Ocultar notificações de serviços em segundo plano e do sistema",
     "blockedNotificationApps": "Aplicativos bloqueados",
     "blockAppNotifications": "Bloquear notificações",
     "unblockAppNotifications": "Desbloquear notificações",
@@ -220,11 +173,9 @@
     "displayAndScreensaver": "Tela e protetor de tela",
     "notifications": "Notificações",
     "continueWatchingDescription": "Mostrar filmes e programas assistidos recentemente na tela inicial",
-    "continueWatchingPermissionDesc": "É necessária uma permissão especial para ler o histórico de reprodução:",
     "requestPermission": "Solicitar permissão",
     "dismiss": "Descartar",
     "openApp": "Abrir",
-    "notificationOptions": "Opções de notificação",
     "noBlockedAppsDesc": "Todos os aplicativos estão atualmente autorizados a exibir notificações",
     "notificationsAllowed": "Notificações permitidas",
     "notificationsBlocked": "Notificações bloqueadas",

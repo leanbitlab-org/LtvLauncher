@@ -67,21 +67,8 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dialogTextNoFileExplorer => '사진을 선택하려면 파일 탐색기를 설치하세요.';
 
   @override
-  String get dialogTitleBackButtonAction => '뒤로 버튼 동작 선택';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title (카테고리)';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return '포맷된 날짜: $dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return '포맷된 시간: $timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get newSection => '새 섹션';
 
   @override
-  String get noDateFormatSpecified => '날짜 형식이 지정되지 않음';
-
-  @override
-  String get noTimeFormatSpecified => '시간 형식이 지정되지 않음';
-
-  @override
   String get nonTvApplications => '비 TV 앱';
 
   @override
   String get open => '열기';
-
-  @override
-  String get orSelectFormatSpecifiers => '또는 형식 지정자 선택';
 
   @override
   String get picture => '사진';
@@ -166,9 +144,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get spacer => '간격';
-
-  @override
-  String get spacerMaxHeightRequirement => '0보다 크고 500 이하여야 합니다';
 
   @override
   String get statusBar => '상태 표시줄';
@@ -201,30 +176,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get systemSettings => '시스템 설정';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher는 FLauncher를 기반으로 한 Android TV용 맞춤형 오픈 소스 런처입니다.\n\nLeanBitLab에서 개발했습니다.\n소스 코드는 $repoUrl에서 사용할 수 있습니다.';
-  }
-
-  @override
   String get textEmptyCategory => '이 카테고리는 비어 있습니다.';
 
   @override
   String get time => '시간';
 
   @override
-  String get titleStatusBarSettingsPage => '상태 표시줄에 표시할 내용 선택';
-
-  @override
   String get tvApplications => 'TV 앱';
 
   @override
   String get type => '유형';
-
-  @override
-  String get typeInTheDateFormat => '날짜 형식 입력';
-
-  @override
-  String get typeInTheHourFormat => '시간 형식 입력';
 
   @override
   String get uninstall => '제거';
@@ -299,26 +260,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get shareBackup => '백업 공유';
 
   @override
-  String get shareBackupDescription => '로컬 네트워크의 다른 기기와 백업 공유';
-
-  @override
-  String get stopSharing => '공유 중지';
-
-  @override
-  String get localNetworkSharingActive => '로컬 네트워크 공유가 활성화되었습니다!';
-
-  @override
-  String get localNetworkSharingInstructions => '다른 기기를 동일한 Wi-Fi 네트워크에 연결하고 웹 브라우저에서 다음 URL을 엽니다.';
-
-  @override
-  String get localNetworkSharingDetails => '여기에서 TV 설정/레이아웃을 다운로드하거나 이 TV로 백업 파일을 업로드할 수 있습니다.';
-
-  @override
-  String failedToStartServer(String error) {
-    return '공유 서버 시작 실패: $error';
-  }
-
-  @override
   String get notificationBell => '알림 벨';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get miscellaneous => '기타';
-
-  @override
-  String get brightnessScheduler => '밝기 스케줄러';
 
   @override
   String get screensaverSettings => '화면 보호기 설정';
@@ -472,9 +410,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get hidePersistentNotifications => '고정 알림 숨기기';
 
   @override
-  String get hidePersistentNotificationsDesc => '백그라운드 서비스 및 시스템 고정 알림 숨기기';
-
-  @override
   String get blockedNotificationApps => '차단된 앱';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get continueWatchingDescription => '홈 화면에 최근 시청한 영화 및 TV 프로그램 표시';
 
   @override
-  String get continueWatchingPermissionDesc => 'TV 앱의 시청 기록을 읽으려면 특별한 권한이 필요합니다:';
-
-  @override
   String get requestPermission => '권한 요청';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get openApp => '열기';
-
-  @override
-  String get notificationOptions => '알림 옵션';
 
   @override
   String get noBlockedAppsDesc => '현재 모든 애플리케이션의 알림 표시가 허용되어 있습니다';

@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "Показати заставку",
     "dialogOptionBackButtonActionShowClock": "Показати годинник",
     "dialogTextNoFileExplorer": "Будь ласка, встановіть файловий менеджер, щоб вибрати зображення.",
-    "dialogTitleBackButtonAction": "Виберіть дію кнопки «Назад»",
     "disambiguateCategoryTitle": "{title} (Категорія)",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "Формат дати: {dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "Формат часу: {timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "Не повинно бути порожнім",
     "name": "Назва",
     "newSection": "Новий розділ",
-    "noDateFormatSpecified": "Формат дати не вказано",
-    "noTimeFormatSpecified": "Формат часу не вказано",
     "nonTvApplications": "Застосунки не для ТБ",
     "open": "Відкрити",
-    "orSelectFormatSpecifiers": "Або виберіть специфікатори формату",
     "picture": "Зображення",
     "removeFrom": "Видалити з {name}",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "Висота рядка",
     "save": "Зберегти",
     "spacer": "Роздільник",
-    "spacerMaxHeightRequirement": "Має бути більше 0 і не більше 500",
     "statusBar": "Рядок стану",
     "settings": "Налаштування",
     "show": "Показати",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "Анімація переходу вибору застосунку",
     "sort": "Сортування",
     "systemSettings": "Системні налаштування",
-    "textAboutDialog": "LTvLauncher — це налаштований лаунчер з відкритим кодом для Android TV, створений на основі FLauncher.\n\nРозроблено LeanBitLab.\nВихідний код доступний за адресою {repoUrl}.",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "Ця категорія порожня.",
     "time": "Час",
-    "titleStatusBarSettingsPage": "Виберіть, що відображати в рядку стану",
     "tvApplications": "Застосунки для ТБ",
     "type": "Тип",
-    "typeInTheDateFormat": "Введіть формат дати",
-    "typeInTheHourFormat": "Введіть формат часу",
     "uninstall": "Видалити",
     "wallpaper": "Шпалери",
     "withEllipsisAddTo": "Додати до...",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "Поділитися резервною копією",
-    "shareBackupDescription": "Поділитися резервною копією з іншими пристроями в локальній мережі",
-    "stopSharing": "Зупинити спільний доступ",
-    "localNetworkSharingActive": "Спільний доступ у локальній мережі активний!",
-    "localNetworkSharingInstructions": "Підключіть інший пристрій до тієї самої мережі Wi-Fi та відкрийте таку адресу у веббраузері:",
-    "localNetworkSharingDetails": "Тут ви можете завантажити налаштування/розташування вашого ТБ або вивантажити файл резервної копії назад на цей телевізор.",
-    "failedToStartServer": "Не вдалося запустити сервер спільного доступу: {error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "Дзвіночок сповіщень",
     "autoHideNotificationBell": "Автоматично приховувати дзвіночок сповіщень",
     "continueWatching": "Продовжити перегляд",
@@ -169,7 +124,6 @@
     "system": "Система",
     "accentColor": "Акцентний колір",
     "miscellaneous": "Інше",
-    "brightnessScheduler": "Розклад яскравості",
     "screensaverSettings": "Налаштування заставки",
     "screensaverClockStyle": "Стиль годинника заставки",
     "dataUsagePeriod": "Період використання даних",
@@ -204,7 +158,6 @@
     "slovenian": "Словенська",
     "hebrew": "Іврит",
     "hidePersistentNotifications": "Приховати постійні сповіщення",
-    "hidePersistentNotificationsDesc": "Приховувати фонові та системні сповіщення",
     "blockedNotificationApps": "Заблоковані додатки",
     "blockAppNotifications": "Блокувати сповіщення",
     "unblockAppNotifications": "Розблокувати сповіщення",
@@ -220,11 +173,9 @@
     "displayAndScreensaver": "Екран та заставка",
     "notifications": "Сповіщення",
     "continueWatchingDescription": "Показувати нещодавно переглянуті фільми та серіали на головному екрані",
-    "continueWatchingPermissionDesc": "Для читання історії перегляду з ТВ-додатків потрібен спеціальний дозвіл:",
     "requestPermission": "Запитати дозвіл",
     "dismiss": "Закрити",
     "openApp": "Відкрити",
-    "notificationOptions": "Параметри сповіщення",
     "noBlockedAppsDesc": "Усім програмам наразі дозволено показувати сповіщення",
     "notificationsAllowed": "Сповіщення дозволено",
     "notificationsBlocked": "Сповіщення заблоковано",

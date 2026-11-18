@@ -67,21 +67,8 @@ class AppLocalizationsHe extends AppLocalizations {
   String get dialogTextNoFileExplorer => 'נא להתקין סייר קבצים כדי לבחור תמונה.';
 
   @override
-  String get dialogTitleBackButtonAction => 'בחירת פעולת כפתור חזרה';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title (קטגוריה)';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return 'תאריך מפורמט: $dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return 'שעה מפורמטת: $timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsHe extends AppLocalizations {
   String get newSection => 'מקטע חדש';
 
   @override
-  String get noDateFormatSpecified => 'לא צוינה תבנית תאריך';
-
-  @override
-  String get noTimeFormatSpecified => 'לא צוינה תבנית שעה';
-
-  @override
   String get nonTvApplications => 'אפליקציות שאינן לטלוויזיה';
 
   @override
   String get open => 'פתיחה';
-
-  @override
-  String get orSelectFormatSpecifiers => 'או בחר מזהי תבנית';
 
   @override
   String get picture => 'תמונה';
@@ -166,9 +144,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get spacer => 'מרווח';
-
-  @override
-  String get spacerMaxHeightRequirement => 'חייב להיות גדול מ-0 וקטן או שווה ל-500';
 
   @override
   String get statusBar => 'שורת מצב';
@@ -201,30 +176,16 @@ class AppLocalizationsHe extends AppLocalizations {
   String get systemSettings => 'הגדרות מערכת';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher הוא מסך בית מותאם אישית בקוד פתוח עבור Android TV, המבוסס על FLauncher.\n\nפותח על ידי LeanBitLab.\nקוד המקור זמין ב-$repoUrl.';
-  }
-
-  @override
   String get textEmptyCategory => 'קטגוריה זו ריקה.';
 
   @override
   String get time => 'שעה';
 
   @override
-  String get titleStatusBarSettingsPage => 'בחירת הפריטים להצגה בשורת המצב';
-
-  @override
   String get tvApplications => 'אפליקציות טלוויזיה';
 
   @override
   String get type => 'סוג';
-
-  @override
-  String get typeInTheDateFormat => 'הקלד את תבנית התאריך';
-
-  @override
-  String get typeInTheHourFormat => 'הקלד את תבנית השעה';
 
   @override
   String get uninstall => 'הסרת התקנה';
@@ -299,26 +260,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get shareBackup => 'שיתוף גיבוי';
 
   @override
-  String get shareBackupDescription => 'שיתוף הגיבוי עם מכשירים אחרים ברשת המקומית';
-
-  @override
-  String get stopSharing => 'הפסקת שיתוף';
-
-  @override
-  String get localNetworkSharingActive => 'שיתוף ברשת המקומית פעיל!';
-
-  @override
-  String get localNetworkSharingInstructions => 'חבר מכשיר נוסף לאותה רשת Wi-Fi ופתח את הכתובת הבאה בדפדפן האינטרנט:';
-
-  @override
-  String get localNetworkSharingDetails => 'כאן תוכל להוריד את הגדרות ופריסת הטלוויזיה שלך או להעלות קובץ גיבוי בחזרה לטלוויזיה זו.';
-
-  @override
-  String failedToStartServer(String error) {
-    return 'הפעלת שרת השיתוף נכשלה: $error';
-  }
-
-  @override
   String get notificationBell => 'פעמון התראות';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get miscellaneous => 'שונות';
-
-  @override
-  String get brightnessScheduler => 'מתזמן בהירות';
 
   @override
   String get screensaverSettings => 'הגדרות שומר מסך';
@@ -472,9 +410,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get hidePersistentNotifications => 'הסתרת התראות קבועות';
 
   @override
-  String get hidePersistentNotificationsDesc => 'הסתרת התראות מערכת והתראות מתמשכות של שירותי רקע';
-
-  @override
   String get blockedNotificationApps => 'אפליקציות חסומות';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get continueWatchingDescription => 'הצגת סרטים ותוכניות טלוויזיה שנצפו לאחרונה מאפליקציות נתמכות במסך הבית שלך';
 
   @override
-  String get continueWatchingPermissionDesc => 'נדרשת הרשאה מיוחדת לקריאת היסטוריית צפייה מאפליקציות טלוויזיה. ניתן להעניק אותה באמצעות הכפתור למטה או דרך ADB:';
-
-  @override
   String get requestPermission => 'בקשת הרשאה';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get openApp => 'פתיחה';
-
-  @override
-  String get notificationOptions => 'אפשרויות התראה';
 
   @override
   String get noBlockedAppsDesc => 'כל האפליקציות מורשות כרגע להציג התראות';

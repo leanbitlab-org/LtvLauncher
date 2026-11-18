@@ -67,21 +67,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dialogTextNoFileExplorer => 'Resim seçmek için lütfen bir dosya gezgini yükleyin.';
 
   @override
-  String get dialogTitleBackButtonAction => 'Geri düğmesi eylemini seçin';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title (Kategori)';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return 'Biçimlendirilmiş tarih: $dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return 'Biçimlendirilmiş saat: $timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get newSection => 'Yeni bölüm';
 
   @override
-  String get noDateFormatSpecified => 'Tarih biçimi belirtilmedi';
-
-  @override
-  String get noTimeFormatSpecified => 'Saat biçimi belirtilmedi';
-
-  @override
   String get nonTvApplications => 'TV Dışı Uygulamalar';
 
   @override
   String get open => 'Aç';
-
-  @override
-  String get orSelectFormatSpecifiers => 'Veya biçim belirteçlerini seçin';
 
   @override
   String get picture => 'Resim';
@@ -166,9 +144,6 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get spacer => 'Ayırıcı';
-
-  @override
-  String get spacerMaxHeightRequirement => '0\'dan büyük ve 500\'den küçük veya eşit olmalıdır';
 
   @override
   String get statusBar => 'Durum çubuğu';
@@ -201,30 +176,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get systemSettings => 'Sistem ayarları';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher, FLauncher tabanlı, Android TV için özelleştirilmiş açık kaynaklı bir başlatıcıdır.\n\nLeanBitLab tarafından geliştirilmiştir.\nKaynak kodu $repoUrl adresinde mevcuttur.';
-  }
-
-  @override
   String get textEmptyCategory => 'Bu kategori boş.';
 
   @override
   String get time => 'Saat';
 
   @override
-  String get titleStatusBarSettingsPage => 'Durum çubuğunda neyin görüntüleneceğini seçin';
-
-  @override
   String get tvApplications => 'TV Uygulamaları';
 
   @override
   String get type => 'Tür';
-
-  @override
-  String get typeInTheDateFormat => 'Tarih biçimini yazın';
-
-  @override
-  String get typeInTheHourFormat => 'Saat biçimini yazın';
 
   @override
   String get uninstall => 'Kaldır';
@@ -299,26 +260,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shareBackup => 'Yedeği Paylaş';
 
   @override
-  String get shareBackupDescription => 'Yedeği yerel ağdaki diğer cihazlarla paylaş';
-
-  @override
-  String get stopSharing => 'Paylaşımı Durdur';
-
-  @override
-  String get localNetworkSharingActive => 'Yerel ağ paylaşımı etkin!';
-
-  @override
-  String get localNetworkSharingInstructions => 'Başka bir cihazı aynı Wi-Fi ağına bağlayın ve bir web tarayıcısında aşağıdaki URL\'yi açın:';
-
-  @override
-  String get localNetworkSharingDetails => 'Buradan TV ayarlarınızı/düzeninizi indirebilir veya bir yedek dosyasını bu TV\'ye geri yükleyebilirsiniz.';
-
-  @override
-  String failedToStartServer(String error) {
-    return 'Paylaşım sunucusu başlatılamadı: $error';
-  }
-
-  @override
   String get notificationBell => 'Bildirim Zili';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get miscellaneous => 'Çeşitli';
-
-  @override
-  String get brightnessScheduler => 'Parlaklık Zamanlayıcısı';
 
   @override
   String get screensaverSettings => 'Ekran Koruyucu Ayarları';
@@ -472,9 +410,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get hidePersistentNotifications => 'Kalıcı Bildirimleri Gizle';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Arka plan servisi ve sistem bildirimlerini gizle';
-
-  @override
   String get blockedNotificationApps => 'Engellenen Uygulamalar';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get continueWatchingDescription => 'Son izlenen filmleri ve dizileri ana ekranda göster';
 
   @override
-  String get continueWatchingPermissionDesc => 'TV uygulamalarından izleme geçmişini okumak için özel izin gereklidir:';
-
-  @override
   String get requestPermission => 'İzin İste';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get openApp => 'Aç';
-
-  @override
-  String get notificationOptions => 'Bildirim Seçenekleri';
 
   @override
   String get noBlockedAppsDesc => 'Şu anda tüm uygulamaların bildirim göstermesine izin veriliyor';

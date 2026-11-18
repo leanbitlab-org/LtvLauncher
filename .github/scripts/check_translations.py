@@ -5,6 +5,7 @@ Checks all lib/l10n/app_*.arb files against lib/l10n/app_en.arb for:
 1. Missing translation keys.
 2. Dangling / extra keys not in app_en.arb.
 3. Untranslated texts (identical to English where translation is expected).
+4. Unused keys: app_en.arb keys never referenced as `.key` in lib/ Dart code.
 
 Can be run manually or as a git hook (pre-commit, pre-push, pre-tag).
 Usage:
@@ -15,6 +16,7 @@ import sys
 import os
 import json
 import glob
+import re
 
 # Words/phrases legitimately identical to English in certain languages (loanwords, units, symbols, brand names)
 ALLOWED_IDENTICAL = {
@@ -87,6 +89,18 @@ def main():
                     if val.startswith("LTvLauncher") or "LTvLauncher" in val:
                         continue
                     warnings.append(f"[{locale}] Possible untranslated key '{k}': \"{val}\" matches English")
+
+    # Unused keys: every key must be read somewhere in lib/ (generated l10n excluded).
+    dart_src = []
+    for dpath in glob.glob(os.path.join(root, "lib", "**", "*.dart"), recursive=True):
+        if os.path.commonpath([dpath, l10n_dir]) == l10n_dir:
+            continue
+        with open(dpath, "r", encoding="utf-8") as f:
+            dart_src.append(f.read())
+    used = set(re.findall(r"\.([A-Za-z_]\w*)", "\n".join(dart_src)))
+    unused = sorted(en_keys - used)
+    if unused:
+        errors.append(f"[en] Unused {len(unused)} keys (remove them from every .arb):\n  " + "\n  ".join(unused))
 
     print(f"Checked {checked_locales} localization files against app_en.arb ({len(en_keys)} keys each).")
 

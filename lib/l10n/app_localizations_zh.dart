@@ -67,21 +67,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dialogTextNoFileExplorer => '请安装文件管理器以选择图片。';
 
   @override
-  String get dialogTitleBackButtonAction => '选择返回键行为';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title（类别）';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return '格式化日期：$dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return '格式化时间：$timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get newSection => '新建分区';
 
   @override
-  String get noDateFormatSpecified => '未指定日期格式';
-
-  @override
-  String get noTimeFormatSpecified => '未指定时间格式';
-
-  @override
   String get nonTvApplications => '非电视应用';
 
   @override
   String get open => '打开';
-
-  @override
-  String get orSelectFormatSpecifiers => '或选择格式说明符';
 
   @override
   String get picture => '图片';
@@ -166,9 +144,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get spacer => '间隔';
-
-  @override
-  String get spacerMaxHeightRequirement => '必须大于 0 且小于等于 500';
 
   @override
   String get statusBar => '状态栏';
@@ -201,30 +176,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get systemSettings => '系统设置';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher 是一款基于 FLauncher 定制的开源 Android TV 桌面启动器。\n\n由 LeanBitLab 开发。\n源代码可在 $repoUrl 获取。';
-  }
-
-  @override
   String get textEmptyCategory => '此类别为空。';
 
   @override
   String get time => '时间';
 
   @override
-  String get titleStatusBarSettingsPage => '选择状态栏中显示的内容';
-
-  @override
   String get tvApplications => '电视应用';
 
   @override
   String get type => '类型';
-
-  @override
-  String get typeInTheDateFormat => '输入日期格式';
-
-  @override
-  String get typeInTheHourFormat => '输入时间格式';
 
   @override
   String get uninstall => '卸载';
@@ -299,26 +260,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get shareBackup => '共享备份';
 
   @override
-  String get shareBackupDescription => '与局域网中的其他设备共享备份';
-
-  @override
-  String get stopSharing => '停止共享';
-
-  @override
-  String get localNetworkSharingActive => '局域网共享已开启！';
-
-  @override
-  String get localNetworkSharingInstructions => '将另一台设备连接到同一 Wi-Fi 网络，并在浏览器中打开以下地址：';
-
-  @override
-  String get localNetworkSharingDetails => '你可以在此下载电视的设置/布局，或将备份文件上传回这台电视。';
-
-  @override
-  String failedToStartServer(String error) {
-    return '启动共享服务失败：$error';
-  }
-
-  @override
   String get notificationBell => '通知铃铛';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get miscellaneous => '其他';
-
-  @override
-  String get brightnessScheduler => '亮度定时';
 
   @override
   String get screensaverSettings => '屏保设置';
@@ -472,9 +410,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get hidePersistentNotifications => '隐藏常驻通知';
 
   @override
-  String get hidePersistentNotificationsDesc => '隐藏后台服务和系统常驻通知';
-
-  @override
   String get blockedNotificationApps => '已屏蔽的应用';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get continueWatchingDescription => '在主屏幕上显示支持的应用最近观看的电影和电视剧';
 
   @override
-  String get continueWatchingPermissionDesc => '需要特殊权限才能读取电视应用的观看历史记录：';
-
-  @override
   String get requestPermission => '请求权限';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get openApp => '打开';
-
-  @override
-  String get notificationOptions => '通知选项';
 
   @override
   String get noBlockedAppsDesc => '当前所有应用均允许显示通知';

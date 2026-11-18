@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "Afficher l'écran de veille",
     "dialogOptionBackButtonActionShowClock": "Afficher l'horloge",
     "dialogTextNoFileExplorer": "Veuillez installer un explorateur de fichiers pour sélectionner une image.",
-    "dialogTitleBackButtonAction": "Choisir l'action du bouton retour",
     "disambiguateCategoryTitle": "{title} (Catégorie)",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "Date formatée : {dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "Heure formatée : {timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "Ne doit pas être vide",
     "name": "Nom",
     "newSection": "Nouvelle section",
-    "noDateFormatSpecified": "Aucun format de date spécifié",
-    "noTimeFormatSpecified": "Aucun format d'heure spécifié",
     "nonTvApplications": "Applications non TV",
     "open": "Ouvrir",
-    "orSelectFormatSpecifiers": "Ou sélectionner les spécificateurs de format",
     "picture": "Image",
     "removeFrom": "Retirer de {name}",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "Hauteur de ligne",
     "save": "Enregistrer",
     "spacer": "Espace",
-    "spacerMaxHeightRequirement": "Doit être supérieur à 0 et inférieur ou égal à 500",
     "statusBar": "Barre d'état",
     "settings": "Paramètres",
     "show": "Afficher",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "Animation de transition du sélecteur d'application",
     "sort": "Trier",
     "systemSettings": "Paramètres système",
-    "textAboutDialog": "LTvLauncher est un lanceur open-source personnalisé pour Android TV, basé sur FLauncher.\n\nDéveloppé par LeanBitLab.\nCode source disponible sur {repoUrl}.",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "Cette catégorie est vide.",
     "time": "Heure",
-    "titleStatusBarSettingsPage": "Choisir ce qu'il faut afficher dans la barre d'état",
     "tvApplications": "Applications TV",
     "type": "Type",
-    "typeInTheDateFormat": "Saisir le format de date",
-    "typeInTheHourFormat": "Saisir le format de l'heure",
     "uninstall": "Désinstaller",
     "wallpaper": "Fond d'écran",
     "withEllipsisAddTo": "Ajouter à...",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "Partager la sauvegarde",
-    "shareBackupDescription": "Partager la sauvegarde avec d'autres appareils sur le réseau local",
-    "stopSharing": "Arrêter le partage",
-    "localNetworkSharingActive": "Le partage sur le réseau local est actif !",
-    "localNetworkSharingInstructions": "Connectez un autre appareil au même réseau Wi-Fi et ouvrez l'URL suivante dans un navigateur Web :",
-    "localNetworkSharingDetails": "Ici, vous pouvez télécharger les paramètres/disposition de votre TV ou importer un fichier de sauvegarde vers cette TV.",
-    "failedToStartServer": "Échec du démarrage du serveur de partage : {error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "Cloche de notification",
     "autoHideNotificationBell": "Masquer automatiquement la cloche de notification",
     "continueWatching": "Continuer à regarder",
@@ -169,7 +124,6 @@
     "system": "Système",
     "accentColor": "Couleur d'accentuation",
     "miscellaneous": "Divers",
-    "brightnessScheduler": "Planificateur de luminosité",
     "screensaverSettings": "Paramètres de l'écran de veille",
     "screensaverClockStyle": "Style d'horloge de l'écran de veille",
     "dataUsagePeriod": "Période d'utilisation des données",
@@ -204,7 +158,6 @@
     "slovenian": "Slovène",
     "hebrew": "Hébreu",
     "hidePersistentNotifications": "Masquer les notifications persistantes",
-    "hidePersistentNotificationsDesc": "Masquer les notifications des services d'arrière-plan et du système",
     "blockedNotificationApps": "Applications bloquées",
     "blockAppNotifications": "Bloquer les notifications",
     "unblockAppNotifications": "Débloquer les notifications",
@@ -220,11 +173,9 @@
     "displayAndScreensaver": "Affichage et écran de veille",
     "notifications": "Notifications",
     "continueWatchingDescription": "Afficher les films et séries récemment regardés sur l'écran d'accueil",
-    "continueWatchingPermissionDesc": "Une autorisation spéciale est requise pour lire l'historique de lecture des applications TV :",
     "requestPermission": "Demander l'autorisation",
     "dismiss": "Ignorer",
     "openApp": "Ouvrir",
-    "notificationOptions": "Options de notification",
     "noBlockedAppsDesc": "Toutes les applications sont actuellement autorisées à afficher des notifications",
     "notificationsAllowed": "Notifications autorisées",
     "notificationsBlocked": "Notifications bloquées",

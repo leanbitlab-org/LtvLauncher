@@ -67,21 +67,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dialogTextNoFileExplorer => 'Пожалуйста, установите файловый менеджер, чтобы выбрать изображение.';
 
   @override
-  String get dialogTitleBackButtonAction => 'Выберите действие кнопки назад';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title (Категория)';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return 'Форматированная дата: $dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return 'Форматированное время: $timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get newSection => 'Новый раздел';
 
   @override
-  String get noDateFormatSpecified => 'Формат даты не указан';
-
-  @override
-  String get noTimeFormatSpecified => 'Формат времени не указан';
-
-  @override
   String get nonTvApplications => 'Приложения не для ТВ';
 
   @override
   String get open => 'Открыть';
-
-  @override
-  String get orSelectFormatSpecifiers => 'Или выберите спецификаторы формата';
 
   @override
   String get picture => 'Изображение';
@@ -166,9 +144,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get spacer => 'Разделитель';
-
-  @override
-  String get spacerMaxHeightRequirement => 'Должно быть больше 0 и меньше или равно 500';
 
   @override
   String get statusBar => 'Строка состояния';
@@ -201,30 +176,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get systemSettings => 'Системные настройки';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher — это настраиваемый лаунчер с открытым исходным кодом для Android TV, основанный на FLauncher.\n\nРазработан LeanBitLab.\nИсходный код доступен по адресу $repoUrl.';
-  }
-
-  @override
   String get textEmptyCategory => 'Эта категория пуста.';
 
   @override
   String get time => 'Время';
 
   @override
-  String get titleStatusBarSettingsPage => 'Выберите, что отображать в строке состояния';
-
-  @override
   String get tvApplications => 'ТВ-приложения';
 
   @override
   String get type => 'Тип';
-
-  @override
-  String get typeInTheDateFormat => 'Введите формат даты';
-
-  @override
-  String get typeInTheHourFormat => 'Введите формат времени';
 
   @override
   String get uninstall => 'Удалить';
@@ -299,26 +260,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get shareBackup => 'Поделиться резервной копией';
 
   @override
-  String get shareBackupDescription => 'Поделиться резервной копией с другими устройствами в локальной сети';
-
-  @override
-  String get stopSharing => 'Остановить доступ';
-
-  @override
-  String get localNetworkSharingActive => 'Доступ в локальной сети активен!';
-
-  @override
-  String get localNetworkSharingInstructions => 'Подключите другое устройство к той же сети Wi-Fi и откройте следующий URL-адрес в веб-браузере:';
-
-  @override
-  String get localNetworkSharingDetails => 'Здесь вы можете скачать настройки/макет вашего ТВ или загрузить файл резервной копии обратно на этот ТВ.';
-
-  @override
-  String failedToStartServer(String error) {
-    return 'Не удалось запустить сервер общего доступа: $error';
-  }
-
-  @override
   String get notificationBell => 'Колокольчик уведомлений';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get miscellaneous => 'Разное';
-
-  @override
-  String get brightnessScheduler => 'Планировщик яркости';
 
   @override
   String get screensaverSettings => 'Настройки заставки';
@@ -472,9 +410,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get hidePersistentNotifications => 'Скрыть постоянные уведомления';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Скрывать фоновые и системные уведомления';
-
-  @override
   String get blockedNotificationApps => 'Заблокированные приложения';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get continueWatchingDescription => 'Показывать недавно просмотренные фильмы и передачи на главном экране';
 
   @override
-  String get continueWatchingPermissionDesc => 'Для чтения истории просмотров из ТВ-приложений требуется специальное разрешение:';
-
-  @override
   String get requestPermission => 'Запросить разрешение';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get openApp => 'Открыть';
-
-  @override
-  String get notificationOptions => 'Параметры уведомления';
 
   @override
   String get noBlockedAppsDesc => 'Всем приложениям в данный момент разрешено показывать уведомления';

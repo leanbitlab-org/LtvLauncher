@@ -67,21 +67,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get dialogTextNoFileExplorer => 'कृपया चित्र चुनने के लिए फ़ाइल एक्सप्लोरर इंस्टॉल करें।';
 
   @override
-  String get dialogTitleBackButtonAction => 'बैक बटन एक्शन चुनें';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title (श्रेणी)';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return 'फ़ॉर्मेट किया गया दिनांक: $dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return 'फ़ॉर्मेट किया गया समय: $timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get newSection => 'नया अनुभाग';
 
   @override
-  String get noDateFormatSpecified => 'कोई दिनांक प्रारूप निर्दिष्ट नहीं';
-
-  @override
-  String get noTimeFormatSpecified => 'कोई समय प्रारूप निर्दिष्ट नहीं';
-
-  @override
   String get nonTvApplications => 'गैर-टीवी ऐप्स';
 
   @override
   String get open => 'खोलें';
-
-  @override
-  String get orSelectFormatSpecifiers => 'या प्रारूप निर्दिष्टकर्ता चुनें';
 
   @override
   String get picture => 'चित्र';
@@ -166,9 +144,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get spacer => 'स्पेसर';
-
-  @override
-  String get spacerMaxHeightRequirement => '0 से अधिक और 500 से कम या बराबर होना चाहिए';
 
   @override
   String get statusBar => 'स्टेटस बार';
@@ -201,30 +176,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get systemSettings => 'सिस्टम सेटिंग्स';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher FLauncher पर आधारित Android TV के लिए एक अनुकूलित ओपन-सोर्स लॉन्चर है।\n\nLeanBitLab द्वारा विकसित।\nस्रोत कोड $repoUrl पर उपलब्ध है।';
-  }
-
-  @override
   String get textEmptyCategory => 'यह श्रेणी खाली है।';
 
   @override
   String get time => 'समय';
 
   @override
-  String get titleStatusBarSettingsPage => 'चुनें कि स्टेटस बार में क्या दिखाना है';
-
-  @override
   String get tvApplications => 'टीवी ऐप्स';
 
   @override
   String get type => 'प्रकार';
-
-  @override
-  String get typeInTheDateFormat => 'दिनांक प्रारूप टाइप करें';
-
-  @override
-  String get typeInTheHourFormat => 'समय प्रारूप टाइप करें';
 
   @override
   String get uninstall => 'अनइंस्टॉल करें';
@@ -299,26 +260,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get shareBackup => 'बैकअप साझा करें';
 
   @override
-  String get shareBackupDescription => 'स्थानीय नेटवर्क पर अन्य डिवाइसों के साथ बैकअप साझा करें';
-
-  @override
-  String get stopSharing => 'साझा करना बंद करें';
-
-  @override
-  String get localNetworkSharingActive => 'स्थानीय नेटवर्क साझाकरण सक्रिय है!';
-
-  @override
-  String get localNetworkSharingInstructions => 'किसी अन्य डिवाइस को उसी Wi-Fi नेटवर्क से कनेक्ट करें और वेब ब्राउज़र में निम्न URL खोलें:';
-
-  @override
-  String get localNetworkSharingDetails => 'यहां आप अपने टीवी की सेटिंग्स/लेआउट डाउनलोड कर सकते हैं या बैकअप फ़ाइल को इस टीवी पर वापस अपलोड कर सकते हैं।';
-
-  @override
-  String failedToStartServer(String error) {
-    return 'साझाकरण सर्वर प्रारंभ करने में विफल: $error';
-  }
-
-  @override
   String get notificationBell => 'सूचना घंटी';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get miscellaneous => 'विविध';
-
-  @override
-  String get brightnessScheduler => 'चमक शेड्यूलर';
 
   @override
   String get screensaverSettings => 'स्क्रीनसेवर सेटिंग्स';
@@ -472,9 +410,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get hidePersistentNotifications => 'स्थायी सूचनाएं छिपाएं';
 
   @override
-  String get hidePersistentNotificationsDesc => 'पृष्ठभूमि सेवा और सिस्टम सूचनाएं छिपाएं';
-
-  @override
   String get blockedNotificationApps => 'अवरुद्ध ऐप्स';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get continueWatchingDescription => 'होम स्क्रीन पर हाल ही में देखी गई फिल्में और टीवी शो दिखाएं';
 
   @override
-  String get continueWatchingPermissionDesc => 'टीवी ऐप्स से देखने का इतिहास पढ़ने के लिए विशेष अनुमति की आवश्यकता है:';
-
-  @override
   String get requestPermission => 'अनुमति का अनुरोध करें';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get openApp => 'खोलें';
-
-  @override
-  String get notificationOptions => 'सूचना विकल्प';
 
   @override
   String get noBlockedAppsDesc => 'सभी ऐप्स को वर्तमान में सूचनाएं दिखाने की अनुमति है';

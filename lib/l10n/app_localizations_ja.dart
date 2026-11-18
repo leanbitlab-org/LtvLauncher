@@ -67,21 +67,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dialogTextNoFileExplorer => '画像を選択するにはファイルエクスプローラーをインストールしてください。';
 
   @override
-  String get dialogTitleBackButtonAction => '戻るボタンの動作を選択';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title (カテゴリ)';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return '書式化された日付: $dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return '書式化された時刻: $timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get newSection => '新しいセクション';
 
   @override
-  String get noDateFormatSpecified => '日付形式が指定されていません';
-
-  @override
-  String get noTimeFormatSpecified => '時刻形式が指定されていません';
-
-  @override
   String get nonTvApplications => '非TVアプリ';
 
   @override
   String get open => '開く';
-
-  @override
-  String get orSelectFormatSpecifiers => 'または形式指定子を選択';
 
   @override
   String get picture => '画像';
@@ -166,9 +144,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get spacer => 'スペーサー';
-
-  @override
-  String get spacerMaxHeightRequirement => '0より大きく500以下である必要があります';
 
   @override
   String get statusBar => 'ステータスバー';
@@ -201,30 +176,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get systemSettings => 'システム設定';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncherはFLauncherをベースにしたAndroid TV用のカスタムオープンソースランチャーです。\n\nLeanBitLabによって開発されています。\nソースコードは$repoUrlで入手できます。';
-  }
-
-  @override
   String get textEmptyCategory => 'このカテゴリは空です。';
 
   @override
   String get time => '時刻';
 
   @override
-  String get titleStatusBarSettingsPage => 'ステータスバーに表示するものを選択';
-
-  @override
   String get tvApplications => 'TVアプリ';
 
   @override
   String get type => '種類';
-
-  @override
-  String get typeInTheDateFormat => '日付形式を入力';
-
-  @override
-  String get typeInTheHourFormat => '時刻形式を入力';
 
   @override
   String get uninstall => 'アンインストール';
@@ -299,26 +260,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get shareBackup => 'バックアップを共有';
 
   @override
-  String get shareBackupDescription => 'ローカルネットワーク上の他のデバイスとバックアップを共有';
-
-  @override
-  String get stopSharing => '共有を停止';
-
-  @override
-  String get localNetworkSharingActive => 'ローカルネットワーク共有が有効です！';
-
-  @override
-  String get localNetworkSharingInstructions => '他のデバイスを同じWi-Fiネットワークに接続し、Webブラウザで次のURLを開きます：';
-
-  @override
-  String get localNetworkSharingDetails => 'ここでTVの設定/レイアウトをダウンロードするか、バックアップファイルをこのTVにアップロードできます。';
-
-  @override
-  String failedToStartServer(String error) {
-    return '共有サーバーの起動に失敗しました: $error';
-  }
-
-  @override
   String get notificationBell => '通知ベル';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get miscellaneous => 'その他';
-
-  @override
-  String get brightnessScheduler => '明るさスケジューラー';
 
   @override
   String get screensaverSettings => 'スクリーンセーバー設定';
@@ -472,9 +410,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get hidePersistentNotifications => '常駐通知を非表示';
 
   @override
-  String get hidePersistentNotificationsDesc => 'バックグラウンドサービスやシステムの常駐通知を非表示';
-
-  @override
   String get blockedNotificationApps => 'ブロックされたアプリ';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get continueWatchingDescription => 'ホーム画面に最近再生した映画や番組を表示します';
 
   @override
-  String get continueWatchingPermissionDesc => 'TVアプリの視聴履歴を読み取るには特別な権限が必要です:';
-
-  @override
   String get requestPermission => '権限をリクエスト';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get openApp => '開く';
-
-  @override
-  String get notificationOptions => '通知のオプション';
 
   @override
   String get noBlockedAppsDesc => '現在、すべてのアプリで通知の表示が許可されています';

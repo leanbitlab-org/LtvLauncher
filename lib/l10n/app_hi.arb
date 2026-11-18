@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "स्क्रीनसेवर दिखाएं",
     "dialogOptionBackButtonActionShowClock": "घड़ी दिखाएं",
     "dialogTextNoFileExplorer": "कृपया चित्र चुनने के लिए फ़ाइल एक्सप्लोरर इंस्टॉल करें।",
-    "dialogTitleBackButtonAction": "बैक बटन एक्शन चुनें",
     "disambiguateCategoryTitle": "{title} (श्रेणी)",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "फ़ॉर्मेट किया गया दिनांक: {dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "फ़ॉर्मेट किया गया समय: {timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "खाली नहीं होना चाहिए",
     "name": "नाम",
     "newSection": "नया अनुभाग",
-    "noDateFormatSpecified": "कोई दिनांक प्रारूप निर्दिष्ट नहीं",
-    "noTimeFormatSpecified": "कोई समय प्रारूप निर्दिष्ट नहीं",
     "nonTvApplications": "गैर-टीवी ऐप्स",
     "open": "खोलें",
-    "orSelectFormatSpecifiers": "या प्रारूप निर्दिष्टकर्ता चुनें",
     "picture": "चित्र",
     "removeFrom": "{name} से हटाएं",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "पंक्ति की ऊंचाई",
     "save": "सहेजें",
     "spacer": "स्पेसर",
-    "spacerMaxHeightRequirement": "0 से अधिक और 500 से कम या बराबर होना चाहिए",
     "statusBar": "स्टेटस बार",
     "settings": "सेटिंग्स",
     "show": "दिखाएं",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "ऐप सेलेक्टर ट्रांज़िशन एनिमेशन",
     "sort": "क्रमबद्ध करें",
     "systemSettings": "सिस्टम सेटिंग्स",
-    "textAboutDialog": "LTvLauncher FLauncher पर आधारित Android TV के लिए एक अनुकूलित ओपन-सोर्स लॉन्चर है।\n\nLeanBitLab द्वारा विकसित।\nस्रोत कोड {repoUrl} पर उपलब्ध है।",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "यह श्रेणी खाली है।",
     "time": "समय",
-    "titleStatusBarSettingsPage": "चुनें कि स्टेटस बार में क्या दिखाना है",
     "tvApplications": "टीवी ऐप्स",
     "type": "प्रकार",
-    "typeInTheDateFormat": "दिनांक प्रारूप टाइप करें",
-    "typeInTheHourFormat": "समय प्रारूप टाइप करें",
     "uninstall": "अनइंस्टॉल करें",
     "wallpaper": "वॉलपेपर",
     "withEllipsisAddTo": "इसमें जोड़ें...",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "बैकअप साझा करें",
-    "shareBackupDescription": "स्थानीय नेटवर्क पर अन्य डिवाइसों के साथ बैकअप साझा करें",
-    "stopSharing": "साझा करना बंद करें",
-    "localNetworkSharingActive": "स्थानीय नेटवर्क साझाकरण सक्रिय है!",
-    "localNetworkSharingInstructions": "किसी अन्य डिवाइस को उसी Wi-Fi नेटवर्क से कनेक्ट करें और वेब ब्राउज़र में निम्न URL खोलें:",
-    "localNetworkSharingDetails": "यहां आप अपने टीवी की सेटिंग्स/लेआउट डाउनलोड कर सकते हैं या बैकअप फ़ाइल को इस टीवी पर वापस अपलोड कर सकते हैं।",
-    "failedToStartServer": "साझाकरण सर्वर प्रारंभ करने में विफल: {error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "सूचना घंटी",
     "autoHideNotificationBell": "सूचना घंटी को स्वचालित रूप से छिपाएं",
     "continueWatching": "देखना जारी रखें",
@@ -169,7 +124,6 @@
     "system": "सिस्टम",
     "accentColor": "एक्सेंट रंग",
     "miscellaneous": "विविध",
-    "brightnessScheduler": "चमक शेड्यूलर",
     "screensaverSettings": "स्क्रीनसेवर सेटिंग्स",
     "screensaverClockStyle": "स्क्रीनसेवर घड़ी शैली",
     "dataUsagePeriod": "डेटा उपयोग अवधि",
@@ -204,7 +158,6 @@
     "slovenian": "स्लोवेनियाई",
     "hebrew": "हिब्रू",
     "hidePersistentNotifications": "स्थायी सूचनाएं छिपाएं",
-    "hidePersistentNotificationsDesc": "पृष्ठभूमि सेवा और सिस्टम सूचनाएं छिपाएं",
     "blockedNotificationApps": "अवरुद्ध ऐप्स",
     "blockAppNotifications": "सूचनाएं अवरुद्ध करें",
     "unblockAppNotifications": "सूचनाएं अनब्लॉक करें",
@@ -220,11 +173,9 @@
     "displayAndScreensaver": "डिस्प्ले और स्क्रीनसेवर",
     "notifications": "सूचनाएं",
     "continueWatchingDescription": "होम स्क्रीन पर हाल ही में देखी गई फिल्में और टीवी शो दिखाएं",
-    "continueWatchingPermissionDesc": "टीवी ऐप्स से देखने का इतिहास पढ़ने के लिए विशेष अनुमति की आवश्यकता है:",
     "requestPermission": "अनुमति का अनुरोध करें",
     "dismiss": "हटाएं",
     "openApp": "खोलें",
-    "notificationOptions": "सूचना विकल्प",
     "noBlockedAppsDesc": "सभी ऐप्स को वर्तमान में सूचनाएं दिखाने की अनुमति है",
     "notificationsAllowed": "सूचनाएं चालू हैं",
     "notificationsBlocked": "सूचनाएं अवरुद्ध हैं",

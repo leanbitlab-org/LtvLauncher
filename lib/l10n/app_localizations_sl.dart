@@ -67,21 +67,8 @@ class AppLocalizationsSl extends AppLocalizations {
   String get dialogTextNoFileExplorer => 'Za izbiro slike namestite raziskovalec datotek.';
 
   @override
-  String get dialogTitleBackButtonAction => 'Izberite dejanje gumba Nazaj';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title (Kategorija)';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return 'Oblika datuma: $dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return 'Oblika časa: $timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsSl extends AppLocalizations {
   String get newSection => 'Nov razdelek';
 
   @override
-  String get noDateFormatSpecified => 'Oblika datuma ni določena';
-
-  @override
-  String get noTimeFormatSpecified => 'Oblika časa ni določena';
-
-  @override
   String get nonTvApplications => 'Ne-TV aplikacije';
 
   @override
   String get open => 'Odpri';
-
-  @override
-  String get orSelectFormatSpecifiers => 'Ali izberite določila oblike';
 
   @override
   String get picture => 'Slika';
@@ -166,9 +144,6 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get spacer => 'Presledek';
-
-  @override
-  String get spacerMaxHeightRequirement => 'Mora biti večje od 0 in manjše ali enako 500';
 
   @override
   String get statusBar => 'Vrstica stanja';
@@ -201,30 +176,16 @@ class AppLocalizationsSl extends AppLocalizations {
   String get systemSettings => 'Sistemske nastavitve';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher je prilagojen odprtokodni zaganjalnik za Android TV, ki temelji na FLauncherju.\n\nRazvil LeanBitLab.\nIzvorna koda je na voljo na $repoUrl.';
-  }
-
-  @override
   String get textEmptyCategory => 'Ta kategorija je prazna.';
 
   @override
   String get time => 'Čas';
 
   @override
-  String get titleStatusBarSettingsPage => 'Izberite, kaj naj bo prikazano v vrstici stanja';
-
-  @override
   String get tvApplications => 'TV aplikacije';
 
   @override
   String get type => 'Vrsta';
-
-  @override
-  String get typeInTheDateFormat => 'Vnesite obliko datuma';
-
-  @override
-  String get typeInTheHourFormat => 'Vnesite obliko časa';
 
   @override
   String get uninstall => 'Odmesti';
@@ -299,26 +260,6 @@ class AppLocalizationsSl extends AppLocalizations {
   String get shareBackup => 'Deli varnostno kopijo';
 
   @override
-  String get shareBackupDescription => 'Deli varnostno kopijo z drugimi napravami v lokalnem omrežju';
-
-  @override
-  String get stopSharing => 'Ustavi deljenje';
-
-  @override
-  String get localNetworkSharingActive => 'Deljenje v lokalnem omrežju je aktivno!';
-
-  @override
-  String get localNetworkSharingInstructions => 'Povežite drugo napravo v isto omrežje Wi-Fi in v spletnem brskalniku odprite naslednji naslov URL:';
-
-  @override
-  String get localNetworkSharingDetails => 'Tukaj lahko prenesete nastavitve/postavitev televizorja ali naložite datoteko varnostne kopije nazaj na ta televizor.';
-
-  @override
-  String failedToStartServer(String error) {
-    return 'Zagon strežnika za skupno rabo ni uspel: $error';
-  }
-
-  @override
   String get notificationBell => 'Zvonček za obvestila';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get miscellaneous => 'Razno';
-
-  @override
-  String get brightnessScheduler => 'Urnik svetlosti';
 
   @override
   String get screensaverSettings => 'Nastavitve ohranjevalnika zaslona';
@@ -472,9 +410,6 @@ class AppLocalizationsSl extends AppLocalizations {
   String get hidePersistentNotifications => 'Skrij trajna obvestila';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Skrij obvestila trajnih storitev v ozadju in sistemska obvestila';
-
-  @override
   String get blockedNotificationApps => 'Blokirane aplikacije';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsSl extends AppLocalizations {
   String get continueWatchingDescription => 'Prikaži nedavno gledane filme in TV-oddaje iz podprtih aplikacij na domačem zaslonu';
 
   @override
-  String get continueWatchingPermissionDesc => 'Za branje zgodovine ogledov iz TV aplikacij je potrebno posebno dovoljenje. Odobrite ga lahko s spodnjim gumbom ali prek ADB:';
-
-  @override
   String get requestPermission => 'Zahtevaj dovoljenje';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get openApp => 'Odpri';
-
-  @override
-  String get notificationOptions => 'Možnosti obvestil';
 
   @override
   String get noBlockedAppsDesc => 'Vsem aplikacijam je trenutno dovoljeno prikazovanje obvestil';

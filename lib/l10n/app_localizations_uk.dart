@@ -67,21 +67,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get dialogTextNoFileExplorer => 'Будь ласка, встановіть файловий менеджер, щоб вибрати зображення.';
 
   @override
-  String get dialogTitleBackButtonAction => 'Виберіть дію кнопки «Назад»';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title (Категорія)';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return 'Формат дати: $dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return 'Формат часу: $timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get newSection => 'Новий розділ';
 
   @override
-  String get noDateFormatSpecified => 'Формат дати не вказано';
-
-  @override
-  String get noTimeFormatSpecified => 'Формат часу не вказано';
-
-  @override
   String get nonTvApplications => 'Застосунки не для ТБ';
 
   @override
   String get open => 'Відкрити';
-
-  @override
-  String get orSelectFormatSpecifiers => 'Або виберіть специфікатори формату';
 
   @override
   String get picture => 'Зображення';
@@ -166,9 +144,6 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get spacer => 'Роздільник';
-
-  @override
-  String get spacerMaxHeightRequirement => 'Має бути більше 0 і не більше 500';
 
   @override
   String get statusBar => 'Рядок стану';
@@ -201,30 +176,16 @@ class AppLocalizationsUk extends AppLocalizations {
   String get systemSettings => 'Системні налаштування';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher — це налаштований лаунчер з відкритим кодом для Android TV, створений на основі FLauncher.\n\nРозроблено LeanBitLab.\nВихідний код доступний за адресою $repoUrl.';
-  }
-
-  @override
   String get textEmptyCategory => 'Ця категорія порожня.';
 
   @override
   String get time => 'Час';
 
   @override
-  String get titleStatusBarSettingsPage => 'Виберіть, що відображати в рядку стану';
-
-  @override
   String get tvApplications => 'Застосунки для ТБ';
 
   @override
   String get type => 'Тип';
-
-  @override
-  String get typeInTheDateFormat => 'Введіть формат дати';
-
-  @override
-  String get typeInTheHourFormat => 'Введіть формат часу';
 
   @override
   String get uninstall => 'Видалити';
@@ -299,26 +260,6 @@ class AppLocalizationsUk extends AppLocalizations {
   String get shareBackup => 'Поділитися резервною копією';
 
   @override
-  String get shareBackupDescription => 'Поділитися резервною копією з іншими пристроями в локальній мережі';
-
-  @override
-  String get stopSharing => 'Зупинити спільний доступ';
-
-  @override
-  String get localNetworkSharingActive => 'Спільний доступ у локальній мережі активний!';
-
-  @override
-  String get localNetworkSharingInstructions => 'Підключіть інший пристрій до тієї самої мережі Wi-Fi та відкрийте таку адресу у веббраузері:';
-
-  @override
-  String get localNetworkSharingDetails => 'Тут ви можете завантажити налаштування/розташування вашого ТБ або вивантажити файл резервної копії назад на цей телевізор.';
-
-  @override
-  String failedToStartServer(String error) {
-    return 'Не вдалося запустити сервер спільного доступу: $error';
-  }
-
-  @override
   String get notificationBell => 'Дзвіночок сповіщень';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get miscellaneous => 'Інше';
-
-  @override
-  String get brightnessScheduler => 'Розклад яскравості';
 
   @override
   String get screensaverSettings => 'Налаштування заставки';
@@ -472,9 +410,6 @@ class AppLocalizationsUk extends AppLocalizations {
   String get hidePersistentNotifications => 'Приховати постійні сповіщення';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Приховувати фонові та системні сповіщення';
-
-  @override
   String get blockedNotificationApps => 'Заблоковані додатки';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsUk extends AppLocalizations {
   String get continueWatchingDescription => 'Показувати нещодавно переглянуті фільми та серіали на головному екрані';
 
   @override
-  String get continueWatchingPermissionDesc => 'Для читання історії перегляду з ТВ-додатків потрібен спеціальний дозвіл:';
-
-  @override
   String get requestPermission => 'Запитати дозвіл';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get openApp => 'Відкрити';
-
-  @override
-  String get notificationOptions => 'Параметри сповіщення';
 
   @override
   String get noBlockedAppsDesc => 'Усім програмам наразі дозволено показувати сповіщення';
