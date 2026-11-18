@@ -1,0 +1,5 @@
+- Added Hebrew translation.
+- Smoother D-pad response: app lists, icons and TV inputs now load off the main thread.
+- Faster home screen: rows are built as you scroll, wallpapers decode at screen size.
+- Fixed gradient backgrounds not showing until restart.
+- App menu now opens with focus on the first option.
