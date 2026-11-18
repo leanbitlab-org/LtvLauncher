@@ -86,21 +86,20 @@ class _FLauncherState extends State<FLauncher> {
                                 order: settings.continueWatchingOrder,
                               ),
                               builder: (context, cwSettings, _) =>
-                                  SingleChildScrollView(
+                                  // Lazy: only sections near the viewport are
+                                  // built. cacheExtent keeps the next row laid
+                                  // out so D-pad up/down can find it.
+                                  ListView(
                                     physics: const ClampingScrollPhysics(),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        _sections(
-                                            appsService.launcherSections,
-                                            continueWatchingActive:
-                                                cwSettings.show &&
-                                                hasContinuingPrograms,
-                                            continueWatchingOrder:
-                                                cwSettings.order),
-                                      ],
-                                    ),
+                                    padding: EdgeInsets.zero,
+                                    cacheExtent: 400,
+                                    children: _sections(
+                                        appsService.launcherSections,
+                                        continueWatchingActive:
+                                            cwSettings.show &&
+                                            hasContinuingPrograms,
+                                        continueWatchingOrder:
+                                            cwSettings.order),
                                   ),
                             ),
                     );
@@ -118,7 +117,7 @@ class _FLauncherState extends State<FLauncher> {
     ),
   );
 
-  Widget _sections(
+  List<Widget> _sections(
     List<LauncherSection> sections, {
     bool continueWatchingActive = false,
     int continueWatchingOrder = 0,
@@ -184,7 +183,7 @@ class _FLauncherState extends State<FLauncher> {
       firstCategoryFound = true;
     }
 
-    return Column(children: children);
+    return children;
   }
 
   Widget _wallpaper(BuildContext context, WallpaperService wallpaperService) {
