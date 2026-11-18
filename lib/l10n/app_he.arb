@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "הצגת שומר מסך",
     "dialogOptionBackButtonActionShowClock": "הצגת שעון",
     "dialogTextNoFileExplorer": "נא להתקין סייר קבצים כדי לבחור תמונה.",
-    "dialogTitleBackButtonAction": "בחירת פעולת כפתור חזרה",
     "disambiguateCategoryTitle": "{title} (קטגוריה)",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "תאריך מפורמט: {dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "שעה מפורמטת: {timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "אינו יכול להיות ריק",
     "name": "שם",
     "newSection": "מקטע חדש",
-    "noDateFormatSpecified": "לא צוינה תבנית תאריך",
-    "noTimeFormatSpecified": "לא צוינה תבנית שעה",
     "nonTvApplications": "אפליקציות שאינן לטלוויזיה",
     "open": "פתיחה",
-    "orSelectFormatSpecifiers": "או בחר מזהי תבנית",
     "picture": "תמונה",
     "removeFrom": "הסרה מ-{name}",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "גובה שורה",
     "save": "שמירה",
     "spacer": "מרווח",
-    "spacerMaxHeightRequirement": "חייב להיות גדול מ-0 וקטן או שווה ל-500",
     "statusBar": "שורת מצב",
     "settings": "הגדרות",
     "show": "הצגה",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "אנימציית מעבר בבחירת אפליקציות",
     "sort": "מיון",
     "systemSettings": "הגדרות מערכת",
-    "textAboutDialog": "LTvLauncher הוא מסך בית מותאם אישית בקוד פתוח עבור Android TV, המבוסס על FLauncher.\n\nפותח על ידי LeanBitLab.\nקוד המקור זמין ב-{repoUrl}.",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "קטגוריה זו ריקה.",
     "time": "שעה",
-    "titleStatusBarSettingsPage": "בחירת הפריטים להצגה בשורת המצב",
     "tvApplications": "אפליקציות טלוויזיה",
     "type": "סוג",
-    "typeInTheDateFormat": "הקלד את תבנית התאריך",
-    "typeInTheHourFormat": "הקלד את תבנית השעה",
     "uninstall": "הסרת התקנה",
     "wallpaper": "טפט",
     "withEllipsisAddTo": "הוספה אל...",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "שיתוף גיבוי",
-    "shareBackupDescription": "שיתוף הגיבוי עם מכשירים אחרים ברשת המקומית",
-    "stopSharing": "הפסקת שיתוף",
-    "localNetworkSharingActive": "שיתוף ברשת המקומית פעיל!",
-    "localNetworkSharingInstructions": "חבר מכשיר נוסף לאותה רשת Wi-Fi ופתח את הכתובת הבאה בדפדפן האינטרנט:",
-    "localNetworkSharingDetails": "כאן תוכל להוריד את הגדרות ופריסת הטלוויזיה שלך או להעלות קובץ גיבוי בחזרה לטלוויזיה זו.",
-    "failedToStartServer": "הפעלת שרת השיתוף נכשלה: {error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "פעמון התראות",
     "autoHideNotificationBell": "הסתרה אוטומטית של פעמון ההתראות",
     "continueWatching": "המשך צפייה",
@@ -169,7 +124,6 @@
     "system": "מערכת",
     "accentColor": "צבע הדגשה",
     "miscellaneous": "שונות",
-    "brightnessScheduler": "מתזמן בהירות",
     "screensaverSettings": "הגדרות שומר מסך",
     "screensaverClockStyle": "סגנון שעון שומר מסך",
     "screensaverAnimation": "אנימציית שומר מסך",
@@ -211,7 +165,6 @@
     "slovenian": "סלובנית",
     "hebrew": "עברית",
     "hidePersistentNotifications": "הסתרת התראות קבועות",
-    "hidePersistentNotificationsDesc": "הסתרת התראות מערכת והתראות מתמשכות של שירותי רקע",
     "blockedNotificationApps": "אפליקציות חסומות",
     "blockAppNotifications": "חסימת התראות",
     "unblockAppNotifications": "ביטול חסימת התראות",
@@ -227,11 +180,9 @@
     "displayAndScreensaver": "תצוגה ושומר מסך",
     "notifications": "התראות",
     "continueWatchingDescription": "הצגת סרטים ותוכניות טלוויזיה שנצפו לאחרונה מאפליקציות נתמכות במסך הבית שלך",
-    "continueWatchingPermissionDesc": "נדרשת הרשאה מיוחדת לקריאת היסטוריית צפייה מאפליקציות טלוויזיה. ניתן להעניק אותה באמצעות הכפתור למטה או דרך ADB:",
     "requestPermission": "בקשת הרשאה",
     "dismiss": "התעלמות",
     "openApp": "פתיחה",
-    "notificationOptions": "אפשרויות התראה",
     "noBlockedAppsDesc": "כל האפליקציות מורשות כרגע להציג התראות",
     "notificationsAllowed": "התראות מורשות",
     "notificationsBlocked": "התראות חסומות",

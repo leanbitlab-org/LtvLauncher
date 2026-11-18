@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "Show screensaver",
     "dialogOptionBackButtonActionShowClock": "Show clock",
     "dialogTextNoFileExplorer": "Please install a file explorer in order to pick a picture.",
-    "dialogTitleBackButtonAction": "Choose the back button action",
     "disambiguateCategoryTitle": "{title} (Category)",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "Formatted date: {dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "Formatted time: {timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "Must not be empty",
     "name": "Name",
     "newSection": "New section",
-    "noDateFormatSpecified": "No date format specified",
-    "noTimeFormatSpecified": "No time format specified",
     "nonTvApplications": "Non-TV Apps",
     "open": "Open",
-    "orSelectFormatSpecifiers": "Or select format specifiers",
     "picture": "Picture",
     "removeFrom": "Remove from {name}",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "Row height",
     "save": "Save",
     "spacer": "Spacer",
-    "spacerMaxHeightRequirement": "Must be greater than 0 and less than or equal to 500",
     "statusBar": "Status bar",
     "settings": "Settings",
     "show": "Show",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "App selector transition animation",
     "sort": "Sort",
     "systemSettings": "System settings",
-    "textAboutDialog": "LTvLauncher is a customized open-source launcher for Android TV, based on FLauncher.\n\nDeveloped by LeanBitLab.\nSource code available at {repoUrl}.",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "This category is empty.",
     "time": "Time",
-    "titleStatusBarSettingsPage": "Choose what to display in the status bar",
     "tvApplications": "TV Apps",
     "type": "Type",
-    "typeInTheDateFormat": "Type in the date format",
-    "typeInTheHourFormat": "Type in the hour format",
     "uninstall": "Uninstall",
     "wallpaper": "Wallpaper",
     "withEllipsisAddTo": "Add to...",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "Share Backup",
-    "shareBackupDescription": "Share backup with other devices on local network",
-    "stopSharing": "Stop Sharing",
-    "localNetworkSharingActive": "Local network sharing is active!",
-    "localNetworkSharingInstructions": "Connect another device to the same Wi-Fi network and open the following URL in a web browser:",
-    "localNetworkSharingDetails": "Here you can download your TV settings/layout or upload a backup file back to this TV.",
-    "failedToStartServer": "Failed to start sharing server: {error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "Notification Bell",
     "autoHideNotificationBell": "Auto-hide Notification Bell",
     "continueWatching": "Continue Watching",
@@ -169,7 +124,6 @@
     "system": "System",
     "accentColor": "Accent Color",
     "miscellaneous": "Miscellaneous",
-    "brightnessScheduler": "Brightness Scheduler",
     "screensaverSettings": "Screensaver Settings",
     "screensaverClockStyle": "Screensaver Clock Style",
     "screensaverAnimation": "Screensaver Animation",
@@ -211,7 +165,6 @@
     "slovenian": "Slovenian",
     "hebrew": "Hebrew",
     "hidePersistentNotifications": "Hide Persistent Notifications",
-    "hidePersistentNotificationsDesc": "Hide ongoing background service and system notifications",
     "blockedNotificationApps": "Blocked Apps",
     "blockAppNotifications": "Block Notifications",
     "unblockAppNotifications": "Unblock Notifications",
@@ -227,11 +180,9 @@
     "displayAndScreensaver": "Display & Screensaver",
     "notifications": "Notifications",
     "continueWatchingDescription": "Show recently watched movies and TV shows from supported apps on your home screen",
-    "continueWatchingPermissionDesc": "Special permission is required to read watch history from TV apps. You can grant it using the button below or via ADB:",
     "requestPermission": "Request Permission",
     "dismiss": "Dismiss",
     "openApp": "Open",
-    "notificationOptions": "Notification Options",
     "noBlockedAppsDesc": "All applications are currently allowed to show notifications",
     "notificationsAllowed": "Notifications Allowed",
     "notificationsBlocked": "Notifications Blocked",

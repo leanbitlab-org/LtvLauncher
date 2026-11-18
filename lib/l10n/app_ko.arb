@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "화면 보호기 표시",
     "dialogOptionBackButtonActionShowClock": "시계 표시",
     "dialogTextNoFileExplorer": "사진을 선택하려면 파일 탐색기를 설치하세요.",
-    "dialogTitleBackButtonAction": "뒤로 버튼 동작 선택",
     "disambiguateCategoryTitle": "{title} (카테고리)",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "포맷된 날짜: {dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "포맷된 시간: {timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "비워둘 수 없습니다",
     "name": "이름",
     "newSection": "새 섹션",
-    "noDateFormatSpecified": "날짜 형식이 지정되지 않음",
-    "noTimeFormatSpecified": "시간 형식이 지정되지 않음",
     "nonTvApplications": "비 TV 앱",
     "open": "열기",
-    "orSelectFormatSpecifiers": "또는 형식 지정자 선택",
     "picture": "사진",
     "removeFrom": "{name}에서 제거",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "행 높이",
     "save": "저장",
     "spacer": "간격",
-    "spacerMaxHeightRequirement": "0보다 크고 500 이하여야 합니다",
     "statusBar": "상태 표시줄",
     "settings": "설정",
     "show": "표시",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "앱 선택기 전환 애니메이션",
     "sort": "정렬",
     "systemSettings": "시스템 설정",
-    "textAboutDialog": "LTvLauncher는 FLauncher를 기반으로 한 Android TV용 맞춤형 오픈 소스 런처입니다.\n\nLeanBitLab에서 개발했습니다.\n소스 코드는 {repoUrl}에서 사용할 수 있습니다.",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "이 카테고리는 비어 있습니다.",
     "time": "시간",
-    "titleStatusBarSettingsPage": "상태 표시줄에 표시할 내용 선택",
     "tvApplications": "TV 앱",
     "type": "유형",
-    "typeInTheDateFormat": "날짜 형식 입력",
-    "typeInTheHourFormat": "시간 형식 입력",
     "uninstall": "제거",
     "wallpaper": "배경화면",
     "withEllipsisAddTo": "추가...",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "백업 공유",
-    "shareBackupDescription": "로컬 네트워크의 다른 기기와 백업 공유",
-    "stopSharing": "공유 중지",
-    "localNetworkSharingActive": "로컬 네트워크 공유가 활성화되었습니다!",
-    "localNetworkSharingInstructions": "다른 기기를 동일한 Wi-Fi 네트워크에 연결하고 웹 브라우저에서 다음 URL을 엽니다.",
-    "localNetworkSharingDetails": "여기에서 TV 설정/레이아웃을 다운로드하거나 이 TV로 백업 파일을 업로드할 수 있습니다.",
-    "failedToStartServer": "공유 서버 시작 실패: {error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "알림 벨",
     "autoHideNotificationBell": "알림 벨 자동 숨기기",
     "continueWatching": "계속 시청",
@@ -169,7 +124,6 @@
     "system": "시스템",
     "accentColor": "강조 색상",
     "miscellaneous": "기타",
-    "brightnessScheduler": "밝기 스케줄러",
     "screensaverSettings": "화면 보호기 설정",
     "screensaverClockStyle": "화면 보호기 시계 스타일",
     "dataUsagePeriod": "데이터 사용 기간",
@@ -204,7 +158,6 @@
     "slovenian": "슬로베니아어",
     "hebrew": "히브리어",
     "hidePersistentNotifications": "고정 알림 숨기기",
-    "hidePersistentNotificationsDesc": "백그라운드 서비스 및 시스템 고정 알림 숨기기",
     "blockedNotificationApps": "차단된 앱",
     "blockAppNotifications": "알림 차단",
     "unblockAppNotifications": "알림 차단 해제",
@@ -220,11 +173,9 @@
     "displayAndScreensaver": "디스플레이 및 화면 보호기",
     "notifications": "알림",
     "continueWatchingDescription": "홈 화면에 최근 시청한 영화 및 TV 프로그램 표시",
-    "continueWatchingPermissionDesc": "TV 앱의 시청 기록을 읽으려면 특별한 권한이 필요합니다:",
     "requestPermission": "권한 요청",
     "dismiss": "닫기",
     "openApp": "열기",
-    "notificationOptions": "알림 옵션",
     "noBlockedAppsDesc": "현재 모든 애플리케이션의 알림 표시가 허용되어 있습니다",
     "notificationsAllowed": "알림 허용됨",
     "notificationsBlocked": "알림 차단됨",

@@ -67,21 +67,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dialogTextNoFileExplorer => 'Por favor, instale un gestor de archivos para seleccionar una imagen.';
 
   @override
-  String get dialogTitleBackButtonAction => 'Elegir la acción del botón \'Atrás\'';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title (Categoría)';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return 'Fecha con formato: $dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return 'Hora con formato: $timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get newSection => 'Nueva sección';
 
   @override
-  String get noDateFormatSpecified => 'Sin formato de fecha';
-
-  @override
-  String get noTimeFormatSpecified => 'Sin formato de hora';
-
-  @override
   String get nonTvApplications => 'Otras aplicaciones';
 
   @override
   String get open => 'Abrir';
-
-  @override
-  String get orSelectFormatSpecifiers => 'O seleccione especificadores de formato';
 
   @override
   String get picture => 'Imagen';
@@ -166,9 +144,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get spacer => 'Espaciador';
-
-  @override
-  String get spacerMaxHeightRequirement => 'Debe ser mayor a cero y menor o igual a 500';
 
   @override
   String get statusBar => 'Barra de estado';
@@ -201,30 +176,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get systemSettings => 'Ajustes del sistema';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher es un lanzador de código abierto personalizado para Android TV, basado en FLauncher.\n\nDesarrollado por LeanBitLab.\nCódigo fuente disponible en $repoUrl.';
-  }
-
-  @override
   String get textEmptyCategory => 'Esta categoría está vacía.';
 
   @override
   String get time => 'Hora';
 
   @override
-  String get titleStatusBarSettingsPage => 'Elija la información a mostrar en la barra de estado';
-
-  @override
   String get tvApplications => 'Aplicaciones del televisor';
 
   @override
   String get type => 'Tipo';
-
-  @override
-  String get typeInTheDateFormat => 'Escriba el formato de fecha';
-
-  @override
-  String get typeInTheHourFormat => 'Escriba el formato de hora';
 
   @override
   String get uninstall => 'Desinstalar';
@@ -299,26 +260,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get shareBackup => 'Compartir copia';
 
   @override
-  String get shareBackupDescription => 'Comparta la copia de seguridad con otros dispositivos en la red local';
-
-  @override
-  String get stopSharing => 'Detener uso compartido';
-
-  @override
-  String get localNetworkSharingActive => '¡El uso compartido en red local está activo!';
-
-  @override
-  String get localNetworkSharingInstructions => 'Conecte otro dispositivo a la misma red Wi-Fi y abra la siguiente URL en un navegador web:';
-
-  @override
-  String get localNetworkSharingDetails => 'Aquí puede descargar la configuración/diseño de su TV o subir un archivo de copia de seguridad a esta TV.';
-
-  @override
-  String failedToStartServer(String error) {
-    return 'Error al iniciar el servidor de uso compartido: $error';
-  }
-
-  @override
   String get notificationBell => 'Campana de notificaciones';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get miscellaneous => 'Miscelánea';
-
-  @override
-  String get brightnessScheduler => 'Programador de brillo';
 
   @override
   String get screensaverSettings => 'Ajustes del salvapantallas';
@@ -472,9 +410,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get hidePersistentNotifications => 'Ocultar notificaciones persistentes';
 
   @override
-  String get hidePersistentNotificationsDesc => 'Ocultar notificaciones de servicios en segundo plano y del sistema';
-
-  @override
   String get blockedNotificationApps => 'Aplicaciones bloqueadas';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get continueWatchingDescription => 'Mostrar películas y series vistas recientemente en la pantalla de inicio';
 
   @override
-  String get continueWatchingPermissionDesc => 'Se requiere un permiso especial para leer el historial de reproducción de las aplicaciones de TV:';
-
-  @override
   String get requestPermission => 'Solicitar permiso';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get openApp => 'Abrir';
-
-  @override
-  String get notificationOptions => 'Opciones de notificación';
 
   @override
   String get noBlockedAppsDesc => 'Todas las aplicaciones tienen permitido mostrar notificaciones';

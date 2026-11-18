@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "إظهار شاشة التوقف",
     "dialogOptionBackButtonActionShowClock": "إظهار الساعة",
     "dialogTextNoFileExplorer": "يرجى تثبيت مستكشف الملفات لاختيار صورة.",
-    "dialogTitleBackButtonAction": "اختر إجراء زر الرجوع",
     "disambiguateCategoryTitle": "{title} (فئة)",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "التاريخ المنسق: {dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "الوقت المنسق: {timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "يجب ألا يكون فارغاً",
     "name": "الاسم",
     "newSection": "قسم جديد",
-    "noDateFormatSpecified": "لم يتم تحديد تنسيق التاريخ",
-    "noTimeFormatSpecified": "لم يتم تحديد تنسيق الوقت",
     "nonTvApplications": "تطبيقات غير تلفزيونية",
     "open": "فتح",
-    "orSelectFormatSpecifiers": "أو حدد محددات التنسيق",
     "picture": "صورة",
     "removeFrom": "إزالة من {name}",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "ارتفاع الصف",
     "save": "حفظ",
     "spacer": "فاصل",
-    "spacerMaxHeightRequirement": "يجب أن يكون أكبر من 0 وأقل من أو يساوي 500",
     "statusBar": "شريط الحالة",
     "settings": "الإعدادات",
     "show": "إظهار",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "رسوم متحركة لانتقال محدد التطبيقات",
     "sort": "فرز",
     "systemSettings": "إعدادات النظام",
-    "textAboutDialog": "LTvLauncher هو مشغل مفتوح المصدر ومخصص لتلفزيون أندرويد، مبني على FLauncher.\n\nتم تطويره بواسطة LeanBitLab.\nالكود المصدري متاح على {repoUrl}.",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "هذه الفئة فارغة.",
     "time": "الوقت",
-    "titleStatusBarSettingsPage": "اختر ما سيتم عرضه في شريط الحالة",
     "tvApplications": "تطبيقات التلفزيون",
     "type": "النوع",
-    "typeInTheDateFormat": "اكتب تنسيق التاريخ",
-    "typeInTheHourFormat": "اكتب تنسيق الوقت",
     "uninstall": "إلغاء التثبيت",
     "wallpaper": "خلفية",
     "withEllipsisAddTo": "إضافة إلى...",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "مشاركة النسخ الاحتياطي",
-    "shareBackupDescription": "مشاركة النسخ الاحتياطي مع الأجهزة الأخرى على الشبكة المحلية",
-    "stopSharing": "إيقاف المشاركة",
-    "localNetworkSharingActive": "مشاركة الشبكة المحلية نشطة!",
-    "localNetworkSharingInstructions": "قم بتوصيل جهاز آخر بنفس شبكة Wi-Fi وافتح عنوان URL التالي في متصفح الويب:",
-    "localNetworkSharingDetails": "هنا يمكنك تنزيل إعدادات/تخطيط التلفزيون الخاص بك أو رفع ملف نسخ احتياطي مرة أخرى إلى هذا التلفزيون.",
-    "failedToStartServer": "فشل بدء خادم المشاركة: {error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "جرس الإشعارات",
     "autoHideNotificationBell": "إخفاء جرس الإشعارات تلقائياً",
     "continueWatching": "متابعة المشاهدة",
@@ -169,7 +124,6 @@
     "system": "النظام",
     "accentColor": "لون التمييز",
     "miscellaneous": "متنوع",
-    "brightnessScheduler": "مجدول السطوع",
     "screensaverSettings": "إعدادات شاشة التوقف",
     "screensaverClockStyle": "نمط ساعة شاشة التوقف",
     "dataUsagePeriod": "فترة استخدام البيانات",
@@ -204,7 +158,6 @@
     "slovenian": "السلوفينية",
     "hebrew": "العبرية",
     "hidePersistentNotifications": "إخفاء الإشعارات الدائمة",
-    "hidePersistentNotificationsDesc": "إخفاء إشعارات خدمات الخلفية والنظام",
     "blockedNotificationApps": "التطبيقات المحظورة",
     "blockAppNotifications": "حظر الإشعارات",
     "unblockAppNotifications": "إلغاء حظر الإشعارات",
@@ -220,11 +173,9 @@
     "displayAndScreensaver": "الشاشة وشاشة التوقف",
     "notifications": "الإشعارات",
     "continueWatchingDescription": "عرض الأفلام والبرامج التلفزيونية التي تمت مشاهدتها مؤخرًا على الشاشة الرئيسية",
-    "continueWatchingPermissionDesc": "يلزم الحصول على إذن خاص لقراءة سجل المشاهدة من تطبيقات التلفزيون:",
     "requestPermission": "طلب الإذن",
     "dismiss": "تجاهل",
     "openApp": "فتح",
-    "notificationOptions": "خيارات الإشعار",
     "noBlockedAppsDesc": "يُسمح لجميع التطبيقات حاليًا بإظهار الإشعارات",
     "notificationsAllowed": "الإشعارات مسموحة",
     "notificationsBlocked": "الإشعارات محظورة",

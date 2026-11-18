@@ -67,21 +67,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dialogTextNoFileExplorer => 'يرجى تثبيت مستكشف الملفات لاختيار صورة.';
 
   @override
-  String get dialogTitleBackButtonAction => 'اختر إجراء زر الرجوع';
-
-  @override
   String disambiguateCategoryTitle(String title) {
     return '$title (فئة)';
-  }
-
-  @override
-  String formattedDate(String dateString) {
-    return 'التاريخ المنسق: $dateString';
-  }
-
-  @override
-  String formattedTime(String timeString) {
-    return 'الوقت المنسق: $timeString';
   }
 
   @override
@@ -127,19 +114,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get newSection => 'قسم جديد';
 
   @override
-  String get noDateFormatSpecified => 'لم يتم تحديد تنسيق التاريخ';
-
-  @override
-  String get noTimeFormatSpecified => 'لم يتم تحديد تنسيق الوقت';
-
-  @override
   String get nonTvApplications => 'تطبيقات غير تلفزيونية';
 
   @override
   String get open => 'فتح';
-
-  @override
-  String get orSelectFormatSpecifiers => 'أو حدد محددات التنسيق';
 
   @override
   String get picture => 'صورة';
@@ -166,9 +144,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get spacer => 'فاصل';
-
-  @override
-  String get spacerMaxHeightRequirement => 'يجب أن يكون أكبر من 0 وأقل من أو يساوي 500';
 
   @override
   String get statusBar => 'شريط الحالة';
@@ -201,30 +176,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get systemSettings => 'إعدادات النظام';
 
   @override
-  String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher هو مشغل مفتوح المصدر ومخصص لتلفزيون أندرويد، مبني على FLauncher.\n\nتم تطويره بواسطة LeanBitLab.\nالكود المصدري متاح على $repoUrl.';
-  }
-
-  @override
   String get textEmptyCategory => 'هذه الفئة فارغة.';
 
   @override
   String get time => 'الوقت';
 
   @override
-  String get titleStatusBarSettingsPage => 'اختر ما سيتم عرضه في شريط الحالة';
-
-  @override
   String get tvApplications => 'تطبيقات التلفزيون';
 
   @override
   String get type => 'النوع';
-
-  @override
-  String get typeInTheDateFormat => 'اكتب تنسيق التاريخ';
-
-  @override
-  String get typeInTheHourFormat => 'اكتب تنسيق الوقت';
 
   @override
   String get uninstall => 'إلغاء التثبيت';
@@ -299,26 +260,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shareBackup => 'مشاركة النسخ الاحتياطي';
 
   @override
-  String get shareBackupDescription => 'مشاركة النسخ الاحتياطي مع الأجهزة الأخرى على الشبكة المحلية';
-
-  @override
-  String get stopSharing => 'إيقاف المشاركة';
-
-  @override
-  String get localNetworkSharingActive => 'مشاركة الشبكة المحلية نشطة!';
-
-  @override
-  String get localNetworkSharingInstructions => 'قم بتوصيل جهاز آخر بنفس شبكة Wi-Fi وافتح عنوان URL التالي في متصفح الويب:';
-
-  @override
-  String get localNetworkSharingDetails => 'هنا يمكنك تنزيل إعدادات/تخطيط التلفزيون الخاص بك أو رفع ملف نسخ احتياطي مرة أخرى إلى هذا التلفزيون.';
-
-  @override
-  String failedToStartServer(String error) {
-    return 'فشل بدء خادم المشاركة: $error';
-  }
-
-  @override
   String get notificationBell => 'جرس الإشعارات';
 
   @override
@@ -344,9 +285,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get miscellaneous => 'متنوع';
-
-  @override
-  String get brightnessScheduler => 'مجدول السطوع';
 
   @override
   String get screensaverSettings => 'إعدادات شاشة التوقف';
@@ -472,9 +410,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hidePersistentNotifications => 'إخفاء الإشعارات الدائمة';
 
   @override
-  String get hidePersistentNotificationsDesc => 'إخفاء إشعارات خدمات الخلفية والنظام';
-
-  @override
   String get blockedNotificationApps => 'التطبيقات المحظورة';
 
   @override
@@ -520,9 +455,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get continueWatchingDescription => 'عرض الأفلام والبرامج التلفزيونية التي تمت مشاهدتها مؤخرًا على الشاشة الرئيسية';
 
   @override
-  String get continueWatchingPermissionDesc => 'يلزم الحصول على إذن خاص لقراءة سجل المشاهدة من تطبيقات التلفزيون:';
-
-  @override
   String get requestPermission => 'طلب الإذن';
 
   @override
@@ -530,9 +462,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get openApp => 'فتح';
-
-  @override
-  String get notificationOptions => 'خيارات الإشعار';
 
   @override
   String get noBlockedAppsDesc => 'يُسمح لجميع التطبيقات حاليًا بإظهار الإشعارات';

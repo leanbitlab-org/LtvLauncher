@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "Ekran koruyucuyu göster",
     "dialogOptionBackButtonActionShowClock": "Saati göster",
     "dialogTextNoFileExplorer": "Resim seçmek için lütfen bir dosya gezgini yükleyin.",
-    "dialogTitleBackButtonAction": "Geri düğmesi eylemini seçin",
     "disambiguateCategoryTitle": "{title} (Kategori)",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "Biçimlendirilmiş tarih: {dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "Biçimlendirilmiş saat: {timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "Boş bırakılamaz",
     "name": "Ad",
     "newSection": "Yeni bölüm",
-    "noDateFormatSpecified": "Tarih biçimi belirtilmedi",
-    "noTimeFormatSpecified": "Saat biçimi belirtilmedi",
     "nonTvApplications": "TV Dışı Uygulamalar",
     "open": "Aç",
-    "orSelectFormatSpecifiers": "Veya biçim belirteçlerini seçin",
     "picture": "Resim",
     "removeFrom": "{name} öğesinden kaldır",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "Satır yüksekliği",
     "save": "Kaydet",
     "spacer": "Ayırıcı",
-    "spacerMaxHeightRequirement": "0'dan büyük ve 500'den küçük veya eşit olmalıdır",
     "statusBar": "Durum çubuğu",
     "settings": "Ayarlar",
     "show": "Göster",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "Uygulama seçici geçiş animasyonu",
     "sort": "Sırala",
     "systemSettings": "Sistem ayarları",
-    "textAboutDialog": "LTvLauncher, FLauncher tabanlı, Android TV için özelleştirilmiş açık kaynaklı bir başlatıcıdır.\n\nLeanBitLab tarafından geliştirilmiştir.\nKaynak kodu {repoUrl} adresinde mevcuttur.",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "Bu kategori boş.",
     "time": "Saat",
-    "titleStatusBarSettingsPage": "Durum çubuğunda neyin görüntüleneceğini seçin",
     "tvApplications": "TV Uygulamaları",
     "type": "Tür",
-    "typeInTheDateFormat": "Tarih biçimini yazın",
-    "typeInTheHourFormat": "Saat biçimini yazın",
     "uninstall": "Kaldır",
     "wallpaper": "Duvar kağıdı",
     "withEllipsisAddTo": "Şuraya ekle...",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "Yedeği Paylaş",
-    "shareBackupDescription": "Yedeği yerel ağdaki diğer cihazlarla paylaş",
-    "stopSharing": "Paylaşımı Durdur",
-    "localNetworkSharingActive": "Yerel ağ paylaşımı etkin!",
-    "localNetworkSharingInstructions": "Başka bir cihazı aynı Wi-Fi ağına bağlayın ve bir web tarayıcısında aşağıdaki URL'yi açın:",
-    "localNetworkSharingDetails": "Buradan TV ayarlarınızı/düzeninizi indirebilir veya bir yedek dosyasını bu TV'ye geri yükleyebilirsiniz.",
-    "failedToStartServer": "Paylaşım sunucusu başlatılamadı: {error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "Bildirim Zili",
     "autoHideNotificationBell": "Bildirim Zilini otomatik gizle",
     "continueWatching": "İzlemeye Devam Et",
@@ -169,7 +124,6 @@
     "system": "Sistem",
     "accentColor": "Vurgu Rengi",
     "miscellaneous": "Çeşitli",
-    "brightnessScheduler": "Parlaklık Zamanlayıcısı",
     "screensaverSettings": "Ekran Koruyucu Ayarları",
     "screensaverClockStyle": "Ekran Koruyucu Saat Stili",
     "dataUsagePeriod": "Veri Kullanım Dönemi",
@@ -204,7 +158,6 @@
     "slovenian": "Slovence",
     "hebrew": "İbranice",
     "hidePersistentNotifications": "Kalıcı Bildirimleri Gizle",
-    "hidePersistentNotificationsDesc": "Arka plan servisi ve sistem bildirimlerini gizle",
     "blockedNotificationApps": "Engellenen Uygulamalar",
     "blockAppNotifications": "Bildirimleri Engelle",
     "unblockAppNotifications": "Bildirim Engelini Kaldır",
@@ -220,11 +173,9 @@
     "displayAndScreensaver": "Ekran ve Ekran Koruyucu",
     "notifications": "Bildirimler",
     "continueWatchingDescription": "Son izlenen filmleri ve dizileri ana ekranda göster",
-    "continueWatchingPermissionDesc": "TV uygulamalarından izleme geçmişini okumak için özel izin gereklidir:",
     "requestPermission": "İzin İste",
     "dismiss": "Kapat",
     "openApp": "Aç",
-    "notificationOptions": "Bildirim Seçenekleri",
     "noBlockedAppsDesc": "Şu anda tüm uygulamaların bildirim göstermesine izin veriliyor",
     "notificationsAllowed": "Bildirimlere İzin Verildi",
     "notificationsBlocked": "Bildirimler Engellendi",

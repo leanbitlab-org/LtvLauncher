@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "スクリーンセーバーを表示",
     "dialogOptionBackButtonActionShowClock": "時計を表示",
     "dialogTextNoFileExplorer": "画像を選択するにはファイルエクスプローラーをインストールしてください。",
-    "dialogTitleBackButtonAction": "戻るボタンの動作を選択",
     "disambiguateCategoryTitle": "{title} (カテゴリ)",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "書式化された日付: {dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "書式化された時刻: {timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "空にすることはできません",
     "name": "名前",
     "newSection": "新しいセクション",
-    "noDateFormatSpecified": "日付形式が指定されていません",
-    "noTimeFormatSpecified": "時刻形式が指定されていません",
     "nonTvApplications": "非TVアプリ",
     "open": "開く",
-    "orSelectFormatSpecifiers": "または形式指定子を選択",
     "picture": "画像",
     "removeFrom": "{name}から削除",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "行の高さ",
     "save": "保存",
     "spacer": "スペーサー",
-    "spacerMaxHeightRequirement": "0より大きく500以下である必要があります",
     "statusBar": "ステータスバー",
     "settings": "設定",
     "show": "表示",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "アプリセレクターの遷移アニメーション",
     "sort": "並べ替え",
     "systemSettings": "システム設定",
-    "textAboutDialog": "LTvLauncherはFLauncherをベースにしたAndroid TV用のカスタムオープンソースランチャーです。\n\nLeanBitLabによって開発されています。\nソースコードは{repoUrl}で入手できます。",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "このカテゴリは空です。",
     "time": "時刻",
-    "titleStatusBarSettingsPage": "ステータスバーに表示するものを選択",
     "tvApplications": "TVアプリ",
     "type": "種類",
-    "typeInTheDateFormat": "日付形式を入力",
-    "typeInTheHourFormat": "時刻形式を入力",
     "uninstall": "アンインストール",
     "wallpaper": "壁紙",
     "withEllipsisAddTo": "追加...",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "バックアップを共有",
-    "shareBackupDescription": "ローカルネットワーク上の他のデバイスとバックアップを共有",
-    "stopSharing": "共有を停止",
-    "localNetworkSharingActive": "ローカルネットワーク共有が有効です！",
-    "localNetworkSharingInstructions": "他のデバイスを同じWi-Fiネットワークに接続し、Webブラウザで次のURLを開きます：",
-    "localNetworkSharingDetails": "ここでTVの設定/レイアウトをダウンロードするか、バックアップファイルをこのTVにアップロードできます。",
-    "failedToStartServer": "共有サーバーの起動に失敗しました: {error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "通知ベル",
     "autoHideNotificationBell": "通知ベルを自動非表示",
     "continueWatching": "続きを見る",
@@ -169,7 +124,6 @@
     "system": "システム",
     "accentColor": "アクセントカラー",
     "miscellaneous": "その他",
-    "brightnessScheduler": "明るさスケジューラー",
     "screensaverSettings": "スクリーンセーバー設定",
     "screensaverClockStyle": "スクリーンセーバー時計スタイル",
     "dataUsagePeriod": "データ使用期間",
@@ -204,7 +158,6 @@
     "slovenian": "スロベニア語",
     "hebrew": "ヘブライ語",
     "hidePersistentNotifications": "常駐通知を非表示",
-    "hidePersistentNotificationsDesc": "バックグラウンドサービスやシステムの常駐通知を非表示",
     "blockedNotificationApps": "ブロックされたアプリ",
     "blockAppNotifications": "通知をブロック",
     "unblockAppNotifications": "通知のブロックを解除",
@@ -220,11 +173,9 @@
     "displayAndScreensaver": "ディスプレイとスクリーンセーバー",
     "notifications": "通知",
     "continueWatchingDescription": "ホーム画面に最近再生した映画や番組を表示します",
-    "continueWatchingPermissionDesc": "TVアプリの視聴履歴を読み取るには特別な権限が必要です:",
     "requestPermission": "権限をリクエスト",
     "dismiss": "非表示",
     "openApp": "開く",
-    "notificationOptions": "通知のオプション",
     "noBlockedAppsDesc": "現在、すべてのアプリで通知の表示が許可されています",
     "notificationsAllowed": "通知を許可",
     "notificationsBlocked": "通知をブロック",

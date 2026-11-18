@@ -19,27 +19,10 @@
     "dialogOptionBackButtonActionShowScreensaver": "显示屏保",
     "dialogOptionBackButtonActionShowClock": "显示时钟",
     "dialogTextNoFileExplorer": "请安装文件管理器以选择图片。",
-    "dialogTitleBackButtonAction": "选择返回键行为",
     "disambiguateCategoryTitle": "{title}（类别）",
     "@disambiguateCategoryTitle": {
         "placeholders": {
             "title": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedDate": "格式化日期：{dateString}",
-    "@formattedDate": {
-        "placeholders": {
-            "dateString": {
-                "type": "String"
-            }
-        }
-    },
-    "formattedTime": "格式化时间：{timeString}",
-    "@formattedTime": {
-        "placeholders": {
-            "timeString": {
                 "type": "String"
             }
         }
@@ -58,11 +41,8 @@
     "mustNotBeEmpty": "不能为空",
     "name": "名称",
     "newSection": "新建分区",
-    "noDateFormatSpecified": "未指定日期格式",
-    "noTimeFormatSpecified": "未指定时间格式",
     "nonTvApplications": "非电视应用",
     "open": "打开",
-    "orSelectFormatSpecifiers": "或选择格式说明符",
     "picture": "图片",
     "removeFrom": "从{name}中移除",
     "@removeFrom": {
@@ -78,7 +58,6 @@
     "rowHeight": "行高",
     "save": "保存",
     "spacer": "间隔",
-    "spacerMaxHeightRequirement": "必须大于 0 且小于等于 500",
     "statusBar": "状态栏",
     "settings": "设置",
     "show": "显示",
@@ -89,21 +68,10 @@
     "appSelectorTransitionAnimation": "应用选择器转场动画",
     "sort": "排序",
     "systemSettings": "系统设置",
-    "textAboutDialog": "LTvLauncher 是一款基于 FLauncher 定制的开源 Android TV 桌面启动器。\n\n由 LeanBitLab 开发。\n源代码可在 {repoUrl} 获取。",
-    "@textAboutDialog": {
-        "placeholders": {
-            "repoUrl": {
-                "type": "String"
-            }
-        }
-    },
     "textEmptyCategory": "此类别为空。",
     "time": "时间",
-    "titleStatusBarSettingsPage": "选择状态栏中显示的内容",
     "tvApplications": "电视应用",
     "type": "类型",
-    "typeInTheDateFormat": "输入日期格式",
-    "typeInTheHourFormat": "输入时间格式",
     "uninstall": "卸载",
     "wallpaper": "壁纸",
     "withEllipsisAddTo": "添加到…",
@@ -147,19 +115,6 @@
         }
     },
     "shareBackup": "共享备份",
-    "shareBackupDescription": "与局域网中的其他设备共享备份",
-    "stopSharing": "停止共享",
-    "localNetworkSharingActive": "局域网共享已开启！",
-    "localNetworkSharingInstructions": "将另一台设备连接到同一 Wi-Fi 网络，并在浏览器中打开以下地址：",
-    "localNetworkSharingDetails": "你可以在此下载电视的设置/布局，或将备份文件上传回这台电视。",
-    "failedToStartServer": "启动共享服务失败：{error}",
-    "@failedToStartServer": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
     "notificationBell": "通知铃铛",
     "autoHideNotificationBell": "自动隐藏通知铃铛",
     "continueWatching": "继续观看",
@@ -169,7 +124,6 @@
     "system": "系统",
     "accentColor": "强调色",
     "miscellaneous": "其他",
-    "brightnessScheduler": "亮度定时",
     "screensaverSettings": "屏保设置",
     "screensaverClockStyle": "屏保时钟样式",
     "dataUsagePeriod": "数据使用周期",
@@ -204,7 +158,6 @@
     "slovenian": "斯洛文尼亚语",
     "hebrew": "希伯来语",
     "hidePersistentNotifications": "隐藏常驻通知",
-    "hidePersistentNotificationsDesc": "隐藏后台服务和系统常驻通知",
     "blockedNotificationApps": "已屏蔽的应用",
     "blockAppNotifications": "屏蔽通知",
     "unblockAppNotifications": "取消屏蔽通知",
@@ -220,11 +173,9 @@
     "displayAndScreensaver": "显示与屏幕保护程序",
     "notifications": "通知",
     "continueWatchingDescription": "在主屏幕上显示支持的应用最近观看的电影和电视剧",
-    "continueWatchingPermissionDesc": "需要特殊权限才能读取电视应用的观看历史记录：",
     "requestPermission": "请求权限",
     "dismiss": "关闭",
     "openApp": "打开",
-    "notificationOptions": "通知选项",
     "noBlockedAppsDesc": "当前所有应用均允许显示通知",
     "notificationsAllowed": "允许通知",
     "notificationsBlocked": "已屏蔽通知",
