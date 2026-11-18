@@ -117,7 +117,7 @@ void main() {
     await tester.tap(find.text("FLauncher"));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text("Add to Category"));
+    await tester.tap(find.text("Add to..."));
     await tester.pumpAndSettle();
     expect(find.byType(AddToCategoryDialog), findsOneWidget);
   });
