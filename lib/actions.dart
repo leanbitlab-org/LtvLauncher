@@ -16,7 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'package:flauncher/flauncher_channel.dart';
 import 'package:flauncher/providers/apps_service.dart';
 import 'package:flauncher/providers/launcher_state.dart';
 import 'package:flauncher/providers/settings_service.dart';
@@ -35,7 +34,6 @@ class SoundFeedbackDirectionalFocusAction extends DirectionalFocusAction {
 
     SettingsService settingsService = context.read<SettingsService>();
     if (settingsService.appKeyClickEnabled) {
-      FLauncherChannel().playClickSound();
       Feedback.forTap(context);
     } else {
       silentForTap(context);
