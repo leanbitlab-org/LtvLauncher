@@ -57,8 +57,13 @@ class _FLauncherState extends State<FLauncher> {
       child: Stack(
         children: [
           RepaintBoundary(
-            child: Consumer<WallpaperService>(
-              builder: (_, wallpaperService, __) => _wallpaper(context, wallpaperService)
+            // Flutter won't raster-cache a plain gradient on its own; this hint keeps the background between frames.
+            child: CustomPaint(
+              isComplex: true,
+              painter: const _NoPainter(),
+              child: Consumer<WallpaperService>(
+                builder: (_, wallpaperService, __) => _wallpaper(context, wallpaperService)
+              ),
             ),
           ),
           Consumer<LauncherState>(
@@ -237,4 +242,14 @@ class _FLauncherState extends State<FLauncher> {
       ),
     );
   }
+}
+
+class _NoPainter extends CustomPainter {
+  const _NoPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {}
+
+  @override
+  bool shouldRepaint(_NoPainter oldDelegate) => false;
 }
