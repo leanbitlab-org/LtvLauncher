@@ -15,24 +15,29 @@ class RowByRowTraversalPolicy extends FocusTraversalPolicy with DirectionalFocus
 
   @override
   bool inDirection(FocusNode currentNode, TraversalDirection direction) {
-    List<FocusNode>? nodes = currentNode.nearestScope?.traversalDescendants.toList();
-    if (nodes == null) {
-      return super.inDirection(currentNode, direction);
-    }
-
-    NodeSearcher searcher = NodeSearcher(direction);
-    List<CandidateNode> candidates = searcher.findCandidates(nodes, currentNode);
-    if (candidates.isEmpty) {
-      if (direction == TraversalDirection.left || direction == TraversalDirection.right) {
-        return false;
+    _centers = Expando();
+    try {
+      List<FocusNode>? nodes = currentNode.nearestScope?.traversalDescendants.toList();
+      if (nodes == null) {
+        return super.inDirection(currentNode, direction);
       }
-      // WHY: Fallback for off-screen nodes. If geometric search fails (e.g., lower/higher row 
-      // is not yet laid out/rendered in viewport), fallback to widget order traversal to untrap focus.
-      return _fallbackPolicy.inDirection(currentNode, direction) || super.inDirection(currentNode, direction);
+
+      NodeSearcher searcher = NodeSearcher(direction);
+      List<CandidateNode> candidates = searcher.findCandidates(nodes, currentNode);
+      if (candidates.isEmpty) {
+        if (direction == TraversalDirection.left || direction == TraversalDirection.right) {
+          return false;
+        }
+        // WHY: Fallback for off-screen nodes. If geometric search fails (e.g., lower/higher row 
+        // is not yet laid out/rendered in viewport), fallback to widget order traversal to untrap focus.
+        return _fallbackPolicy.inDirection(currentNode, direction) || super.inDirection(currentNode, direction);
+      }
+      FocusNode nextNode = searcher.findBestFocusNode(candidates, currentNode);
+      nextNode.requestFocus();
+      return true;
+    } finally {
+      _centers = null;
     }
-    FocusNode nextNode = searcher.findBestFocusNode(candidates, currentNode);
-    nextNode.requestFocus();
-    return true;
   }
 }
 
@@ -96,51 +101,57 @@ List<CandidateNode> toCandidateNodes(List<FocusNode> nodes) => nodes.map((e) => 
 
 List<FocusNode> toFocusNodes(List<CandidateNode> nodes) => nodes.map((e) => e.node).toList();
 
+/// Node centers for the search in progress. [FocusNode.rect] walks the render
+/// tree, and one search compares each node many times; nothing moves meanwhile.
+Expando<Offset>? _centers;
+
 /// A few extension methods to the [FocusNode] to be able to compare their
 /// respective position easily.
 extension Geometry on FocusNode {
+  Offset get _center => _centers == null ? rect.center : (_centers![this] ??= rect.center);
+
   /// Vertical tolerance to account for focus card zoom animations (1.1x - 1.15x),
   /// outline borders, and subpixel rendering variance on TV panels.
   static const double rowTolerance = 16.0;
 
   bool isBelow(FocusNode other) {
-    return (rect.center.dy - other.rect.center.dy) > rowTolerance;
+    return (_center.dy - other._center.dy) > rowTolerance;
   }
 
   bool isBelowOrEquals(FocusNode other) {
-    return (rect.center.dy - other.rect.center.dy) >= -rowTolerance;
+    return (_center.dy - other._center.dy) >= -rowTolerance;
   }
 
   bool isRightTo(FocusNode other) {
-    return rect.center.dx.round() > other.rect.center.dx.round();
+    return _center.dx.round() > other._center.dx.round();
   }
 
   bool isRightToOrEquals(FocusNode other) {
-    return rect.center.dx.round() >= other.rect.center.dx.round();
+    return _center.dx.round() >= other._center.dx.round();
   }
 
   bool isLeftTo(FocusNode other) {
-    return rect.center.dx.round() < other.rect.center.dx.round();
+    return _center.dx.round() < other._center.dx.round();
   }
 
   bool isLeftToOrEquals(FocusNode other) {
-    return rect.center.dx.round() <= other.rect.center.dx.round();
+    return _center.dx.round() <= other._center.dx.round();
   }
 
   bool isAbove(FocusNode other) {
-    return (other.rect.center.dy - rect.center.dy) > rowTolerance;
+    return (other._center.dy - _center.dy) > rowTolerance;
   }
 
   bool isAboveOrEquals(FocusNode other) {
-    return (other.rect.center.dy - rect.center.dy) >= -rowTolerance;
+    return (other._center.dy - _center.dy) >= -rowTolerance;
   }
 
   bool isOnTheSameRow(FocusNode other) {
-    return (rect.center.dy - other.rect.center.dy).abs() <= rowTolerance;
+    return (_center.dy - other._center.dy).abs() <= rowTolerance;
   }
 
   double distance(FocusNode other) {
-    return sqrt(pow(rect.center.dx.round() - other.rect.center.dx.round(), 2) +
-        pow(rect.center.dy.round() - other.rect.center.dy.round(), 2));
+    return sqrt(pow(_center.dx.round() - other._center.dx.round(), 2) +
+        pow(_center.dy.round() - other._center.dy.round(), 2));
   }
 }
