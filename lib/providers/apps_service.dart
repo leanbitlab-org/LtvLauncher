@@ -222,6 +222,7 @@ class AppsService extends ChangeNotifier {
   Future<void> _deleteUninstalledMissingApps() async {
     final List<String> uninstalled =
         await _fLauncherChannel.getUninstalledPackages(_missingPackageNames.toList());
+    debugPrint('AppsService: still missing $_missingPackageNames, uninstalled $uninstalled');
     if (uninstalled.isEmpty) return;
     await _database.deleteApps(uninstalled);
     _missingPackageNames.removeAll(uninstalled);
@@ -397,6 +398,9 @@ class AppsService extends ChangeNotifier {
     _missingPackageNames = knownPackageNames
         .where((pkg) => !appsFromSystemByPackageName.containsKey(pkg))
         .toSet();
+    if (_missingPackageNames.isNotEmpty) {
+      debugPrint('AppsService: app query missed known apps $_missingPackageNames');
+    }
 
     await _database.transaction(() async {
       await _database.persistApps(
