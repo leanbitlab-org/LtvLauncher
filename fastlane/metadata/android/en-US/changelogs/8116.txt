@@ -1,0 +1,4 @@
+- Fixed apps disappearing from the home screen after a reboot on some TVs.
+- Smoother home screen on low-end TVs: faster D-pad moves and animations.
+- Each D-pad move now plays one click sound instead of two.
+- The chosen gradient background now shows right away.
