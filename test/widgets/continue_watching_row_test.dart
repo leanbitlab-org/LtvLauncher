@@ -251,9 +251,14 @@ void main() {
       );
       await tester.pump();
 
-      // When unfocused, AnimatedOpacity for dimming layer should have opacity 0.10
-      final opacitiesBefore = tester.widgetList<AnimatedOpacity>(find.byType(AnimatedOpacity));
-      expect(opacitiesBefore.any((o) => o.opacity == 0.10), isTrue);
+      // The dimming layer is a black AnimatedContainer at 10% when unfocused, clear when focused.
+      Color? dimColor() => tester
+          .widgetList<AnimatedContainer>(find.descendant(
+              of: find.byType(IgnorePointer), matching: find.byType(AnimatedContainer)))
+          .map((c) => (c.decoration as BoxDecoration?)?.color)
+          .whereType<Color>()
+          .single;
+      expect(dimColor(), Colors.black.withOpacity(0.10));
 
       // Focus the card using traditional keyboard navigation
       final inkWell = find.byType(InkWell);
@@ -262,9 +267,8 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 250));
 
-      // When focused with traditional highlight mode, dimming layer should have opacity 0.0
-      final opacitiesAfter = tester.widgetList<AnimatedOpacity>(find.byType(AnimatedOpacity));
-      expect(opacitiesAfter.any((o) => o.opacity == 0.0), isTrue);
+      // When focused with traditional highlight mode, the dimming layer is clear.
+      expect(dimColor(), Colors.black.withOpacity(0));
     });
 
     testWidgets('tapping or pressing select launches the program', (tester) async {
