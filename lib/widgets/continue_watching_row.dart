@@ -670,17 +670,15 @@ class _WatchNextCardState extends State<WatchNextCard> with TickerProviderStateM
                         ),
                         // Unfocused dimming overlay
                         IgnorePointer(
-                          child: AnimatedOpacity(
+                          // A color, not an Opacity layer: much cheaper to raster with Skia (as in AppCard).
+                          child: AnimatedContainer(
                             duration: appSelectorTransitionAnimationEnabled
                                 ? const Duration(milliseconds: 200)
                                 : Duration.zero,
                             curve: Curves.easeInOut,
-                            opacity: shouldHighlight ? 0 : 0.10,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: borderRadius,
-                                color: Colors.black,
-                              ),
+                            decoration: BoxDecoration(
+                              borderRadius: borderRadius,
+                              color: Colors.black.withOpacity(shouldHighlight ? 0 : 0.10),
                             ),
                           ),
                         ),
