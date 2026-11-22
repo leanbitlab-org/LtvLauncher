@@ -43,6 +43,18 @@ class FLauncherChannel {
     }
   }
 
+  /// The given packages that are no longer installed. Empty on error, so nothing is deleted.
+  Future<List<String>> getUninstalledPackages(Iterable<String> packageNames) async {
+    try {
+      List<String>? uninstalled =
+          await _methodChannel.invokeListMethod<String>("getUninstalledPackages", packageNames.toList());
+      return uninstalled ?? const [];
+    } catch (e) {
+      _logError('getUninstalledPackages', e);
+      return const [];
+    }
+  }
+
   Future<Uint8List> getApplicationBanner(String packageName) async {
     try {
       final Uint8List? bytes = await _methodChannel.invokeMethod("getApplicationBanner", packageName);

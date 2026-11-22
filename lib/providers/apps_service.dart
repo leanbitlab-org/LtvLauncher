@@ -40,6 +40,16 @@ class AppsService extends ChangeNotifier {
 
   bool _initialized = false;
 
+  /// Apps in the database that the last app query did not report.
+  Set<String> _missingPackageNames = {};
+  Timer? _missingAppsRetryTimer;
+
+  /// When to query again while known apps are missing (a partial list right after boot).
+  static const List<Duration> _missingAppsRetryDelays = [
+    Duration(seconds: 30),
+    Duration(minutes: 2),
+  ];
+
   List<LauncherSection> _launcherSections = List.empty(growable: true);
   Map<String, App> _applications = Map();
   Map<String, Uint8List> _iconCache = Map();
@@ -120,10 +130,10 @@ class AppsService extends ChangeNotifier {
         case "PACKAGE_ADDED":
         case "PACKAGE_CHANGED":
           Map<dynamic, dynamic> applicationInfo = event['activityInfo'];
-          await _database.persistApps([_buildAppCompanion(applicationInfo)]);
-
           App newApp = App.fromSystem(applicationInfo);
-          App? existingApp = _applications[newApp.packageName];
+          App? existingApp = _applications[newApp.packageName] ??
+              (await _savedApps([newApp.packageName]))[newApp.packageName];
+          await _database.persistApps([_buildAppCompanion(applicationInfo)]);
 
           if (existingApp != null) {
             _updateExistingApp(existingApp, newApp);
@@ -142,12 +152,15 @@ class AppsService extends ChangeNotifier {
           break;
         case "PACKAGES_AVAILABLE":
           List<dynamic> applicationsInfo = event["activitiesInfo"];
+          final Map<String, App> savedApps = await _savedApps(applicationsInfo
+              .map((applicationInfo) => applicationInfo['packageName'] as String));
           await _database
               .persistApps((applicationsInfo).map(_buildAppCompanion));
 
           for (Map<dynamic, dynamic> applicationInfo in applicationsInfo) {
             App newApp = App.fromSystem(applicationInfo);
-            App? existingApp = _applications[newApp.packageName];
+            App? existingApp =
+                _applications[newApp.packageName] ?? savedApps[newApp.packageName];
 
             if (existingApp != null) {
               _updateExistingApp(existingApp, newApp);
@@ -187,6 +200,56 @@ class AppsService extends ChangeNotifier {
 
     // Pre-cache icons for visible apps
     _preCacheIcons();
+
+    _scheduleMissingAppsRetry(0);
+  }
+
+  void _scheduleMissingAppsRetry(int attempt) {
+    if (_missingPackageNames.isEmpty) return;
+    if (attempt >= _missingAppsRetryDelays.length) {
+      _deleteUninstalledMissingApps();
+      return;
+    }
+    _missingAppsRetryTimer =
+        Timer(_missingAppsRetryDelays[attempt], () async {
+      await _refreshState();
+      _scheduleMissingAppsRetry(attempt + 1);
+    });
+  }
+
+  /// Deletes the apps still missing after the retries that PackageManager confirms are not
+  /// installed (uninstalled while the launcher was not running). The rest keep their sections.
+  Future<void> _deleteUninstalledMissingApps() async {
+    final List<String> uninstalled =
+        await _fLauncherChannel.getUninstalledPackages(_missingPackageNames.toList());
+    debugPrint('AppsService: still missing $_missingPackageNames, uninstalled $uninstalled');
+    if (uninstalled.isEmpty) return;
+    await _database.deleteApps(uninstalled);
+    _missingPackageNames.removeAll(uninstalled);
+  }
+
+  @override
+  void dispose() {
+    _missingAppsRetryTimer?.cancel();
+    super.dispose();
+  }
+
+  /// Saved copies, with their saved sections, of the given apps that are not in memory but are
+  /// in the database. Used when apps missing from the last app query come back.
+  Future<Map<String, App>> _savedApps(Iterable<String> packageNames) async {
+    final Set<String> wanted =
+        packageNames.where((pkg) => !_applications.containsKey(pkg)).toSet();
+    if (wanted.isEmpty) return {};
+    final Map<String, App> saved = {
+      for (final App app in await _database.getApplications())
+        if (wanted.contains(app.packageName)) app.packageName: app
+    };
+    if (saved.isEmpty) return saved;
+    for (final AppCategory appCategory in await _database.getAppsCategories()) {
+      saved[appCategory.appPackageName]?.categoryOrders[appCategory.categoryId] =
+          appCategory.order;
+    }
+    return saved;
   }
 
   Future<void> _preCacheIcons() async {
@@ -329,11 +392,14 @@ class AppsService extends ChangeNotifier {
     final Set<String> knownPackageNames =
         appsFromDatabaseBefore.map((a) => a.packageName).toSet();
 
-    final List<String> uninstalledPackageNames = knownPackageNames
+    // Known apps missing from this query keep their rows and sections. Right after boot, some
+    // TVs report only part of the installed apps (#178); deleting them here lost their sections
+    // for good. Uninstalls are deleted by the PACKAGE_REMOVED event instead.
+    _missingPackageNames = knownPackageNames
         .where((pkg) => !appsFromSystemByPackageName.containsKey(pkg))
-        .toList();
-    if (uninstalledPackageNames.isNotEmpty) {
-      await _database.deleteApps(uninstalledPackageNames);
+        .toSet();
+    if (_missingPackageNames.isNotEmpty) {
+      debugPrint('AppsService: app query missed known apps $_missingPackageNames');
     }
 
     await _database.transaction(() async {
