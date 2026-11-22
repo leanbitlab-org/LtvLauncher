@@ -188,7 +188,7 @@ class WallpaperService extends ChangeNotifier {
       await _wallpaperFile.delete();
     }
 
-    _settingsService.setGradientUuid(fLauncherGradient.uuid);
+    await _settingsService.setGradientUuid(fLauncherGradient.uuid);
     // Drop the stale wallpaper image so the gradient shows without a restart.
     await _updateWallpaper(force: true);
   }
