@@ -323,11 +323,11 @@ class _AppCardState extends State<AppCard> with TickerProviderStateMixin {
                               ),
                               if (_moving) ..._arrows(),
                               IgnorePointer(
-                                child: AnimatedOpacity(
+                                // A color, not an Opacity layer: much cheaper to raster with Skia.
+                                child: AnimatedContainer(
                                   duration: appSelectorTransitionAnimationEnabled ? const Duration(milliseconds: 200) : Duration.zero,
                                   curve: Curves.easeInOut,
-                                  opacity: shouldHighlight ? 0 : 0.10,
-                                  child: Container(color: Colors.black),
+                                  color: Colors.black.withOpacity(shouldHighlight ? 0 : 0.10),
                                 ),
                               ),
                               Selector<SettingsService, (bool, String)>(
