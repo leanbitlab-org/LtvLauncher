@@ -141,15 +141,6 @@ class FLauncherChannel {
   Future<void> openDefaultLauncherSettings() async =>
       await _methodChannel.invokeMethod("openDefaultLauncherSettings");
 
-  Future<void> playClickSound() async {
-    try {
-      await _methodChannel.invokeMethod("playClickSound");
-    } catch (e) {
-      _logError('playClickSound', e);
-      // Ignore error in non-Android or test environments
-    }
-  }
-
   Future<void> startAmbientMode() async => await _methodChannel.invokeMethod("startAmbientMode");
 
   void addAppsChangedListener(void Function(Map<String, dynamic>) listener) =>

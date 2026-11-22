@@ -223,10 +223,6 @@ public class MainActivity extends FlutterActivity {
                 case "isBreezyWeatherInstalled" -> result.success(isBreezyWeatherInstalled());
                 case "openBreezyWeather" -> result.success(openBreezyWeather());
                 case "getPackageName" -> result.success(getPackageName());
-                case "playClickSound" -> {
-                    getWindow().getDecorView().playSoundEffect(android.view.SoundEffectConstants.CLICK);
-                    result.success(null);
-                }
                 default -> result.notImplemented();
             }
         });
