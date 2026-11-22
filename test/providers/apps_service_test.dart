@@ -248,6 +248,135 @@ void main() {
     });
 
     test(
+        "app missing from a partial boot query keeps its section and comes back (#178)",
+        () async {
+      final channel = MockFLauncherChannel();
+      final database = MockFLauncherDatabase();
+
+      final category = Category(
+          id: 1, name: "TV Apps", order: 0, sort: CategorySort.manual);
+      final lateAppInfo = {
+        'packageName': 'app.late',
+        'name': 'Late App',
+        'version': '1.0.0',
+        'sideloaded': false
+      };
+
+      // Right after boot the system reports only app.1.
+      when(channel.getApplications()).thenAnswer((_) => Future.value([
+            {
+              'packageName': 'app.1',
+              'name': 'App 1',
+              'version': '1.0.0',
+              'sideloaded': false
+            },
+          ]));
+      when(channel.getApplicationIcon(any))
+          .thenAnswer((_) => Future.value(Uint8List(0)));
+      when(channel.getApplicationBanner(any))
+          .thenAnswer((_) => Future.value(Uint8List(0)));
+
+      when(database.getApplications()).thenAnswer((_) => Future.value([
+            App(packageName: "app.1", name: "App 1", version: "1.0.0", hidden: false),
+            App(packageName: "app.late", name: "Late App", version: "1.0.0", hidden: false),
+          ]));
+      when(database.getCategories())
+          .thenAnswer((_) => Future.value([category]));
+      when(database.getAppsCategories()).thenAnswer((_) => Future.value([
+            AppCategory(categoryId: 1, appPackageName: "app.late", order: 0),
+            AppCategory(categoryId: 1, appPackageName: "app.1", order: 1),
+          ]));
+      when(database.getLauncherSpacers()).thenAnswer((_) => Future.value([]));
+      when(database.transaction(any)).thenAnswer(
+          (realInvocation) => realInvocation.positionalArguments[0]());
+      when(database.wasCreated).thenReturn(false);
+      when(database.persistApps(any)).thenAnswer((_) => Future.value());
+      when(database.deleteApps(any)).thenAnswer((_) => Future.value());
+
+      final appsService = AppsService(channel, database);
+      while (!appsService.initialized) {
+        await Future.delayed(const Duration(milliseconds: 10));
+      }
+      final dynamic onAppsChanged =
+          verify(channel.addAppsChangedListener(captureAny)).captured.single;
+      List<String> appsInCategory() => appsService.categories[0].applications
+          .map((app) => app.packageName)
+          .toList();
+
+      expect(appsInCategory(), ["app.1"]);
+      verifyNever(database.deleteApps(any));
+
+      // Android reports the late app once it is available.
+      await onAppsChanged({
+        'action': 'PACKAGES_AVAILABLE',
+        'activitiesInfo': [lateAppInfo]
+      });
+      expect(appsInCategory(), ["app.late", "app.1"]);
+      verifyNever(database.insertAppsCategories(any));
+
+      appsService.dispose();
+    });
+
+    testWidgets(
+        "missing apps are retried, then deleted only if PackageManager says uninstalled",
+        (tester) async {
+      final channel = MockFLauncherChannel();
+      final database = MockFLauncherDatabase();
+
+      when(channel.getApplications()).thenAnswer((_) => Future.value([
+            {
+              'packageName': 'app.1',
+              'name': 'App 1',
+              'version': '1.0.0',
+              'sideloaded': false
+            },
+          ]));
+      when(channel.getUninstalledPackages(any))
+          .thenAnswer((_) => Future.value(['app.gone']));
+      when(channel.getApplicationIcon(any))
+          .thenAnswer((_) => Future.value(Uint8List(0)));
+      when(channel.getApplicationBanner(any))
+          .thenAnswer((_) => Future.value(Uint8List(0)));
+
+      when(database.getApplications()).thenAnswer((_) => Future.value([
+            App(packageName: "app.1", name: "App 1", version: "1.0.0", hidden: false),
+            App(packageName: "app.gone", name: "Gone", version: "1.0.0", hidden: false),
+            App(packageName: "app.slow", name: "Slow", version: "1.0.0", hidden: false),
+          ]));
+      when(database.getCategories()).thenAnswer((_) =>
+          Future.value([Category(id: 1, name: "TV Apps", order: 0)]));
+      when(database.getAppsCategories()).thenAnswer((_) => Future.value([]));
+      when(database.getLauncherSpacers()).thenAnswer((_) => Future.value([]));
+      when(database.transaction(any)).thenAnswer(
+          (realInvocation) => realInvocation.positionalArguments[0]());
+      when(database.wasCreated).thenReturn(false);
+      when(database.persistApps(any)).thenAnswer((_) => Future.value());
+      when(database.deleteApps(any)).thenAnswer((_) => Future.value());
+
+      final appsService = AppsService(channel, database);
+      while (!appsService.initialized) {
+        await tester.pump();
+      }
+      verify(channel.getApplications()).called(1);
+
+      await tester.pump(const Duration(seconds: 30));
+      verify(channel.getApplications()).called(1);
+      verifyNever(channel.getUninstalledPackages(any));
+      verifyNever(database.deleteApps(any));
+
+      await tester.pump(const Duration(minutes: 2));
+      await tester.pump();
+      verify(channel.getApplications()).called(1);
+      final asked = verify(channel.getUninstalledPackages(captureAny))
+          .captured
+          .single as Iterable<String>;
+      expect(asked.toSet(), {"app.gone", "app.slow"});
+      verify(database.deleteApps(["app.gone"])).called(1);
+
+      appsService.dispose();
+    });
+
+    test(
         "app update preserves lastLaunchedAt and re-sorts category when name changes",
         () async {
       final channel = MockFLauncherChannel();

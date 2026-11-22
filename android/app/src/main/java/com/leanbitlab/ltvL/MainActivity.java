@@ -115,6 +115,10 @@ public class MainActivity extends FlutterActivity {
         new MethodChannel(messenger, METHOD_CHANNEL).setMethodCallHandler((call, result) -> {
             switch (call.method) {
                 case "getApplications" -> replyAsync(result, this::getApplications);
+                case "getUninstalledPackages" -> {
+                    List<String> packageNames = call.arguments();
+                    replyAsync(result, () -> getUninstalledPackages(packageNames));
+                }
                 case "getApplicationBanner" -> {
                     String packageName = call.arguments();
                     replyAsync(result, () -> getApplicationBanner(packageName));
@@ -380,7 +384,8 @@ public class MainActivity extends FlutterActivity {
                 } else {
                     nonTvActivitiesInfo = activitiesInfo.second;
                 }
-            } catch (InterruptedException | ExecutionException ignored) {
+            } catch (InterruptedException | ExecutionException e) {
+                Log.w("MainActivity", "App list query failed", e);
             } finally {
                 completed += 1;
             }
@@ -429,7 +434,8 @@ public class MainActivity extends FlutterActivity {
             try {
                 Future<Map<String, Serializable>> appMap = completionService.take();
                 applications.add(appMap.get());
-            } catch (InterruptedException | ExecutionException ignored) {
+            } catch (InterruptedException | ExecutionException e) {
+                Log.w("MainActivity", "Skipping an app that failed to load", e);
             } finally {
                 appCount -= 1;
             }
@@ -448,6 +454,20 @@ public class MainActivity extends FlutterActivity {
         }
 
         return applications;
+    }
+
+    /** The given packages that PackageManager does not know (unlike an app list query, this does not depend on activities resolving). */
+    private List<String> getUninstalledPackages(List<String> packageNames) {
+        PackageManager packageManager = getPackageManager();
+        List<String> uninstalled = new ArrayList<>();
+        for (String packageName : packageNames) {
+            try {
+                packageManager.getPackageInfo(packageName, 0);
+            } catch (PackageManager.NameNotFoundException e) {
+                uninstalled.add(packageName);
+            }
+        }
+        return uninstalled;
     }
 
     public Map<String, Serializable> getApplication(String packageName) {
