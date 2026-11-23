@@ -477,4 +477,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'Добавлять новые установленные приложения в лаунчер';
+
+  @override
+  String get whatsNew => 'Что нового';
+
+  @override
+  String get supportUs => 'Поддержать нас';
+
+  @override
+  String get gotIt => 'Понятно';
 }

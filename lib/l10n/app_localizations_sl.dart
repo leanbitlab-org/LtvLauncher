@@ -477,4 +477,13 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'Dodaj na novo nameščene aplikacije v zaganjalnik';
+
+  @override
+  String get whatsNew => 'Novosti';
+
+  @override
+  String get supportUs => 'Podprite nas';
+
+  @override
+  String get gotIt => 'Razumem';
 }

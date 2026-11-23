@@ -477,4 +477,13 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'הוספת אפליקציות חדשות שהותקנו למסך הבית';
+
+  @override
+  String get whatsNew => 'מה חדש';
+
+  @override
+  String get supportUs => 'תמכו בנו';
+
+  @override
+  String get gotIt => 'הבנתי';
 }

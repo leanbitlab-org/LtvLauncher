@@ -187,5 +187,8 @@
     "screensaverAnimationFadeSubtitle": "新しい位置へスムーズにフェードイン・フェードアウト",
     "screensaverAnimationScatter": "文字スキャッター",
     "screensaverAnimationScatterSubtitle": "文字が軽快に跳ね回る演出",
-    "autoAddNewApps": "新しくインストールしたアプリをランチャーに追加"
+    "autoAddNewApps": "新しくインストールしたアプリをランチャーに追加",
+    "whatsNew": "新機能",
+    "supportUs": "サポートする",
+    "gotIt": "OK"
 }

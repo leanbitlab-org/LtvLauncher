@@ -187,5 +187,8 @@
     "notificationsAllowed": "התראות מורשות",
     "notificationsBlocked": "התראות חסומות",
     "dpadDismissHint": "שמאל: התעלמות • אישור: אפשרויות",
-    "autoAddNewApps": "הוספת אפליקציות חדשות שהותקנו למסך הבית"
+    "autoAddNewApps": "הוספת אפליקציות חדשות שהותקנו למסך הבית",
+    "whatsNew": "מה חדש",
+    "supportUs": "תמכו בנו",
+    "gotIt": "הבנתי"
 }

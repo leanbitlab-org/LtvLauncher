@@ -477,4 +477,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get autoAddNewApps => '새로 설치된 앱을 런처에 추가';
+
+  @override
+  String get whatsNew => '새로운 기능';
+
+  @override
+  String get supportUs => '후원하기';
+
+  @override
+  String get gotIt => '확인';
 }

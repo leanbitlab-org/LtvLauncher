@@ -477,4 +477,13 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'Yeni yüklenen uygulamaları başlatıcıya ekle';
+
+  @override
+  String get whatsNew => 'Yenilikler';
+
+  @override
+  String get supportUs => 'Bizi destekleyin';
+
+  @override
+  String get gotIt => 'Anladım';
 }

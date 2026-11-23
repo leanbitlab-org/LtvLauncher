@@ -187,5 +187,8 @@
     "notificationsAllowed": "Notifications Allowed",
     "notificationsBlocked": "Notifications Blocked",
     "dpadDismissHint": "Left: Dismiss • OK: Options",
-    "autoAddNewApps": "Add newly installed apps to launcher"
+    "autoAddNewApps": "Add newly installed apps to launcher",
+    "whatsNew": "What's new",
+    "supportUs": "Support us",
+    "gotIt": "Got it"
 }

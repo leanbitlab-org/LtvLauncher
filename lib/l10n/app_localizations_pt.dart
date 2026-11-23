@@ -477,4 +477,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'Adicionar aplicativos recém-instalados ao launcher';
+
+  @override
+  String get whatsNew => 'Novidades';
+
+  @override
+  String get supportUs => 'Apoie-nos';
+
+  @override
+  String get gotIt => 'Entendi';
 }

@@ -187,5 +187,8 @@
     "screensaverAnimationFadeSubtitle": "Sanftes Ein- und Ausblenden an neuen Positionen",
     "screensaverAnimationScatter": "Zeichen-Streuung",
     "screensaverAnimationScatterSubtitle": "Verspielte hüpfende Zeichen",
-    "autoAddNewApps": "Neu installierte Apps zum Launcher hinzufügen"
+    "autoAddNewApps": "Neu installierte Apps zum Launcher hinzufügen",
+    "whatsNew": "Neuigkeiten",
+    "supportUs": "Uns unterstützen",
+    "gotIt": "Verstanden"
 }

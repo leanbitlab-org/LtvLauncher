@@ -477,4 +477,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'नए इंस्टॉल किए गए ऐप्स को लॉन्चर में जोड़ें';
+
+  @override
+  String get whatsNew => 'नया क्या है';
+
+  @override
+  String get supportUs => 'हमें सपोर्ट करें';
+
+  @override
+  String get gotIt => 'समझ गया';
 }

@@ -187,5 +187,8 @@
     "screensaverAnimationFadeSubtitle": "Плавне зникнення та поява на нових позиціях",
     "screensaverAnimationScatter": "Розсипання символів",
     "screensaverAnimationScatterSubtitle": "Грайливі стрибаючі символи",
-    "autoAddNewApps": "Додавати щойно встановлені додатки до лаунчера"
+    "autoAddNewApps": "Додавати щойно встановлені додатки до лаунчера",
+    "whatsNew": "Що нового",
+    "supportUs": "Підтримати нас",
+    "gotIt": "Зрозуміло"
 }
