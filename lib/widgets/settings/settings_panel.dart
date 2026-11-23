@@ -109,7 +109,7 @@ class _SettingsPanelState extends State<SettingsPanel> {
                 ),
               ),
               child: SidePanelDialog(
-              width: 420,
+              width: 360,
               isRightSide: false,
               child: Navigator(
                 key: _navigatorKey,
