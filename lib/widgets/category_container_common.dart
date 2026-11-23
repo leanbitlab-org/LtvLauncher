@@ -28,10 +28,7 @@ Widget categoryContainerEmptyState(BuildContext context) {
               clipBehavior: Clip.antiAlias,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               child: InkWell(
-                onTap: () => showDialog(
-                  context: context,
-                  builder: (_) => SettingsPanel(initialRoute: LauncherSectionsPanelPage.routeName),
-                ),
+                onTap: () => SettingsPanel.show(context, initialRoute: LauncherSectionsPanelPage.routeName),
                 child: Padding(
                   padding: EdgeInsets.all(8),
                   child: Center(

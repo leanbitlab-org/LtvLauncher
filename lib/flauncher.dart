@@ -78,7 +78,7 @@ class _FLauncherState extends State<FLauncher> {
               backgroundColor: Colors.transparent,
               appBar: FocusAwareAppBar(key: _appBarKey),
               body: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                 child: Consumer<AppsService>(
                   builder: (context, appsService, _) {
                     if (appsService.initialized) {

@@ -54,6 +54,21 @@ class SettingsPanel extends StatefulWidget {
 
   const SettingsPanel({Key? key, this.initialRoute}) : super(key: key);
 
+  /// Opens the panel with a short fade (scrim) and slide-in/out (panel).
+  static Future<void> show(BuildContext context, {String? initialRoute}) =>
+      showGeneralDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierColor: Colors.transparent,
+        transitionDuration: const Duration(milliseconds: 200),
+        pageBuilder: (_, __, ___) => SettingsPanel(initialRoute: initialRoute),
+        transitionBuilder: (_, animation, __, child) => FadeTransition(
+          opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut, reverseCurve: Curves.easeIn),
+          child: child,
+        ),
+      );
+
   @override
   State<SettingsPanel> createState() => _SettingsPanelState();
 }
@@ -85,8 +100,16 @@ class _SettingsPanelState extends State<SettingsPanel> {
               child: Container(color: Colors.transparent),
             ),
             // The side panel
-            SidePanelDialog(
-              width: 350,
+            SlideTransition(
+              position: Tween<Offset>(begin: const Offset(-0.12, 0), end: Offset.zero).animate(
+                CurvedAnimation(
+                  parent: ModalRoute.of(context)?.animation ?? kAlwaysCompleteAnimation,
+                  curve: Curves.easeOutCubic,
+                  reverseCurve: Curves.easeInCubic,
+                ),
+              ),
+              child: SidePanelDialog(
+              width: 420,
               isRightSide: false,
               child: Navigator(
                 key: _navigatorKey,
@@ -158,6 +181,7 @@ class _SettingsPanelState extends State<SettingsPanel> {
                   }
                 },
               ),
+            ),
             ),
           ],
         ),

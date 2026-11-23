@@ -42,6 +42,7 @@ class _ApplicationsPanelPageState extends State<ApplicationsPanelPage> {
   int _selectedIndex = 0;
   String _title = "";
   bool _isSwitchingViaKeyboard = false;
+  final Set<int> _visitedTabs = {0};
 
   final List<_TabData> _tabs = [
     _TabData(0, Icons.tv, (l) => l.tvApplications),
@@ -110,6 +111,7 @@ class _ApplicationsPanelPageState extends State<ApplicationsPanelPage> {
       if (mounted) {
         setState(() {
           _selectedIndex = index;
+          _visitedTabs.add(index);
           _title = title;
         });
       }
@@ -182,32 +184,47 @@ class _ApplicationsPanelPageState extends State<ApplicationsPanelPage> {
         _selectTab(index, title);
       },
       borderRadius: BorderRadius.circular(12),
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 120),
+        curve: Curves.easeOut,
         height: 48,
         decoration: BoxDecoration(
           color: selected
               ? Colors.white.withOpacity(0.15)
               : (focused ? Colors.white.withOpacity(0.1) : Colors.transparent),
           borderRadius: BorderRadius.circular(12),
-          border: focused ? Border.all(color: Theme.of(context).colorScheme.primary, width: 2) : null,
+          // Always present (transparent when unfocused) so it can fade instead of popping.
+          border: Border.all(
+            color: focused ? Theme.of(context).colorScheme.primary : Colors.transparent,
+            width: 2,
+          ),
         ),
-        child: Icon(
-          icon,
-          color: (selected || focused) ? Colors.white : Colors.white60,
+        child: TweenAnimationBuilder<Color?>(
+          tween: ColorTween(end: (selected || focused) ? Colors.white : Colors.white60),
+          duration: const Duration(milliseconds: 120),
+          builder: (_, color, __) => Icon(icon, color: color),
         ),
       ),
     );
   }
 
+  /// Tabs are built on first visit and then kept mounted, so paging back to a
+  /// tab is instant (no list rebuild, no icon placeholder flash, scroll kept).
   Widget _buildCurrentTab() {
-     // ... (same)
-    switch (_selectedIndex) {
-      case 0: return _TVTab();
-      case 1: return _SideloadedTab();
-      case 2: return _FavoritesTab();
-      case 3: return _HiddenTab();
-      default: return Container();
-    }
+    return IndexedStack(
+      index: _selectedIndex,
+      children: List.generate(_tabs.length, (i) {
+        if (!_visitedTabs.contains(i)) return const SizedBox.shrink();
+        final autofocusFirst = i == 0;
+        final Widget tab = switch (i) {
+          0 => _TVTab(autofocusFirst: autofocusFirst),
+          1 => _SideloadedTab(autofocusFirst: autofocusFirst),
+          2 => _FavoritesTab(autofocusFirst: autofocusFirst),
+          _ => _HiddenTab(autofocusFirst: autofocusFirst),
+        };
+        return ExcludeFocus(excluding: i != _selectedIndex, child: tab);
+      }),
+    );
   }
 }
 
@@ -252,101 +269,78 @@ class ChangeTabAction extends Action<ChangeTabIntent> {
 }
 
 
+/// Lazy list shared by all tabs. Only the initial tab autofocuses its first
+/// item: tabs stay mounted once visited, and an autofocus on a later tab would
+/// pull focus off the tab bar while the user is paging left/right.
+class _AppList extends StatelessWidget {
+  final List<App> applications;
+  final bool autofocusFirst;
+
+  const _AppList(this.applications, {required this.autofocusFirst});
+
+  @override
+  Widget build(BuildContext context) {
+    if (applications.isEmpty) {
+      return _EmptyListPlaceholder("No applications found", autofocus: autofocusFirst);
+    }
+    return ListView.builder(
+      itemCount: applications.length,
+      itemBuilder: (context, index) => EnsureVisible(
+        key: ValueKey(applications[index].packageName),
+        alignment: 0.5,
+        child: _AppListItem(applications[index], autofocus: autofocusFirst && index == 0, isFirst: index == 0),
+      ),
+    );
+  }
+}
+
 class _TVTab extends StatelessWidget {
+  final bool autofocusFirst;
+  const _TVTab({required this.autofocusFirst});
+
   @override
   Widget build(BuildContext context) => Selector<AppsService, List<App>>(
         selector: (_, appsService) => appsService.applications.where((app) => !app.sideloaded && !app.hidden).toList(),
-        builder: (context, applications, _) {
-          if (applications.isEmpty) {
-            return const _EmptyListPlaceholder("No applications found", autofocus: true);
-          }
-          return ListView(
-            children: applications
-                .asMap()
-                .entries
-                .map((entry) => EnsureVisible(
-                      key: ValueKey(entry.value.packageName),
-                      alignment: 0.5,
-                      child: _AppListItem(entry.value, autofocus: entry.key == 0, isFirst: entry.key == 0),
-                    ))
-                .toList(),
-          );
-        },
+        builder: (context, applications, _) => _AppList(applications, autofocusFirst: autofocusFirst),
       );
 }
 
 class _SideloadedTab extends StatelessWidget {
+  final bool autofocusFirst;
+  const _SideloadedTab({required this.autofocusFirst});
+
   @override
   Widget build(BuildContext context) => Selector<AppsService, List<App>>(
         selector: (_, appsService) => appsService.applications.where((app) => app.sideloaded && !app.hidden).toList(),
-        builder: (context, applications, _) {
-          if (applications.isEmpty) {
-            return const _EmptyListPlaceholder("No applications found", autofocus: true);
-          }
-          return ListView(
-            children: applications
-                .asMap()
-                .entries
-                .map((entry) => EnsureVisible(
-                      key: ValueKey(entry.value.packageName),
-                      alignment: 0.5,
-                      child: _AppListItem(entry.value, autofocus: entry.key == 0, isFirst: entry.key == 0),
-                    ))
-                .toList(),
-          );
-        },
+        builder: (context, applications, _) => _AppList(applications, autofocusFirst: autofocusFirst),
       );
 }
 
 class _FavoritesTab extends StatelessWidget {
+  final bool autofocusFirst;
+  const _FavoritesTab({required this.autofocusFirst});
+
   @override
   Widget build(BuildContext context) => Selector<AppsService, List<App>>(
         selector: (_, appsService) {
-           final favorites = appsService.categories.firstWhere(
+          final favorites = appsService.categories.firstWhere(
             (category) => category.name == 'Favorites',
             orElse: () => Category(name: 'Favorites'),
           );
           return favorites.applications.where((app) => !app.hidden).toList();
         },
-        builder: (context, applications, _) {
-          if (applications.isEmpty) {
-            return const _EmptyListPlaceholder("No applications found", autofocus: true);
-          }
-          return ListView(
-            children: applications
-                .asMap()
-                .entries
-                .map((entry) => EnsureVisible(
-                      key: ValueKey(entry.value.packageName),
-                      alignment: 0.5,
-                      child: _AppListItem(entry.value, autofocus: entry.key == 0, isFirst: entry.key == 0),
-                    ))
-                .toList(),
-          );
-        },
+        builder: (context, applications, _) => _AppList(applications, autofocusFirst: autofocusFirst),
       );
 }
 
 class _HiddenTab extends StatelessWidget {
+  final bool autofocusFirst;
+  const _HiddenTab({required this.autofocusFirst});
+
   @override
   Widget build(BuildContext context) => Selector<AppsService, List<App>>(
         selector: (_, appsService) => appsService.applications.where((app) => app.hidden).toList(),
-        builder: (context, applications, _) {
-          if (applications.isEmpty) {
-            return const _EmptyListPlaceholder("No applications found", autofocus: true);
-          }
-          return ListView(
-            children: applications
-                .asMap()
-                .entries
-                .map((entry) => EnsureVisible(
-                      key: ValueKey(entry.value.packageName),
-                      alignment: 0.5,
-                      child: _AppListItem(entry.value, autofocus: entry.key == 0, isFirst: entry.key == 0),
-                    ))
-                .toList(),
-          );
-        },
+        builder: (context, applications, _) => _AppList(applications, autofocusFirst: autofocusFirst),
       );
 }
 

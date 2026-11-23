@@ -13,6 +13,9 @@ import 'date_time_widget.dart';
 import 'network_widget.dart';
 import 'weather_status_bar_widget.dart';
 
+/// Status bar height: just the 36dp icon button / pill (default toolbar is 56dp).
+const double _kStatusBarHeight = 36;
+
 class FocusAwareAppBar extends StatefulWidget implements PreferredSizeWidget
 {
   const FocusAwareAppBar({Key? key}) : super(key: key);
@@ -23,7 +26,7 @@ class FocusAwareAppBar extends StatefulWidget implements PreferredSizeWidget
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(_kStatusBarHeight);
 }
 
 class FocusAwareAppBarState extends State<FocusAwareAppBar>
@@ -72,7 +75,7 @@ class FocusAwareAppBarState extends State<FocusAwareAppBar>
             child: AnimatedContainer(
               curve: Curves.decelerate,
               duration: Duration(milliseconds: 150),
-              height: focused ? kToolbarHeight : 0,
+              height: focused ? _kStatusBarHeight : 0,
               child: widget!
             ),
             onFocusChange: (hasFocus) {
@@ -91,6 +94,7 @@ class FocusAwareAppBarState extends State<FocusAwareAppBar>
           // (sections indent 16 + 8 card margin + 8 tile inset = 32dp; the icon
           // button adds 4 padding + 2 border + 2 glyph inset, so start at 24).
           titleSpacing: 24,
+          toolbarHeight: _kStatusBarHeight,
           elevation: 0,
           scrolledUnderElevation: 0,
           backgroundColor: Colors.transparent,
@@ -102,7 +106,7 @@ class FocusAwareAppBarState extends State<FocusAwareAppBar>
               _FocusableIconButton(
                 icon: Icons.settings_outlined,
                 focusNode: _settingsFocusNode,
-                onPressed: () => showDialog(context: context, builder: (_) => const SettingsPanel()),
+                onPressed: () => SettingsPanel.show(context),
               ),
               Selector<SettingsService, bool>(
                 selector: (_, settings) => settings.showInputsWidgetInStatusBar,
