@@ -78,7 +78,7 @@ class _FLauncherState extends State<FLauncher> {
               backgroundColor: Colors.transparent,
               appBar: FocusAwareAppBar(key: _appBarKey),
               body: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                padding: EdgeInsets.zero,
                 child: Consumer<AppsService>(
                   builder: (context, appsService, _) {
                     if (appsService.initialized) {
@@ -96,7 +96,9 @@ class _FLauncherState extends State<FLauncher> {
                                   // out so D-pad up/down can find it.
                                   ListView(
                                     physics: const ClampingScrollPhysics(),
-                                    padding: EdgeInsets.zero,
+                                    // Inset inside the list, not around it: the list clips at its
+                                    // edge and would cut the focused tile's shadow.
+                                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                                     cacheExtent: 400,
                                     children: _sections(
                                         appsService.launcherSections,
