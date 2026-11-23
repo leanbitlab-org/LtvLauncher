@@ -25,6 +25,7 @@ class _FocusableSettingsTileState extends State<FocusableSettingsTile> {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       child: Actions(
@@ -47,19 +48,22 @@ class _FocusableSettingsTileState extends State<FocusableSettingsTile> {
           child: GestureDetector(
             onTap: widget.onPressed,
             behavior: HitTestBehavior.opaque,
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 120),
+              curve: Curves.easeOut,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: _focused ? Colors.white.withOpacity(0.05) : Colors.transparent,
+                color: _focused ? primary.withOpacity(0.14) : Colors.transparent,
                 borderRadius: BorderRadius.circular(12),
-                border: _focused
-                    ? Border.all(color: Theme.of(context).colorScheme.primary, width: 2)
-                    : Border.all(color: Colors.transparent, width: 2),
+                border: Border.all(color: _focused ? primary : Colors.transparent, width: 2),
               ),
               child: Row(
                 children: [
                   if (widget.leading != null) ...[
-                    widget.leading!,
+                    IconTheme.merge(
+                      data: IconThemeData(color: _focused ? primary : null),
+                      child: widget.leading!,
+                    ),
                     const SizedBox(width: 16),
                   ],
                   Expanded(child: widget.title),
