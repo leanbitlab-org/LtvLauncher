@@ -103,16 +103,7 @@ def main():
     size_armv7 = find_apk_size("LTvLauncher-armeabi-v7a-release.apk", "app-armeabi-v7a-release.apk")
     size_arm64 = find_apk_size("LTvLauncher-arm64-v8a-release.apk", "app-arm64-v8a-release.apk")
 
-    release_notes = f"""### 💖 Support Our Work
-
-As an open-source, community-funded project, we operate on a very limited budget. If LTvLauncher helps you daily, please consider supporting us on [GitHub Sponsors](https://github.com/sponsors/LeanBitLab) or [Open Collective](https://opencollective.com/leanbitlab-org). Sharing LTvLauncher with friends and family makes a huge difference!
-
-## 🚀 What's New
-
-### ✨ Highlights & Changes
-{changelog}
-
-## 📦 Downloads (Choose Your Architecture)
+    downloads = f"""### Downloads (Choose Your Architecture)
 
 | File | Target Devices | Architecture | Size |
 |:---|:---|:---|:---|
@@ -120,6 +111,22 @@ As an open-source, community-funded project, we operate on a very limited budget
 | **`LTvLauncher-arm64-v8a-release.apk`** | Chromecast with Google TV, Nvidia Shield, modern TVs | 64-bit ARM (`arm64-v8a`) | {size_arm64} |
 | **`LTvLauncher-armeabi-v7a-release.apk`** | Fire TV Stick (Lite, 4K, 4K Max), older smart TVs | 32-bit ARM (`armeabi-v7a`) | {size_armv7} |
 """
+
+    # Hand-written notes (Support, Added, Changed, Fixed, Maintenance) win over the fastlane bullets
+    notes_path = f"docs/releasenote/release_notes_{tag_name}.md"
+    if os.path.exists(notes_path):
+        with open(notes_path, "r") as f:
+            release_notes = f.read().rstrip() + "\n\n" + downloads
+    else:
+        release_notes = f"""### 💖 Support Our Work
+
+As an open-source, community-funded project, we operate on a very limited budget. If LTvLauncher helps you daily, please consider supporting us on [GitHub Sponsors](https://github.com/sponsors/LeanBitLab) or [Open Collective](https://opencollective.com/leanbitlab-org). Sharing LTvLauncher with friends and family makes a huge difference!
+
+## LTvLauncher {tag_name}
+
+{changelog}
+
+{downloads}"""
 
     with open("release_notes.md", "w") as f:
         f.write(release_notes)
