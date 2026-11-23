@@ -477,4 +477,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'Añadir aplicaciones recién instaladas al iniciador';
+
+  @override
+  String get whatsNew => 'Novedades';
+
+  @override
+  String get supportUs => 'Apóyanos';
+
+  @override
+  String get gotIt => 'Entendido';
 }

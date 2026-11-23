@@ -477,4 +477,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'Add newly installed apps to launcher';
+
+  @override
+  String get whatsNew => 'What\'s new';
+
+  @override
+  String get supportUs => 'Support us';
+
+  @override
+  String get gotIt => 'Got it';
 }

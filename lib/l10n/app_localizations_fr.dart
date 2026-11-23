@@ -477,4 +477,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'Ajouter les nouvelles applications au lanceur';
+
+  @override
+  String get whatsNew => 'Nouveautés';
+
+  @override
+  String get supportUs => 'Nous soutenir';
+
+  @override
+  String get gotIt => 'Compris';
 }

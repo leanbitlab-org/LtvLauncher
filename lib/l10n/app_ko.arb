@@ -187,5 +187,8 @@
     "screensaverAnimationFadeSubtitle": "새로운 위치에서 부드럽게 페이드 아웃/인",
     "screensaverAnimationScatter": "글자 흩뿌리기",
     "screensaverAnimationScatterSubtitle": "통통 튀는 재미있는 글자 애니메이션",
-    "autoAddNewApps": "새로 설치된 앱을 런처에 추가"
+    "autoAddNewApps": "새로 설치된 앱을 런처에 추가",
+    "whatsNew": "새로운 기능",
+    "supportUs": "후원하기",
+    "gotIt": "확인"
 }

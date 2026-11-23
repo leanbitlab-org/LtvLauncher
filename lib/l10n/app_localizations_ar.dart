@@ -477,4 +477,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'إضافة التطبيقات المثبتة حديثاً إلى المشغل';
+
+  @override
+  String get whatsNew => 'ما الجديد';
+
+  @override
+  String get supportUs => 'ادعمنا';
+
+  @override
+  String get gotIt => 'حسنًا';
 }

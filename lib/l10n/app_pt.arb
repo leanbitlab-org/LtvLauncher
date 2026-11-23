@@ -187,5 +187,8 @@
     "screensaverAnimationFadeSubtitle": "Esmaecimento suave em novas posições",
     "screensaverAnimationScatter": "Dispersão de caracteres",
     "screensaverAnimationScatterSubtitle": "Caracteres saltitantes divertidos",
-    "autoAddNewApps": "Adicionar aplicativos recém-instalados ao launcher"
+    "autoAddNewApps": "Adicionar aplicativos recém-instalados ao launcher",
+    "whatsNew": "Novidades",
+    "supportUs": "Apoie-nos",
+    "gotIt": "Entendi"
 }

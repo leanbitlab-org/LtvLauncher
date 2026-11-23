@@ -56,3 +56,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icon.png
+    - fastlane/metadata/android/en-US/changelogs/

@@ -27,6 +27,8 @@ import 'package:flauncher/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'flauncher.dart';
+import 'whats_new.dart';
+import 'widgets/whats_new_dialog.dart';
 
 class FLauncherApp extends StatelessWidget
 {
@@ -35,7 +37,9 @@ class FLauncherApp extends StatelessWidget
     BackIntent()
   ]);
 
-  const FLauncherApp();
+  final WhatsNewData? whatsNew;
+
+  const FLauncherApp({this.whatsNew});
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +149,7 @@ class FLauncherApp extends StatelessWidget
       home: Builder(
         builder: (context) => PopScope(
           canPop: false,
-          child: FLauncher(),
+          child: _WhatsNewGate(data: whatsNew, child: FLauncher()),
           onPopInvokedWithResult: (didPop, result) {
             if (didPop) return;
             LauncherState launcherState = context.read<LauncherState>();
@@ -172,3 +176,34 @@ Locale resolveAppLocale(List<Locale>? preferredLocales, Iterable<Locale> support
   return const Locale('en');
 }
 
+
+
+/// Shows the What's new dialog once, after the first frame of the home screen.
+class _WhatsNewGate extends StatefulWidget {
+  final WhatsNewData? data;
+  final Widget child;
+
+  const _WhatsNewGate({required this.data, required this.child});
+
+  @override
+  State<_WhatsNewGate> createState() => _WhatsNewGateState();
+}
+
+class _WhatsNewGateState extends State<_WhatsNewGate> {
+  @override
+  void initState() {
+    super.initState();
+    final data = widget.data;
+    if (data != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        // Record the build now, not on dismiss: the notes show once per update even if "Got it" is never pressed.
+        data.markSeen();
+        showDialog(context: context, builder: (_) => WhatsNewDialog(data: data));
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
+}

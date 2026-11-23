@@ -477,4 +477,13 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get autoAddNewApps => 'Додавати щойно встановлені додатки до лаунчера';
+
+  @override
+  String get whatsNew => 'Що нового';
+
+  @override
+  String get supportUs => 'Підтримати нас';
+
+  @override
+  String get gotIt => 'Зрозуміло';
 }

@@ -187,5 +187,8 @@
     "screensaverAnimationFadeSubtitle": "在不同位置平滑淡出与淡入",
     "screensaverAnimationScatter": "字符散开",
     "screensaverAnimationScatterSubtitle": "趣味跳跃字符",
-    "autoAddNewApps": "将新安装的应用添加到启动器"
+    "autoAddNewApps": "将新安装的应用添加到启动器",
+    "whatsNew": "新功能",
+    "supportUs": "支持我们",
+    "gotIt": "知道了"
 }

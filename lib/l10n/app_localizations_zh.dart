@@ -477,4 +477,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get autoAddNewApps => '将新安装的应用添加到启动器';
+
+  @override
+  String get whatsNew => '新功能';
+
+  @override
+  String get supportUs => '支持我们';
+
+  @override
+  String get gotIt => '知道了';
 }

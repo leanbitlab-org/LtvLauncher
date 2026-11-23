@@ -477,4 +477,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get autoAddNewApps => '新しくインストールしたアプリをランチャーに追加';
+
+  @override
+  String get whatsNew => '新機能';
+
+  @override
+  String get supportUs => 'サポートする';
+
+  @override
+  String get gotIt => 'OK';
 }

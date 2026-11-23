@@ -187,5 +187,8 @@
     "screensaverAnimationFadeSubtitle": "Desvanecimiento suave en nuevas posiciones",
     "screensaverAnimationScatter": "Dispersión de caracteres",
     "screensaverAnimationScatterSubtitle": "Caracteres animados que rebotan",
-    "autoAddNewApps": "Añadir aplicaciones recién instaladas al iniciador"
+    "autoAddNewApps": "Añadir aplicaciones recién instaladas al iniciador",
+    "whatsNew": "Novedades",
+    "supportUs": "Apóyanos",
+    "gotIt": "Entendido"
 }
