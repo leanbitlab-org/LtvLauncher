@@ -1,0 +1,5 @@
+- Added a short What's new dialog after each update.
+- Changed the home status bar to be more compact.
+- Changed the settings panel to slide in, with a highlight on the focused tile.
+- Changed the Applications tabs to switch without flicker or reloading.
+- Fixed the focused tile shadow being cut off at the screen edge.

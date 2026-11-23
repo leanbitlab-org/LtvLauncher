@@ -1,4 +1,5 @@
 import os
+import re
 import subprocess
 
 def get_version_code():
@@ -68,6 +69,40 @@ def get_git_changelog(current_tag):
     except Exception as e:
         return f"- New changes in release {current_tag}"
 
+SECTIONS = ("Added", "Changed", "Fixed", "Removed")
+CONVENTIONAL_TYPES = {"feat": "Added", "fix": "Fixed", "revert": "Removed"}
+CONVENTIONAL_PREFIX = re.compile(r"^(\w+)(\([^)]*\))?!?:\s*")
+
+
+def section_for(text):
+    """Section of one changelog bullet: by conventional commit type, else by its first word."""
+    match = CONVENTIONAL_PREFIX.match(text)
+    if match:
+        return CONVENTIONAL_TYPES.get(match.group(1).lower(), "Changed"), text[match.end():]
+    lowered = text.lower()
+    if lowered.startswith(("add", "new ")):
+        return "Added", text
+    if lowered.startswith("fix"):
+        return "Fixed", text
+    if lowered.startswith(("remove", "drop")):
+        return "Removed", text
+    return "Changed", text
+
+
+def group_changelog(changelog):
+    """Turn plain '- ' bullets into '### Added/Changed/Fixed/Removed' groups."""
+    groups = {section: [] for section in SECTIONS}
+    for line in changelog.splitlines():
+        text = line.strip().lstrip("-*").strip()
+        if not text:
+            continue
+        section, text = section_for(text)
+        groups[section].append(f"- {text[:1].upper()}{text[1:]}")
+    return "\n\n".join(
+        f"### {section}\n" + "\n".join(lines) for section, lines in groups.items() if lines
+    )
+
+
 def find_apk_size(*filenames):
     candidate_dirs = [
         "build/app/outputs/flutter-apk",
@@ -124,7 +159,7 @@ As an open-source, community-funded project, we operate on a very limited budget
 
 ## LTvLauncher {tag_name}
 
-{changelog}
+{group_changelog(changelog)}
 
 {downloads}"""
 
