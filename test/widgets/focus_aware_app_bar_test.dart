@@ -98,9 +98,9 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // After focus: app bar height should be kToolbarHeight
+    // After focus: app bar height should be the compact status bar height (36)
     final animatedContainerFocused = tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
-    expect(animatedContainerFocused.constraints?.maxHeight, kToolbarHeight);
+    expect(animatedContainerFocused.constraints?.maxHeight, 36.0);
   });
 
   testWidgets('FocusAwareAppBar renders inputs button based on setting and availability', (WidgetTester tester) async {
